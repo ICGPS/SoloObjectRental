@@ -12,16 +12,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ProjectApplicationTests {
+
 	@Autowired
 	private MemberRepository memberRepository;
+
 	@Autowired
 	private AuthoritiesRepository authoritiesRepository;
 
-	@Test
-	@Disabled
-		//실행이 안되게 하는것
+	@Test @Disabled
 	void contextLoads() {
-		Member member = memberRepository.findByUserId("userId").orElse(null);
+		Member member = memberRepository.findByUserId("user02").orElse(null);
 
 		Authorities authorities = new Authorities();
 		authorities.setMember(member);

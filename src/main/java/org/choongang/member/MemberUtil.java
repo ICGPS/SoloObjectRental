@@ -2,6 +2,7 @@ package org.choongang.member;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.choongang.member.entities.Authorities;
 import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Component;
 
@@ -9,23 +10,35 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class MemberUtil {
 
-  private final HttpSession session;
+    private final HttpSession session;
 
-  public boolean isLogin() {
-    return getMember() != null;
-  }
+    public boolean isAdmin() {
 
-  public Member getMember() {
-    Member member = (Member) session.getAttribute("member");
+        if (isLogin()) {
+            return getMember().getAuthorities()
+                    .stream().map(Authorities::getAuthority)
+                    .anyMatch(a -> a == Authority.ADMIN || a == Authority.MANAGER);
+        }
 
-    return member;
-  }
+        return false;
+    }
 
-  public static void clearLoginData(HttpSession session) {
-    session.removeAttribute("username");
-    session.removeAttribute("NotBlank_username");
-    session.removeAttribute("NotBlank_password");
-    session.removeAttribute("Global_error");
-  }
+    public boolean isLogin() {
+
+        return getMember() != null;
+    }
+
+    public Member getMember() {
+        Member member = (Member) session.getAttribute("member");
+
+        return member;
+    }
+
+    public static void clearLoginData(HttpSession session) {
+        session.removeAttribute("username");
+        session.removeAttribute("NotBlank_username");
+        session.removeAttribute("NotBlank_password");
+        session.removeAttribute("Global_error");
+    }
 
 }
