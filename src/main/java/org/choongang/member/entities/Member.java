@@ -1,6 +1,8 @@
 package org.choongang.member.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
@@ -29,6 +31,20 @@ public class Member extends Base {
 
     @Column(length=40, nullable = false)
     private String name;
+
+    /* 추가 내용 S */
+    @Column(length=20, nullable = false)
+    private String userName;
+
+    @Column(nullable = false)
+    private String tel;
+
+    @Column(length=7, nullable = false)
+    private String bDay;
+
+//    @Column(length=20)
+    //    private String nation;  // 국적
+    /* 추가 내용 E */
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)

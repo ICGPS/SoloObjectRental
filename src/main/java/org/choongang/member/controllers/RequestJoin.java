@@ -30,7 +30,27 @@ public class RequestJoin {
     @NotBlank
     private String name;
 
+    /* 추가 내용 S */
+    @NotBlank
+    private String userName;    // 닉네임
+
+    @NotBlank
+    private String bDay;    // 생년월일 + 1자리
+
+    @NotBlank
+    @Size(min=10, max=11)
+    private String tel;
+
+    @NotBlank
+    private String address;     // 주소
+
+//    @NotBlank
+//    private String nation;  // 국적
+
+    /* 추가 내용 E */
+
     @AssertTrue
-    private boolean agree;
+    private boolean agree;  // 이용 동의
+
 
 }
