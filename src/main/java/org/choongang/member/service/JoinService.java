@@ -41,10 +41,6 @@ public class JoinService {
         member.setPassword(hash);
         member.setUserId(form.getUserId());
         member.setGid(form.getGid());
-        member.setUserName(form.getUserName());
-        member.setTel(form.getTel());
-        member.setBDay(form.getBDay());
-//        member.setNation(form.getNation());
 
         process(member);
 
