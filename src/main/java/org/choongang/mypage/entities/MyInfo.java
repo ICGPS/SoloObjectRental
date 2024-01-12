@@ -24,5 +24,5 @@ public class MyInfo {
 
     private String myInfoUpdater; // 수정 AfterClicking 수정 기능
 
-    private String delete; // 탈퇴
+    private String delete; // 탈퇴111
 }
