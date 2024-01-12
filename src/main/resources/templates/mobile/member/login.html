@@ -27,11 +27,6 @@
             <label for="autoLogin" th:text="#{자동_로그인}"></label>
         </div>
 
-        <div>
-            <input type="checkbox" name="autoLogin" value="true" id="autoLogin">
-            <label for="autoLogin" th:text="#{자동_로그인}"></label>
-        </div>
-
         <button type="submit" th:text="#{로그인}"></button>
 
         <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}"></div>
