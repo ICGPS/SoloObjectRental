@@ -49,17 +49,57 @@
             </dd>
         </dl>
 
+        <dt th:text="#{닉네임}"></dt>
+        <dd>
+            <input type="text" name="userName" th:field="*{userName}">
+            <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+        </dd>
+        </dl>
+
         <dl>
-            <dt th:text="#{프로필_이미지}"></dt>
+            <dt th:text="#{생년월일}"></dt>
             <dd>
-                <div id="profile_image"></div>
-                <button type="button" class="upload_files"
-                        th:text="#{이미지_업로드}" data-image-only="true" data-single-file="true"></button>
+                <input type="text" name="bDay" th:field="*{bDay}" placeholder="앞6자리+뒤1자리">
+                <div class="error" th:each="err : ${#fields.errors('bDay')}" th:text="${err}"></div>
             </dd>
         </dl>
 
+        <dl>
+            <dt th:text="#{휴대전화}"></dt>
+            <dd>
+                <input type="text" name="tel" th:field="*{tel}" placeholder="( - ) 빼고 숫자만 입력">
+                <div class="error" th:each="err : ${#fields.errors('tel')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt th:text="#{주소}"></dt>
+            <dd>
+                <input type="text" name="address" th:field="*{address}">
+                <div class="error" th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+
+        <!--        <dl>-->
+        <!--            <dt th:text="#{국적}"></dt>-->
+        <!--            <dd>-->
+        <!--                <input type="text" name="nation" th:field="*{nation}">-->
+        <!--                <div class="error" th:each="err : ${#fields.errors('nation')}" th:text="${err}"></div>-->
+        <!--            </dd>-->
+        <!--        </dl>-->
+
+        <!--        <dl>-->
+        <!--            <dt th:text="#{프로필_이미지}"></dt>-->
+        <!--            <script th:replace="~{common/_file_tpl::image1_tpl}"></script>-->
+        <!--            <dd>-->
+        <!--                <div id="profile_image"></div>-->
+        <!--                <button type="button" class="upload_files"-->
+        <!--                        th:text="#{이미지_업로드}" data-image-only="true" data-single-file="true"></button>-->
+        <!--            </dd>-->
+        <!--        </dl>-->
+
         <div th:text="#{회원가입_약관}"></div>
-        <div class="terms" th:utext="${@utils.nl2br(siteConfig.joinTerms)}"></div>
+        <textarea class="terms" th:utext="${@utils.nl2br(siteConfig.joinTerms)}" readonly></textarea>
         <div class="terms_agree">
             <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
             <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
