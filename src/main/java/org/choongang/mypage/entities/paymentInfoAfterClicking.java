@@ -14,7 +14,7 @@ public class paymentInfoAfterClicking {
 
     private int deleteCard; // 카드 삭제
 
-    private int defaultAccount; // 기본값 용중인 계좌
+    private int defaultAccount; // 기본값 사용중인 계좌
 
     private int addAccount; // 계좌 추가 등록
 
