@@ -74,7 +74,7 @@ public class MemberController implements ExceptionProcessor {
             addCss.add("member/join");
             addScript.add("member/join");
         }
-        
+
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
