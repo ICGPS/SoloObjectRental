@@ -3,6 +3,7 @@ package org.choongang.admin.product.controllers;
 import lombok.RequiredArgsConstructor;
 import org.choongang.product.repositories.CategoryRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -19,12 +20,11 @@ public class CategoryValidator implements Validator {
 
   @Override
   public void validate(Object target, Errors errors) {
-    //cataCd 분류코드 중복 여부 체크
-    RequestCategory form = (RequestCategory) target;
+    /* cateCd : 분류 코드 중복 여부 체크 */
+    RequestCategory form = (RequestCategory)target;
     String cateCd = form.getCateCd();
 
-    //    boolean exists = repository.existsById(cateCd)
-    if (repository.existsById(cateCd) && repository.existsById(cateCd)) { //이미 등록된 분류 코드면
+    if (StringUtils.hasText(cateCd) && repository.existsById(cateCd)) { // 이미 등록된 분류 코드이면
       errors.rejectValue("cateCd", "Duplicated");
     }
   }

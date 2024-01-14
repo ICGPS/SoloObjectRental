@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static org.springframework.data.domain.Sort.Order.asc;
 import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
@@ -54,7 +55,7 @@ public class CategoryInfoService {
       builder.and(category.active.eq(true));
     }
 
-    List<Category> items = (List<Category>) categoryRepository.findAll(builder, Sort.by(desc("listOrder"), desc("createdAt")));
+    List<Category> items = (List<Category>) categoryRepository.findAll(builder, Sort.by(desc("listOrder"), asc("createdAt")));
 
     return items;
   }

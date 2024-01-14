@@ -32,7 +32,7 @@ public class CategoryDeleteService {
    *
    * @param chks : 목록 선택 순번
    */
-    public void deleteList(List<Integer> chks) {
+  public void deleteList(List<Integer> chks) {
     chks.forEach(chk -> delete(utils.getParam("cateCd_" + chk)));
   }
 }
