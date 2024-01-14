@@ -1,9 +1,12 @@
 package org.choongang.product.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.product.controllers.RequestProduct;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.member.MemberUtil;
+import org.choongang.product.service.ProductSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ public class ProductController implements ExceptionProcessor {
 
     private final Utils utils;
     private final MemberUtil memberUtil;
+    private final ProductSaveService productSaveService;
 
 
     @GetMapping("/index")
@@ -50,4 +54,24 @@ public class ProductController implements ExceptionProcessor {
         }
 
     }
+
+    /**
+     * 상품 등록, 수정 처리
+     *
+     * @param model
+     * @return
+     */
+//    @PostMapping("/save")
+//    public String save(@Valid RequestProduct form, Errors errors, Model model) {
+//        String mode = form.getMode();
+//        commonProcess(mode, model);
+//
+//        if (errors.hasErrors()) {
+//            return "admin/product/" + mode;
+//        }
+//
+//        productSaveService.save(form);
+//
+//        return "redirect:/admin/product";
+//    }
 }
