@@ -11,8 +11,8 @@ spring:
   # 데이터베이스 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@13.124.196.150:1521:xe
-    username: PROJECT
+    url: jdbc:oracle:thin:@localhost:1521:myoracle
+    username: spring6
     password: _aA123456
 
   # JPA 설정

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1>물품상세페이지</h1>
+    <a th:href="@{/product/index}" th:text="#{물품전체보기}"></a>
+    <a th:href="@{/product/list}" th:text="#{카테고리별 상품리스트}"></a>
+    <a th:href="@{/product/info}" th:text="#{물품상세}"></a>
+
+
+    <div><!-- 상세페이지 우측에 나타날 주문 내용 -->
+        상세페이지 우측에 나타날 주문 내용<br>
+        상품명, 옵션(?), 갯수, 렌탈료, 개월수, 총렌탈료 등등
+<!--        <form method="post" th:action="@{/product/order}" th:object="{주문시사용할테이블}">-->
+<!--            갯수:<input type="number" name="number" th:field="*{갯수}">-->
+<!--            원가: <input type="number" name="price" th:field="*{원가}">-->
+<!--            렌탈료: <input type="number" name="rentalFee" th:field="*{렌탈료}">-->
+<!--            개월수: <input type="number" name="months" th:field="*{개월}">-->
+<!--            -->
+<!--            <button type="submit">주문하기</button>-->
+                <a th:href="@{/product/order}">주문(임시버튼)</a>
+
+
+        </form>
+    </div>
+</main>
+</html>

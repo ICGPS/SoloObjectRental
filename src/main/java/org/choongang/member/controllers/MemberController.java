@@ -9,10 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
+@SessionAttributes("EmailAuthVerified")
 public class MemberController implements ExceptionProcessor {
 
     private final Utils utils;
@@ -29,11 +28,14 @@ public class MemberController implements ExceptionProcessor {
     public String join(@ModelAttribute RequestJoin form, Model model) {
         commonProcess("join", model);
 
+        // 이메일 인증 여부 false로 초기화
+        model.addAttribute("EmailAuthVerified", false);
+
         return utils.tpl("member/join");
     }
 
     @PostMapping("/join")
-    public String joinPs(@Valid RequestJoin form, Errors errors,Model model) {
+    public String joinPs(@Valid RequestJoin form, Errors errors,Model model, SessionStatus sessionStatus) {
         commonProcess("join", model);
 
         joinService.process(form, errors);
@@ -42,6 +44,8 @@ public class MemberController implements ExceptionProcessor {
             return utils.tpl("member/join");
         }
 
+        // EmailAuthVerified 세션값 비우기 */
+        sessionStatus.setComplete();
 
         return "redirect:/member/login";
     }
@@ -59,6 +63,7 @@ public class MemberController implements ExceptionProcessor {
 
         List<String> addCommonScript = new ArrayList<>(); // 공통 자바스크립트
         List<String> addScript = new ArrayList<>(); // 프론트 자바 스크립트
+        List<String> addCss = new ArrayList<>();
 
         if (mode.equals("login")) {
             pageTitle = Utils.getMessage("로그인", "commons");
@@ -66,10 +71,13 @@ public class MemberController implements ExceptionProcessor {
         } else if (mode.equals("join")) {
             addCommonScript.add("fileManager");
             addScript.add("member/form");
+            addCss.add("member/join");
+            addScript.add("member/join");
         }
 
         model.addAttribute("pageTitle", pageTitle);
-        model.addAttribute("addCommonScript", addCommonScript);
+        model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
+        model.addAttribute("addCommonScript", addCommonScript);
     }
 }
