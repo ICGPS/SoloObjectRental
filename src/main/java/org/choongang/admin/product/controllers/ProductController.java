@@ -7,9 +7,12 @@ import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.commons.exceptions.AlertException;
+import org.choongang.product.constants.ProductStatus;
 import org.choongang.product.entities.Category;
+import org.choongang.product.service.CategoryDeleteService;
 import org.choongang.product.service.CategoryInfoService;
 import org.choongang.product.service.CategorySaveService;
+import org.choongang.product.service.ProductSaveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,9 @@ public class ProductController implements ExceptionProcessor {
   private final CategoryValidator categoryValidator;
   private final CategorySaveService categorySaveService;
   private final CategoryInfoService categoryInfoService;
+  private final CategoryDeleteService categoryDeleteService;
 
+  private final ProductSaveService productSaveService;
 
   @ModelAttribute("menuCode")
   public String getMenuCode() {
@@ -38,6 +43,19 @@ public class ProductController implements ExceptionProcessor {
   @ModelAttribute("subMenus")
   public List<MenuDetail> getSubMenus() {
     return Menu.getMenus("product");
+  }
+
+  // 상품 상태 목록
+  @ModelAttribute("productStatuses")
+  public List<String[]> getProductStatuses() {
+    return ProductStatus.getList();
+  }
+
+
+  // 상품 분류 목록
+  @ModelAttribute("categories")
+  public List<Category> getCategories() {
+    return categoryInfoService.getList(true);
   }
 
   /**
@@ -59,7 +77,7 @@ public class ProductController implements ExceptionProcessor {
    * @return
    */
   @GetMapping("/add")
-  public String add(Model model) {
+  public String add(@ModelAttribute RequestProduct form, Model model) {
     commonProcess("add", model);
 
     return "admin/product/add";
@@ -73,7 +91,15 @@ public class ProductController implements ExceptionProcessor {
    * @return
    */
   @PostMapping("/save")
-  public String save(Model model) {
+  public String save(@Valid RequestProduct form, Errors errors, Model model) {
+    String mode = form.getMode();
+    commonProcess(mode, model);
+
+    if (errors.hasErrors()) {
+      return "admin/product/" + mode;
+    }
+
+    productSaveService.save(form);
 
     return "redirect:/admin/product";
   }
@@ -132,6 +158,7 @@ public class ProductController implements ExceptionProcessor {
   public String categoryEdit(@RequestParam("chk") List<Integer> chks, Model model) {
     commonProcess("category", model);
 
+    categorySaveService.saveList(chks);
 
     // 수정 완료 -> 목록 갱신
     model.addAttribute("script", "parent.location.reload()");
@@ -139,8 +166,10 @@ public class ProductController implements ExceptionProcessor {
   }
 
   @DeleteMapping("/category")
-  public String categoryDelete(@RequestParam("chk") List<String> chks, Model model) {
+  public String categoryDelete(@RequestParam("chk") List<Integer> chks, Model model) {
     commonProcess("category", model);
+
+    categoryDeleteService.deleteList(chks);
 
     // 삭제 완료 후 -> 목록 새로고침
     model.addAttribute("script", "parent.location.reload()");

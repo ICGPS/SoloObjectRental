@@ -61,23 +61,26 @@ public class MemberController implements ExceptionProcessor {
         mode = StringUtils.hasText(mode) ? mode : "join";
         String pageTitle = Utils.getMessage("회원가입", "commons");
 
-        List<String> addCommonScript = new ArrayList<>(); // 공통 자바스크립트
-        List<String> addScript = new ArrayList<>(); // 프론트 자바 스크립트
         List<String> addCss = new ArrayList<>();
+        List<String> addScript = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
 
-        if (mode.equals("login")) {
+        if (mode.equals("login")) { // 로그인
             pageTitle = Utils.getMessage("로그인", "commons");
 
-        } else if (mode.equals("join")) {
-            addCommonScript.add("fileManager");
-            addScript.add("member/form");
+        } else if (mode.equals("join")) { // 회원가입
             addCss.add("member/join");
             addScript.add("member/join");
+            addCommonScript.add("address");
+
+        } else if (mode.equals("find_pw")) { // 비밀번호 찾기
+            pageTitle = Utils.getMessage("비밀번호_찾기", "commons");
         }
 
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
         model.addAttribute("addCommonScript", addCommonScript);
+
     }
 }

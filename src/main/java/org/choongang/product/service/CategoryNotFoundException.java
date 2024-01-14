@@ -8,5 +8,4 @@ public class CategoryNotFoundException extends AlertBackException {
   public CategoryNotFoundException() {
     super(Utils.getMessage("NotFound.product.category", "errors"), HttpStatus.NOT_FOUND);
   }
-
 }
