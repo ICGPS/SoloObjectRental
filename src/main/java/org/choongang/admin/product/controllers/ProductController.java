@@ -12,6 +12,7 @@ import org.choongang.product.entities.Category;
 import org.choongang.product.service.CategoryDeleteService;
 import org.choongang.product.service.CategoryInfoService;
 import org.choongang.product.service.CategorySaveService;
+import org.choongang.product.service.ProductSaveService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +33,17 @@ public class ProductController implements ExceptionProcessor {
   private final CategoryInfoService categoryInfoService;
   private final CategoryDeleteService categoryDeleteService;
 
+  private final ProductSaveService productSaveService;
+
   @ModelAttribute("menuCode")
   public String getMenuCode() {
     return "product";
   }
 
+  @ModelAttribute("subMenus")
+  public List<MenuDetail> getSubMenus() {
+    return Menu.getMenus("product");
+  }
 
   // 상품 상태 목록
   @ModelAttribute("productStatuses")
@@ -44,15 +51,11 @@ public class ProductController implements ExceptionProcessor {
     return ProductStatus.getList();
   }
 
+
   // 상품 분류 목록
   @ModelAttribute("categories")
   public List<Category> getCategories() {
     return categoryInfoService.getList(true);
-  }
-
-  @ModelAttribute("subMenus")
-  public List<MenuDetail> getSubMenus() {
-    return Menu.getMenus("product");
   }
 
   /**
@@ -65,19 +68,6 @@ public class ProductController implements ExceptionProcessor {
     commonProcess("list", model);
 
     return "admin/product/list";
-  }
-
-  /**
-   * 상품 등록
-   *
-   * @param model
-   * @return
-   */
-  @GetMapping("/add")
-  public String add(Model model) {
-    commonProcess("add", model);
-
-    return "admin/product/add";
   }
 
   /**
@@ -109,16 +99,7 @@ public class ProductController implements ExceptionProcessor {
       return "admin/product/" + mode;
     }
 
-    return "redirect:/admin/product";
-  }
-  /**
-   * 상품 등록, 수정 처리
-   *
-   * @param model
-   * @return
-   */
-  @PostMapping("/save")
-  public String save(Model model) {
+    productSaveService.save(form);
 
     return "redirect:/admin/product";
   }

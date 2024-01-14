@@ -24,6 +24,8 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath address = createString("address");
 
+    public final StringPath addressSub = createString("addressSub");
+
     public final ListPath<Authorities, QAuthorities> authorities = this.<Authorities, QAuthorities>createList("authorities", Authorities.class, QAuthorities.class, PathInits.DIRECT2);
 
     public final StringPath bDay = createString("bDay");
@@ -49,6 +51,8 @@ public class QMember extends EntityPathBase<Member> {
     public final StringPath userId = createString("userId");
 
     public final StringPath userName = createString("userName");
+
+    public final StringPath zonecode = createString("zonecode");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));
