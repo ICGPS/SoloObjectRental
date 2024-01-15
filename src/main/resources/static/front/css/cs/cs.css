@@ -4,3 +4,20 @@
     background: #ccc;
     text-align: center;
 }
+
+.feedbackPostAdd {
+       width: 100%;
+        height: 300px;
+        background: pink;
+        text-align: center;
+}
+
+textarea {
+    width: 80%;
+    height: 6.25em;
+    resize: none;
+}
+
+.submit_btns .btn {
+
+}
