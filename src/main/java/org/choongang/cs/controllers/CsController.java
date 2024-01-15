@@ -45,11 +45,11 @@ public class CsController implements ExceptionProcessor {
     }
 
     // 칭찬/개선
-    @GetMapping("/improvement")
+    @GetMapping("/feedbackPost")
     public String improvement(Model model) {
-        commonProcess("improvement", model);
+        commonProcess("feedbackPost", model);
 
-        return utils.tpl("cs/improvement");
+        return utils.tpl("cs/feedbackPost");
     }
 
     private void commonProcess(String mode, Model model) {
@@ -61,7 +61,7 @@ public class CsController implements ExceptionProcessor {
         if (mode.equals("inquiry") || mode.equals("inquiryAdd")) {
             pageTitle = mode.equals("inquiry") ? "1:1 문의" : "1:1 문의 작성";
 
-        } else if (mode.equals("improvement")) {
+        } else if (mode.equals("feedbackPost")) {
             pageTitle = "칭찬/개선";
         }
 
