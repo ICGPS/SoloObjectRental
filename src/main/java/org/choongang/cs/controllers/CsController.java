@@ -20,7 +20,7 @@ public class CsController implements ExceptionProcessor {
     private final Utils utils;
 
     // 고객지원 홈
-    @GetMapping("/index")
+    @GetMapping("/main")
     public String index(Model model) {
         commonProcess("index", model);
 
@@ -45,11 +45,18 @@ public class CsController implements ExceptionProcessor {
     }
 
     // 칭찬/개선
-    @GetMapping("/improvement")
-    public String improvement(Model model) {
-        commonProcess("improvement", model);
+    @GetMapping("/feedbackPost")
+    public String feedbackPost(Model model) {
+        commonProcess("feedbackPost", model);
 
-        return utils.tpl("cs/improvement");
+        return utils.tpl("cs/feedbackPost");
+    }
+
+    @GetMapping("/feedbackPostAdd")
+    public String feedbackPostAdd(Model model) {
+        commonProcess("feedbackPostAdd", model);
+
+        return utils.tpl("cs/feedbackPost_add");
     }
 
     private void commonProcess(String mode, Model model) {
@@ -61,8 +68,8 @@ public class CsController implements ExceptionProcessor {
         if (mode.equals("inquiry") || mode.equals("inquiryAdd")) {
             pageTitle = mode.equals("inquiry") ? "1:1 문의" : "1:1 문의 작성";
 
-        } else if (mode.equals("improvement")) {
-            pageTitle = "칭찬/개선";
+        } else if (mode.equals("feedbackPost") || mode.equals("feedbackPostAdd")) {
+            pageTitle = mode.equals("feedbackPost") ? "칭찬/개선" : "의견보내기";
         }
 
         addCss.add("cs/cs");

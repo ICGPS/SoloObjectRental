@@ -3,7 +3,21 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1>1:1 문의 작성하는 페이지</h1>
-
+    <h1>1:1 문의 작성</h1>
+    <form name="inquirySave" method="post" autocomplete="off">
+        <input type="hidden" name="mode" value="add">
+        <select name="inquiryType">
+            <option>상품문의</option>
+            <option>배송문의</option>
+            <option>결제문의</option>
+        </select>
+        <input type="text" name="title" placeholder="제목">
+        <textarea name="content"></textarea>
+        <!--파일 첨부-->
+        <div class="submit_btns">
+            <button type="reset" class="btn btn-secondary">다시입력</button>
+            <button type="submit" class="btn btn-success">작성하기</button>
+        </div>
+    </form>
 </main>
 </html>

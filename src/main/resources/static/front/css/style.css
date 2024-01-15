@@ -1,0 +1,30 @@
+/* 공통 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 헤더 */
+header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    position: fixed;
+    background: #e9e9e9;
+    box-sizing: border-box;
+}
+
+header > div > a {
+    font-size: 16px;
+    text-decoration: none;
+    color: #000;
+}
+
+/* 메인 */
+main {
+    padding-top: 100px;
+    /*height: 1000px;*/
+}
