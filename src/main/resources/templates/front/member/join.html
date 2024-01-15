@@ -4,6 +4,9 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <h1 th:text="#{회원가입}"></h1>
+    <a th:href="@{/member/mainPage}">메인페이지</a>
+    <a th:href="@{/member/findId}">아이디 찾기</a>
+    <a th:href="@{/member/findPw}">비밀번호 찾기</a>
 
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
         <input type="hidden" name="gid" th:field="*{gid}">

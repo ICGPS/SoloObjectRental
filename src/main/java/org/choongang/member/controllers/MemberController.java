@@ -53,6 +53,34 @@ public class MemberController implements ExceptionProcessor {
         return utils.tpl("member/login");
     }
 
+    @GetMapping("/findId")
+    public String findId(Model model) {
+        commonProcess("findId", model);
+
+        System.out.println("아이디 찾기 테스트");
+
+        return utils.tpl("member/findId");
+    }
+
+    @GetMapping("/findPw")
+    public String findPw(Model model) {
+        commonProcess("findPw", model);
+
+        System.out.println("비밀번호 찾기 테스트");
+
+        return utils.tpl("member/findPw");
+    }
+
+    @GetMapping("/mainPage")
+    public String mainPage(Model model) {
+        commonProcess("mainPage", model);
+
+        System.out.println("메인페이지 테스트");
+
+        return utils.tpl("member/mainPage");
+    }
+
+
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "join";
         String pageTitle = Utils.getMessage("회원가입", "commons");
