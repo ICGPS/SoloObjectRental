@@ -41,19 +41,6 @@ public class Member extends Base {
     @Column(length=7, nullable = false)
     private String bDay;
 
-    /* 추가 엔티티 S */
-
-    // 약관 동의 상태 확인, 동의 / 미동의로 구분
-    @Enumerated(EnumType.STRING)
-    private AgreementStatus agree;
-
-    // 회원의 탈퇴 여부 확인, 탈퇴 / 미탈퇴로 구분
-    @Enumerated(EnumType.STRING)
-    private ExfireStatus exfire;
-
-    /* 추가 엔티티 E */
-
-
 //    @Column(length=20)
     //    private String nation;  // 국적
     /* 추가 내용 E */
