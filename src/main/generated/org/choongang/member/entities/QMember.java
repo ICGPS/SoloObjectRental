@@ -22,7 +22,13 @@ public class QMember extends EntityPathBase<Member> {
 
     public final org.choongang.commons.entities.QBase _super = new org.choongang.commons.entities.QBase(this);
 
+    public final StringPath address = createString("address");
+
+    public final StringPath addressSub = createString("addressSub");
+
     public final ListPath<Authorities, QAuthorities> authorities = this.<Authorities, QAuthorities>createList("authorities", Authorities.class, QAuthorities.class, PathInits.DIRECT2);
+
+    public final StringPath bDay = createString("bDay");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
@@ -40,7 +46,13 @@ public class QMember extends EntityPathBase<Member> {
 
     public final NumberPath<Long> seq = createNumber("seq", Long.class);
 
+    public final StringPath tel = createString("tel");
+
     public final StringPath userId = createString("userId");
+
+    public final StringPath userName = createString("userName");
+
+    public final StringPath zonecode = createString("zonecode");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));

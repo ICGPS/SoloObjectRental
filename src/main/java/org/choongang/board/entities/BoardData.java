@@ -11,7 +11,6 @@ import org.choongang.commons.entities.BaseMember;
 public class BoardData extends BaseMember {
     @Id @GeneratedValue
     private Long seq;
-
     private String subject;
     private String content;
 }
