@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1 th:text="#{비밀번호 찾기}"></h1>
+    <a th:href="@{/member/findId}">아이디 찾기</a>
+    <a th:href="@{/member/mainPage}">메인페이지</a>
+
+</main>
+</html>
