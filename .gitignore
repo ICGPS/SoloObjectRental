@@ -35,7 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
-
+ProjectApplication
 application.*
+application-prod.yml
+application.yml
 
 src/main/generated/
