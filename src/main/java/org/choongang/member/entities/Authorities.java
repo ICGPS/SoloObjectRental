@@ -19,4 +19,6 @@ public class Authorities {
     @Enumerated(EnumType.STRING)
     @Column(length=15, nullable = false)
     private Authority authority;
+
+    private String userType;
 }
