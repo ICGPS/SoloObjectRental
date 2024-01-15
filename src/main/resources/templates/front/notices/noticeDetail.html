@@ -8,7 +8,8 @@
 
     <h2 th:text="${notice.title}"></h2>
     <p th:text="${notice.content}"></p>
-    <p th:text="${notice.createdAt}"></p>
+    <p>작성자: <span th:text="${notice.writer}"></span></p>
+    <p>작성일: <span th:text="${#dates.format(notice.createdAt, 'yyyy-MM-dd HH:mm')}"></span></p>
 
 </main>
 </html>

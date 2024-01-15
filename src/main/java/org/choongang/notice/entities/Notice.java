@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -14,9 +14,9 @@ import java.util.Date;
 public class Notice {
 
     @Id @GeneratedValue
-    private Long nNum; // 공지사항 번호
+    private Long id; // 공지사항 번호
 
-    private String aId; // 관리자 아이디
+    // private String aId; // 관리자 아이디
 
     private String title; // 제목
 
@@ -24,6 +24,6 @@ public class Notice {
 
     private String writer; // 작성자
 
-    private Date createdAt; // 작성일
+    private Date createdAt = new Date(); // 작성일
 }
 
