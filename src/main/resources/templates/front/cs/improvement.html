@@ -1,8 +1,20 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-   칭찬 개선
+   <h2>칭찬 / 개선</h2>
+
+   <form action="" method="post"> // 현재 페이지로 데이터 전송
+      <label for="feedback">제목 : </label>
+      </br>
+      <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea>
+      </br>
+      <p>파일첨부 추가</p>
+
+      <input type="submit" value="전송">
+   </form>
+
 </main>
 </html>
