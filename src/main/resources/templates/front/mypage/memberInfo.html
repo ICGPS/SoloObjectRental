@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
 <head>
     <link rel="stylesheet" type="text/css" href="memberInfo.css">
 </head>
@@ -35,6 +36,8 @@
                 <button>우편번호 검색</button>
                 <button>새로운 주소 추가</button>
             </div>
+            <a th:href="@{/mypage/paymentList}">결제관리</a>
+            <a th:href="@{/mypage/deliveryAddressList}">배송관리</a>
             <div class="button-group">
                 <button id="saveButton">저장</button>
                 <button id="cancelButton">취소</button>

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{main.html}">
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
 <head>
 
     <meta charset="UTF-8">
@@ -15,24 +16,23 @@
         <!-- 프로필 카드 -->
         <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
             <!-- 프로필 카드 내용 -->
-            <a href="@{/member/memberInfo}">회원정보수정</a>
+            <a th:href="@{/mypage/main}">메인페이지</a>
+            <a th:href="@{/mypage/memberInfo}">회원정보수정</a>
         </div>
         <!-- 렌탈 목록 -->
         <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
             <!-- 렌탈목록 내용 -->
-            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-               href="@{/member/lentalMoglog}">렌탈목록</a>
+            <a th:href="@{/mypage/lentalList}">렌탈목록</a>
         </div>
         <!-- 장바구니 카드 -->
         <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
             <!-- 장바구니 카드 내용 -->
-            <a href="@{/member/shoppingCart/cart}">장바구니목록</a>
+            <a th:href="@{/shoppingCart/cart}">장바구니목록</a>
         </div>
         <!-- 문의 카드 -->
         <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
             <!-- 문의 카드 내용 -->
-            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-               href="@{/member/qna}">1:1문의</a>
+            <a th:href="@{/cs/inquiry}">1:1문의</a>
         </div>
     </section>
 </main>
