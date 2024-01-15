@@ -20,7 +20,7 @@ public class CsController implements ExceptionProcessor {
     private final Utils utils;
 
     // 고객지원 홈
-    @GetMapping("/index")
+    @GetMapping("/main")
     public String index(Model model) {
         commonProcess("index", model);
 
