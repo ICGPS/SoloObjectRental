@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
+import org.choongang.member.controllers.RequestJoin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,6 @@ public class Member extends Base {
 
     @Column(length=7, nullable = false)
     private String bDay;
-
 
 //    @Column(length=20)
     //    private String nation;  // 국적

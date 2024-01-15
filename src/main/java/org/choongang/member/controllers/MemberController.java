@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
-import org.choongang.member.service.FindPwService;
 import org.choongang.member.service.JoinService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,6 @@ public class MemberController implements ExceptionProcessor {
 
     private final Utils utils;
     private final JoinService joinService;
-    private final FindPwService findPwService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model) {
@@ -59,51 +57,33 @@ public class MemberController implements ExceptionProcessor {
         return utils.tpl("member/login");
     }
 
-    /**
-     * 비밀번호 찾기 양식
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/find_pw")
-    public String findPw(@ModelAttribute RequestFindPw form, Model model) {
-        commonProcess("find_pw", model);
+    @GetMapping("/findId")
+    public String findId(Model model) {
+        commonProcess("findId", model);
 
-        return utils.tpl("member/find_pw");
+        System.out.println("아이디 찾기 테스트");
+
+        return utils.tpl("member/findId");
     }
 
-    /**
-     * 비밀번호 찾기 처리
-     *
-     * @param model
-     * @return
-     */
-    @PostMapping("/find_pw")
-    public String findPwPs(@Valid RequestFindPw form, Errors errors, Model model) {
-        commonProcess("find_pw", model);
+    @GetMapping("/findPw")
+    public String findPw(Model model) {
+        commonProcess("findPw", model);
 
-        findPwService.process(form, errors); // 비밀번호 찾기 처리
+        System.out.println("비밀번호 찾기 테스트");
 
-        if (errors.hasErrors()) {
-            return utils.tpl("member/find_pw");
-        }
-
-        // 비밀번호 찾기에 이상 없다면 완료 페이지로 이동
-        return "redirect:/member/find_pw_done";
+        return utils.tpl("member/findPw");
     }
 
-    /**
-     * 비밀번호 찾기 완료 페이지
-     *
-     * @param model
-     * @return
-     */
-    @GetMapping("/find_pw_done")
-    public String findPwDone(Model model) {
-        commonProcess("find_pw", model);
+    @GetMapping("/mainPage")
+    public String mainPage(Model model) {
+        commonProcess("mainPage", model);
 
-        return utils.tpl("member/find_pw_done");
+        System.out.println("메인페이지 테스트");
+
+        return utils.tpl("member/mainPage");
     }
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "join";
