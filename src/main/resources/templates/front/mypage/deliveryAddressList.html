@@ -4,26 +4,68 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
 
-    <h1 th:text="#{배송지관리}"></h1>
-    <h2 th:text="배송지 번호"></h2>
-    <h3 th:text="주소"></h3>
-    <h3 th:text="우편찾기"></h3>
-    <h3 th:text="배송지 추가"></h3>
-
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>배송 주소록</title>
+        <link rel="stylesheet" href="style.css">
+        <title>Acme Shopping</title>
     </head>
 
-    <body>
     <div class="flex flex-col items-center justify-center h-screen">
         <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-2xl" data-v0-t="card">
-            <!-- ... (이전에 작성된 HTML 내용) ... -->
+            <div class="flex flex-col space-y-1.5 p-6">
+                <h3 class="text-2xl font-semibold leading-none tracking-tight">배송 주소록</h3> <!-- 배송 주소록 제목 -->
+                <p class="text-sm text-muted-foreground">배송 주소록을 관리하세요</p> <!-- 배송 주소록 관리 안내문구 -->
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="memberNumber">
+                            회원 번호 <!-- 회원 번호 라벨 -->
+                        </label>
+                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="memberNumber" placeholder="회원 번호를 입력하세요" /> <!-- 회원 번호 입력란 -->
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="recipient">
+                            수령인 <!-- 수령인 라벨 -->
+                        </label>
+                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="recipient" placeholder="수령인의 이름을 입력하세요" /> <!-- 수령인 입력란 -->
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="contactNumber">
+                            연락처 <!-- 연락처 라벨 -->
+                        </label>
+                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="contactNumber" placeholder="수령인의 연락처를 입력하세요" /> <!-- 연락처 입력란 -->
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="deliveryAddressNumber">
+                            배송 주소 번호 <!-- 배송 주소 번호 라벨 -->
+                        </label>
+                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="deliveryAddressNumber" placeholder="배송 주소 번호를 입력하세요" /> <!-- 배송 주소 번호 입력란 -->
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="deliveryAddress">
+                            배송 주소 <!-- 배송 주소 라벨 -->
+                        </label>
+                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="deliveryAddress" placeholder="배송 주소를 입력하세요" /> <!-- 배송 주소 입력란 -->
+                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mt-2">
+                            우편번호 찾기 <!-- 우편번호 찾기 버튼 -->
+                        </button>
+                    </div>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mt-2">
+                        새로운 주소 추가 <!-- 새로운 주소 추가 버튼 -->
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center p-6">
+                <div class="flex space-x-4">
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+                        저장 <!-- 저장 버튼 -->
+                    </button>
+                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
+                        취소 <!-- 취소 버튼 -->
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    </body>
-
-</html>
