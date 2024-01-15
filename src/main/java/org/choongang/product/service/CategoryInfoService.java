@@ -55,7 +55,7 @@ public class CategoryInfoService {
       builder.and(category.active.eq(true));
     }
 
-    List<Category> items = (List<Category>) categoryRepository.findAll(builder, Sort.by(desc("listOrder"), desc("createdAt")));
+    List<Category> items = (List<Category>) categoryRepository.findAll(builder, Sort.by(desc("listOrder"), asc("createdAt")));
 
     return items;
   }

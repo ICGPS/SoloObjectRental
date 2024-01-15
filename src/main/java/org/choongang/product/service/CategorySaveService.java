@@ -30,8 +30,16 @@ public class CategorySaveService {
    */
   public void saveList(List<Integer> chks) {
     for (int chk : chks) {
+      String cateCd = utils.getParam("cateCd_" + chk);
+      Category category = repository.findById(cateCd).orElse(null);
+      if (category == null) continue;
 
+      category.setCateNm(utils.getParam("cateNm_" + chk));
+      category.setActive(Boolean.parseBoolean(utils.getParam("active_" + chk)));
+      category.setListOrder(Integer.parseInt(utils.getParam("listOrder_" + chk)));
     }
+
+    repository.flush();
   }
 
 }

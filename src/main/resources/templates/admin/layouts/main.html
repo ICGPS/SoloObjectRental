@@ -40,38 +40,16 @@
 
     <th:block layout:fragment="addScript"></th:block>
 </head>
-<body class="min-h-screen bg-gray-100 dark-bg-gray-800">
-<main class="p-6">
-    <section class="grid grid-cols-1 md-grid-cols-2 gap-6">
-        <!-- 프로필 카드 -->
-        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-            <!-- 프로필 카드 내용 -->
-            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-               href="edit.html"
-            >회원정보수정</a>
-        </div>
-        <!-- 주문 카드 -->
-        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-            <!-- 주문 카드 내용 -->
-            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-               href="#"
-            >장바구니</a>
-        </div>
-        <!-- 장바구니 카드 -->
-        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-            <!-- 장바구니 카드 내용 -->
-            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-               href="#"
-            >주문관리</a>
-        </div>
-        <!-- 문의 카드 -->
-        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-            <!-- 문의 카드 내용 -->
-            <a class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-               href="#"
-            >1:1문의</a>
-        </div>
-    </section>
-</main>
+<body>
+    <header th:replace="~{admin/outlines/header::common}"></header>
+
+    <main>
+        <aside th:replace="~{admin/outlines/_side::menus}"></aside>
+        <section>
+            <nav th:replace="~{admin/outlines/_submenu::submenus}"></nav>
+            <section layout:fragment="content"></section>
+        </section>
+    </main>
+    <iframe name="ifrmProcess" class="dn"></iframe>
 </body>
 </html>
