@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+
+    <h1>공지사항 상세페이지</h1>
+
+    <h2 th:text="${notice.title}"></h2>
+    <p th:text="${notice.content}"></p>
+    <p th:text="${notice.createdAt}"></p>
+
+</main>
+</html>
