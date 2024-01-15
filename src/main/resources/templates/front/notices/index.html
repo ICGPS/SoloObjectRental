@@ -7,7 +7,7 @@
 </head>
 <main layout:fragment="content">
     <h2>공지사항</h2>
-    // localhost:3000/notices/index
+
     <!-- 공지사항 목록을 보여주는 뷰 -->
     <table border="1">
         <tr>
@@ -17,7 +17,7 @@
             <th>작성자</th>
             <th>작성일</th>
         </tr>
-        <tr th:each="notice : ${notices}">
+        <tr th:each="notice : ${enotics}">
             <td th:text="${notice.nNum}"></td>
             <td>
                 <a th:href="@{/notices/{id}(id=${notices.id})}" th:text="${notice.title}"></a>

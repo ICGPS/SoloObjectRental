@@ -20,7 +20,7 @@ public class NoticeController {
 
     private final NoticeRepository noticeRepository;
 
-    @GetMapping
+    @GetMapping("/index")
     public String Notices(Model model) {
 
         // DB에서 공지사항 가져오기
@@ -28,20 +28,19 @@ public class NoticeController {
 
         model.addAttribute("notices", notices);
 
-        return "index";
+        return "front/notices/index";
     }
 
-    @GetMapping("/notices/new")
-    public String NoticeForm(Model model) {
-        System.out.println("공지사항 게시판으로 이동");
+    @GetMapping("/new")
+    public String newNotice(Model model) {
 
         model.addAttribute("notice", new Notice());
-        return "noticeForm";
+        return "front/notices/newNotice";
     }
 
-    @PostMapping("/notices/new")
+
+    @PostMapping("/new")
     public String newNotice(Notice notice) {
-        System.out.println("");
 
         // 현재 날짜로 작성일 설정
         notice.setCreatedAt(new Date());
@@ -53,7 +52,8 @@ public class NoticeController {
         return "redirect:/notices/index";
     }
 
-    @GetMapping("/notices/{id}")
+
+    @GetMapping("/{id}")
     public String getNoticeById(@PathVariable Long id, Model model) {
         Notice notice = noticeRepository.findById(id).orElse(null);
 
@@ -65,6 +65,8 @@ public class NoticeController {
 
         return "noticeDetail";
     }
+
+
 }
 
 

@@ -2,17 +2,18 @@ package org.choongang.notice.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+
 import java.util.Date;
+
 
 @Entity
 @Data
 public class Notice {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id @GeneratedValue
     private Long nNum; // 공지사항 번호
 
     private String aId; // 관리자 아이디
