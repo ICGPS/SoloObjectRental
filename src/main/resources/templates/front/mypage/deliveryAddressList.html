@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+
+    <h1 th:text="#{배송지관리}"></h1>
+    <h2 th:text="배송지 번호"></h2>
+    <h3 th:text="주소"></h3>
+    <h3 th:text="우편찾기"></h3>
+    <h3 th:text="배송지 추가"></h3>
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>배송 주소록</title>
+    </head>
+
+    <body>
+    <div class="flex flex-col items-center justify-center h-screen">
+        <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-2xl" data-v0-t="card">
+            <!-- ... (이전에 작성된 HTML 내용) ... -->
+        </div>
+    </div>
+    </body>
+
+</html>

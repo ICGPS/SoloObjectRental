@@ -111,4 +111,41 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("addCommonScript", addCommonScript);
 
     }
+
+    @GetMapping("/myPage")
+    public String myPage(Model model) {
+        commonProcess("myPage",model);
+
+        System.out.println("마이페이지");
+
+        return utils.tpl("mypage/main");
+    }
+
+    @GetMapping("memberInfo")
+    public String memberInfo(Model model) {
+        commonProcess("memberInfo",model);
+
+        System.out.println("회원정보,수정");
+
+        return utils.tpl("member/memberInfo");
+    }
+
+    @GetMapping("deliveryAddressList")
+    public String deliveryAddressList(Model model) {
+        commonProcess("deliveryAddressList",model);
+
+        System.out.println("배송지관리");
+
+        return utils.tpl("member/deliveryAddressList");
+    }
+
+    @GetMapping("paymentList")
+    public String paymentList(Model model) {
+        commonProcess("paymentList",model);
+
+        System.out.println("결제관리");
+
+        return utils.tpl("member/paymentList");
+    }
+
 }
