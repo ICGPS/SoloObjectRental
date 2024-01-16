@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<head>
+
+</head>
+<main layout:fragment="content">
+    <h2>공지사항</h2>
+    <!-- localhost:3000/notices/index -->
+
+    <!-- 공지사항 목록을 보여주는 뷰 -->
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        <tr th:each="notice, rowStat : ${notices}">
+            <td th:text="${rowStat.index + 1}"></td>
+            <td>
+                <a th:href="@{/notices/{id}(id=${notice.id})}" th:text="${notice.title}"></a>
+            </td>
+            <td>
+                <a th:href="@{/notices/{id}(id=${notice.id})}" th:text="${notice.content}"></a>
+            </td>
+            <td th:text="${notice.writer}"></td>
+            <td th:text="${#dates.format(notice.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+    </table>
+
+    <a th:href="@{/notices/new}">글쓰기</a>
+</main>
+</html>
