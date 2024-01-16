@@ -66,7 +66,7 @@ public class CsController implements ExceptionProcessor {
         List<String> addCss = new ArrayList<>();
 
         if (mode.equals("inquiry") || mode.equals("inquiryAdd")) {
-            pageTitle = mode.equals("inquiry") ? "1:1 문의" : "1:1 문의 작성";
+            pageTitle = mode.equals("inquiry") ? "1:1 문의" : "1:1 문의하기";
 
         } else if (mode.equals("feedbackPost") || mode.equals("feedbackPostAdd")) {
             pageTitle = mode.equals("feedbackPost") ? "칭찬/개선" : "의견보내기";
