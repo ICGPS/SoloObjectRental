@@ -4,6 +4,9 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
     <h1 th:text="#{회원가입}"></h1>
+    <a th:href="@{/member/mainPage}">메인페이지</a>
+    <a th:href="@{/member/findId}">아이디 찾기</a>
+    <a th:href="@{/member/findPw}">비밀번호 찾기</a>
 
     <form name="frmJoin" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${requestJoin}">
         <input type="hidden" name="gid" th:field="*{gid}">
@@ -98,8 +101,16 @@
         <dl>
             <dt th:text="#{주소}"></dt>
             <dd>
-                <input type="text" name="address" th:field="*{address}">
-                <div class="error" th:each="err : ${#fields.errors('address')}" th:text="${err}"></div>
+                <div>
+                    <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly th:placeholder="#{우편번호}">
+                    <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
+                </div>
+                <div>
+                    <input type="text" name="address" id="address" th:field="*{address}" readonly th:placeholder="#{주소}">
+                </div>
+                <div>
+                    <input type="text" name="addressSub" th:field="*{addressSub}" th:placeholder="#{나머지_주소}">
+                </div>
             </dd>
         </dl>
 

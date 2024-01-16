@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+   <h2>칭찬 / 개선</h2>
+
+   <form action="" method="post">
+      <label for="feedback">내용 : </label>
+      <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea>
+      <p>파일첨부 추가</p>
+
+      <input type="submit" value="전송">
+   </form>
+
+</main>
+</html>

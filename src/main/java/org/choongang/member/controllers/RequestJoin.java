@@ -11,6 +11,9 @@ import java.util.UUID;
 @Data
 public class RequestJoin {
 
+    private String zonecode;
+    private String address;
+    private String addressSub;
     private String gid = UUID.randomUUID().toString();
 
     @NotBlank @Email
@@ -41,8 +44,6 @@ public class RequestJoin {
     @Size(min=10, max=11)
     private String tel;
 
-    @NotBlank
-    private String address;     // 주소
 
 //    @NotBlank
 //    private String nation;  // 국적

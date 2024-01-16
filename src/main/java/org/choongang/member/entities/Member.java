@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
+import org.choongang.member.controllers.RequestJoin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +41,18 @@ public class Member extends Base {
     @Column(length=7, nullable = false)
     private String bDay;
 
-    @Column(length=7, nullable = false)
-    private String address;
-
 //    @Column(length=20)
     //    private String nation;  // 국적
     /* 추가 내용 E */
+
+    @Column(length=10)
+    private String zonecode;
+
+    @Column(length=100)
+    private String address;
+
+    @Column(length=100)
+    private String addressSub;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
