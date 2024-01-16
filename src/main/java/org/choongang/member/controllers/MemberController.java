@@ -150,4 +150,6 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("addCommonScript", addCommonScript);
 
     }
+
+
 }

@@ -55,7 +55,9 @@ public class EmailSendService {
             mimeMessageHelper.setTo(message.to()); // 메일 수신자
             mimeMessageHelper.setSubject(message.subject());  // 메일 제목
             mimeMessageHelper.setText(text, true); // 메일 내용
-            javaMailSender.send(mimeMessage);
+            javaMailSender.
+
+                    send(mimeMessage);
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();

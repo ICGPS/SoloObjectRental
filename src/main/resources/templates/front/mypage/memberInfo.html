@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+<head>
+    <link rel="stylesheet" type="text/css" href="memberInfo.css">
+</head>
+<body>
+<div class="container">
+    <div>
+        <h2>회원 정보 관리</h2>
+        <p>회원 정보를 수정하세요.</p>
+    </div>
+    <div>
+        <form>
+            <div>
+                <label for="name">이름</label>
+                <input id="name" placeholder="이름 입력">
+            </div>
+            <div>
+                <label for="email">이메일</label>
+                <input id="email" placeholder="이메일 입력">
+            </div>
+            <div>
+                <label for="password">비밀번호</label>
+                <input id="password" placeholder="비밀번호 입력" type="password">
+            </div>
+            <div>
+                <label for="passwordConfirm">비밀번호 확인</label>
+                <input id="passwordConfirm" placeholder="비밀번호 확인" type="password">
+            </div>
+            <div>
+                <label for="deliveryAddress">우편주소</label>
+                <input id="deliveryAddress" placeholder="우편주소 입력">
+                <button>우편번호 검색</button>
+                <button>새로운 주소 추가</button>
+            </div>
+            <a th:href="@{/mypage/paymentList}">결제관리</a>
+            <a th:href="@{/mypage/deliveryAddressList}">배송관리</a>
+            <div class="button-group">
+                <button id="saveButton">저장</button>
+                <button id="cancelButton">취소</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
