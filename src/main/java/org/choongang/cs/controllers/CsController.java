@@ -1,12 +1,18 @@
 package org.choongang.cs.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
+import org.choongang.member.controllers.RequestFindPw;
+import org.choongang.member.controllers.RequestJoin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -40,6 +46,20 @@ public class CsController implements ExceptionProcessor {
     @GetMapping("/inquiryAdd")
     public String inquiryAdd(Model model) {
         commonProcess("inquiryAdd", model);
+
+        model.addAttribute("inquirySave", new InquirySave("add", null, null, null));
+
+        return utils.tpl("cs/inquiry_add");
+    }
+
+    @PostMapping("/inquirySave")
+    public String inquirySave(@ModelAttribute InquirySave form, Errors errors, Model model) {
+        commonProcess("inquirySave", model);
+
+        System.out.println(form.mode());
+        System.out.println(form.inquiryType());
+        System.out.println(form.title());
+        System.out.println(form.content());
 
         return utils.tpl("cs/inquiry_add");
     }
