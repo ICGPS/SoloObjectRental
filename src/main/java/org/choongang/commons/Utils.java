@@ -139,7 +139,7 @@ public class Utils {
     }
 
     /**
-     * 요청 데이터 가져오기 편의 함수
+     * 요청 데이터 단일 조회 편의 함수
      *
      * @param name
      * @return
@@ -148,6 +148,12 @@ public class Utils {
         return request.getParameter(name);
     }
 
+    /**
+     * 요청 데이터 복수개 조회 편의 함수
+     *
+     * @param name
+     * @return
+     */
     public String[] getParams(String name) {
         return request.getParameterValues(name);
     }
@@ -175,5 +181,18 @@ public class Utils {
         Collections.shuffle(chars);
 
         return chars.stream().limit(length).collect(Collectors.joining());
+    }
+
+
+    /**
+     * 비회원 UID(Unique ID)
+     *      iP + 브라우저 정보
+     * @return
+     */
+    public int guestUid() {
+        String ip = request.getRemoteAddr();
+        String ua = request.getHeader("User-Agent");
+
+        return Objects.hash(ip, ua);
     }
 }

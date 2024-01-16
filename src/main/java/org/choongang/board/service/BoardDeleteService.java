@@ -1,4 +1,4 @@
-package org.choongang.board;
+package org.choongang.board.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
