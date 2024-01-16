@@ -4,52 +4,109 @@
       layout:decorate="~{front/layouts/main}">
 
 <main layout:fragment="content">
-    <a th:href="@{/product/index}" th:text="#{물품전체보기}"></a>
-    <a th:href="@{/product/list}" th:text="#{카테고리별 상품리스트}"></a>
+    <a th:href="@{/product/index}" th:text="#{물품전체보기}"></a> >
+    <a th:href="@{/product/list}" th:text="#{카테고리별_상품리스트}"></a> >
     <a th:href="@{/product/info}" th:text="#{물품상세}"></a>
     <br>
     <h1>물품상세페이지</h1>
+    <div class="center">
+        <div class="slideImage">이미지 슬라이드</div>
+        <div class="orderInfo"><!-- 상세페이지 우측에 나타날 주문 내용 -->
+            상세페이지 우측에 나타날 주문 내용<br>
 
-    <div style="float:left; width:59%; height: 50vh; background: white; z-index: 1; border: 1px solid black">이미지 슬라이드</div>
-    <div style="float:right; width: 40%; height: 50vh; background: white; z-index: 2; border: 1px solid black"><!-- 상세페이지 우측에 나타날 주문 내용 -->
-        상세페이지 우측에 나타날 주문 내용<br>
-        상품명, 옵션(?), 갯수, 렌탈료, 개월수, 총렌탈료 등등
-<!--        <form method="post" th:action="@{/product/order}" th:object="{주문시사용할테이블}">-->
-<!--            갯수:<input type="number" name="number" th:field="*{갯수}">-->
-<!--            원가: <input type="number" name="price" th:field="*{원가}">-->
-<!--            렌탈료: <input type="number" name="rentalFee" th:field="*{rentalFee}">-->
-<!--            개월수: <input type="number" name="months" th:field="*{개월}">-->
-<!--            -->
-<!--            <button type="submit">주문하기</button>-->
-<!--        </form>-->
-
-                <a th:href="@{/product/order}">주문(임시버튼)</a>
+            상품명, 옵션(?), 갯수, 렌탈료, 개월수, 총렌탈료 등등
+    <!--        <form method="post" th:action="@{/product/order}" th:object="{주문시사용할테이블}">-->
+    <!--            갯수:<input type="number" name="number" th:field="*{갯수}">-->
+    <!--            원가: <input type="number" name="price" th:field="*{원가}">-->
+    <!--            렌탈료: <input type="number" name="rentalFee" th:field="*{rentalFee}">-->
+    <!--            개월수: <input type="number" name="months" th:field="*{개월}">-->
+    <!--            -->
+    <!--            <button type="submit">주문하기</button>-->
+    <!--        </form>-->
+            레이어 팝업
+                    <a th:href="@{/product/order}">주문(임시버튼)</a>
+        </div>
     </div>
 
-<br>
-    <div style="height:100%">
-        <label class="detailSub" style="border: 1px solid;">
-            <input type="radio" name="sub" style="display: none;" checked>
-            <span>상세설명</span>
-        </label>
-
-        <label class="detailSub" style="border: 1px solid;">
-            <input type="radio" name="sub" style="display: none;">
-            <span>구매정보</span>
-        </label>
-
-        <label class="detailSub" style="border: 1px solid;">
-            <input type="radio" name="sub" style="display: none;">
-            <span>리뷰</span>
-        </label>
-
-        <label class="detailSub" style="border: 1px solid;">
-            <input type="radio" name="sub" style="display: none;">
-            <span>문의</span>
-        </label>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <a class="checked" href="#detail" th:text="#{상세설명}" name="detail"></a>
+            </div>
+            <div class="col">
+                <a class="subInfo" href="#info" th:text="#{구매정보}"></a>
+            </div>
+            <div class="col">
+                <a href="#review" th:text="#{리뷰}"></a>
+            </div>
+            <div class="col">
+                <a href="#inquiry" th:text="#{문의}"></a>
+            </div>
+        </div>
     </div>
-    <div>위 선택에 버튼방식으로 동작하도록 바꾸고,
-        <br>선택에 따라 하부 내용 달라지도록 처리해야 함</div>
+    <div class="text-center">
+        <h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <a href="#detail" th:text="#{상세설명}"></a>
+            </div>
+            <div class="col">
+                <a class="checked" href="#info" th:text="#{구매정보}" name="info"></a>
+            </div>
+            <div class="col">
+                <a href="#review" th:text="#{리뷰}"></a>
+            </div>
+            <div class="col">
+                <a href="#inquiry" th:text="#{문의}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <a href="#detail" th:text="#{상세설명}"></a>
+            </div>
+            <div class="col">
+                <a href="#info" th:text="#{구매정보}"></a>
+            </div>
+            <div class="col">
+                <a class="checked" href="#review" th:text="#{리뷰}" name="review"></a>
+            </div>
+            <div class="col">
+                <a href="#inquiry" th:text="#{문의}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <a href="#detail" th:text="#{상세설명}"></a>
+            </div>
+            <div class="col">
+                <a href="#info" th:text="#{구매정보}"></a>
+            </div>
+            <div class="col">
+                <a href="#review" th:text="#{리뷰}"></a>
+            </div>
+            <div class="col">
+                <a class="checked" href="#inquiry" th:text="#{문의}" name="inquiry"></a>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1><h1>설명</h1>
+    </div>
 
 </main>
 </html>

@@ -1,0 +1,12 @@
+a { text-decoration: none; padding: 10px 30px; color: black; font-size: 20px; background: #fff; border: 1px solid;}
+
+
+/* 제품상세페이지 S */
+
+.slideImage { float:left; width: 60%; height: 50vh; background: #0002; }
+.orderInfo { float:left; width: 40%; height: 50vh; background: #0003; }
+
+
+.checked { background: #596b99; }
+
+/* 제품상세페이지 E */
