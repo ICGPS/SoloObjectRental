@@ -20,11 +20,17 @@ private final Utils utils;
 
     return utils.tpl("shoppingCart/cart");
   }
-  @GetMapping("/review")
-  public String re() {
-
-    return  utils.tpl("shoppingCart/review");
-  }
+//  @GetMapping("/review")
+//  public String re() {
+//
+//    return  utils.tpl("orderDetail/review");
+//  }
+//
+//  @GetMapping("/receipt")
+//  public String res() {
+//
+//    return  utils.tpl("orderDetail/receipt");
+//  }
 
   @GetMapping("/order")
   public String ShoppingCartOrder() {
