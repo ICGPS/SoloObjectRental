@@ -7,12 +7,12 @@
     <form name="inquirySave" method="post" th:action="@{/cs/inquirySave}" autocomplete="off" th:object="${inquirySave}">
         <input type="hidden" th:field="*{mode}">
         <select name="inquiryType">
-            <option>상품문의</option>
-            <option>배송문의</option>
-            <option>결제문의</option>
+            <option value="product">상품문의</option>
+            <option value="delivery">배송문의</option>
+            <option value="payment">결제문의</option>
         </select>
-        <input type="text" th:field="*{title}" placeholder="제목">
-        <textarea th:field="*{content}"></textarea>
+        <input type="text" name="title" th:field="*{title}" placeholder="제목">
+        <textarea name="content" th:field="*{content}" placeholder="내용"></textarea>
         <!--파일 첨부-->
         <div class="submit_btns">
             <button type="reset" class="btn btn-secondary">다시입력</button>

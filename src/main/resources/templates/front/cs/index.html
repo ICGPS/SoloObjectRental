@@ -3,8 +3,20 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <div class="visual_box">사진 이미지 / 공지사항</div>
-    <a class="btn btn-danger" th:href="@{/cs/inquiry}" th:text="#{문의하기}"></a>
-    <a class="btn btn-danger" th:href="@{/cs/feedbackPost}" th:text="#{칭찬/개선}"></a>
+    <div class="visual_box">
+        <div>
+            <h3>고객지원</h3>
+            <p>무엇을 도와드릴까요?</p>
+        </div>
+    </div>
+    <div class="service_btn_box">
+            <a class="service_btn" th:href="@{/cs/inquiry}">
+                <i class="xi-help-o"></i>
+                <span>1:1문의</span>
+            </a>
+
+        <a class="service_btn" th:href="@{/cs/feedbackPost}" th:text="#{칭찬/개선}"></a>
+    </div>
+
 </main>
 </html>

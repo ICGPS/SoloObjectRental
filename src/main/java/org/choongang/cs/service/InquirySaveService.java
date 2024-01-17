@@ -1,11 +1,26 @@
 package org.choongang.cs.service;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.cs.controllers.InquirySave;
+import org.choongang.cs.entities.Inquiry;
+import org.choongang.cs.repositories.InquiryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 @Service
 @RequiredArgsConstructor
-public class InquiryService {
+public class InquirySaveService {
+
+    private final InquiryRepository inquiryRepository;
+    String title = "test";
+    String content ="test";
+
+    public void save() {
+        inquiryRepository.save(Inquiry.builder()
+                .title(title)
+                .content(content)
+                .build());
+    }
 }
 
 /**
