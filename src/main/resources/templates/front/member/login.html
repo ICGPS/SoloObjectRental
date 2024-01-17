@@ -1,38 +1,141 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{front/layouts/main}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
 <main layout:fragment="content">
-    <h1 th:text="#{로그인}"></h1>
-    <a th:href="@{/member/findId}">아이디 찾기</a>
-    <a th:href="@{/member/findPw}">비밀번호 찾기</a>
-    <a th:href="@{/member/mainPage}">메인페이지</a>
-    <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
-        <input type="hidden" name="redirectURL"
-               th:if="${param.redirectURL != null}" th:value="${param.redirectURL}">
-        <dl>
-            <dt th:text="#{아이디}"></dt>
-            <dd>
-                <input type="text" name="username" th:value="${session.username}">
-                <div class="error" th:if="${session.NotBlank_username != null}" th:text="${session.NotBlank_username}"></div>
-            </dd>
-        </dl>
-        <dl>
-            <dt th:text="#{비밀번호}"></dt>
-            <dd>
-                <input type="password" name="password">
-                <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
-            </dd>
-        </dl>
-        <a th:href="@{/member/find_pw}" th:text="#{비밀번호_찾기}"></a>
-        <div>
-            <input type="checkbox" name="autoLogin" value="true" id="autoLogin">
-            <label for="autoLogin" th:text="#{자동_로그인}"></label>
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm mx-auto max-w-sm">
+        <div class="flex flex-col p-6 space-y-1">
+            <h3 class="whitespace-nowrap tracking-tight text-2xl font-bold" th:text="#{로그인}"></h3>
+            <p class="text-sm text-muted-foreground" th:text="#{아래에 아이디를 입력하여 계정에 로그인하세요}"></p>
         </div>
-
-        <button type="submit" th:text="#{로그인}"></button>
-
-        <div class="error" th:if="${session.Global_error != null}" th:text="${session.Global_error}"></div>
-    </form>
+        <div class="p-6 text-lg">
+            <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
+                <input type="hidden" name="redirectURL" th:if="${param.redirectURL != null}" th:value="${param.redirectURL}">
+                <dl>
+                    <dt th:text="#{아이디}"></dt>
+                    <dd>
+                        <input type="text" name="username" th:value="${session.username}"
+                               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                        <div class="error" th:if="${session.NotBlank_username != null}" th:text="${session.NotBlank_username}"></div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt th:text="#{비밀번호}"></dt>
+                    <dd>
+                        <input type="password" name="password"
+                               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                        <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
+                    </dd>
+                </dl>
+                <a th:href="@{/member/findId}" th:text="#{아이디 찾기}" class="inline-block text-sm underline"></a>
+                <a th:href="@{/member/find_pw}" th:text="#{비밀번호 찾기}" class="inline-block text-sm underline"></a>
+                <div>
+                    <input type="checkbox" name="autoLogin" value="true" id="autoLogin"
+                           class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                    <label for="autoLogin" th:text="#{자동 로그인}" class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2 text-sm"></label>
+                </div>
+                <button type="submit" th:text="#{로그인}"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"></button>
+                <button type="button" th:text="#{회원가입}"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full mt-2 bg-green-500"
+                        onclick="window.location.href='/member/join'"> <!-- 옵션을 이용한 페이지이동 -->
+                </button>
+                <div class="flex justify-center space-x-2 mt-4">
+                    <button type="button" th:text="#{페이스북 로그인}"
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-1/2 bg-blue-500"></button>
+                    <button type="button" th:text="#{구글 로그인}"
+                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-1/2 bg-red-500"></button>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 </html>
+
+
+<!--
+<style>
+    /* 전체 화면을 가운데 정렬하는 스타일 */
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* 카드 스타일 */
+    .card {
+        border-radius: 0.375rem;
+        border: 1px solid #e2e8f0;
+        background-color: #fff;
+        color: #1a202c;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 20rem;
+        margin: 0;
+    }
+
+    /* 카드 내의 각 섹션의 스타일 */
+    .card-section {
+        padding: 1.5rem;
+    }
+
+    /* 섹션 간 간격 스타일 */
+    .section-spacing {
+        margin-bottom: 1rem;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        height: 2.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* 주소 검색 버튼 스타일 */
+    .search-address-btn {
+        background-color: #3182ce;
+        color: #fff;
+    }
+
+    /* 추가 주소 버튼 스타일 */
+    .add-address-btn {
+        background-color: #3182ce;
+        color: #fff;
+    }
+
+    /* 저장, 취소 버튼 그룹 스타일 */
+    .btn-group {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
+    }
+
+    /* 저장, 취소 버튼 스타일 */
+    .save-btn, .cancel-btn {
+        margin-left: 0.5rem;
+    }
+
+    /* 저장 버튼 스타일 */
+    .save-btn {
+        background-color: #3182ce;
+        color: #fff;
+    }
+
+    /* 취소 버튼 스타일 */
+    .cancel-btn {
+        background-color: #3182ce;
+        color: #fff;
+    }
+</style>
+<title>Delivery Address List</title>
+</head>-->
