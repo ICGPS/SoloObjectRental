@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.config.controllers.BasicConfig;
+import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -194,5 +195,28 @@ public class Utils {
         String ua = request.getHeader("User-Agent");
 
         return Objects.hash(ip, ua);
+    }
+
+    /**
+     * 삭제 버튼 클릭시 "정말 삭제하시겠습니까?" confirm 대화상자
+     *
+     * @return
+     */
+    public String confirmDelete() {
+        String message = Utils.getMessage("Confirm.delete.message", "commons");
+
+        return String.format("return confirm('%s');", message);
+    }
+    public String backgroundStyle(FileInfo file) {
+
+        String imageUrl = file.getFileUrl();
+        List<String> thumbsUrl = file.getThumbsUrl();
+        if (thumbsUrl != null && !thumbsUrl.isEmpty()) {
+            imageUrl = thumbsUrl.get(thumbsUrl.size() - 1);
+        }
+
+        String style = String.format("background:url('%s') no-repeat center center; background-size:cover;", imageUrl);
+
+        return style;
     }
 }
