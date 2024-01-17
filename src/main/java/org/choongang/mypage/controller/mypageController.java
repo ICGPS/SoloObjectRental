@@ -1,6 +1,7 @@
 package org.choongang.mypage.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.commons.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
-public class mypageController {
+public class mypageController implements ExceptionProcessor {
 
     @GetMapping
     public String myPage() {

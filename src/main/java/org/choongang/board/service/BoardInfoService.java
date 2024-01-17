@@ -126,15 +126,15 @@ public class BoardInfoService {
 
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(subjectCond)
-                        .or(contentCond);
+                    .or(contentCond);
 
                 andBuilder.and(orBuilder);
 
             } else if (sopt.equals("POSTER")) { // 작성자 + 아이디 + 회원명
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(boardData.poster.contains(skey))
-                        .or(boardData.member.userId.contains(skey))
-                        .or(boardData.member.name.contains(skey));
+                    .or(boardData.member.userId.contains(skey))
+                    .or(boardData.member.name.contains(skey));
 
                 andBuilder.and(orBuilder);
             }
@@ -159,17 +159,17 @@ public class BoardInfoService {
         PathBuilder<BoardData> pathBuilder = new PathBuilder<>(BoardData.class, "boardData");
 
         List<BoardData> items = new JPAQueryFactory(em)
-                .selectFrom(boardData)
-                .leftJoin(boardData.member)
-                .fetchJoin()
-                .offset(offset)
-                .limit(limit)
-                .where(andBuilder)
-                .orderBy(
-                        new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
-                        new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
-                )
-                .fetch();
+            .selectFrom(boardData)
+            .leftJoin(boardData.member)
+            .fetchJoin()
+            .offset(offset)
+            .limit(limit)
+            .where(andBuilder)
+            .orderBy(
+                new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
+                new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
+            )
+            .fetch();
 
         // 게시글 전체 갯수
         long total = boardDataRepository.count(andBuilder);
@@ -182,13 +182,32 @@ public class BoardInfoService {
     }
 
     /**
+     * 최신 게시글
+     *
+     * @param bid : 게시판 아이디
+     * @param limit : 조회할 갯수
+     * @return
+     */
+    public List<BoardData> getLatest(String bid, int limit) {
+        BoardDataSearch search = new BoardDataSearch();
+        search.setLimit(limit);
+
+        ListData<BoardData> data = getList(bid, search);
+
+        return data.getItems();
+    }
+
+    public List<BoardData> getLatest(String bid) {
+        return getLatest(bid, 10);
+    }
+
+    /**
      * 게시글 추가 정보 처리
      *
      * @param boardData
      */
     public void addBoardData(BoardData boardData) {
         /* 파일 정보 추가 S */
-
         String gid = boardData.getGid();
 
         List<FileInfo> editorFiles = fileInfoService.getListDone(gid, "editor");
@@ -243,7 +262,6 @@ public class BoardInfoService {
     }
 
 
-
     /**
      * 게시글 조회수 업데이트
      *
@@ -256,7 +274,7 @@ public class BoardInfoService {
 
         try {
             int uid = memberUtil.isLogin() ?
-                    memberUtil.getMember().getSeq().intValue() : utils.guestUid();
+                memberUtil.getMember().getSeq().intValue() : utils.guestUid();
 
             BoardView boardView = new BoardView(seq, uid);
 
