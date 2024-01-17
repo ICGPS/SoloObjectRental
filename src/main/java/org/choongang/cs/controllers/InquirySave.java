@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 public record InquirySave(
         @NotBlank
         String mode,
+        String userId,
         String inquiryType,
         String title,
         String content
