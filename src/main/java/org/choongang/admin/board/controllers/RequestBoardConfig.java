@@ -1,8 +1,11 @@
 package org.choongang.admin.board.controllers;
 
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.choongang.file.entities.FileInfo;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -35,8 +38,10 @@ public class RequestBoardConfig {
     private boolean useUploadImage; // 이미지 첨부 사용 여부
 
     private boolean useUploadFile; // 파일 첨부 사용 여부
-    
+
     private String locationAfterWriting = "list"; // 글 작성 후 이동 위치
+
+    private boolean showListBelowView; // 글 보기 하단 목록 노출 여부
 
     private String skin = "default"; // 스킨
 
@@ -54,4 +59,10 @@ public class RequestBoardConfig {
 
     private String htmlTop; // 게시판 상단 HTML
     private String htmlBottom; // 게시판 하단 HTML
+
+    @Transient
+    private List<FileInfo> htmlTopImages; // 게시판 상단 Top 이미지
+
+    @Transient
+    private List<FileInfo> htmlBottomImages; // 게시판 하단 Bottom 이미지
 }

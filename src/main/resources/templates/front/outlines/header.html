@@ -4,6 +4,7 @@
 <header th:fragment="common">
     <div>로고 영역</div>
     <div>
+        <th:block th:replace="~{front/product/_categories::menus}"></th:block>
         <th:block sec:authorize="isAnonymous()"> <!-- 미 로그인 상태 -->
             <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
             <a th:href="@{/member/login}" th:text="#{로그인}"></a>
