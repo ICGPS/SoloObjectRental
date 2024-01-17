@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
+import org.choongang.board.service.BoardDeleteService;
 import org.choongang.board.service.BoardInfoService;
 import org.choongang.board.service.BoardSaveService;
 import org.choongang.board.service.config.BoardConfigInfoService;
@@ -34,6 +35,7 @@ public class BoardController implements ExceptionProcessor {
   private final BoardFormValidator boardFormValidator;
   private final BoardSaveService boardSaveService;
   private final BoardInfoService boardInfoService;
+  private final BoardDeleteService boardDeleteService;
 
   private final MemberUtil memberUtil;
   private final Utils utils;
@@ -68,10 +70,20 @@ public class BoardController implements ExceptionProcessor {
    * @return
    */
   @GetMapping("/view/{seq}")
-  public String view(@PathVariable("seq") Long seq, Model model) {
+  public String view(@PathVariable("seq") Long seq,
+                     @ModelAttribute BoardDataSearch search, Model model) {
     boardInfoService.updateViewCount(seq); // 조회수 업데이트
 
     commonProcess(seq, "view", model);
+
+    // 게시글 보기 하단 목록 노출 S
+    if (board.isShowListBelowView()) {
+      ListData<BoardData> data = boardInfoService.getList(board.getBid(), search);
+
+      model.addAttribute("items", data.getItems());
+      model.addAttribute("pagination", data.getPagination());
+    }
+    // 게시글 보기 하단 목록 노출 E
 
     return utils.tpl("board/view");
   }
@@ -139,7 +151,6 @@ public class BoardController implements ExceptionProcessor {
       return utils.tpl("board/" + mode);
     }
 
-
     // 게시글 저장 처리
     BoardData boardData = boardSaveService.save(form);
 
@@ -147,6 +158,15 @@ public class BoardController implements ExceptionProcessor {
     redirectURL += board.getLocationAfterWriting().equals("view") ? "view/" + boardData.getSeq() : "list/" + form.getBid();
 
     return redirectURL;
+  }
+
+  @GetMapping("/delete/{seq}")
+  public String delete(@PathVariable("seq") Long seq, Model model) {
+    commonProcess(seq, "delete", model);
+
+    boardDeleteService.delete(seq);
+
+    return "redirect:/board/list/" + board.getBid();
   }
 
   /**
@@ -212,7 +232,7 @@ public class BoardController implements ExceptionProcessor {
    * 게시판 공통 처리 : 게시글 보기, 게시글 수정 - 게시글 번호가 있는 경우
    *      - 게시글 조회 -> 게시판 설정
    *
-   * @param seq
+   * @param seq : 게시글 번호
    * @param mode
    * @param model
    */
