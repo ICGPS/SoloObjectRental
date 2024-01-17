@@ -64,12 +64,10 @@ public class CsController implements ExceptionProcessor {
     }
 
     @PostMapping("/inquirySave")
-    public String inquirySave(@ModelAttribute InquirySave form, Errors errors, Model model, InquirySaveService inquirySaveService) {
+    public String inquirySave(@ModelAttribute InquirySave form, Errors errors, Model model) {
         commonProcess("inquirySave", model);
 
-        System.out.println(form.mode());
-        System.out.println(form.title());
-        System.out.println(form.content());
+        inquirySaveService.save(form);
 
         return utils.tpl("cs/inquiry_add_done");
     }
