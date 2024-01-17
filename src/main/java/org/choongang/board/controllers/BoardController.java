@@ -1,12 +1,12 @@
 package org.choongang.board.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
-import org.choongang.board.service.BoardDeleteService;
-import org.choongang.board.service.BoardInfoService;
-import org.choongang.board.service.BoardSaveService;
+import org.choongang.board.service.*;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
@@ -29,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController implements ExceptionProcessor {
 
+
   private final BoardConfigInfoService configInfoService;
   private final FileInfoService fileInfoService;
 
@@ -36,6 +37,7 @@ public class BoardController implements ExceptionProcessor {
   private final BoardSaveService boardSaveService;
   private final BoardInfoService boardInfoService;
   private final BoardDeleteService boardDeleteService;
+  private final BoardAuthService boardAuthService;
 
   private final MemberUtil memberUtil;
   private final Utils utils;
@@ -237,11 +239,26 @@ public class BoardController implements ExceptionProcessor {
    * @param model
    */
   private void commonProcess(Long seq, String mode, Model model) {
+    // 글수정, 글삭제 권한 체크
+    boardAuthService.check(mode, seq);
+
     boardData = boardInfoService.get(seq);
 
     String bid = boardData.getBoard().getBid();
     commonProcess(bid, mode, model);
 
     model.addAttribute("boardData", boardData);
+  }
+
+  @Override
+  @ExceptionHandler(Exception.class)
+  public String errorHandler(Exception e, HttpServletResponse response, HttpServletRequest request, Model model) {
+
+    if (e instanceof GuestPasswordCheckException) {
+
+      return utils.tpl("board/password");
+    }
+
+    return ExceptionProcessor.super.errorHandler(e, response, request, model);
   }
 }
