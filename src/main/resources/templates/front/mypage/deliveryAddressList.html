@@ -2,70 +2,143 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* 전체 화면을 가운데 정렬하는 스타일 */
+        header {
+            position: absolute;
+            top: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* 카드 스타일 */
+        .card {
+            border-radius: 0.375rem;
+            border: 1px solid #e2e8f0;
+            background-color: #fff;
+            color: #1a202c;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 20rem;
+            margin: 0;
+        }
+
+        /* 카드 내의 각 섹션의 스타일 */
+        .card-section {
+            padding: 1.5rem;
+        }
+
+        /* 섹션 간 간격 스타일 */
+        .section-spacing {
+            margin-bottom: 1rem;
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            height: 2.5rem;
+            padding: 0.5rem 1rem;
+        }
+
+        /* 주소 검색 버튼 스타일 */
+        .search-address-btn {
+            background-color: #3182ce;
+            color: #fff;
+        }
+
+        /* 추가 주소 버튼 스타일 */
+        .add-address-btn {
+            background-color: #3182ce;
+            color: #fff;
+        }
+
+        /* 저장, 취소 버튼 그룹 스타일 */
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        /* 저장, 취소 버튼 스타일 */
+        .save-btn, .cancel-btn {
+            margin-left: 0.5rem;
+        }
+
+        /* 저장 버튼 스타일 */
+        .save-btn {
+            background-color: #3182ce;
+            color: #fff;
+        }
+
+        /* 취소 버튼 스타일 */
+        .cancel-btn {
+            background-color: #3182ce;
+            color: #fff;
+        }
+    </style>
+    <title>배송 주소 목록</title>
+</head>
 <main layout:fragment="content">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>Acme Shopping</title>
-    </head>
 
-    <div class="flex flex-col items-center justify-center h-screen">
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-2xl" data-v0-t="card">
-            <div class="flex flex-col space-y-1.5 p-6">
-                <h3 class="text-2xl font-semibold leading-none tracking-tight">배송 주소록</h3> <!-- 배송 주소록 제목 -->
-                <p class="text-sm text-muted-foreground">배송 주소록을 관리하세요</p> <!-- 배송 주소록 관리 안내문구 -->
+    <div class="card">
+        <div class="card-section">
+            <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">배송 주소 목록</h3>
+            <p style="font-size: 0.875rem; color: #718096;">배송지</p>
+        </div>
+        <div class="card-section">
+            <div class="section-spacing">
+                <label for="memberNumber" style="font-size: 0.875rem; font-weight: 500;">회원번호</label>
+                <input type="text" id="memberNumber" placeholder="회원번호를 입력해주세요"
+                       style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
             </div>
-            <div class="p-6">
-                <div class="space-y-4">
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="memberNumber">
-                            회원 번호 <!-- 회원 번호 라벨 데이터베이스 인덱스 번호-->
-                        </label>
-                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="memberNumber" placeholder="회원 번호 데이터베이스 인덱스 번호" /> <!-- 인덱스 번호 -->
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="recipient">
-                            수령인 <!-- 수령인 라벨 -->
-                        </label>
-                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="recipient" placeholder="수령인의 이름을 입력하세요" /> <!-- 수령인 입력란 -->
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="contactNumber">
-                            연락처 <!-- 연락처 라벨 -->
-                        </label>
-                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="contactNumber" placeholder="수령인의 연락처를 입력하세요" /> <!-- 연락처 입력란 -->
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="deliveryAddressNumber">
-                            배송 주소 번호 <!-- 배송 주소 번호 라벨 -->
-                        </label>
-                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="deliveryAddressNumber" placeholder="배송 주소 번호를 입력하세요" /> <!-- 배송 주소 번호 입력란 -->
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="deliveryAddress">
-                            배송 주소 <!-- 배송 주소 라벨 -->
-                        </label>
-                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" id="deliveryAddress" placeholder="배송 주소를 입력하세요" /> <!-- 배송 주소 입력란 -->
-                        <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mt-2">
-                            우편번호 찾기 <!-- 우편번호 찾기 버튼 -->
-                        </button>
-                    </div>
-                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mt-2">
-                        새로운 주소 추가 <!-- 새로운 주소 추가 버튼 -->
-                    </button>
-                </div>
+            <div class="section-spacing">
+                <label for="recipient" style="font-size: 0.875rem; font-weight: 500;">수령인</label>
+                <input type="text" id="recipient" placeholder="수령인을 입력해주세요"
+                       style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
             </div>
-            <div class="flex items-center p-6">
-                <div class="flex space-x-4">
-                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
-                        저장 <!-- 저장 버튼 -->
-                    </button>
-                    <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 ml-auto">
-                        취소 <!-- 취소 버튼 -->
-                    </button>
-                </div>
+            <div class="section-spacing">
+                <label for="contactNumber" style="font-size: 0.875rem; font-weight: 500;">연락처</label>
+                <input type="text" id="contactNumber" placeholder="연락처를 입력해주세요"
+                       style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
+            </div>
+            <div class="section-spacing">
+                <label for="deliveryAddressNumber" style="font-size: 0.875rem; font-weight: 500;">배송지</label>
+                <input type="text" id="deliveryAddressNumber" placeholder="배송지를 입력해주세요"
+                       style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
+            </div>
+            <div class="section-spacing">
+                <label for="deliveryAddress" style="font-size: 0.875rem; font-weight: 500;">배송지 상세주소</label>
+                <input type="text" id="deliveryAddress" placeholder="배송지 상세주소를 입력해주세요"
+                       style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
+                <button class="btn search-address-btn" style="margin-top: 0.5rem;">우편번호 찾기</button>
+            </div>
+            <button class="btn add-address-btn" style="margin-top: 0.5rem;">배송지 추가</button>
+        </div>
+        <div class="card-section">
+            <div class="btn-group">
+                <button class="btn save-btn">Save</button>
+                <button class="btn cancel-btn">Cancel</button>
             </div>
         </div>
     </div>
+</html>
+
+
+
