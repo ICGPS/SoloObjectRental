@@ -21,13 +21,14 @@ public class Inquiry extends Base {
     @Column(length = 19, nullable = false)
     private Long memberNumber; // 회원번호
 
-    @Column(length = 10, nullable = false)
-    private int categoryNumber; // 문의사항 카테고리 번호
+    @Column(length = 255, nullable = false)
+    private String categoryType; // 문의사항 카테고리
 
     @Column(length = 255, nullable = false)
     private String title; // 제목
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Lob
+    @Column(nullable = false)
     private String content; // 내용
 
     @Column(length = 255, nullable = false)
