@@ -2,6 +2,7 @@ package org.choongang.cs.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.choongang.commons.entities.Base;
 import org.choongang.commons.entities.BaseMember;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -11,10 +12,10 @@ import org.hibernate.annotations.DynamicInsert;
 @NoArgsConstructor
 @Table(name = "inquiry")
 @Builder
-public class Inquiry {
+public class Inquiry extends Base {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long seq; // 문의사항 번호
 
     @Column(length = 19, nullable = false)

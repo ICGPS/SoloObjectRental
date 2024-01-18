@@ -25,7 +25,6 @@ public class InquirySaveService {
         Member member = memberInfo.getMember();
 
         inquiryRepository.saveAndFlush(Inquiry.builder()
-                .seq(1L)
                 .memberNumber(member.getSeq())
                 .categoryNumber(1)
                 .title(inquirySave.title())

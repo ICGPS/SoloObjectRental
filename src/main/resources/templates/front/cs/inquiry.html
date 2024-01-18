@@ -10,11 +10,14 @@
     <div class="often_question">
       <h4>문의 하시기 전에</h4>
       <p>자주 찾는 질문을 준비했어요 ~ !</p>
-      <ul>
-        <li>자주하는 질문1</li>
-        <li>자주하는 질문2</li>
-        <li>자주하는 질문3</li>
-      </ul>
+          <ul class="items">
+            <li th:each="item : ${@boardInfoService.getLatest('inquiry', 5)}" th:object="${item}" class="item">
+              <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                <th:block th:text="*{subject}"></th:block>
+              </a>
+            </li>
+          </ul>
+        <a th:href="@{/board/list/inquiry}">더보기</a>
     </div>
     <a class="btn btn-danger" th:href="@{/cs/inquiryAdd}" th:text="#{1:1 문의하기}"></a>
   </div>
