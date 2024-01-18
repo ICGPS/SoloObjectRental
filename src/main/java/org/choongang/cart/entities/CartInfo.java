@@ -14,29 +14,27 @@ import org.choongang.product.entities.Product;
 @Data
 @Builder
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class CartInfo extends Base {
-  @Id
-  @GeneratedValue
+  @Id @GeneratedValue
   private Long seq;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "_mode", length = 10, nullable = false)
-  private CartType mode = CartType.CART;//오라클 예약어라 중복이 된다
+  @Column(name="_mode", length=10, nullable = false)
+  private CartType mode = CartType.CART;
 
-  @Column(name = "_uid", nullable = false ) //비회원을 구분하기 위한 UID
-  private int uid;//오라클 예약어라 중복이 된다
+  @Column(name="_uid", nullable = false) // 비회원을 구분하기 위한 UID
+  private int uid;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "productSeq")
+  @JoinColumn(name="productSeq")
   private Product product;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "memberSeq")
+  @JoinColumn(name="memberSeq")
   private Member member;
 
-  private int ea = 1; //주문 수량
+  private int ea = 1; // 주문수량
 
   @Transient
   private int totalPrice; // 상품 합계
@@ -50,4 +48,3 @@ public class CartInfo extends Base {
   @Transient
   private FileInfo listImage;
 }
-
