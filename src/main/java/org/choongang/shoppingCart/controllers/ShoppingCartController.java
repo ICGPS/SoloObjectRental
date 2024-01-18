@@ -20,13 +20,13 @@ private final Utils utils;
 
     return utils.tpl("shoppingCart/cart");
   }
-//  @GetMapping("/review")
+//  @GetMapping("/review") //리뷰 컨트롤러
 //  public String re() {
 //
 //    return  utils.tpl("orderDetail/review");
 //  }
 //
-//  @GetMapping("/receipt")
+//  @GetMapping("/receipt") // 영수증 컨트롤러
 //  public String res() {
 //
 //    return  utils.tpl("orderDetail/receipt");
@@ -41,7 +41,7 @@ private final Utils utils;
   @GetMapping("/continueShopping")
   public String continueShopping() {
 
-    return utils.tpl("product/list");
+    return utils.tpl("product/productlist");
   }
 
 }

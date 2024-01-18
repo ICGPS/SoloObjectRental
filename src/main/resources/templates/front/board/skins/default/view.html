@@ -46,7 +46,7 @@
 
 
        <div class="board_btns">
-           <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="btn"></a>
+            <a th:href="@{/board/write/{bid}(bid=${board.bid})}" th:text="#{글쓰기}" class="btn"></a>
 
            <a th:if="*{showEditButton}" th:href="@{/board/update/{seq}(seq=*{seq})}" th:text="#{글수정}" class="btn"></a>
 
