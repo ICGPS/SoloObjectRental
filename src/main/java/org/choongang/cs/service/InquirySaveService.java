@@ -4,21 +4,33 @@ import lombok.RequiredArgsConstructor;
 import org.choongang.cs.controllers.InquirySave;
 import org.choongang.cs.entities.Inquiry;
 import org.choongang.cs.repositories.InquiryRepository;
+import org.choongang.member.entities.Member;
+import org.choongang.member.service.MemberInfo;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class InquirySaveService {
 
     private final InquiryRepository inquiryRepository;
-    String title = "test";
-    String content ="test";
 
-    public void save() {
-        inquiryRepository.save(Inquiry.builder()
-                .title(title)
-                .content(content)
+    public void save(InquirySave inquirySave) {
+        MemberInfo memberInfo = (MemberInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Member member = memberInfo.getMember();
+
+        inquiryRepository.saveAndFlush(Inquiry.builder()
+                .seq(1L)
+                .memberNumber(member.getSeq())
+                .categoryNumber(1)
+                .title(inquirySave.title())
+                .content(inquirySave.content())
+                .author(member.getName())
                 .build());
     }
 }
