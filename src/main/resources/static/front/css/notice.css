@@ -1,0 +1,33 @@
+.notice_container { width: 80%; margin: auto; margin-top: 20px; }
+
+.notice_table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+
+.notice_table th {
+    text-align: center;
+    padding: 200px;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media only screen and (max-width: 600px) {
+    .notice_table th {
+        width: 100%; /* 화면이 작아지면 각 칼럼의 너비를 100%로 조절 */
+    }
+}
+
+th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+
+th { background-color: #f2f2f2; }
+
+a { text-decoration: none; color: #0066cc; }
+
+a:hover { text-decoration: underline; color: #004080; }
+
+a:visited { color: #660099; }
+
+a:active { color: #ff3300; }
+
+a:link { color: #0066cc; }
+
+.write_link { display: inline-block; margin-top: 20px; padding: 10px; background-color: #0066cc; color: #fff; text-decoration: none; border-radius: 5px; }
+
+.write_link:hover { background-color: #004080; }
