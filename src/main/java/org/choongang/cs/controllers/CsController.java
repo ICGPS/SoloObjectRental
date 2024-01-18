@@ -1,11 +1,16 @@
 package org.choongang.cs.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
+import org.choongang.cs.entities.Inquiry;
+import org.choongang.cs.service.InquirySaveService;
+import org.choongang.member.MemberUtil;
 import org.choongang.member.controllers.RequestFindPw;
 import org.choongang.member.controllers.RequestJoin;
+import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,7 +28,9 @@ import java.util.Objects;
 @RequestMapping("/cs")
 @RequiredArgsConstructor
 public class CsController implements ExceptionProcessor {
+    private final MemberUtil memberUtil;
     private final Utils utils;
+    private final InquirySaveService inquirySaveService;
 
     // 고객지원 홈
     @GetMapping("/main")
@@ -47,21 +54,22 @@ public class CsController implements ExceptionProcessor {
     public String inquiryAdd(Model model) {
         commonProcess("inquiryAdd", model);
 
-        model.addAttribute("inquirySave", new InquirySave("add", null, null, null));
+        model.addAttribute("inquirySave", new InquirySave("add",null, null, null, null));
 
-        return utils.tpl("cs/inquiry_add");
+        if (memberUtil.isLogin()) {
+            return utils.tpl("cs/inquiry_add");
+        }
+
+        return "redirect:/member/login";
     }
 
     @PostMapping("/inquirySave")
     public String inquirySave(@ModelAttribute InquirySave form, Errors errors, Model model) {
         commonProcess("inquirySave", model);
 
-        System.out.println(form.mode());
-        System.out.println(form.inquiryType());
-        System.out.println(form.title());
-        System.out.println(form.content());
+        inquirySaveService.save(form);
 
-        return utils.tpl("cs/inquiry_add");
+        return utils.tpl("cs/inquiry_add_done");
     }
 
     // 칭찬/개선

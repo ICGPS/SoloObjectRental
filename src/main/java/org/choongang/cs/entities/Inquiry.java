@@ -1,19 +1,36 @@
 package org.choongang.cs.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
+import org.choongang.commons.entities.Base;
 import org.choongang.commons.entities.BaseMember;
+import org.hibernate.annotations.DynamicInsert;
 
 @Entity
-@Data
-public class Inquiry extends BaseMember {
-    @Id @GeneratedValue
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "inquiry")
+@Builder
+public class Inquiry extends Base {
+
+    @Id
+    @GeneratedValue
     private Long seq; // 문의사항 번호
+
+    @Column(length = 19, nullable = false)
     private Long memberNumber; // 회원번호
-    private int categoryNumber; // 문의사항 카테고리 번호
+
+    @Column(length = 255, nullable = false)
+    private String categoryType; // 문의사항 카테고리
+
+    @Column(length = 255, nullable = false)
     private String title; // 제목
+
+    @Lob
+    @Column(nullable = false)
     private String content; // 내용
+
+    @Column(length = 255, nullable = false)
     private String author; // 작성자
 }

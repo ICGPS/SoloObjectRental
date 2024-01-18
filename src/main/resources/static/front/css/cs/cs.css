@@ -1,8 +1,61 @@
 .visual_box {
     width: 100%;
-    height: 300px;
-    background: #ccc;
+    height: 500px;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ),url("https://i.postimg.cc/JznmH8Xc/headphones-1816349-1280.jpg");
+    background-repeat: no-repeat;
+    background-position: center 0;
     text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.visual_box > div {
+    padding-left: 30px;
+}
+
+.visual_box > div p {
+    font-size: 18px;
+    text-align: left;
+}
+
+.service_btn_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.service_btn_box a {
+    text-decoration: none;
+    width: 300px;
+    padding: 20px;
+    margin: 10px;
+    background: #7a8e95;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.service_btn_box a:active,
+ .service_btn_box a:hover {
+    background: #213f5d;
+}
+
+.service_btn_box a i {
+    margin-top: 2px;
+}
+
+.service_btn_box a span {
+    padding-left: 5px;
+}
+
+.often_question {
+    width: 100%;
+    background: orange;
 }
 
 .feedbackPostAdd {
@@ -16,8 +69,4 @@ textarea {
     width: 80%;
     height: 6.25em;
     resize: none;
-}
-
-.submit_btns .btn {
-
 }

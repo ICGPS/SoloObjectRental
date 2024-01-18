@@ -24,4 +24,3 @@ public abstract class Base {
     @Column(insertable = false)
     private LocalDateTime modifiedAt;
 }
-//
