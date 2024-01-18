@@ -22,23 +22,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartController implements ExceptionProcessor {
 
-//private final ShoppingDataRepository shoppingDataRepository;
-//private final Utils utils;
   private final CartSaveService cartSaveService;
   private final CartInfoService cartInfoService;
   private final CartDeleteService cartDeleteService;
   private final Utils utils;
+
 
   @ModelAttribute("pageTitle")
   public String getPageTitle() {
     return Utils.getMessage("장바구니", "commons");
   }
 
+
   /**
    * 장바구니에 상품 등록
-   * mode : cart - 장바구니 페이지 노출 상품
-   * direct - 바로 구매 상품
-   * @param model
+   *      mode : cart - 장바구니 페이지 노출 상품
+   *             direct - 바로 구매 상품
    * @return
    */
   @PostMapping("/save")
@@ -55,8 +54,10 @@ public class CartController implements ExceptionProcessor {
     return "common/_execute_script";
   }
 
+
   /**
    * 장바구니 상품 목록
+   *
    * @return
    */
   @GetMapping
@@ -70,20 +71,11 @@ public class CartController implements ExceptionProcessor {
     return utils.tpl("cart/list");
   }
 
-  private void commonProcess(String mode, Model model) {
-    mode = StringUtils.hasText(mode) ? mode : "list";
-
-    List<String> addScript = new ArrayList<>();
-    if (mode.equals("list")) { // 장바구니 상품 목록
-      addScript.add("cart/cart");
-    }
-
-    model.addAttribute("addScript", addScript);
-  }
-
   @PostMapping
   public String cartPs(@RequestParam("chk") List<Integer> chks,
                        @RequestParam("mode") String mode, Model model) {
+
+    String script = "parent.location.reload()"; // 부모창 새로고침
 
     if (mode.equals("edit")) { // 장바구니 상품 목록 수정
 
@@ -94,14 +86,28 @@ public class CartController implements ExceptionProcessor {
       cartDeleteService.deleteList(chks);
 
     } else if (mode.equals("order")) { // 장바구니 상품 주문
-
+      String orderUrl = cartInfoService.getOrderUrl(chks);
+      script = String.format("parent.location.replace('%s');", orderUrl);
     }
 
-    model.addAttribute("script", "parent.location.reload()");
+    model.addAttribute("script", script);
     return "common/_execute_script";
   }
 
+  private void commonProcess(String mode, Model model) {
+    mode = StringUtils.hasText(mode) ? mode : "list";
+
+    List<String> addScript = new ArrayList<>();
+    if (mode.equals("list")) { // 장바구니 상품 목록
+      addScript.add("cart/cart");
+    }
+
+    model.addAttribute("addScript", addScript);
+  }
 }
+
+//private final ShoppingDataRepository shoppingDataRepository;
+//private final Utils utils;
 
 
 //  @GetMapping("/cart")
