@@ -15,6 +15,7 @@ import org.choongang.board.controllers.RequestBoard;
 import org.choongang.board.entities.*;
 import org.choongang.board.repositories.BoardDataRepository;
 import org.choongang.board.repositories.BoardViewRepository;
+import org.choongang.board.service.comment.CommentInfoService;
 import org.choongang.board.service.config.BoardConfigInfoService;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
@@ -38,6 +39,7 @@ public class BoardInfoService {
     private final BoardViewRepository boardViewRepository;
 
     private final BoardConfigInfoService configInfoService;
+    private final CommentInfoService commentInfoService;
 
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
@@ -56,6 +58,10 @@ public class BoardInfoService {
         BoardData boardData = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
 
         addBoardData(boardData);
+
+        // 댓글 목록
+        List<CommentData> comments = commentInfoService.getList(seq);
+        boardData.setComments(comments);
 
         return boardData;
     }
@@ -126,15 +132,15 @@ public class BoardInfoService {
 
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(subjectCond)
-                    .or(contentCond);
+                        .or(contentCond);
 
                 andBuilder.and(orBuilder);
 
             } else if (sopt.equals("POSTER")) { // 작성자 + 아이디 + 회원명
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(boardData.poster.contains(skey))
-                    .or(boardData.member.userId.contains(skey))
-                    .or(boardData.member.name.contains(skey));
+                        .or(boardData.member.userId.contains(skey))
+                        .or(boardData.member.name.contains(skey));
 
                 andBuilder.and(orBuilder);
             }
@@ -159,17 +165,17 @@ public class BoardInfoService {
         PathBuilder<BoardData> pathBuilder = new PathBuilder<>(BoardData.class, "boardData");
 
         List<BoardData> items = new JPAQueryFactory(em)
-            .selectFrom(boardData)
-            .leftJoin(boardData.member)
-            .fetchJoin()
-            .offset(offset)
-            .limit(limit)
-            .where(andBuilder)
-            .orderBy(
-                new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
-                new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
-            )
-            .fetch();
+                .selectFrom(boardData)
+                .leftJoin(boardData.member)
+                .fetchJoin()
+                .offset(offset)
+                .limit(limit)
+                .where(andBuilder)
+                .orderBy(
+                        new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
+                        new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
+                )
+                .fetch();
 
         // 게시글 전체 갯수
         long total = boardDataRepository.count(andBuilder);
@@ -274,7 +280,7 @@ public class BoardInfoService {
 
         try {
             int uid = memberUtil.isLogin() ?
-                memberUtil.getMember().getSeq().intValue() : utils.guestUid();
+                    memberUtil.getMember().getSeq().intValue() : utils.guestUid();
 
             BoardView boardView = new BoardView(seq, uid);
 
