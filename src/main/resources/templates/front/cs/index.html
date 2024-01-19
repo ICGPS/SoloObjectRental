@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
+<main layout:fragment="content" class="cs_main">
     <div class="visual_box">
         <div>
             <h3>고객지원</h3>
@@ -10,13 +10,14 @@
         </div>
     </div>
     <div class="service_btn_box">
-            <a class="service_btn" th:href="@{/cs/inquiry}">
-                <i class="xi-help-o"></i>
-                <span>1:1문의</span>
-            </a>
-
-        <a class="service_btn" th:href="@{/cs/feedbackPost}" th:text="#{칭찬/개선}"></a>
+        <a class="service_btn" th:href="@{/cs/inquiry}">
+            <i class="xi-help-o"></i>
+            <span>1:1 문의</span>
+        </a>
+        <a class="service_btn" th:href="@{/cs/feedbackPost}">
+            <i class="xi-message-o"></i>
+            <span>칭찬/개선</span>
+        </a>
     </div>
-
 </main>
 </html>

@@ -1,3 +1,7 @@
+.cs_main {
+    min-height: 1000px;
+}
+
 .visual_box {
     width: 100%;
     height: 500px;
@@ -7,6 +11,7 @@
     text-align: center;
     display: flex;
     align-items: center;
+    padding: 0 20%;
 }
 
 .visual_box > div {
@@ -20,6 +25,7 @@
 
 .service_btn_box {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     padding: 30px;
@@ -34,7 +40,7 @@
     border-radius: 10px;
     text-align: center;
     font-size: 20px;
-    color: #fff;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,16 +52,21 @@
 }
 
 .service_btn_box a i {
+    font-size: 24px;
+    color: #fff;
     margin-top: 2px;
 }
 
 .service_btn_box a span {
+    font-size: 22px;
+    color: #fff;
     padding-left: 5px;
 }
 
 .often_question {
     width: 100%;
     background: orange;
+    margin: 20px 0;
 }
 
 .feedbackPostAdd {
@@ -65,8 +76,55 @@
         text-align: center;
 }
 
-textarea {
-    width: 80%;
-    height: 6.25em;
-    resize: none;
+.inquiry_main {
+       min-height: 1000px;
+       text-align: center;
+       padding: 50px;
+}
+
+.inquiry_main h3 {
+    font-size: 24px;
+    margin: 0 0 50px 0;
+}
+
+.inquiry_main p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.inquiry_btn {
+    display: inline-flex;
+    width: 180px;
+    height: 50px;
+    background: #596b99;
+    border-radius: 10px;
+    color:#fff;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.inquiry_box {
+    display: flex;
+}
+
+.inquiry_box select {
+    width: 20%;
+}
+
+.inquiry_box + textarea {
+     width: 100%;
+     min-height: 500px;
+     padding: 10px;
+     border: 1px solid #d5d5d5;
+     border-radius: 3px;
+}
+
+.submit_btns {
+    margin-top: 50px;
+}
+
+.submit_btns .btn {
+    padding: 10px 15px;
+    font-size: 16px;
 }

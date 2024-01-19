@@ -37,8 +37,6 @@ public class CsController implements ExceptionProcessor {
     public String index(Model model) {
         commonProcess("index", model);
 
-        System.out.println("cs화면 테스트");
-
         return utils.tpl("cs/index");
     }
 
@@ -70,6 +68,13 @@ public class CsController implements ExceptionProcessor {
         inquirySaveService.save(form);
 
         return utils.tpl("cs/inquiry_add_done");
+    }
+
+    @GetMapping("/inquiryList")
+    public String inquiryList(Model model) {
+        commonProcess("inquiryList", model);
+
+        return utils.tpl("cs/inquiry_list");
     }
 
     // 칭찬/개선
