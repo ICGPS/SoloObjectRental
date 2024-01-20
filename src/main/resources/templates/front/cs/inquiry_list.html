@@ -2,7 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-    <main layout:fragment="content">
-
+    <main layout:fragment="content" th:object="${listRecordInquiry}">
+            <table>
+                <tr>
+                    <th>문의유형</th>
+                    <th>제목</th>
+                    <th>작성일</th>
+                </tr>
+                <th:block th:each="recordInquiry : ${listRecordInquiry}">
+                <tr>
+                    <td th:text="${recordInquiry.inquiryType}"></td>
+                    <td>
+                        <a th:text="${recordInquiry.title}" th:href="@{inquiryDetail/{seq}(seq = ${recordInquiry.seq})}"></a>
+                    </td>
+                    <td th:text="${recordInquiry.createdAt}"></td>
+                </tr>
+                </th:block>
+            </table>
     </main>
 </html>
