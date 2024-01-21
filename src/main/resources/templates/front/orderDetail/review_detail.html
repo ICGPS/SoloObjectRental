@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 작성</title>
+</head>
+<body>
+
+<form id="reviewForm" name="reviewForm" method="post" action="/orderDetail/submitReview">
+    <input type="hidden" name="productSeq" value="100"> <!-- 상품번호 받을 DOM -->
+
+    <input type="radio" name="scope" value="1">
+    <input type="radio" name="scope" value="2">
+    <input type="radio" name="scope" value="3">
+    <input type="radio" name="scope" value="4">
+    <input type="radio" name="scope" value="5">
+    <br>
+    리뷰 내용: <textarea id="reviewContent" name="reviewContent"></textarea>
+    <br>
+    <!--<input type='button' value='등록' onclick='submitReview()'>-->
+    <button type="submit">등록</button>
+</form>
+
+<!--<script>
+    function submitReview() {
+        var reviewPage = window.opener.document.getElementById("reviewPage").value;
+        window.opener.document.getElementById("reviewsContainer").innerHTML += "<p>" + reviewPage + "</p>";
+        window.close();
+    }
+</script>-->
+
+</body>
+</html>

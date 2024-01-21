@@ -1,24 +1,14 @@
 package org.choongang.cs.controllers;
 
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
-import org.choongang.cs.entities.Inquiry;
-import org.choongang.cs.service.InquirySaveService;
+import org.choongang.cs.service.InquiryService;
 import org.choongang.member.MemberUtil;
-import org.choongang.member.controllers.RequestFindPw;
-import org.choongang.member.controllers.RequestJoin;
-import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +20,12 @@ import java.util.Objects;
 public class CsController implements ExceptionProcessor {
     private final MemberUtil memberUtil;
     private final Utils utils;
-    private final InquirySaveService inquirySaveService;
+    private final InquiryService inquiryService;
 
     // 고객지원 홈
     @GetMapping("/main")
     public String index(Model model) {
         commonProcess("index", model);
-
-        System.out.println("cs화면 테스트");
 
         return utils.tpl("cs/index");
     }
@@ -54,7 +42,7 @@ public class CsController implements ExceptionProcessor {
     public String inquiryAdd(Model model) {
         commonProcess("inquiryAdd", model);
 
-        model.addAttribute("inquirySave", new InquirySave("add",null, null, null, null));
+        model.addAttribute("inquirySave", new InquirySave("add", null, null, null, null));
 
         if (memberUtil.isLogin()) {
             return utils.tpl("cs/inquiry_add");
@@ -67,10 +55,31 @@ public class CsController implements ExceptionProcessor {
     public String inquirySave(@ModelAttribute InquirySave form, Errors errors, Model model) {
         commonProcess("inquirySave", model);
 
-        inquirySaveService.save(form);
+        inquiryService.save(form);
 
         return utils.tpl("cs/inquiry_add_done");
     }
+
+    @GetMapping("/inquiryList")
+    public String inquiryList(Model model) {
+        commonProcess("inquiryList", model);
+
+        List<RecordInquiry> listRecordInquiry = inquiryService.getList();
+        model.addAttribute("listRecordInquiry", listRecordInquiry);
+
+        return utils.tpl("cs/inquiry_list");
+    }
+
+    @GetMapping("/inquiryDetail/{seq}")
+    public String inquiryDetail(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("inquiryDetail", model);
+
+        RecordInquiry recordInquiry = inquiryService.getOne(seq);
+        model.addAttribute("recordInquiry", recordInquiry);
+
+        return utils.tpl("cs/inquiry_detail");
+    }
+
 
     // 칭찬/개선
     @GetMapping("/feedbackPost")
