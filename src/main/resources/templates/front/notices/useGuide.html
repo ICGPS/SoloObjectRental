@@ -3,13 +3,36 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
 
     <h2>이용 안내</h2>
-    <table border="1">
+    <table>
         <tr>
             <th>결제 방법</th>
             <th>이용 방법</th>
             <th>제품 사용 방법</th>
+        </tr>
+        <tr>
+            <td>신용카드, 계좌이체 등...</td>
+            <td>이용 방법....</td>
+            <td>파손 분실 등...</td>
         </tr>
     </table>
 
