@@ -2,8 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-    <main layout:fragment="content" th:object="${recordInquiry}">
-        <h3 th:text="*{title}"></h3>
+    <main layout:fragment="content" th:object="${recordInquiry}" class="inquiry_detail">
+        <div>
+            <h3 th:text="*{title}"></h3>
+            <p th:text="*{createdAt}"></p>
+        </div>
         <p th:text="*{content}"></p>
     </main>
 </html>

@@ -128,3 +128,38 @@
     padding: 10px 15px;
     font-size: 16px;
 }
+
+.inquiry_table {
+    width: 100%;
+}
+
+.inquiry_table th {
+    border: 1px solid #efefef;
+    background: #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.inquiry_table td {
+    border: 1px solid #efefef;
+    padding: 10px;
+}
+
+.inquiry_detail div {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inquiry_detail div > p {
+    width: auto;
+    margin: 0;
+}
+
+.inquiry_detail p {
+    width: 100%;
+    padding: 10px;
+}
