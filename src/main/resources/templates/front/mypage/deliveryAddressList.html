@@ -119,15 +119,20 @@
                        style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
             </div>
             <div class="section-spacing">
-                <label for="deliveryAddressNumber" style="font-size: 0.875rem; font-weight: 500;">배송지</label>
-                <input type="text" id="deliveryAddressNumber" placeholder="배송지를 입력해주세요"
+                <label for="address" style="font-size: 0.875rem; font-weight: 500;">배송지</label>
+                <input type="text" id="postcode" placeholder="우편번호">
+                <input type="text" id="address" placeholder="배송지를 입력해주세요"
                        style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
+                <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+                    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+                </div>
             </div>
             <div class="section-spacing">
-                <label for="deliveryAddress" style="font-size: 0.875rem; font-weight: 500;">배송지 상세주소</label>
-                <input type="text" id="deliveryAddress" placeholder="배송지 상세주소를 입력해주세요"
-                       style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
-                <button class="btn search-address-btn" style="margin-top: 0.5rem;">우편번호 찾기</button>
+                <label for="detailAddress" style="font-size: 0.875rem; font-weight: 500;">배송지 상세주소</label>
+                <input type="text" id="detailAddress" placeholder="배송지 상세주소를 입력해주세요" style="width: 100%; height: 2.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; padding: 0.5rem; box-sizing: border-box; font-size: 0.875rem;">
+                <input type="text" id="extraAddress" placeholder="참고항목">
+
+                <button class="btn search-address-btn" style="margin-top: 0.5rem;" onclick="execDaumPostcode()">우편번호 찾기</button>
             </div>
             <button class="btn add-address-btn" style="margin-top: 0.5rem;">배송지 추가</button>
         </div>
@@ -138,6 +143,74 @@
             </div>
         </div>
     </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script>
+
+
+        var element_wrap = document.getElementById('wrap');
+
+        function foldDaumPostcode() {
+            element_wrap.style.display = 'none';
+        }
+
+        function execDaumPostcode() {
+         console.log('aaaa');
+            var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+            new daum.Postcode({
+                oncomplete: function(data) {
+
+                    var addr = '';
+                    var extraAddr = '';
+
+
+                    if (data.userSelectedType === 'R') {
+                        addr = data.roadAddress;
+                    } else {
+                        addr = data.jibunAddress;
+                    }
+
+                    if(data.userSelectedType === 'R'){
+
+                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                            extraAddr += data.bname;
+                        }
+
+                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+
+                        if(extraAddr !== ''){
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                    document.getElementById("extraAddress").value = extraAddr;
+
+                    } else {
+                        document.getElementById("extraAddress").value = '';
+                    }
+
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("address").value = addr;
+
+                    document.getElementById("detailAddress").focus();
+
+
+                    element_wrap.style.display = 'none';
+
+
+                    document.body.scrollTop = currentScroll;
+                },
+                onresize : function(size) {
+                    element_wrap.style.height = size.height+'px';
+                },
+                width : '100%',
+                height : '100%'
+            }).embed(element_wrap);
+
+            element_wrap.style.display = 'block';
+        }
+    </script>
+</main>
 </html>
 
 
