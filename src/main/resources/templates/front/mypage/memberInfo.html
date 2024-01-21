@@ -4,8 +4,9 @@
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
 <head>
-    <link rel="stylesheet" type="text/css" href="memberInfo.css">
+    <link rel="stylesheet" type="text/css" href="/static/mypage/css/memberinfo.css">
 </head>
+
 <body>
 <div class="container">
     <div>
@@ -23,17 +24,30 @@
                 <input id="email" placeholder="이메일 입력">
             </div>
             <div>
-                <label for="password">비밀번호</label>
+                <label for="password">현재 비밀번호</label>
                 <input id="password" placeholder="비밀번호 입력" type="password">
             </div>
             <div>
-                <label for="passwordConfirm">비밀번호 확인</label>
-                <input id="passwordConfirm" placeholder="비밀번호 확인" type="password">
+                <label for="newPassword">비밀번호</label>
+                <input id="newPassword" placeholder="비밀번호 입력" type="password">
+            </div>
+            <div>
+                <label for="newPasswordConfirm">새비밀번호 확인</label>
+                <input id="newPasswordConfirm" placeholder="비밀번호 확인" type="password">
             </div>
             <div>
                 <label for="deliveryAddress">우편주소</label>
+                <input type="text" id="postcode" placeholder="우편번호">
+                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="address" placeholder="주소"><br>
+                <input type="text" id="detailAddress" placeholder="상세주소">
+                <input type="text" id="extraAddress" placeholder="참고항목">
+                <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+                    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
+                </div>
+
                 <input id="deliveryAddress" placeholder="우편주소 입력">
-                <button>우편번호 검색</button>
+                <!--<button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address" >우편번호 검색</button>-->
                 <button>새로운 주소 추가</button>
             </div>
             <a th:href="@{/mypage/paymentList}">결제관리</a>
@@ -46,6 +60,74 @@
     </div>
 </div>
 </body>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script>
+
+
+        var element_wrap = document.getElementById('wrap');
+
+        function foldDaumPostcode() {
+            element_wrap.style.display = 'none';
+        }
+
+        function execDaumPostcode() {
+         console.log('aaaa');
+            var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+            new daum.Postcode({
+                oncomplete: function(data) {
+
+                    var addr = '';
+                    var extraAddr = '';
+
+
+                    if (data.userSelectedType === 'R') {
+                        addr = data.roadAddress;
+                    } else {
+                        addr = data.jibunAddress;
+                    }
+
+                    if(data.userSelectedType === 'R'){
+
+                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                            extraAddr += data.bname;
+                        }
+
+                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+
+                        if(extraAddr !== ''){
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                    document.getElementById("extraAddress").value = extraAddr;
+
+                    } else {
+                        document.getElementById("extraAddress").value = '';
+                    }
+
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("address").value = addr;
+
+                    document.getElementById("detailAddress").focus();
+
+
+                    element_wrap.style.display = 'none';
+
+
+                    document.body.scrollTop = currentScroll;
+                },
+                onresize : function(size) {
+                    element_wrap.style.height = size.height+'px';
+                },
+                width : '100%',
+                height : '100%'
+            }).embed(element_wrap);
+
+            element_wrap.style.display = 'block';
+        }
+    </script>
+</main>
 </html>
 
 
