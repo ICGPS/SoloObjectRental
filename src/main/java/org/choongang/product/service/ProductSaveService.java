@@ -22,13 +22,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductSaveService {
 
-    private final ProductRepository productRepository;
-    private final ProductOptionRepository productOptionRepository;
-    private final FileUploadService fileUploadService;
-    private final CategoryRepository categoryRepository;
-    private final Utils utils;
+        private final ProductRepository productRepository;
+        private final ProductOptionRepository productOptionRepository;
+        private final FileUploadService fileUploadService;
+        private final CategoryRepository categoryRepository;
+        private final Utils utils;
 
-    public void save(RequestProduct form) {
+        public void save(RequestProduct form) {
 
         String mode = form.getMode();
         Long seq = form.getSeq();

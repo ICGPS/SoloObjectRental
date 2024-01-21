@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,11 @@ public class ProductController implements ExceptionProcessor {
     private Product product; // 상품
 
     @GetMapping("/{cateCd}")
-    public String list(@PathVariable("cateCd") String cateCd, ProductSearch search, Model model) {
+    public String list(@PathVariable("cateCd") String cateCd, @RequestParam(defaultValue = "createdAt")String sort, ProductSearch search, Model model) {
+
         commonProcess(cateCd, "list", model);
 
-        ListData<Product> data = productInfoService.getList(search, false);
+        ListData<Product> data = productInfoService.getList(search, false, sort);
 
         model.addAttribute("items", data.getItems());
         model.addAttribute("pagination", data.getPagination());
