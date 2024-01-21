@@ -56,12 +56,15 @@
     </div>
     <!--// site_top -->
 
+    <script src="/search/search/js"></script>
+
+    <div id="searchResultsContainer"></div>
     <div class="logo_search">
         <div class="layout_width">
             <a th:href="@{/}" class="logo">
                 <img th:src="@{/common/image/logo.png}">
             </a>
-            <form name="frmSearch" class="search" th:action="@{/board/search}" autocomplete="off">
+            <form name="frmSearch" class="search" th:action="@{/search/searchResults}" autocomplete="off" onsubmit="return search()">
                 <input type="text" name="skey" th:value="${param.skey}" th:placeholder="#{검색어를_입력하세요.}">
                 <button type="submit" class="search_btn">
                     <i class="xi-search"></i>
