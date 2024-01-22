@@ -1,6 +1,7 @@
 package org.choongang.orderDetails.service;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberInfo;
 import org.choongang.orderDetails.entities.Review;
@@ -15,13 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-
+    private final MemberUtil memberUtil;
     public void save(Review review) {
-        MemberInfo memberInfo = (MemberInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member member = memberInfo.getMember();
-
+        Member member = memberUtil.getMember();
         review.setMemberNumber(member.getSeq());
-
+        System.out.println(review);
         reviewRepository.saveAndFlush(review);
     }
 

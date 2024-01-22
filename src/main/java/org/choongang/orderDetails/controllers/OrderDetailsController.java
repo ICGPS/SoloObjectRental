@@ -1,4 +1,4 @@
-package org.choongang.orderDetails;
+package org.choongang.orderDetails.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
@@ -42,10 +42,12 @@ public class OrderDetailsController implements ExceptionProcessor {
   }
 
   @PostMapping("/submitReview")
-  public String submitReview(@ModelAttribute Review form, Model model) {
+  public String submitReview(@ModelAttribute Review review, Model model) {
 
-    reviewService.save(form);
+    reviewService.save(review);
 
-    return "redirect:/orderDetail/review";
+
+    model.addAttribute("script", "self.close();");
+    return "common/_execute_script";
   }
 }
