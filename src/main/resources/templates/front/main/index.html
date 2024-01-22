@@ -17,36 +17,14 @@
 <body>
 <main layout:fragment="content" class="layout_width">
 
-
     <div class="position-relative p-md-12 text-center bg-body-tertiary" style="background-image: url('https://cdn.pixabay.com/animation/2022/12/05/15/23/15-23-06-837_512.gif'); background-size: 100% 800px;">
         <div class="col-md-6 p-lg-5 mx-auto my-5" style="height: 700px;">
             <h1 class="display-3 fw-bold">Solo Object Rental</h1>
             <h3 class="fw-normal text-muted mb-3">솔로들을 위한 렌탈 사이트</h3>
         </div>
-
     </div>
 
-
-<div class="board_latest my-5">
-    <div class="card border-primary col-6" >
-        <div class="card-body text-primary">
-            <ul th:each="b : ${boardMenus}">
-            <h2>
-                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
-            </h2>
-                <ul class="items">
-                    <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
-                        <a th:href="@{/board/view/{seq}(seq=*{seq})}">
-                            <th:block th:if="*{notice}">
-                                [<th:block th:text="#{공지}"></th:block>]
-                            </th:block>
-                            <th:block th:text="*{subject}"></th:block>
-                        </a>
-                    </li>
-                </ul>
-            </ul>
-        </div>
-    </div>
+<div class="board_latest my-5 justify-content-end">
     <div class="card border-primary col-6" >
         <div class="card-body text-primary">
             <ul th:each="b : ${boardMenus}">
