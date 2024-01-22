@@ -64,9 +64,7 @@
 }
 
 .often_question {
-    width: 100%;
-    background: orange;
-    margin: 20px 0;
+    margin-top: 50px;
 }
 
 .feedbackPostAdd {
@@ -84,7 +82,6 @@
 
 .inquiry_main h3 {
     font-size: 24px;
-    margin: 0 0 50px 0;
 }
 
 .inquiry_main p {
@@ -130,19 +127,8 @@
 }
 
 .inquiry_table {
-    width: 100%;
-}
-
-.inquiry_table th {
-    border: 1px solid #efefef;
-    background: #ddd;
     padding: 10px;
     text-align: center;
-}
-
-.inquiry_table td {
-    border: 1px solid #efefef;
-    padding: 10px;
 }
 
 .inquiry_detail div {
