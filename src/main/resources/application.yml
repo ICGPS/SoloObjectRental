@@ -56,7 +56,6 @@ spring:
     livereload:
       enabled: true
 
-  #
   jackson:
     serialization:
       failOnEmptyBeans: false

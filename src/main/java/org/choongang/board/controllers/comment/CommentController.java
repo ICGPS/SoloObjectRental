@@ -2,7 +2,6 @@ package org.choongang.board.controllers.comment;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.CommentData;
 import org.choongang.board.service.BoardAuthService;
@@ -11,7 +10,7 @@ import org.choongang.board.service.comment.CommentDeleteService;
 import org.choongang.board.service.comment.CommentSaveService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
-import org.choongang.commons.exceptions.AlertException;
+import org.choongang.commons.exceptions.AlertBackException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +19,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/comment")
 @RequiredArgsConstructor
+@RequestMapping("/comment")
 public class CommentController implements ExceptionProcessor {
 
     private final CommentFormValidator commentFormValidator;
@@ -38,16 +37,16 @@ public class CommentController implements ExceptionProcessor {
      * @return
      */
     @PostMapping("/save")
-    public String save(@Valid RequestComment form, Errors errors, Model model) {
+    public String save(RequestComment form, Errors errors, Model model) {
 
         commentFormValidator.validate(form, errors);
 
         if (errors.hasErrors()) {
             FieldError error = errors.getFieldErrors().stream().findFirst().orElse(null);
-
-            throw new AlertException(Utils.getMessage(error.getCodes()[0]), HttpStatus.BAD_REQUEST);
+            
+            throw new AlertBackException(Utils.getMessage(error.getCodes()[0]), HttpStatus.BAD_REQUEST);
         }
-
+        
         CommentData commentData = commentSaveService.save(form); // 댓글 저장, 수정
 
         String script = String.format("parent.location.replace('/board/view/%d?comment_id=%d');", commentData.getBoardData().getSeq(), commentData.getSeq());
@@ -78,3 +77,28 @@ public class CommentController implements ExceptionProcessor {
         return ExceptionProcessor.super.errorHandler(e, response, request, model);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,12 +14,14 @@ import org.choongang.member.Authority;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
+// @RequiredArgsConstructor
 public class BoardAuthService {
 
     @Autowired
@@ -55,11 +57,17 @@ public class BoardAuthService {
 
         AuthCheck data = null;
         if (mode.indexOf("comment_") != -1) { // 댓글
+
+            System.out.println("댓글!!!!!!!!!!!");
+            
             data = commentInfoService.get(seq);
+            
         } else { // 게시글
             data = infoService.get(seq);
+
         }
 
+        System.out.println(data);
 
         if ((mode.contains("update") && !data.isEditable())
                 || (mode.contains("delete") && !data.isDeletable())) {
@@ -67,6 +75,7 @@ public class BoardAuthService {
 
             // 비회원 -> 비밀번호 확인 필요
             if (member == null) {
+                
                 session.setAttribute("mode", mode);
                 session.setAttribute("seq", seq);
 
@@ -104,6 +113,7 @@ public class BoardAuthService {
             key = "guest_confirmed_" + seq;
 
         } else if (mode.equals("comment_update") || mode.equals("comment_delete")) { // 비회원 댓글
+
             CommentData data = commentInfoService.get(seq);
 
             boolean match = encoder.matches(password, data.getGuestPw());

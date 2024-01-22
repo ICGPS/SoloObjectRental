@@ -21,12 +21,13 @@ public class CommentFormValidator implements Validator, PasswordValidator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        if (memberUtil.isLogin()) { // 로그인 상태일때는 비회원 비밀번호 체크 X
+        if (memberUtil.isLogin()) { // 로그인 상태일 때는 비회원 비밀번호 체크 X
             return;
         }
 
         RequestComment form = (RequestComment) target;
         String guestPw = form.getGuestPw();
+
         if (!StringUtils.hasText(guestPw)) {
             errors.rejectValue("guestPw", "NotBlank");
         }
@@ -39,8 +40,31 @@ public class CommentFormValidator implements Validator, PasswordValidator {
             if (!alphaCheck(guestPw, true) || !numberCheck(guestPw)) {
                 errors.rejectValue("guestPw", "Complexity");
             }
-        } // endif
 
+        } // end if
 
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -29,10 +29,10 @@ public class CommentInfoService {
     private final BoardDataRepository boardDataRepository;
     private final MemberUtil memberUtil;
     private final HttpServletRequest request;
-
+    
     /**
      * 댓글 단일 조회
-     *
+     * 
      * @param seq : 댓글 번호
      * @return
      */
@@ -45,6 +45,7 @@ public class CommentInfoService {
     }
 
     public RequestComment getForm(Long seq) {
+
         CommentData data = get(seq);
         RequestComment form = new ModelMapper().map(data, RequestComment.class);
 
@@ -61,16 +62,16 @@ public class CommentInfoService {
      */
     public List<CommentData> getList(Long boardDataSeq) {
         QCommentData commentData = QCommentData.commentData;
+
         BooleanBuilder andBuilder = new BooleanBuilder();
         andBuilder.and(commentData.boardData.seq.eq(boardDataSeq));
 
-        List<CommentData> items = (List<CommentData>)commentDataRepository.findAll(andBuilder, Sort.by(desc("listOrder"), asc("createdAt")));
-
+        List<CommentData> items = (List<CommentData>) commentDataRepository.findAll(andBuilder, Sort.by(desc("listOrder"), asc("createdAt")));
+        
         items.forEach(this::addCommentInfo);
 
         return items;
     }
-
 
     /**
      * 댓글 추가 정보 처리
@@ -78,25 +79,30 @@ public class CommentInfoService {
      * @param data
      */
     private void addCommentInfo(CommentData data) {
+        
         boolean editable = false, deletable = false, mine = false;
 
         Member _member = data.getMember(); // 댓글을 작성한 회원
-
-        /*
+        
+        /**
          * 1) 관리자는 댓글 수정, 삭제 제한 없음
          *
          */
         if (memberUtil.isAdmin()) {
+
             editable = deletable = true;
+
         }
 
         /**
-         * 회원이 작성한 댓글이면 현재 로그인 사용자의 아이디와 동일해야 수정, 삭제 가능
+         * 회원이 작성한 댓글이면 현재 로그인한 사용자의 아이디와 동일해야 수정, 삭제 가능
          *
          */
         if (_member != null && memberUtil.isLogin()
                 && _member.getUserId().equals(memberUtil.getMember().getUserId())) {
+
             editable = deletable = mine = true;
+
         }
 
         // 비회원 -> 비회원 비밀번호가 확인 된 경우 삭제, 수정 가능
@@ -104,6 +110,7 @@ public class CommentInfoService {
         HttpSession session = request.getSession();
         String key = "guest_comment_confirmed_" + data.getSeq();
         Boolean guestConfirmed = (Boolean)session.getAttribute(key);
+
         if (_member == null && guestConfirmed != null && guestConfirmed) {
             editable = true;
             deletable = true;
@@ -121,15 +128,17 @@ public class CommentInfoService {
         data.setEditable(editable);
         data.setDeletable(deletable);
         data.setMine(mine);
+        
     }
 
     /**
-     * 게시글별 댓글 수 업데이트
-     *
-     * @param boardDataSeq : 게시글 번호
+     * 게시글 별 댓글 수 업데이트
+     * @param boardDataSeq
      */
     public void updateCommentCount(Long boardDataSeq) {
+
         BoardData data = boardDataRepository.findById(boardDataSeq).orElse(null);
+
         if (data == null) {
             return;
         }
@@ -139,6 +148,30 @@ public class CommentInfoService {
         data.setCommentCount(total);
 
         boardDataRepository.flush();
-
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

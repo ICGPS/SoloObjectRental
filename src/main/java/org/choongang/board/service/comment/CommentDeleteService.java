@@ -3,6 +3,7 @@ package org.choongang.board.service.comment;
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.entities.CommentData;
 import org.choongang.board.repositories.CommentDataRepository;
+import org.choongang.cart.service.CartData;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
