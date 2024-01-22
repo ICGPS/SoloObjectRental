@@ -4,7 +4,7 @@
    <div class="board_view layout_width">
 
         <h1 th:replace="~{front/board/skins/default/_board_title::title}"></h1>
-
+`
        <div class="subject">
            <span th:if="*{!#strings.isEmpty(category)}" class="category"
                  th:text="*{'[' + category + ']'}"></span>
@@ -35,7 +35,8 @@
            </div>
        </div>
        <!--// post_info -->
-       <div class="content" th:utext="*{content}"></div>
+       <div th:if="*{editorView}" class="content" th:utext="*{content}"></div>
+       <div th:if="*{!editorView}" class="content" th:utext="*{@utils.nl2br(content)}"></div>
 
        <ul th:if="*{attachFiles != null && !attachFiles.isEmpty()}" class="downloads">
            <li th:each="file : *{attachFiles}" th:object="${file}">

@@ -1,10 +1,8 @@
 package org.choongang.board.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.choongang.commons.entities.Base;
 import org.choongang.member.entities.Member;
 
@@ -18,7 +16,9 @@ public class CommentData extends Base implements AuthCheck {
     
     @Id @GeneratedValue
     private Long seq;
-    
+
+    @JsonIgnore
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardDataSeq")
     private BoardData boardData;
