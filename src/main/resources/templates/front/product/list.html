@@ -2,6 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
+<head>
+    <style>
+        main { padding: 100px;}
+        ul li { list-style-type: none; float: left; width: 25%; margin-top: 10px; }
+        ul:after{ content:''; display:block; clear:both; }
+    </style>
+</head>
 <main layout:fragment="content">
     <h1>
         <a th:href="@{/product/{cateCd}(cateCd=${category.cateCd})}" th:text="${category.cateNm}"></a>
@@ -11,10 +18,11 @@
         <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=salePriceDESC)}" th:text="#{높은가격순}"></a>
         <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=score)}" th:text="#{별점순}"></a>
     </div>
+
     <ul class="products">
         <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
             <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
-                <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 400, 400, 'goodsImage')}">
                 </th:block>
                 <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
                     이미지 없음(이미지로 교체)
