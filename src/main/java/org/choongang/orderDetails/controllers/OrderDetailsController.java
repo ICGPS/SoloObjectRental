@@ -5,6 +5,7 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.orderDetails.entities.Review;
 import org.choongang.orderDetails.service.ReviewService;
+import org.choongang.product.service.ProductInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class OrderDetailsController implements ExceptionProcessor {
 
   private final Utils utils;
   private final ReviewService reviewService;
+  private final ProductInfoService productInfoService;
 
   @GetMapping("/main")
   public String orderDetail() {
@@ -46,8 +48,8 @@ public class OrderDetailsController implements ExceptionProcessor {
 
     reviewService.save(review);
 
-
     model.addAttribute("script", "self.close();");
+
     return "common/_execute_script";
   }
 }
