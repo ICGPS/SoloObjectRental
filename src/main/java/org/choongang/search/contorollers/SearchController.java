@@ -2,6 +2,7 @@ package org.choongang.search.contorollers;
 
 import org.choongang.search.entities.Search;
 import org.choongang.search.repositories.SearchRepository;
+import org.choongang.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,19 +18,14 @@ import java.util.List;
 @RequestMapping("/search")
 public class SearchController {
 
-    private SearchRepository searchRepository;
-
     @Autowired
-    public SearchController(SearchRepository searchRepository) {
-        this.searchRepository = searchRepository;
-    }
+    private SearchService searchService;
 
     @GetMapping("/searchResults")
-    public String searchResults(Model model, @RequestParam(value = "keyword", required=false) String keyword) {
-
-        List<Search> searchResults = searchRepository.findByBoardNameAndTitleContainingOrBoardNameAndContentContaining("boardName1", keyword, "boardName2", keyword);
+    public String searchResults(Model model, @RequestParam(value = "skey", required = false) String keyword) {
+        List<Search> searchResults = searchService.searchResults(keyword);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("searchResults", searchResults);
-
         return "front/search/searchResults";
     }
 }

@@ -5,9 +5,27 @@
 <main layout:fragment="content">
     <title>검색 결과</title>
 
-    <h1>검색 결과!!</h1>
+    <h2>검색 결과</h2>
+    <p th:text="'검색어: ' + ${keyword}"></p>
 
-
+    <table>
+        <thead>
+        <tr>
+            <th>게시판</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="result : ${searchResults}">
+            <td th:text="${result.boardName}"></td>
+            <td th:text="${result.title}"></td>
+            <td th:text="${result.content}"></td>
+            <td th:text="${#dates.format(result.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
 
 </main>
 </html>
