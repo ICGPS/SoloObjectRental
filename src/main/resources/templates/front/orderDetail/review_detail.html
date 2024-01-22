@@ -1,33 +1,33 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"> <!-- 403 오류 해결방안... -->
+    <meta name="_csrf" th:content="${_csrf.token}"> <!-- 403 오류 해결방안... -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     <title>리뷰 작성</title>
 </head>
 <body>
 
-<form id="reviewForm" name="reviewForm" method="post" action="/orderDetail/submitReview">
+<form id="reviewForm" name="reviewForm" method="post" th:action="@{/orderDetail/submitReview}">
     <input type="hidden" name="productSeq" value="100"> <!-- 상품번호 받을 DOM -->
 
-    <input type="radio" name="scope" value="1">
-    <input type="radio" name="scope" value="2">
-    <input type="radio" name="scope" value="3">
-    <input type="radio" name="scope" value="4">
-    <input type="radio" name="scope" value="5">
+    <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/> <!-- 403 오류 해결방안... -->
+
+    <input type="radio" name="score" value="1"> 1점
+    <input type="radio" name="score" value="2"> 2점
+    <input type="radio" name="score" value="3"> 3점
+    <input type="radio" name="score" value="4"> 4점
+    <input type="radio" name="score" value="5"> 5점
     <br>
-    리뷰 내용: <textarea id="reviewContent" name="reviewContent"></textarea>
+    리뷰 내용: <textarea id="reviewContent" name="content"></textarea>
     <br>
-    <!--<input type='button' value='등록' onclick='submitReview()'>-->
-    <button type="submit">등록</button>
+    <button type="submit" id="submitBtn">등록</button>
 </form>
 
-<!--<script>
-    function submitReview() {
-        var reviewPage = window.opener.document.getElementById("reviewPage").value;
-        window.opener.document.getElementById("reviewsContainer").innerHTML += "<p>" + reviewPage + "</p>";
-        window.close();
-    }
-</script>-->
+<script>
+
+</script>
 
 </body>
 </html>
