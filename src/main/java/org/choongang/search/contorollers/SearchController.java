@@ -25,15 +25,13 @@ public class SearchController {
     }
 
     @GetMapping("/searchResults")
-    public String searchResults(Model model, @RequestParam String keyword) {
+    public String searchResults(Model model, @RequestParam(value = "keyword", required=false) String keyword) {
 
-        List<Search> searchResults = searchRepository.findByBoardNameAndTitleContainingOrBoardNameAndContentContaining("board1", keyword, "board2", keyword);
+        List<Search> searchResults = searchRepository.findByBoardNameAndTitleContainingOrBoardNameAndContentContaining("boardName1", keyword, "boardName2", keyword);
         model.addAttribute("searchResults", searchResults);
 
-        return "search/searchResults";
+        return "front/search/searchResults";
     }
-
-
 }
 
 
