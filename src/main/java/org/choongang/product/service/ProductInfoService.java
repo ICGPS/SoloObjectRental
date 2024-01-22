@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import static org.springframework.data.domain.Sort.Order.asc;
 import static org.springframework.data.domain.Sort.Order.desc;
 
 @Service
@@ -83,10 +84,10 @@ public class ProductInfoService {
      * @param isAll : true - 미노출 상품도 모두 보이기 
      * @return
      */
-    public ListData<Product> getList(ProductSearch search, boolean isAll) {
+    public ListData<Product> getList(ProductSearch search, boolean isAll, String sort) {
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
-
+        System.out.println("///////////////" +  sort);
         QProduct product = QProduct.product;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
@@ -133,7 +134,16 @@ public class ProductInfoService {
 
         /* 검색 조건 처리 E */
 
+        // default - 등록순
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), desc("createdAt")));
+        // 정렬순서
+        if (sort.equals("score")) { // 별점순
+            pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), desc("score")));
+        } else if (sort.equals("salePriceDESC")) { // 높은 가격순
+            pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), desc("salePrice")));
+        } else if (sort.equals("salePriceASC")) { // 낮은 가격순
+            pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), asc("salePrice")));
+        }
 
         Page<Product> data = productRepository.findAll(andBuilder, pageable);
         Pagination pagination = new Pagination(page, (int)data.getTotalElements(), 10, limit, request);
@@ -142,6 +152,10 @@ public class ProductInfoService {
         items.forEach(this::addProductInfo); // 추가 정보 처리
 
         return new ListData<>(items, pagination);
+    }
+
+    public ListData<Product> getList(ProductSearch search, boolean isAll) {
+        return getList(search, isAll, "createdAt");
     }
 
     /**
