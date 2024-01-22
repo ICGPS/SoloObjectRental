@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("UseGuideController")
-@RequestMapping("/useGuide")
+@RequestMapping("/notices")
 @RequiredArgsConstructor
 public class UseGuideController {
 
-    @GetMapping("/index")
+    @GetMapping("/useGuide")
     public String home() {
-        return "front/useGuide/index";
+        return "front/notices/useGuide";
     }
 }

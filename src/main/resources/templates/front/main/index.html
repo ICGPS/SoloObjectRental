@@ -4,28 +4,871 @@
       layout:decorate="~{front/layouts/main}">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+
+    <style>
+        @keyframes glitter { 0% { color: #ffcc00;} 50% { color: #ff0000;} 100% { color: #ffcc00;}}
+        .glitter-text { animation: glitter 1s infinite; }
+    </style>
+
 </head>
-
+<body>
 <main layout:fragment="content" class="layout_width">
-    <h1 th:text="#{최신_게시글}"></h1>
 
-    <ul class="board_latest">
-        <li th:each="b : ${boardMenus}">
+
+    <div class="position-relative p-md-12 text-center bg-body-tertiary" style="background-image: url('https://cdn.pixabay.com/animation/2022/12/05/15/23/15-23-06-837_512.gif'); background-size: 100% 800px;">
+        <div class="col-md-6 p-lg-5 mx-auto my-5" style="height: 700px;">
+            <h1 class="display-3 fw-bold">Solo Object Rental</h1>
+            <h3 class="fw-normal text-muted mb-3">솔로들을 위한 렌탈 사이트</h3>
+        </div>
+
+    </div>
+
+
+<div class="board_latest my-5">
+    <div class="card border-primary col-6" >
+        <div class="card-body text-primary">
+            <ul th:each="b : ${boardMenus}">
             <h2>
                 <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
             </h2>
-            <ul class="items">
-                <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
-                    <a th:href="@{/board/view/{seq}(seq=*{seq})}">
-                        <th:block th:if="*{notice}">
-                            [<th:block th:text="#{공지}"></th:block>]
-                        </th:block>
-                        <th:block th:text="*{subject}"></th:block>
-                    </a>
-                </li>
+                <ul class="items">
+                    <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                        <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{notice}">
+                                [<th:block th:text="#{공지}"></th:block>]
+                            </th:block>
+                            <th:block th:text="*{subject}"></th:block>
+                        </a>
+                    </li>
+                </ul>
             </ul>
-        </li>
-    </ul>
+        </div>
+    </div>
+    <div class="card border-primary col-6" >
+        <div class="card-body text-primary">
+            <ul th:each="b : ${boardMenus}">
+            <h2>
+                <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+            </h2>
+                <ul class="items">
+                    <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                        <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{notice}">
+                                [<th:block th:text="#{공지}"></th:block>]
+                            </th:block>
+                            <th:block th:text="*{subject}"></th:block>
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="fs-3 glitter-text fw-bolder">가구 인기상품</div>
+    <button class="btn btn-warning" type="button">더보기</button>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 mb-5  text-center">
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="fs-3 glitter-text fw-bolder">생활가전 인기상품</div>
+    <button class="btn btn-warning" type="button">더보기</button>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 mb-5  text-center">
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="fs-3 glitter-text fw-bolder">전자제품 인기상품</div>
+    <button class="btn btn-warning" type="button">더보기</button>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 mb-5  text-center">
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="fs-3 glitter-text fw-bolder">의류 인기상품</div>
+    <button class="btn btn-warning" type="button">더보기</button>
+</div>
+
+
+<div class="row row-cols-1 row-cols-md-4 mb-5  text-center">
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="fs-3 glitter-text fw-bolder">패션/잡화 인기상품</div>
+    <button class="btn btn-warning" type="button">더보기</button>
+</div>
+
+<div class="row row-cols-1 row-cols-md-4 mb-5  text-center">
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="fs-3 glitter-text fw-bolder">기타 인기상품</div>
+    <button class="btn btn-warning" type="button">더보기</button>
+</div>
+<div class="row row-cols-1 row-cols-md-4 mb-5  text-center">
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-3 rounded-3 shadow-sm">
+            <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">제품1번</h4>
+            </div>
+            <div class="card-body">
+                <ul class="products">
+                    <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+                        <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                            <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 350, 350, 'goodsImage')}">
+                            </th:block>
+                            <th:block th:unless="*{listImages != null && !listImages.isEmpty()}">
+                                이미지 없음(이미지로 교체)
+                            </th:block>
+                        </a>
+                        <div class="productNm" th:text="*{name}"></div>
+                        <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                            <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </del>
+                        <div class="salePrice" th:if="*{salePrice > 0}">
+                            <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </li>
+                    <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
+                </ul>
+                <button type="button" class="w-100 btn btn-lg btn-primary">구매하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
 </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+
 </html>

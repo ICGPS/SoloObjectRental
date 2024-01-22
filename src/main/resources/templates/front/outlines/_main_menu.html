@@ -3,6 +3,7 @@
 <nav th:if="${boardMenus}" th:fragment="menus">
     <div class="inner layout_width">
         <a th:each="menu : ${boardMenus}" th:object="${menu}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{bName}"></a>
+        <a th:each="item : ${categories}" th:object="${item}" th:href="@{/product/{cateCd}(cateCd=*{cateCd})}" th:text="*{cateNm}"></a>
     </div>
 </nav>
 </html>
