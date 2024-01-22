@@ -6,6 +6,7 @@ import org.choongang.product.service.CategoryInfoService;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ControllerAdvice("org.choongang")
@@ -19,6 +20,11 @@ public class ProductAdvice {
      */
     @ModelAttribute("categories")
     private List<Category> getCategories() {
+
+//        List<Category> categories = new ArrayList<>();
+//        categories.add(new Category("01", "가구", 0, true));
+//        categories.add(new Category("02", "전자", 0, true));
+
         return categoryInfoService.getList();
     }
 
