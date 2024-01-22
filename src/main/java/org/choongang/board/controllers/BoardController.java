@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.choongang.board.controllers.comment.RequestComment;
 import org.choongang.board.entities.Board;
 import org.choongang.board.entities.BoardData;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
@@ -137,6 +139,26 @@ public class BoardController implements ExceptionProcessor {
     return utils.tpl("board/update");
   }
 
+  @GetMapping("/reply/{seq}")
+  public String reply(@PathVariable("seq") Long parentSeq,@ModelAttribute RequestBoard form, Model model) {
+
+      commonProcess(parentSeq, "reply", model);
+      String content = boardData.getContent();
+      content = String.format("<br><br><br><br><br>=========================<br>%s", content);
+
+      form.setBid(board.getBid());
+      form.setContent(content);
+      form.setParentSeq(parentSeq);
+
+      if (memberUtil.isLogin()) {
+
+        form.setPoster(memberUtil.getMember().getName());
+
+      }
+
+      return utils.tpl("board/write");
+  }
+
   /**
    * 게시글 등록, 수정
    *
@@ -247,12 +269,11 @@ public class BoardController implements ExceptionProcessor {
       pageTitle += mode.equals("update") ?  Utils.getMessage("글수정", "commons") :  Utils.getMessage("글쓰기", "commons");
 
     } else if (mode.equals("view")) {
-      // pageTitle - 글 제목 - 게시판 명
-      pageTitle = String.format("%s | %s", boardData.getSubject(), board.getBName());
-      addScript.add("board/view");
+        // pageTitle - 글 제목 - 게시판 명
+        pageTitle = String.format("%s | %s", boardData.getSubject(), board.getBName());
+
+        addScript.add("board/view");
     }
-
-
 
     model.addAttribute("addCommonCss", addCommonCss);
     model.addAttribute("addCss", addCss);

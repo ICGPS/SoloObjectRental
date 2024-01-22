@@ -31,7 +31,6 @@ spring:
     cache: true
     prefix: classpath:/templates/
 
-  #
   jackson:
     serialization:
       failOnEmptyBeans: false

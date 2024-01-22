@@ -22,6 +22,7 @@ import org.choongang.commons.Pagination;
 import org.choongang.commons.Utils;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
+import org.choongang.member.Authority;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.modelmapper.ModelMapper;
@@ -61,7 +62,8 @@ public class BoardInfoService {
 
         // 댓글 목록
         List<CommentData> comments = commentInfoService.getList(seq);
-        boardData.setComments(comments);
+
+         boardData.setComments(comments);
 
         return boardData;
     }
@@ -132,15 +134,15 @@ public class BoardInfoService {
 
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(subjectCond)
-                        .or(contentCond);
+                    .or(contentCond);
 
                 andBuilder.and(orBuilder);
 
             } else if (sopt.equals("POSTER")) { // 작성자 + 아이디 + 회원명
                 BooleanBuilder orBuilder = new BooleanBuilder();
                 orBuilder.or(boardData.poster.contains(skey))
-                        .or(boardData.member.userId.contains(skey))
-                        .or(boardData.member.name.contains(skey));
+                    .or(boardData.member.userId.contains(skey))
+                    .or(boardData.member.name.contains(skey));
 
                 andBuilder.and(orBuilder);
             }
@@ -165,17 +167,18 @@ public class BoardInfoService {
         PathBuilder<BoardData> pathBuilder = new PathBuilder<>(BoardData.class, "boardData");
 
         List<BoardData> items = new JPAQueryFactory(em)
-                .selectFrom(boardData)
-                .leftJoin(boardData.member)
-                .fetchJoin()
-                .offset(offset)
-                .limit(limit)
-                .where(andBuilder)
-                .orderBy(
-                        new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
-                        new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
-                )
-                .fetch();
+            .selectFrom(boardData)
+            .leftJoin(boardData.member)
+            .fetchJoin()
+            .offset(offset)
+            .limit(limit)
+            .where(andBuilder)
+            .orderBy(
+                new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
+                new OrderSpecifier(Order.DESC, pathBuilder.get("listOrder")),
+                new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
+            )
+            .fetch();
 
         // 게시글 전체 갯수
         long total = boardDataRepository.count(andBuilder);
@@ -236,6 +239,7 @@ public class BoardInfoService {
         // 회원 -> 직접 작성한 게시글만 삭제, 수정 가능
         Member member = memberUtil.getMember();
         if (_member != null && memberUtil.isLogin() && _member.getUserId().equals(member.getUserId())) {
+
             editable = true;
             deletable = true;
             mine = true;
@@ -246,6 +250,7 @@ public class BoardInfoService {
         HttpSession session = request.getSession();
         String key = "guest_confirmed_" + boardData.getSeq();
         Boolean guestConfirmed = (Boolean)session.getAttribute(key);
+
         if (_member == null && guestConfirmed != null && guestConfirmed) {
             editable = true;
             deletable = true;
@@ -265,6 +270,36 @@ public class BoardInfoService {
         boardData.setShowDeleteButton(showDeleteButton);
 
         /* 수정, 삭제 권한 정보 처리 E */
+
+        /* 댓글 작성 권한 처리 S */
+
+        boolean commentable = false;
+        Board board = boardData.getBoard();
+        Authority commentAccessType = board.getCommentAccessType();
+
+        // 관리자이거나 전체 작성 가능이면
+        if (commentAccessType == Authority.ALL) {
+            commentable = true;
+        }
+
+        // 회원일 때
+        if (memberUtil.isLogin()) {
+
+            if (commentAccessType == Authority.USER) {
+                commentable = true;
+
+            }
+
+            if (commentAccessType == Authority.ADMIN && memberUtil.isAdmin()) {
+                commentable = true;
+            }
+
+        }
+
+        boardData.setCommentable(commentable);
+
+        /* 댓글 작성 권한 처리 E */
+
     }
 
 
@@ -280,7 +315,7 @@ public class BoardInfoService {
 
         try {
             int uid = memberUtil.isLogin() ?
-                    memberUtil.getMember().getSeq().intValue() : utils.guestUid();
+                memberUtil.getMember().getSeq().intValue() : utils.guestUid();
 
             BoardView boardView = new BoardView(seq, uid);
 
