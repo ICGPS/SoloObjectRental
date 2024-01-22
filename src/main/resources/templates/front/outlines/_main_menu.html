@@ -2,8 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <nav th:if="${boardMenus}" th:fragment="menus">
     <div class="inner layout_width">
-        <a th:each="menu : ${boardMenus}" th:object="${menu}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{bName}"></a>
-        <a th:each="item : ${categories}" th:object="${item}" th:href="@{/product/{cateCd}(cateCd=*{cateCd})}" th:text="*{cateNm}"></a>
+        <style>
+            .dropdown{
+                position : relative;
+                display : inline-block;
+                font-size: 23px;
+                margin-right: 80px;
+            }
+
+            .dropdown-content{
+                display : none;
+                position : absolute;
+            }
+
+            .dropdown-content a{
+                display : block;
+                text-decoration: none;
+                color: white;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        </style>
+
+        <div class="dropdown">
+            <span class="dropbtn" th:text="#{상품}"></span>
+            <div class="dropdown-content">
+                <a th:each="item : ${categories}" th:object="${item}" th:href="@{/product/{cateCd}(cateCd=*{cateCd})}" th:text="*{cateNm}"></a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <span class="dropbtn" th:text="#{고객센터}"></span>
+            <div class="dropdown-content">
+                <a th:each="menu : ${boardMenus}" th:object="${menu}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{bName}"></a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <span class="dropbtn" th:text="#{이용안내}"></span>
+            <div class="dropdown-content">
+                <a th:href="@{/cs/index}">이용안내</a>
+            </div>
+        </div>
     </div>
 </nav>
 </html>

@@ -62,8 +62,9 @@
     <div class="logo_search">
         <div class="layout_width">
             <a th:href="@{/}" class="logo">
-                <img th:src="@{/common/image/logo.png}">
+                <img th:src="@{/common/image/logo.png}" height="50px">
             </a>
+            <nav th:replace="~{front/outlines/_main_menu::menus}"></nav>
             <form name="frmSearch" class="search" th:action="@{/search/searchResults}" autocomplete="off" onsubmit="return search()">
                 <input type="text" name="skey" th:value="${param.skey}" th:placeholder="#{검색어를_입력하세요.}">
                 <button type="submit" class="search_btn">
@@ -75,6 +76,5 @@
     </div>
     <!--// logo_search -->
 
-    <nav th:replace="~{front/outlines/_main_menu::menus}"></nav>
 </header>
 </html>
