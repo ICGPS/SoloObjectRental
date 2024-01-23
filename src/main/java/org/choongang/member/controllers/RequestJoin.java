@@ -12,6 +12,7 @@ import java.util.UUID;
 public class RequestJoin {
 
     private String zonecode;
+    @Size(max = 20)
     private String address;
     private String addressSub;
     private String gid = UUID.randomUUID().toString();
