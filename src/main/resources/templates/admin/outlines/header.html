@@ -3,11 +3,13 @@
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <header th:fragment="common">
         <section class="logo_area">
-            <a th:href="@{/admin}">로고</a>
+            <a th:href="@{/admin}">
+                <img src="https://static.bmhd.cz/data/loga-dopravcu/7/6482.png" height="80px">
+            </a>
         </section>
         <section class="btn_area">
             <th:block sec:authorize="isAuthenticated()">
-                <a th:href="@{/member/info}">회원정보 수정</a>
+                <a th:href="@{/mypage/memberInfo}">회원정보 수정</a>
                 <a th:href="@{/member/logout}">로그아웃</a>
             </th:block>
             <th:block sec:authorize="isAnonymous()">

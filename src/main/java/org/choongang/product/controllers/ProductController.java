@@ -32,7 +32,7 @@ public class ProductController implements ExceptionProcessor {
     private Product product; // 상품
 
     @GetMapping("/{cateCd}")
-    public String list(@PathVariable("cateCd") String cateCd, @RequestParam(defaultValue = "createdAt")String sort, ProductSearch search, Model model) {
+    public String list(@PathVariable("cateCd") String cateCd, @RequestParam(name="ProductCreatedAt", defaultValue = "createdAt")String sort, ProductSearch search, Model model) {
 
         commonProcess(cateCd, "list", model);
 
