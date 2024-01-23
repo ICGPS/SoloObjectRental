@@ -62,7 +62,11 @@
 .comment_items button, .comment_items .btns a { border: 1px solid #596b99; background: #fff; height: 35px; padding: 0 15px; color: #596b99; cursor: pointer; transition: all 0.5s; border-radius: 3px; display: inline-block; line-height: 33px; }
 .comment_items button:hover, .comment_items .btns a:hover { background: #596b99; color: #fff; }
 
-
+/* 게시글 통합 검색 상단 */
+#search_top { width: 450px; display: flex; margin: 30px auto 50px; }
+#search_top select { width: 150px; }
+#search_top button { width: 150px; cursor: pointer; background: #ddd; border-radius: 5px; border: 1px solid #aaa; }
+#search_top input[type='text'] { flex-grow: 1; margin: 0 5px; }
 
 
 

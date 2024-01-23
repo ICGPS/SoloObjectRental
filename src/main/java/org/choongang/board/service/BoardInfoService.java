@@ -98,12 +98,7 @@ public class BoardInfoService {
      */
     public ListData<BoardData> getList(String bid, BoardDataSearch search) {
 
-        Board board = null;
-        if (StringUtils.hasText(bid)) {
-            board = configInfoService.get(bid);
-        } else {
-            board = new Board();
-        }
+        Board board = StringUtils.hasText(bid) ? configInfoService.get(bid) : new Board();
 
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), board.getRowsPerPage());
@@ -113,8 +108,10 @@ public class BoardInfoService {
         BooleanBuilder andBuilder = new BooleanBuilder();
 
         if (StringUtils.hasText(bid)) {
+
             andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
         }
+
         /* 검색 조건 처리 S */
 
         String sopt = search.getSopt();
@@ -198,7 +195,9 @@ public class BoardInfoService {
     }
 
     public ListData<BoardData> getList(BoardDataSearch search) {
+
         return getList(null, search);
+
     }
 
     /**
