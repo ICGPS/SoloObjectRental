@@ -4,9 +4,33 @@
       layout:decorate="~{front/layouts/main}">
 <head>
     <style>
-        main { padding: 100px;}
-        ul li { list-style-type: none; float: left; width: 25%; margin-top: 10px; }
-        ul:after{ content:''; display:block; clear:both; }
+        main { padding: 0 100px; }
+        ul:after { content:''; display: table; clear: both; }
+        ul > li { float: left; }
+        .products > .item {
+            width: 25%;
+            display: flex;
+            flex-direction: column; /* 수직 방향으로 정렬 */
+            align-items: center; /* 가운데 정렬 */
+            text-align: center;
+        }
+        .products > .item > .image {
+            height: 450px;
+            width: 75%;
+            display: flex; /* 내부의 요소들을 수직 가운데 정렬하기 위해 추가 */
+            justify-content: center; /* 수평 가운데 정렬 */
+            align-items: center; /* 수직 가운데 정렬 */
+        }
+        .products > .item + .item { border-left: 1px dashed; }
+        .products > .item > a {
+            vertical-align: middle;
+            display: flex; /* 내부의 요소들을 수직 가운데 정렬하기 위해 추가 */
+            flex-direction: column; /* 수직 방향으로 정렬 */
+            align-items: center; /* 가운데 정렬 */
+            text-align: center;
+            text-decoration: none;
+            color: #333; /* 링크 색상 설정 */
+        }
     </style>
 </head>
 <main layout:fragment="content">
@@ -28,15 +52,17 @@
                     이미지 없음(이미지로 교체)
                 </th:block>
             </a>
-            <div class="productNm" th:text="*{name}"></div>
-            <del class="consumerPrice" th:if="*{consumerPrice > 0}">
-                <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
-                <th:block th:text="#{원}"></th:block>
-            </del>
-            <div class="salePrice" th:if="*{salePrice > 0}">
-                <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
-                <th:block th:text="#{원}"></th:block>
-            </div>
+            <a th:href="@{/product/detail/{seq}(seq=*{seq})}">
+                <div class="productNm" th:text="*{name}"></div>
+                <del class="consumerPrice" th:if="*{consumerPrice > 0}">
+                    <th:block th:text="*{consumerPrice > 1000 ? #numbers.formatInteger(consumerPrice, 3, 'COMMA') : consumerPrice}"></th:block>
+                    <th:block th:text="#{원}"></th:block>
+                </del>
+                <div class="salePrice" th:if="*{salePrice > 0}">
+                    <th:block th:text="*{salePrice > 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                    <th:block th:text="#{원}"></th:block>
+                </div>
+            </a>
         </li>
         <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
     </ul>
