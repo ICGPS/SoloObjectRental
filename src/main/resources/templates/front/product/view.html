@@ -125,8 +125,26 @@
         <div id="review" class='desc_content'>
             <button onclick="openReviewPopup()">리뷰 작성</button>
             <ul>
-                <li>리뷰 보여쥬기1</li>
-                <li>리뷰 보여쥬기2</li>
+                <li>
+                    <div>
+                        <span>3점</span>
+                        <div>
+                            <span>내 이름</span>
+                            <span>2024.01.23</span>
+                        </div>
+                    </div>
+                    <p>리뷰 내용 여기에 나오게 ~~~ !</p>
+                </li>
+                <li>
+                    <div>
+                        <span>3점</span>
+                        <div>
+                            <span th:text="${session.member.userName}"></span>
+                            <span>2024.01.23</span>
+                        </div>
+                    </div>
+                    <p>리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !</p>
+                </li>
                 <li>리뷰 보여쥬기3</li>
                 <li>리뷰 보여쥬기4</li>
             </ul>

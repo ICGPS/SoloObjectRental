@@ -24,3 +24,42 @@
 .product_detail .ea_box input[type='number'] { width: 50px; text-align: right; height: 40px; border: 1px solid #d5d5d5; }
 .product_detail .ea_box button { width: 40px; height: 40px; background: #cc3c3c; color: #fff; cursor: pointer; border: 0; }
 /* 상품 상세 E */
+
+#review {
+    padding: 10px 20px;
+}
+
+#review button {
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    background: #ddd;
+}
+
+#review button:active,
+#review button:hover {
+    background: #999;
+}
+
+#review ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 1rem;
+}
+
+#review ul li > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#review ul li > div div span {
+    margin-right: 10px;
+}
+
+#review ul li p {
+    margin-top: 1rem;
+}
