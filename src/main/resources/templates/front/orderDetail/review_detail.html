@@ -33,7 +33,7 @@
 <body>
 
 <form id="reviewForm" name="reviewForm" method="post" th:action="@{/orderDetail/submitReview}">
-    <input type="hidden" name="productSeq" value="100"> <!-- 상품번호 받을 DOM -->
+    <input type="hidden" name="productSeq" th:value="${param.seq}"> <!-- 상품번호 받을 DOM -->
 
     <input type="hidden" th:name="_csrf" th:value="${_csrf.token}"/> <!-- 403 오류 해결방안... -->
     <input type="radio" name="score" id="score_1" value="1">

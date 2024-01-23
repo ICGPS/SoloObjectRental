@@ -10,15 +10,22 @@
                 margin-right: 80px;
             }
 
+             .dropdown > a {
+                font-size: 23px !important;
+                text-align: center !important;
+            }
+
             .dropdown-content{
                 display : none;
                 position : absolute;
+                background: #fff;
             }
 
-            .dropdown-content a{
+            .dropdown-content a {
                 display : block;
                 text-decoration: none;
-                color: white;
+                text-align: center !important;
+                background: #fff;
             }
 
             .dropdown:hover .dropdown-content {
@@ -33,15 +40,20 @@
             </div>
         </div>
         <div class="dropdown">
-            <span class="dropbtn" th:text="#{고객센터}"></span>
+            <a th:href="@{/cs/main}">
+                <span class="dropbtn" th:text="#{고객센터}"></span>
+            </a>
             <div class="dropdown-content">
-                <a th:each="menu : ${boardMenus}" th:object="${menu}" th:href="@{/board/list/{bid}(bid=*{bid})}" th:text="*{bName}"></a>
+                <a th:href="@{/cs/inquiry}">1:1 문의</a>
+                <a th:href="@{/cs/feedbackPost}">칭찬/개선</a>
             </div>
         </div>
         <div class="dropdown">
-            <span class="dropbtn" th:text="#{이용안내}"></span>
+            <a th:href="@{/notices/useGuide}">
+                <span class="dropbtn" th:text="#{이용안내}"></span>
+            </a>
             <div class="dropdown-content">
-                <a th:href="@{/cs/index}">이용안내</a>
+                <a th:href="@{/notices/useGuide}">이용안내</a>
             </div>
         </div>
     </div>
