@@ -18,14 +18,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="result : ${searchResults}">
-            <td th:text="${result.boardName}"></td>
-            <td th:text="${result.title}"></td>
-            <td th:text="${result.content}"></td>
-            <td th:text="${#dates.format(result.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-        </tr>
+            <tr th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+                <td></td>
+                <td th:text="*{subject}"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:unless="${items != null && !items.isEmpty()}">
+                <td colspan="4" th:text="#{조회된_게시글이_없습니다.}"></td>
+            </tr>
         </tbody>
     </table>
-
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </main>
 </html>
