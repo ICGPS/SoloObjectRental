@@ -29,16 +29,17 @@ public class mypageController implements ExceptionProcessor {
 
 
     // 주문 상세 페이지 연결 추가 S //
-    @GetMapping("/productDetail")
-    public String productDetail(Model model) {
+    @GetMapping("/orderDetail")
+    public String orderDetail(Model model) {
 
         System.out.println("주문 상세 페이지(주문 목록에서 상품 클릭 시 뜨는 창)");
 
-        return "front/mypage/productDetail";
+        return "front/mypage/orderDetail";
     }
     // 주문 상세 페이지 연결 추가 E //
 
-    // 장바구니 결제 페이지 S //
+    
+    // 장바구니 결제 페이지 추가 S //
     @GetMapping("/orderInCart")
     public String orderInCart(Model model) {
 
@@ -47,9 +48,9 @@ public class mypageController implements ExceptionProcessor {
         return "front/mypage/orderInCart";
 
     }
-    // 장바구니 결제 페이지 E //
+    // 장바구니 결제 페이지 추가 E //
 
-    // 결제 완료 페이지 S //
+    // 결제 완료 페이지 추가 S //
     @GetMapping("/paymentFinish")
     public String paymentFinish(Model model) {
 
@@ -58,7 +59,18 @@ public class mypageController implements ExceptionProcessor {
         return "front/mypage/paymentFinish";
 
     }
-    // 결제 완료 페이지 E //
+    // 결제 완료 페이지 추가 E //
+
+    // 구매 영수증 추가 S //
+    @GetMapping("/purchaseReceipt")
+    public String purchaseReceipt(Model model) {
+
+        System.out.println("구매 영수증 페이지");
+
+        return "front/mypage/purchaseReceipt";
+
+    }
+    // 구매 영수증 추가 E //
 
     @GetMapping("/memberInfo")
     public String memberInfo(Model model) {

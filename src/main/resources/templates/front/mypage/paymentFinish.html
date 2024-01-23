@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
 <head>
     <meta charset="UTF-8">
     <title>결제 완료 페이지</title>
     <th:block layout:fragment="addCss">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/paymentFinish.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/common/reset.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{front/css/mypage/paymentFinish.css}">
+        <!-- <link rel="stylesheet" type="text/css" th:href="@{/common/css/reset.css}"> -->
     </th:block>
     <th:block layout:fragment="addScript">
-        <script type="text/javascript" th:src="@{/js/mypage/paymentFinish.js}"></script>
+        <script type="text/javascript" th:src="@{/front/js/mypage/paymentFinish.js}"></script>
     </th:block>
 </head>
 <body>
-<main layout:fragment="content">
     <h1 th:text="'결제 완료 페이지'"></h1>
     <div class="paymentFinish">
         <form>
@@ -45,6 +45,6 @@
             </div>
         </form>
     </div>
-</main>
 </body>
+</main>
 </html>
