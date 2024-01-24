@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/static/mypage/css/memberInfo.css}">
 </head>
-<form action="/submit" method="post">
+<form name="frmUpMemberInfo" method="post" action="@{/mypage/updateMemberInfo}" th:object="${requestUpdateMemberInfo}" >
 <body>
 <div id="content" layout:fragment="content">
     <div>
@@ -14,16 +14,21 @@
     </div>
     <div>
         <!-- 회원 정보 폼 -->
-        <form id="memberInfoForm">
+        <form id="memberInfoForm" action="/mypage/memberInfo" th:object="${member}">
             <div>
-                <label for="name">이름</label>
+                <label for="name" th:text="#{이름}"></label>
                 <!-- 이름은 변경 못하도록 설정 -->
-                <input id="name"  th:value="${userName}" disabled>
+                <input id="name"  th:value="*{name}" disabled>
             </div>
             <div>
-                <label for="email">이메일</label>
+                <label for="userName" th:text="#{닉네임}"></label>
+                <!-- 이름은 변경 못하도록 설정 -->
+                <input id="userName"  th:value="*{userName}">
+            </div>
+            <div>
+                <label for="email" th:text="#{이메일}"></label>
                 <!-- 이메일은 변경 못하도록 설정 -->
-                <input id="email" th:value="${email}" disabled>
+                <input id="email" th:value="*{email}" disabled>
             </div>
             <div>
                 <label for="phone">휴대전화</label>
@@ -33,9 +38,9 @@
                 <label for="address">주소</label>
                 <input id="address" placeholder="주소 입력" th:value="${address}">
             </div>
-            <button id="saveButton">저장</button>
-            <input type="submit" value="전송">
-            <button id="cancelButton">취소</button>
+            <button id="saveButton" type="submit">저장</button>
+<!--            <input  value="전송">-->
+            <button id="cancel">취소</button>
         </form>
     </div>
     <div>
@@ -52,8 +57,14 @@
         <div id="passwordPopup" class="popup" style="display: none;">
             <!-- 내용 추가 -->
         </div>
+
+        <div >
+            <th:block th:text="*{seq}">aaa</th:block>
+        </div>
     </div>
 </div>
+
+
 </body>
 </form>
 <style>

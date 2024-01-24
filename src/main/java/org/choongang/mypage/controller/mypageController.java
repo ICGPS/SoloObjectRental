@@ -2,6 +2,8 @@ package org.choongang.mypage.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
+import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
 public class mypageController implements ExceptionProcessor {
+
+
+    private final MemberUtil memberUtil;
 
     @GetMapping
     public String myPage() {
@@ -74,15 +79,15 @@ public class mypageController implements ExceptionProcessor {
     }
     // 구매 영수증 추가 E //
 
-    @GetMapping("/memberInfo")
-    public String memberInfo(Model model) {
-//        commonProcess("memberInfo",model);
-
-        System.out.println("회원정보,수정");
-
-//        return utils.tpl("mypage/memberInfo");
-        return "front/mypage/memberInfo";
-    }
+//    @GetMapping("/memberInfo")
+//    public String memberInfo(Model model) {
+////        commonProcess("memberInfo",model);
+//
+//        System.out.println("회원정보,수정");
+//
+////        return utils.tpl("mypage/memberInfo");
+//        return "front/mypage/memberInfo";
+//    }
 
     @GetMapping("/deliveryAddressList")
     public String deliveryAddressList(Model model) {
@@ -120,12 +125,46 @@ public class mypageController implements ExceptionProcessor {
         // 회원 정보를 모델에 추가
         // model.addAttribute("memberInfo", memberInfo); // memberInfo는 실제로 사용하는 데이터 객체
         return "front/mypage/memberInfo";
-    }*/
-/*
+    }
+*/
+
+    @GetMapping("/memberInfo")
+    public String updateMemberInfo(@ModelAttribute MemberInfoForm memberInfoForm, Model model) {
+        // 회원 정보 수정 로직 추가
+        commonProcess("memberInfo");
+        Member member = (Member) memberUtil.getMember();
+        if (memberUtil.isLogin()) {
+            System.out.println(member);
+            model.addAttribute("member", member);
+
+            return "front/mypage/memberInfo";
+        } else {
+            return "redirect:/mypage";
+        }
+
+//        return "redirect:/mypage/memberInfo";
+    }
     @PostMapping("/updateMemberInfo")
-    public String updateMemberInfo(@ModelAttribute MemberInfoForm memberInfoForm) {
-        // 회원 정보 업데이트 로직 추가
+    public String updateMemberInfoPs(@ModelAttribute MemberInfoForm memberInfoForm, Model model) {
+        // 회원 정보 수정 로직 추가
+
+
+
+//        model.addAttribute(member.get);
+//        updateMemberInfoService.process(MemberInfoForm, errors);
+//        if (errors.hasErrors()) {
+//            return "redirect:/mypage/memberInfo";
+//        }
         return "redirect:/mypage/memberInfo";
-    }*/
+    }
+
+    private void commonProcess(String mode) {
+//        list<> addcss
+//        if(mode.equals("memberInfo")) {
+//            adcss.("/static/mypage/css/memberInfo");
+//        } else (eq(aaa) {
+//            addcss()
+//        }
+    }
 
 }

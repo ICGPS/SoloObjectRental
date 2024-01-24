@@ -37,7 +37,7 @@ public class MemberInfoService implements UserDetailsService {
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
     private final EntityManager em;
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -107,7 +107,7 @@ public class MemberInfoService implements UserDetailsService {
         return new ListData<>(items, pagination);
     }
 
-    public void updateMemberInfo(Long memberId, MemberInfoHandler updateRequest) {
+ /*   public void updateMemberInfo(Long memberId, MemberInfoHandler updateRequest) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(MemberNotFoundException::new);
 
@@ -116,5 +116,5 @@ public class MemberInfoService implements UserDetailsService {
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
 
-    }
+    }*/
 }
