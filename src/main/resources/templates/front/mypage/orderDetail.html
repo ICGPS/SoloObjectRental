@@ -20,7 +20,7 @@
 <body>
     <h1 th:text="'주문 상세 페이지'"></h1>
     <div class="order-detail">
-        <form>
+        <form action="orderDetail" method="post">
             <div class="detailWrap">
                 <div class="leftOne">
                     <h4 class="left-text">주문상세</h4>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="buyReceiptWrap">
                         <div class="buyBtn">
-                            <button>구매영수증</button>
+                            <a th:href="@{purchaseReceipt}"><button>구매영수증</button></a>
                         </div>
                         <div class="receiptDetailWrap">
                             <div class="receiptDetail">
@@ -200,15 +200,5 @@
             justify-content: space-between;
     }
 </style>
-<script type="text/javascript">
-    function redirectToPurchaseReceipt() {
-        console.log("Button clicked!"); // 버튼 클릭 확인용 로그
-
-        var purchaseReceiptUrl = '/mypage/purchaseReceipt?' + Math.random();
-        console.log("Redirecting to: " + purchaseReceiptUrl); // 페이지 이동 확인용 로그
-
-        window.location.href = purchaseReceiptUrl;
-    }
-</script>
 </body>
 </html>
