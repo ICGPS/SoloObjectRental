@@ -43,7 +43,6 @@
 .board_list .depth_8 { text-indent: 160px; }
 
 /* 댓글 공통 스타일 */
-/* 댓글 */
 #frmComment { margin: 20px 0 30px; }
 .commenter_info { margin-bottom: 5px; }
 .commenter_info input { width: 120px; }
@@ -67,6 +66,7 @@
 #search_top select { width: 150px; }
 #search_top button { width: 150px; cursor: pointer; background: #ddd; border-radius: 5px; border: 1px solid #aaa; }
 #search_top input[type='text'] { flex-grow: 1; margin: 0 5px; }
+.search_btn { width: 50px; cursor: pointer; background: #ddd; border-radius: 5px; border: 1px solid #aaa; }
 
 
 
