@@ -3,7 +3,40 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1>구매 영수증</h1>
+    <head>
+        <meta charset="UTF-8">
+        <title>구매 영수증</title>
+        <th:block layout:fragment="addCss">
+            <!-- 링크 연결 보류 -->
+            <!-- <link rel="stylesheet" type="text/css" th:href="@{/front/css/mypage/orderDetail.css}"> -->
+            <!-- <link rel="stylesheet" type="text/css" th:href="@{/common/css/reset.css}"> -->
+        </th:block>
+        <th:block layout:fragment="addScript">
+            <!-- 링크 연결 보류 -->
+            <!-- <script type="text/javascript" th:src="@{/front/js/mypage/orderDetail.js}"></script> -->
+        </th:block>
+    </head>
+    <body>
+    <h1 th:text="'구매 영수증'"></h1>
+    <div class="purchaseReceipt">
+        <div class="buyReceiptWrap">
+            <a th:href="@{/mypage/orderDetail(orderNumber=${orderNumber})}">
+                <button type="button">주문 상세 페이지</button>
+            </a>
+        </div>
+    </div>
 
+    <!--
+    <script th:inline="javascript">
+        function redirectToOrderDetail() {
+            // 여기서 orderNumber를 사용하여 주문 상세 페이지로 이동
+            var orderNumber = /*[[${orderNumber}]]*/ null;
+            if (orderNumber) {
+                window.location.href = '/orderDetail?orderNumber=' + orderNumber;
+            }
+        }
+    </script>
+    -->
+    </body>
 </main>
 </html>
