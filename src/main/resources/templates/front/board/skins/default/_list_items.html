@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="default">
         <div class="board_list layout_width">
-
             <th:block th:if="${mode != null || mode == 'search'}">
                 <th:block th:replace="~{front/board/skins/default/_search_top::search}"></th:block>
             </th:block>

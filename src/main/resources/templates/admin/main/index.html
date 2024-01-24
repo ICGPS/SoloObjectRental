@@ -4,5 +4,18 @@
     layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
 
+  <div class="layout_width">
+    <th:block sec:authorize="isAnonymous()"> <!-- 미 로그인 상태 -->
+      <h1>로그인이 필요합니다</h1>
+    </th:block>
+
+
+    <th:block sec:authorize="isAuthenticated()"> <!-- 로그인 상태 -->
+      <h1>관리자님 안녕하세요</h1>
+    </th:block>
+  </div>
+
+
+
 </section>
 </html>

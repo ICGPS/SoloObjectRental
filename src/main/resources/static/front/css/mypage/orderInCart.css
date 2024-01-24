@@ -1,0 +1,56 @@
+.rightInfo {
+    display: flex;
+}
+.topInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    }
+    .orderProductText {
+        font-size: 18px;
+    }
+    .imageTextWrap {
+        margin-top: 20px;
+    }
+    .imageTextWrap .imageWrap {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+    }
+    .imageTextWrap .rightTextWrap {
+        width: 100%;
+        margin-left: 20px;
+    }
+    .imageTextWrap {
+        display: flex;
+        align-items: center;
+    }
+    .textWrap {
+        padding: 5px 0;
+    }
+    .inputWrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .toggleSvg {
+        cursor: pointer;
+    }
+    .toggleSvg1.close {
+        transform: rotate(180deg);
+    }
+    .toggleSvg2.close {
+        transform: rotate(180deg);
+    }
+    .innerInfo1 {
+        display: none;
+    }
+    .innerInfo2 {
+        display: none;
+    }
+    .innerInfo1.active {
+        display: block;
+    }
+    .innerInfo2.active {
+        display: block;
+    }

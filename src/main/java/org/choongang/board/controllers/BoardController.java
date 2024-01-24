@@ -144,13 +144,9 @@ public class BoardController implements ExceptionProcessor {
   public String reply(@PathVariable("seq") Long parentSeq,@ModelAttribute RequestBoard form, Model model) {
 
       commonProcess(parentSeq, "reply", model);
-      
-      if (!board.isUseReply()) { // 답글 사용 불가
-
-        throw new UnAuthorizedException();
-
-      }
-      
+    if (!board.isUseReply()) { // 답글 사용 불가
+      throw new UnAuthorizedException();
+    }
       String content = boardData.getContent();
       content = String.format("<br><br><br><br><br>=========================<br>%s", content);
 

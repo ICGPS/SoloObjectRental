@@ -107,11 +107,10 @@ public class BoardInfoService {
         QBoardData boardData = QBoardData.boardData;
         BooleanBuilder andBuilder = new BooleanBuilder();
 
+        //        andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
         if (StringUtils.hasText(bid)) {
-
             andBuilder.and(boardData.board.bid.eq(bid)); // 게시판 ID
         }
-
         /* 검색 조건 처리 S */
 
         String sopt = search.getSopt();
@@ -136,16 +135,13 @@ public class BoardInfoService {
             } else if (sopt.equals("SUBJECT_CONTENT")) { // 제목 + 내용
 
                 BooleanBuilder orBuilder = new BooleanBuilder();
-                orBuilder.or(subjectCond)
-                    .or(contentCond);
+                orBuilder.or(subjectCond).or(contentCond);
 
                 andBuilder.and(orBuilder);
 
             } else if (sopt.equals("POSTER")) { // 작성자 + 아이디 + 회원명
                 BooleanBuilder orBuilder = new BooleanBuilder();
-                orBuilder.or(boardData.poster.contains(skey))
-                    .or(boardData.member.userId.contains(skey))
-                    .or(boardData.member.name.contains(skey));
+                orBuilder.or(boardData.poster.contains(skey)).or(boardData.member.userId.contains(skey)).or(boardData.member.name.contains(skey));
 
                 andBuilder.and(orBuilder);
             }
@@ -169,35 +165,20 @@ public class BoardInfoService {
 
         PathBuilder<BoardData> pathBuilder = new PathBuilder<>(BoardData.class, "boardData");
 
-        List<BoardData> items = new JPAQueryFactory(em)
-            .selectFrom(boardData)
-            .leftJoin(boardData.member)
-            .fetchJoin()
-            .offset(offset)
-            .limit(limit)
-            .where(andBuilder)
-            .orderBy(
-                new OrderSpecifier(Order.DESC, pathBuilder.get("notice")),
-                new OrderSpecifier(Order.DESC, pathBuilder.get("listOrder")),
-                new OrderSpecifier(Order.ASC, pathBuilder.get("listOrder2")),
-                new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))
-            )
-            .fetch();
+        List<BoardData> items = new JPAQueryFactory(em).selectFrom(boardData).leftJoin(boardData.member).fetchJoin().offset(offset).limit(limit).where(andBuilder).orderBy(new OrderSpecifier(Order.DESC, pathBuilder.get("notice")), new OrderSpecifier(Order.DESC, pathBuilder.get("listOrder")), new OrderSpecifier(Order.ASC, pathBuilder.get("listOrder2")), new OrderSpecifier(Order.DESC, pathBuilder.get("createdAt"))).fetch();
 
         // 게시글 전체 갯수
         long total = boardDataRepository.count(andBuilder);
 
         int ranges = utils.isMobile() ? board.getPageCountMobile() : board.getPageCountPc();
 
-        Pagination pagination = new Pagination(page, (int)total, ranges, limit, request);
+        Pagination pagination = new Pagination(page, (int) total, ranges, limit, request);
 
         return new ListData<>(items, pagination);
     }
 
     public ListData<BoardData> getList(BoardDataSearch search) {
-
         return getList(null, search);
-
     }
 
     /**

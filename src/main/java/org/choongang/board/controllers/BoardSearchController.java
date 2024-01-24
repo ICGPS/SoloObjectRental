@@ -21,65 +21,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class BoardSearchController implements ExceptionProcessor {
 
-    private final Utils utils;
-    private final BoardInfoService boardInfoService;
+  private final Utils utils;
+  private final BoardInfoService boardInfoService;
 
-    @ModelAttribute("pageTitle")
-    public String pageTitle() {
+  @ModelAttribute("pageTitle")
+  public String pageTitle() {
+    return Utils.getMessage("게시글_통합검색", "commons");
+  }
 
-        return Utils.getMessage("게시글_통합검색", "commons");
+  @ModelAttribute("addCss")
+  public String[] addCss() {
+    return new String[] {"board/skin_default"};
+  }
+
+  @GetMapping
+  public String search(@ModelAttribute BoardDataSearch search, Model model) {
+
+    if (!StringUtils.hasText(search.getSkey())) {
+      throw new AlertBackException(Utils.getMessage("NotBlank", "skey"), HttpStatus.BAD_REQUEST);
     }
 
-    @ModelAttribute("addCss")
-    public String[] addCss() {
-
-        return new String[] {"board/skin_default"};
+    String sopt = search.getSopt();
+    if (!StringUtils.hasText(sopt)) {
+      search.setSopt("SUBJECT_CONTENT");
     }
 
-    @GetMapping
-    public String search(@ModelAttribute BoardDataSearch search, Model model) {
+    Board board = new Board();
+    board.setSkin("default");
 
-        if (!StringUtils.hasText(search.getSkey())) {
+////    ListData<BoardData> data = boardInfoService.getList(search);
+//    model.addAttribute("items", data.getItems());
+//    model.addAttribute("pagination", data.getPagination());
+//    model.addAttribute("board", board);
+//    model.addAttribute("mode", "search");
 
-            throw new AlertBackException(Utils.getMessage("NotBlank", "skey"), HttpStatus.BAD_REQUEST);
-        }
-
-        String sopt = search.getSopt();
-
-        if (!StringUtils.hasText(sopt)) {
-            search.setSopt("SUBJECT_CONTENT");
-        }
-
-        Board board = new Board();
-        board.setSkin("default");
-
-        ListData<BoardData> data = boardInfoService.getList(search);
-
-        model.addAttribute("items", data.getItems());
-        model.addAttribute("pagination", data.getPagination());
-        model.addAttribute("board", board);
-        model.addAttribute("mode", "search");
-
-        return utils.tpl("board/search");
-    }
-
+    return utils.tpl("board/search");
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

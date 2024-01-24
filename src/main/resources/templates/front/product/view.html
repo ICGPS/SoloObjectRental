@@ -2,7 +2,32 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content" class="product_detail layout_width" th:object="${product}">
-    <section class="product_main">
+    <style>
+        .product_main {
+            width: 100%; height: 600px;
+        }
+        #bottomBar {
+            width: 100%;
+            height: 100px;
+            background: #CFD8DC;
+            color: #fff;
+            visibility: hidden;
+            position: fixed;
+            bottom: 0;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 1px;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
+    <section class="product_main" id="product_main">
         <div class="product_images">
             <div class="main_image">
                 <img th:if="*{mainImages != null && !mainImages.isEmpty()}" th:src="*{mainImages[0].fileUrl}">
@@ -171,11 +196,53 @@
         </div>
         <!-- 배송/교환반품 영역 E -->
     </section>
+    <div id="bottomBar" style="display: flex;" class="selected_products">
+        <div th:text="*{name}"></div>
+        <dl>
+            <dt th:text="#{판매가}"></dt>
+            <dd>
+                <th:block th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                <th:block th:text="#{원}"></th:block>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{할인가}"></dt>
+            <dd></dd>
+        </dl>
+        <div class="option_ea">
+            <div class="ea_box">
+                <input type="number" name="ea_0" value="1" min="1">
+                <button type="button" class="change_ea down">
+                    <i class="xi-minus"></i>
+                </button>
+                <button type="button" class="change_ea up">
+                    <i class="xi-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="summary">
+            <div class="tit" th:text="#{총_상품금액}"></div>
+            <div class="info">
+                <span id="totalPrice" th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></span>
+                <th:block th:text="#{원}"></th:block>
+            </div>
+        </div>
+        <div class="btns">
+            <button type="button" th:text="#{장바구니}" class="product_action" data-mode="CART"></button>
+            <button type="button" th:text="#{구매하기}" class="product_action"  data-mode="DIRECT"></button>
+        </div>
+    </div>
 
-    <script>
-        function openReviewPopup() {
-            var reviewPopup = window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
-        }
-    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+<!--            // 갯수 변화에 따라 총 금액이 달라지도록 이벤트 처리해야 하는데...-->
+
+
+    });
+    function openReviewPopup() {
+        var reviewPopup = window.open("/orderDetail/reviewDetail", "_blank", "width=600,height=400");
+    }
+</script>
 </main>
 </html>
