@@ -52,11 +52,6 @@ public class BoardData extends Base implements AuthCheck {
     
     private int depth; // 답글 들여쓰기 정도
 
-    @Column(length=60)
-    private String listOrder2 = "R"; // 답글 2차 정렬 -> 오름차순
-
-    private int depth; // 답글 들여쓰기 정도
-
     @Column(length=20)
     private String ip; // IP 주소
 
