@@ -3,7 +3,25 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1>구매 영수증</h1>
-
+    <head>
+        <meta charset="UTF-8">
+        <title>구매 영수증</title>
+        <th:block layout:fragment="addCss">
+            <!-- 링크 연결 보류 -->
+            <!-- <link rel="stylesheet" type="text/css" th:href="@{/front/css/mypage/orderDetail.css}"> -->
+            <!-- <link rel="stylesheet" type="text/css" th:href="@{/common/css/reset.css}"> -->
+        </th:block>
+        <th:block layout:fragment="addScript">
+            <!-- 링크 연결 보류 -->
+            <!-- <script type="text/javascript" th:src="@{/front/js/mypage/orderDetail.js}"></script> -->
+        </th:block>
+    </head>
+    <body>
+    <h1 th:text="'구매 영수증'"></h1>
+    <div class="purchaseReceipt">
+        <div class="buyReceiptWrap">
+        </div>
+    </div>
+    </body>
 </main>
 </html>
