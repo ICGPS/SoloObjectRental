@@ -45,7 +45,7 @@ public class mypageController implements ExceptionProcessor {
     }
     // 주문 상세 페이지 연결 추가 E //
 
-    
+
     // 장바구니 결제 페이지 추가 S //
     @GetMapping("/orderInCart")
     public String orderInCart(Model model) {
