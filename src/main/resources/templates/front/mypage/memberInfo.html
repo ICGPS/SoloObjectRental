@@ -1,133 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns=""
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/mypage/css/memberinfo.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/mypage/css/memberInfo.css}">
 </head>
-
+<form action="/submit" method="post">
 <body>
-<div class="container">
+<div id="content" layout:fragment="content">
     <div>
         <h2>회원 정보 관리</h2>
         <p>회원 정보를 수정하세요.</p>
     </div>
     <div>
-        <form>
+        <!-- 회원 정보 폼 -->
+        <form id="memberInfoForm">
             <div>
                 <label for="name">이름</label>
-                <input id="name" placeholder="이름 입력">
+                <!-- 이름은 변경 못하도록 설정 -->
+                <input id="name"  th:value="${userName}" disabled>
             </div>
             <div>
                 <label for="email">이메일</label>
-                <input id="email" placeholder="이메일 입력">
+                <!-- 이메일은 변경 못하도록 설정 -->
+                <input id="email" th:value="${email}" disabled>
             </div>
             <div>
-                <label for="password">현재 비밀번호</label>
-                <input id="password" placeholder="비밀번호 입력" type="password">
+                <label for="phone">휴대전화</label>
+                <input id="phone" placeholder="휴대전화 입력" th:value="${tel}">
             </div>
             <div>
-                <label for="newPassword">비밀번호</label>
-                <input id="newPassword" placeholder="비밀번호 입력" type="password">
+                <label for="address">주소</label>
+                <input id="address" placeholder="주소 입력" th:value="${address}">
             </div>
-            <div>
-                <label for="newPasswordConfirm">새비밀번호 확인</label>
-                <input id="newPasswordConfirm" placeholder="비밀번호 확인" type="password">
-            </div>
-            <div>
-                <label for="deliveryAddress">우편주소</label>
-                <input type="text" id="postcode" placeholder="우편번호">
-                <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" id="address" placeholder="주소"><br>
-                <input type="text" id="detailAddress" placeholder="상세주소">
-                <input type="text" id="extraAddress" placeholder="참고항목">
-                <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-                    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-                </div>
-
-                <input id="deliveryAddress" placeholder="우편주소 입력">
-                <!--<button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address" >우편번호 검색</button>-->
-                <button>새로운 주소 추가</button>
-            </div>
-            <a th:href="@{/mypage/paymentList}">결제관리</a>
-            <a th:href="@{/mypage/deliveryAddressList}">배송관리</a>
-            <div class="button-group">
-                <button id="saveButton">저장</button>
-                <button id="cancelButton">취소</button>
-            </div>
+            <button id="saveButton">저장</button>
+            <input type="submit" value="전송">
+            <button id="cancelButton">취소</button>
         </form>
+    </div>
+    <div>
+        <!-- 배송지 관리 팝업창 버튼 -->
+        <button id="deliveryPopupButton">배송지 관리</button>
+        <!-- 배송지 관리 팝업창 -->
+        <div id="deliveryPopup" class="popup" style="display: none;">
+            <!-- 내용 추가 -->
+        </div>
+
+        <!-- 비밀번호 변경 팝업창 버튼 -->
+        <button id="passwordPopupButton">비밀번호 변경</button>
+        <!-- 비밀번호 변경 팝업창 -->
+        <div id="passwordPopup" class="popup" style="display: none;">
+            <!-- 내용 추가 -->
+        </div>
     </div>
 </div>
 </body>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</form>
+<style>
 
-    <script>
+</style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/mypage/js/memberInfo.js"></script>
 
-
-        var element_wrap = document.getElementById('wrap');
-
-        function foldDaumPostcode() {
-            element_wrap.style.display = 'none';
-        }
-
-        function execDaumPostcode() {
-         console.log('aaaa');
-            var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-            new daum.Postcode({
-                oncomplete: function(data) {
-
-                    var addr = '';
-                    var extraAddr = '';
-
-
-                    if (data.userSelectedType === 'R') {
-                        addr = data.roadAddress;
-                    } else {
-                        addr = data.jibunAddress;
-                    }
-
-                    if(data.userSelectedType === 'R'){
-
-                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                            extraAddr += data.bname;
-                        }
-
-                        if(data.buildingName !== '' && data.apartment === 'Y'){
-                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                        }
-
-                        if(extraAddr !== ''){
-                            extraAddr = ' (' + extraAddr + ')';
-                        }
-                    document.getElementById("extraAddress").value = extraAddr;
-
-                    } else {
-                        document.getElementById("extraAddress").value = '';
-                    }
-
-                    document.getElementById('postcode').value = data.zonecode;
-                    document.getElementById("address").value = addr;
-
-                    document.getElementById("detailAddress").focus();
-
-
-                    element_wrap.style.display = 'none';
-
-
-                    document.body.scrollTop = currentScroll;
-                },
-                onresize : function(size) {
-                    element_wrap.style.height = size.height+'px';
-                },
-                width : '100%',
-                height : '100%'
-            }).embed(element_wrap);
-
-            element_wrap.style.display = 'block';
-        }
-    </script>
-</main>
 </html>
-
-

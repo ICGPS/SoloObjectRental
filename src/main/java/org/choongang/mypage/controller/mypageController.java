@@ -5,6 +5,8 @@ import org.choongang.commons.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/mypage")
@@ -112,5 +114,18 @@ public class mypageController implements ExceptionProcessor {
         return "front/mypage/deliverAddressList";
     }
 
+
+    /*@GetMapping("/memberInfo")
+    public String getMemberInfo(Model model) {
+        // 회원 정보를 모델에 추가
+        // model.addAttribute("memberInfo", memberInfo); // memberInfo는 실제로 사용하는 데이터 객체
+        return "front/mypage/memberInfo";
+    }*/
+/*
+    @PostMapping("/updateMemberInfo")
+    public String updateMemberInfo(@ModelAttribute MemberInfoForm memberInfoForm) {
+        // 회원 정보 업데이트 로직 추가
+        return "redirect:/mypage/memberInfo";
+    }*/
 
 }
