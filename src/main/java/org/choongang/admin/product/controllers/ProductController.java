@@ -39,6 +39,7 @@ public class ProductController implements ExceptionProcessor {
     private final ProductInfoService productInfoService;
     private final ProductDeleteService productDeleteService;
 
+    private final ProductDisplayService productDisplayService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -56,7 +57,7 @@ public class ProductController implements ExceptionProcessor {
         return ProductStatus.getList();
     }
 
-    
+
     // 상품 분류 목록
     @ModelAttribute("categories")
     public List<Category> getCategories() {
@@ -82,7 +83,7 @@ public class ProductController implements ExceptionProcessor {
 
     /**
      * 상품 목록에서 수정
-     * 
+     *
      * @param chks : 선택 번호
      * @param model
      * @return
@@ -100,7 +101,7 @@ public class ProductController implements ExceptionProcessor {
 
     /**
      * 상품 목록에서 삭제
-     * 
+     *
      * @param chks : 선택 번호
      * @param model
      * @return
@@ -247,6 +248,39 @@ public class ProductController implements ExceptionProcessor {
         return "common/_execute_script";
     }
 
+    @GetMapping("/display")
+    public String display(Model model) {
+        commonProcess("display", model);
+
+        return "admin/product/display";
+    }
+
+    @PostMapping("/display")
+    public String displayPs(@RequestParam("num") List<Long> codes, Model model) {
+        commonProcess("display", model);
+
+        productDisplayService.save(codes);
+
+        model.addAttribute("script", "parent.location.reload();");
+        return "common/_execute_script";
+    }
+
+    @GetMapping("/popup_select")
+    public String popupSelect(@RequestParam("target") String target,
+                              @ModelAttribute ProductSearch search, Model model) {
+
+        search.setLimit(7);
+
+        ListData<Product> data = productInfoService.getList(search, true);
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        model.addAttribute("addScript", new String[] {"product/popup_select"});
+
+        return "admin/product/popup_select";
+    }
+
     /**
      * 공통 처리 부분
      * @param mode
@@ -267,6 +301,9 @@ public class ProductController implements ExceptionProcessor {
 
         } else if (mode.equals("category")) {
             pageTitle = "상품 분류";
+        } else if (mode.equals("display")) {
+            pageTitle = "상품 진열 관리";
+            addScript.add("product/display");
         }
 
         model.addAttribute("pageTitle", pageTitle);
