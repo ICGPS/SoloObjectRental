@@ -20,9 +20,23 @@
     <h1 th:text="'구매 영수증'"></h1>
     <div class="purchaseReceipt">
         <div class="buyReceiptWrap">
-            <button onclick="redirectToOrderDetail()">주문 상세 페이지</button>
+            <a th:href="@{/mypage/orderDetail(orderNumber=${orderNumber})}">
+                <button type="button">주문 상세 페이지</button>
+            </a>
         </div>
     </div>
+
+    <!--
+    <script th:inline="javascript">
+        function redirectToOrderDetail() {
+            // 여기서 orderNumber를 사용하여 주문 상세 페이지로 이동
+            var orderNumber = /*[[${orderNumber}]]*/ null;
+            if (orderNumber) {
+                window.location.href = '/orderDetail?orderNumber=' + orderNumber;
+            }
+        }
+    </script>
+    -->
     </body>
 </main>
 </html>

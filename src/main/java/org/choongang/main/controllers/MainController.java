@@ -23,5 +23,11 @@ public class MainController implements ExceptionProcessor {
 
         return utils.tpl("main/index");
     }
+
+    @GetMapping("main/index")
+    public String memberToIndex() {
+
+        return utils.tpl("main/index");
+    }
 }
 

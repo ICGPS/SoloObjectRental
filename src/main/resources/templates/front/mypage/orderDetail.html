@@ -50,7 +50,9 @@
                     </div>
                     <div class="buyReceiptWrap">
                         <div class="buyBtn">
-                            <a th:href="@{purchaseReceipt}"><button>구매영수증</button></a>
+                            <a th:href="@{/mypage/purchaseReceipt(orderNumber=${orderNumber})}">
+                                <button type="button">구매영수증</button>
+                            </a>
                         </div>
                         <div class="receiptDetailWrap">
                             <div class="receiptDetail">
