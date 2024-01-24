@@ -29,9 +29,10 @@ public class ReviewService {
 
     public void save(Review review) {
         Member member = memberUtil.getMember();
-        review.setMemberNumber(member.getSeq());
+        review.setMember(member);
 
         reviewRepository.saveAndFlush(review);
     }
+
 
 }

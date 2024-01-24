@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Utils;
+import org.choongang.orderDetails.entities.Review;
+import org.choongang.orderDetails.repositories.ReviewRepository;
+import org.choongang.orderDetails.service.ReviewService;
 import org.choongang.product.entities.Category;
 import org.choongang.product.entities.Product;
 import org.choongang.product.service.CategoryInfoService;
@@ -26,6 +29,7 @@ public class ProductController implements ExceptionProcessor {
 
     private final CategoryInfoService categoryInfoService;
     private final ProductInfoService productInfoService;
+    private final ReviewService reviewService;
     private final Utils utils;
 
     private Category category; // 상품 분류
