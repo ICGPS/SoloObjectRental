@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
-import org.choongang.member.controllers.RequestJoin;
 
 import java.util.ArrayList;
 import java.util.List;
