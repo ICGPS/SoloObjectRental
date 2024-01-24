@@ -16,7 +16,6 @@
         <!-- 프로필 카드 -->
         <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
             <!-- 프로필 카드 내용 -->
-            <a th:href="@{/mypage/main}">메인페이지</a>
             <a th:href="@{/mypage/memberInfo}">회원정보수정</a>
         </div>
         <!-- 렌탈 목록 -->
@@ -34,6 +33,47 @@
             <!-- 문의 카드 내용 -->
             <a th:href="@{/cs/inquiryList}">1:1문의</a>
         </div>
+
+        <!-- 장바구니에서 주문하기 추가 S -->
+
+        <!-- 장바구니에서 주문하기 카드 -->
+        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+            <!-- 장바구니에서 주문하기 카드 내용 -->
+            <a th:href="@{/mypage/orderInCart}">장바구니에서 주문하기</a>
+        </div>
+
+        <!-- 장바구니에서 주문하기 추가 E -->
+
+        <!-- 주문 상세 추가 S -->
+
+        <!-- 주문 상세 카드 -->
+        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+            <!-- 주문 상세 카드 내용 -->
+            <a th:href="@{/mypage/orderDetail}">주문 상세</a>
+        </div>
+
+        <!-- 주문 상세 추가 E -->
+
+        <!-- 구매 영수증 추가 S -->
+
+        <!-- 구매 영수증 카드 -->
+        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+            <!-- 구매 영수증 카드 내용 -->
+            <a th:href="@{/mypage/purchaseReceipt}">구매 영수증</a>
+        </div>
+
+        <!-- 구매 영수증 추가 E -->
+
+        <!-- 결제 완료 카드 추가 S -->
+
+        <!-- 결제 완료 카드 -->
+        <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+            <!-- 결제완료 카드 내용 -->
+            <a th:href="@{/mypage/paymentFinish}">결제 완료</a>
+        </div>
+
+        <!-- 결제 완료 추가 E -->
+
     </section>
 </main>
 </body>

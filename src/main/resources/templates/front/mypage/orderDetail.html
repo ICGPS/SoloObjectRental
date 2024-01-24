@@ -2,23 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
 <head>
     <meta charset="UTF-8">
     <title>주문 상세 페이지(주문 목록에서 상품 클릭 시 뜨는 창)</title>
     <th:block layout:fragment="addCss">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/mypage/productDetail.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/css/common/reset.css}">
+        <!-- 링크 연결 보류 -->
+       <!-- <link rel="stylesheet" type="text/css" th:href="@{/front/css/mypage/orderDetail.css}"> -->
+       <!-- <link rel="stylesheet" type="text/css" th:href="@{/common/css/reset.css}"> -->
     </th:block>
     <th:block layout:fragment="addScript">
-        <script type="text/javascript" th:src="@{/js/mypage/productDetail.js}"></script>
+        <!-- 링크 연결 보류 -->
+        <!-- <script type="text/javascript" th:src="@{/front/js/mypage/orderDetail.js}"></script> -->
     </th:block>
-    <a th:href="@{mypage/purchaseReceipt}">구매 영수증(팝업으로 대체)</a>
+    <!-- <a th:href="@{mypage/purchaseReceipt}">구매 영수증(팝업으로 대체)</a> -->
 </head>
 <body>
-<main layout:fragment="content">
     <h1 th:text="'주문 상세 페이지'"></h1>
     <div class="order-detail">
-        <form>
+        <form action="orderDetail" method="post">
             <div class="detailWrap">
                 <div class="leftOne">
                     <h4 class="left-text">주문상세</h4>
@@ -48,7 +50,9 @@
                     </div>
                     <div class="buyReceiptWrap">
                         <div class="buyBtn">
-                            <button>구매영수증</button>
+                            <a th:href="@{/mypage/purchaseReceipt(orderNumber=${orderNumber})}">
+                                <button type="button">구매영수증</button>
+                            </a>
                         </div>
                         <div class="receiptDetailWrap">
                             <div class="receiptDetail">

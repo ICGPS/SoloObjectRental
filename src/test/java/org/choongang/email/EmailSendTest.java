@@ -24,7 +24,7 @@ public class EmailSendTest {
     @Test
     void sendTest() {
         EmailMessage message = new EmailMessage("skfk6788@kakao.com", "제목...", "내용...");
-        boolean success = emailSendService.sendMail(message);
+        boolean success = emailSendService.sendMail(message, "id_send");
 
         assertTrue(success);
     }

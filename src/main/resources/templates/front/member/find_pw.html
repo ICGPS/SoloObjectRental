@@ -3,8 +3,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1 th:text="#{비밀번호_찾기}"></h1>
 
+    <style>
+        .top_right {
+        position: absolute;
+        top: 140px;
+        right: 20px;
+    }
+
+    .top_right a {
+    /* 각 링크 사이의 간격 조절을 위한 마진 추가 */
+    margin: 0 10px 0 0;
+    }
+    </style>
+
+    <div class="top_right">
+    <a th:href="@{/main/index}">메인페이지</a>
+    </div>
+    <h1 th:text="#{비밀번호_찾기}"></h1>
     <form name="frmFindPw" method="post" th:action="@{/member/find_pw}" autocomplete="off" th:object="${requestFindPw}">
 
         <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">

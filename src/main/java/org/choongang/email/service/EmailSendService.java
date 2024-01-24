@@ -67,7 +67,7 @@ public class EmailSendService {
 
     }
 
-    public boolean sendMail(EmailMessage message) {
+    public boolean sendMail(EmailMessage message, String idSend) {
         return sendMail(message, null, null);
     }
 }
