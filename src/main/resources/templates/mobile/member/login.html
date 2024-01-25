@@ -3,6 +3,18 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+    <style>
+        .left {
+            /* 조절하고자 하는 값으로 수정하세요 */
+            position: absolute;
+            left: 20px;
+        }
+
+        .left a {
+            /* 링크 간의 간격을 조절하려면 이 값을 조절하세요 */
+            margin-right: 10px;
+        }
+    </style>
     <h1 th:text="#{로그인}"></h1>
     <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
         <input type="hidden" name="redirectURL"
@@ -21,7 +33,11 @@
                 <div class="error" th:if="${session.NotBlank_password != null}" th:text="${session.NotBlank_password}"></div>
             </dd>
         </dl>
-
+        <div class="left">
+            <a th:href="@{/main/index}" class="inline-block text-sm underline">메인페이지</a>
+            <a th:href="@{/member/find_id}" class="inline-block text-sm underline">아이디 찾기</a>
+            <a th:href="@{/member/find_pw}" class="inline-block text-sm underline">비밀번호 찾기</a>
+        </div>
         <div>
             <input type="checkbox" name="autoLogin" value="true" id="autoLogin">
             <label for="autoLogin" th:text="#{자동_로그인}"></label>

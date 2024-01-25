@@ -6,8 +6,10 @@ import org.choongang.commons.Utils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class MainController implements ExceptionProcessor {
 
@@ -18,8 +20,14 @@ public class MainController implements ExceptionProcessor {
         return new String[] { "main/style" };
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String index() {
+
+        return utils.tpl("main/index");
+    }
+
+    @GetMapping("main/index")
+    public String memberToIndex() {
 
         return utils.tpl("main/index");
     }

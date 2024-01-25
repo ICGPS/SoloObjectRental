@@ -1,7 +1,9 @@
 package org.choongang.admin.product.controllers;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.config.service.ConfigInfoService;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
@@ -38,8 +40,9 @@ public class ProductController implements ExceptionProcessor {
     private final ProductSaveService productSaveService;
     private final ProductInfoService productInfoService;
     private final ProductDeleteService productDeleteService;
-
     private final ProductDisplayService productDisplayService;
+    private final ConfigInfoService configInfoService;
+
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -57,7 +60,7 @@ public class ProductController implements ExceptionProcessor {
         return ProductStatus.getList();
     }
 
-
+    
     // 상품 분류 목록
     @ModelAttribute("categories")
     public List<Category> getCategories() {
@@ -83,7 +86,7 @@ public class ProductController implements ExceptionProcessor {
 
     /**
      * 상품 목록에서 수정
-     *
+     * 
      * @param chks : 선택 번호
      * @param model
      * @return
@@ -101,7 +104,7 @@ public class ProductController implements ExceptionProcessor {
 
     /**
      * 상품 목록에서 삭제
-     *
+     * 
      * @param chks : 선택 번호
      * @param model
      * @return
@@ -252,6 +255,10 @@ public class ProductController implements ExceptionProcessor {
     public String display(Model model) {
         commonProcess("display", model);
 
+        List<Long> codes = configInfoService.get("displayCodes", new TypeReference<List<Long>>() {}).orElse(null);
+
+        model.addAttribute("codes", codes);
+
         return "admin/product/display";
     }
 
@@ -262,6 +269,7 @@ public class ProductController implements ExceptionProcessor {
         productDisplayService.save(codes);
 
         model.addAttribute("script", "parent.location.reload();");
+
         return "common/_execute_script";
     }
 

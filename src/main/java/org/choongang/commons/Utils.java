@@ -245,8 +245,9 @@ public class Utils {
 
         try {
             return om.writeValueAsString(item);
-        } catch (JsonProcessingException e) {}
+        } catch (JsonProcessingException e) {
 
-        return "{}";
+            return "{}";
+        }
     }
 }
