@@ -1,51 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns=""
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
 <head>
-    <link rel="stylesheet" type="text/css" href="memberInfo.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/mypage/css/memberInfo.css}">
 </head>
-<body>
-<div class="container">
-    <div>
-        <h2>회원 정보 관리</h2>
-        <p>회원 정보를 수정하세요.</p>
+<form name="frmUpMemberInfo" method="post" action="@{/mypage/updateMemberInfo}" th:object="${requestUpdateMemberInfo}" >
+    <body>
+    <div id="content" layout:fragment="content">
+        <div>
+            <h2>회원 정보 관리</h2>
+            <p>회원 정보를 수정하세요.</p>
+        </div>
+        <div>
+            <!-- 회원 정보 폼 -->
+            <form id="memberInfoForm" action="/mypage/memberInfo" th:object="${member}">
+                <div>
+                    <label for="name" th:text="#{이름}"></label>
+                    <!-- 이름은 변경 못하도록 설정 -->
+                    <input id="name"  th:value="*{name}" disabled>
+                </div>
+                <div>
+                    <label for="userName" th:text="#{닉네임}"></label>
+                    <!-- 이름은 변경 못하도록 설정 -->
+                    <input id="userName"  th:value="*{userName}">
+                </div>
+                <div>
+                    <label for="email" th:text="#{이메일}"></label>
+                    <!-- 이메일은 변경 못하도록 설정 -->
+                    <input id="email" th:value="*{email}" disabled>
+                </div>
+                <div>
+                    <label for="phone">휴대전화</label>
+                    <input id="phone" placeholder="휴대전화 입력" th:value="${tel}">
+                </div>
+                <div>
+                    <label for="address">주소</label>
+                    <input id="address" placeholder="주소 입력" th:value="${address}">
+                </div>
+                <button id="saveButton" type="submit">저장</button>
+                <!--            <input  value="전송">-->
+                <button id="cancel">취소</button>
+            </form>
+        </div>
+        <div>
+            <!-- 배송지 관리 팝업창 버튼 -->
+            <button id="deliveryPopupButton">배송지 관리</button>
+            <!-- 배송지 관리 팝업창 -->
+            <div id="deliveryPopup" class="popup" style="display: none;">
+                <!-- 내용 추가 -->
+            </div>
+
+            <!-- 비밀번호 변경 팝업창 버튼 -->
+            <button id="passwordPopupButton">비밀번호 변경</button>
+            <!-- 비밀번호 변경 팝업창 -->
+            <div id="passwordPopup" class="popup" style="display: none;">
+                <!-- 내용 추가 -->
+            </div>
+
+            <div >
+                <th:block th:text="*{seq}">aaa</th:block>
+            </div>
+        </div>
     </div>
-    <div>
-        <form>
-            <div>
-                <label for="name">이름</label>
-                <input id="name" placeholder="이름 입력">
-            </div>
-            <div>
-                <label for="email">이메일</label>
-                <input id="email" placeholder="이메일 입력">
-            </div>
-            <div>
-                <label for="password">비밀번호</label>
-                <input id="password" placeholder="비밀번호 입력" type="password">
-            </div>
-            <div>
-                <label for="passwordConfirm">비밀번호 확인</label>
-                <input id="passwordConfirm" placeholder="비밀번호 확인" type="password">
-            </div>
-            <div>
-                <label for="deliveryAddress">우편주소</label>
-                <input id="deliveryAddress" placeholder="우편주소 입력">
-                <button>우편번호 검색</button>
-                <button>새로운 주소 추가</button>
-            </div>
-            <a th:href="@{/mypage/paymentList}">결제관리</a>
-            <a th:href="@{/mypage/deliveryAddressList}">배송관리</a>
-            <div class="button-group">
-                <button id="saveButton">저장</button>
-                <button id="cancelButton">취소</button>
-            </div>
-        </form>
-    </div>
-</div>
-</body>
+
+
+    </body>
+</form>
+<style>
+
+</style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/mypage/js/memberInfo.js"></script>
+
 </html>
-
-
