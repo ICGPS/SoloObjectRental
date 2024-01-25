@@ -52,6 +52,8 @@ public class ProductController implements ExceptionProcessor {
     public String detail(@PathVariable("seq") Long seq, Model model) {
         commonProcess(seq, "detail", model);
 
+        model.addAttribute("reviewList", reviewService.getReviewList(seq));
+
         return utils.tpl("product/view");
     }
 

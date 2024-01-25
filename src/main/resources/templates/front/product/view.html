@@ -157,28 +157,16 @@
         <div id="review" class='desc_content'>
             <button onclick="openReviewPopup()">리뷰 작성</button>
             <ul>
-                <li>
+                <li th:each="review : ${reviewList}">
                     <div>
-                        <span></span>
+                        <span th:text="${review.score} + '점'"></span>
                         <div>
-                            <span>내 이름</span>
-                            <span>2024.01.23</span>
+                            <span th:text="${review.member.userName}"></span>
+                            <span th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd')}"></span>
                         </div>
                     </div>
-                    <p>리뷰 내용 여기에 나오게 ~~~ !</p>
+                    <p th:text="${review.content}"></p>
                 </li>
-                <li>
-                    <div>
-                        <span>3점</span>
-                        <div>
-                            <span th:text="${session.member.userName}"></span>
-                            <span>2024.01.23</span>
-                        </div>
-                    </div>
-                    <p>리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !리뷰 내용 여기에 나오게 ~~~ !</p>
-                </li>
-                <li>리뷰 보여쥬기3</li>
-                <li>리뷰 보여쥬기4</li>
             </ul>
         </div>
         <!-- 후기 영역 E -->
@@ -265,9 +253,11 @@
     <!--            // 갯수 변화에 따라 총 금액이 달라지도록 이벤트 처리해야 하는데...-->
 
         });
+
         function openReviewPopup() {
-            var reviewPopup = window.open("/orderDetail/reviewDetail", "_blank", "width=600,height=400");
+            var reviewPopup = window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
         }
+
         function calculateDate() {
             var sdateString = document.getElementsByName('sdate')[0].value;
             var edateString = document.getElementsByName('edate')[0].value;

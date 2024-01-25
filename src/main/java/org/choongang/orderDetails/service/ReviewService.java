@@ -34,5 +34,8 @@ public class ReviewService {
         reviewRepository.saveAndFlush(review);
     }
 
+    public List<Review> getReviewList(Long productSeq) {
+        return reviewRepository.findByProductSeqOrderByCreatedAtDesc(productSeq);
+    }
 
 }
