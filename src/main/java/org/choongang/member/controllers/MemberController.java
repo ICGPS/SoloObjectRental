@@ -6,6 +6,7 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.member.service.FindPwService;
 import org.choongang.member.service.JoinService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -59,14 +60,46 @@ public class MemberController implements ExceptionProcessor {
         return utils.tpl("member/login");
     }
 
-    @GetMapping("/findId")
-    public String findId(Model model) {
-        commonProcess("findId", model);
+    /* 아이디 찾기 S */
 
-        System.out.println("아이디 찾기 테스트");
+    /**
+     * 아이디 찾기 양식
+     * 
+     * @param form
+     * @param model
+     * @return
+     */
 
-        return utils.tpl("member/findId");
+    @GetMapping("/find_id")
+    public String findId(@ModelAttribute RequestFindId form, Model model) {
+        commonProcess("find_id", model);
+
+
+        return utils.tpl("member/find_id");
     }
+
+    /**
+     * 아이디 찾기 처리
+     *
+     * @param form
+     * @param errors
+     * @param model
+     * @return
+     */
+    
+    @PostMapping("/find_id")
+    public String findIdPs(@Valid RequestFindId form, Errors errors, Model model) {
+        commonProcess("find_id", model);
+
+        if (errors.hasErrors()) {
+
+            return utils.tpl("member/find_id");
+        }
+        return "redirect:/member/find_id_done";
+    }
+
+
+    /* 아이디 찾기 E */
 
     /**
      * 비밀번호 찾기 양식
@@ -139,6 +172,10 @@ public class MemberController implements ExceptionProcessor {
             addCss.add("member/join");
             addScript.add("member/join");
             addCommonScript.add("address");
+
+        } else if (mode.equals("find_id")) { // 아이디 찾기
+            pageTitle = Utils.getMessage("아이디_찾기", "commons");
+
 
         } else if (mode.equals("find_pw")) { // 비밀번호 찾기
             pageTitle = Utils.getMessage("비밀번호_찾기", "commons");
