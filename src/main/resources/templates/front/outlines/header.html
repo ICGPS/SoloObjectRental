@@ -63,8 +63,8 @@
                 <img src="https://static.bmhd.cz/data/loga-dopravcu/7/6482.png" height="80px">
             </a>
             <nav th:replace="~{front/outlines/_main_menu::menus}"></nav>
-            <form name="frmSearch" class="search" th:action="@{/search/searchResults}" autocomplete="off">
-                <input type="text" name="skey" th:placeholder="#{검색어를_입력하세요.}">
+            <form name="frmSearch" class="search" th:action="@{/board/search}" autocomplete="off">
+                <input type="text" name="skey" th:value="${param.skey}" th:placeholder="#{검색어를_입력하세요.}">
                 <button type="submit" class="search_btn">
                     <i class="xi-search"></i>
                 </button>
