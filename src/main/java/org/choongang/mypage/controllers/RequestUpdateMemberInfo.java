@@ -1,4 +1,4 @@
-package org.choongang.mypage.controller;
+package org.choongang.mypage.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 
 @Data
-public class requestUpdateMemberInfo {
+public class RequestUpdateMemberInfo {
 
     @NotBlank
     @Size(min=8)

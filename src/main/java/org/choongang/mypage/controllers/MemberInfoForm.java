@@ -1,4 +1,4 @@
-package org.choongang.mypage.controller;
+package org.choongang.mypage.controllers;
 
 import lombok.Getter;
 import lombok.Setter;
