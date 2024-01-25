@@ -3,6 +3,7 @@ package org.choongang.orderDetails.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.choongang.commons.entities.Base;
+import org.choongang.member.entities.Member;
 
 @Entity
 @Getter
@@ -23,5 +24,7 @@ public class Review extends Base {
     @Lob
     private String content;
 
-    private Long memberNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="memberSeq")
+    private Member member;
 }
