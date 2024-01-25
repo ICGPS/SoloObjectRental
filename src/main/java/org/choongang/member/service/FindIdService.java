@@ -7,6 +7,7 @@ import org.choongang.email.service.EmailMessage;
 import org.choongang.email.service.EmailSendService;
 import org.choongang.member.controllers.FindIdValidator;
 import org.choongang.member.controllers.RequestFindId;
+import org.choongang.member.entities.Member;
 import org.choongang.member.repositories.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -35,9 +36,11 @@ public class FindIdService {
     }
 
     public void send(String email) {
+        Member member = new Member();
         EmailMessage emailMessage = new EmailMessage(email, Utils.getMessage("Email.id.find", "commons"), Utils.getMessage("Email.id.find", "commons"));
-        Map<String, Object> tplData = new HashMap<>();
-        tplData.get("id");
-        sendService.sendMail(emailMessage, "id_send");
+            Map<String, Object> tplData = new HashMap<>();
+            String userId = member.getUserId();
+        tplData.put("id", userId);
+        sendService.sendMail(emailMessage, "send_id", tplData);
     }
 }
