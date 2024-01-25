@@ -41,6 +41,7 @@
             <form name="frmSave" method="post" th:action="@{/cart/save}" autocomplete="off" target="ifrmProcess">
                 <input type="hidden" name="mode" value="CART">
                 <input type="hidden" name="seq" th:value="*{seq}">
+                <input type="hidden" name="salePrice" th:value="*{salePrice}">
                 <div th:text="*{name}"></div>
                 <dl th:if="*{consumerPrice > 0}">
                     <dt th:text="#{소비자가}"></dt>
@@ -75,14 +76,15 @@
                     </dd>
                     <dd th:unless="*{deliveryPrice > 0}" th:text="#{무료배송}"></dd>
                 </dl>
-                <div class="summary">
-                    <div class="tit" th:text="#{총_상품금액}"></div>
-                    <div class="info">
-                        <span id="totalPrice" class="totalPrice" th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}">
+                <dl class="summary">
+                    <dt class="tit" th:text="#{총_상품금액}"></dt>
+                    <dd class="info">
+                        <input type="hidden" name="totalPrice" th:value="*{salePrice}">
+                        <span name="showTotalPrice" class="totalPrice" th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}">
                         </span>
                         <th:block th:text="#{원}"></th:block>
-                    </div>
-                </div>
+                    </dd>
+                </dl>
 
 
                 <div class="selected_products">
@@ -105,18 +107,57 @@
                 </div>
                 <!--// selected_products -->
                 <div>
-                    <dt th:text="#{대여기간}"></dt>
+                    <dt id="showPeriod" th:text="#{대여기간}"></dt>
+                    <input type="hidden" id="period" name="period" value="0">
                     <dd width="300">
                         <input type="date" name="sdate" onchange="calculateDate();"> ~
                         <input type="date" name="edate" onchange="calculateDate();">
                     </dd>
-                    <p id="betweenDays">날짜 차이: </p>
                 </div>
                 <!--// summary -->
                 <div class="btns">
                     <button type="button" th:text="#{찜하기}" class="product_action" data-mode="WISH"></button>
                     <button type="button" th:text="#{장바구니}" class="product_action" data-mode="CART"></button>
                     <button type="button" th:text="#{구매하기}" class="product_action"  data-mode="DIRECT"></button>
+                </div>
+
+                <div id="bottomBar" style="display: flex;" class="selected_products">
+                    <div th:text="*{name}"></div>
+                    <dl>
+                        <dt th:text="#{판매가}"></dt>
+                        <dd>
+                            <th:block th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
+                            <th:block th:text="#{원}"></th:block>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt th:text="#{할인가}"></dt>
+                        <dd></dd>
+                    </dl>
+                    <div class="option_ea">
+                        <div class="ea_box">
+                            <input type="number" name="ea_0" value="1" min="1">
+                            <button type="button" class="change_ea down">
+                                <i class="xi-minus"></i>
+                            </button>
+                            <button type="button" class="change_ea up">
+                                <i class="xi-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="summary">
+                        <div class="tit" th:text="#{총_상품금액}"></div>
+                        <div class="info">
+                            <span name="showTotalPrice" class="totalPrice" th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}">
+                            </span>
+                            <th:block th:text="#{원}"></th:block>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <button type="button" th:text="#{장바구니}" class="product_action" data-mode="CART"></button>
+                        <button type="button" th:text="#{구매하기}" class="product_action" data-mode="DIRECT"></button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -203,54 +244,30 @@
         </div>
         <!-- 배송/교환반품 영역 E -->
     </section>
-    <div id="bottomBar" style="display: flex;" class="selected_products">
-        <div th:text="*{name}"></div>
-        <dl>
-            <dt th:text="#{판매가}"></dt>
-            <dd>
-                <th:block th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></th:block>
-                <th:block th:text="#{원}"></th:block>
-            </dd>
-        </dl>
-        <dl>
-            <dt th:text="#{할인가}"></dt>
-            <dd></dd>
-        </dl>
-        <div class="option_ea">
-            <div class="ea_box">
-                <input type="number" name="ea_0" value="1" min="1">
-                <button type="button" class="change_ea down">
-                    <i class="xi-minus"></i>
-                </button>
-                <button type="button" class="change_ea up">
-                    <i class="xi-plus"></i>
-                </button>
-            </div>
-        </div>
-
-        <div class="summary">
-            <div class="tit" th:text="#{총_상품금액}"></div>
-            <div class="info">
-                <span class="totalPrice" th:text="*{salePrice >= 1000 ? #numbers.formatInteger(salePrice, 3, 'COMMA') : salePrice}"></span>
-                <th:block th:text="#{원}"></th:block>
-            </div>
-        </div>
-        <div class="btns">
-            <button type="button" th:text="#{장바구니}" class="product_action" data-mode="CART"></button>
-            <button type="button" th:text="#{구매하기}" class="product_action" data-mode="DIRECT"></button>
-        </div>
-    </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-
-    <!--            // 갯수 변화에 따라 총 금액이 달라지도록 이벤트 처리해야 하는데...-->
 
         });
         function openReviewPopup() {
             var reviewPopup = window.open("/orderDetail/reviewDetail", "_blank", "width=600,height=400");
         }
+
+        /* 대여 기간(달력 둘 다 선택) 확정시 기간 계산하여 출력
+        // 데이터에 저장 필요
+        */
         function calculateDate() {
+            // 시작일 제한
+            if (new Date(document.getElementsByName('sdate')[0].value) < new Date()) {
+                alert('대여 시작일을 확인해주세요.');
+                document.getElementsByName('sdate')[0].value='';
+            }
+            // 종료일 - 시작일 < 0이라면 알림
+            if ( (new Date(document.getElementsByName('sdate')[0].value) >= new Date(document.getElementsByName('edate')[0].value))
+                || (new Date(document.getElementsByName('edate')[0].value) < new Date()) ) {
+                alert('대여 종료일을 확인해주세요.');
+                document.getElementsByName('edate')[0].value='';
+            }
+
             var sdateString = document.getElementsByName('sdate')[0].value;
             var edateString = document.getElementsByName('edate')[0].value;
 
@@ -262,8 +279,28 @@
                 var betweenDays = betweenDate / (1000 * 60 * 60 * 24);
                 var betweenMonth = Math.ceil(betweenDays / 30);
 
-                document.getElementById('betweenDays').innerText = '기간: ' + betweenMonth + '개월(' + betweenDays + '일)';
+                document.getElementById('period').value = betweenMonth;
+                document.getElementById('showPeriod').innerText = '대여기간: ' + betweenMonth + '개월(' + betweenDays + '일)';
+
+                calculateTotal();
             }
+        }
+
+        /* 대여기간, 상품 갯수, 상품 가격을 종합 계산 */
+        function calculateTotal() {
+            const salePrice = frmSave.salePrice.value;
+
+            const ea = document.getElementsByName('ea_0')[0].value;
+
+            let totalPrice0 = document.getElementsByName('showTotalPrice')[0].value;
+<!--            let totalPrice1 = document.getElementsByName('showTotalPrice')[1].value;-->
+
+            const period = document.getElementById('period').value;
+
+            totalPrice0 = salePrice * period * ea;
+
+            document.getElementsByName('showTotalPrice')[0].innerText = totalPrice0;
+            document.getElementsByName('showTotalPrice')[1].innerText = totalPrice0;
         }
     </script>
 </main>
