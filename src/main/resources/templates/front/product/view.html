@@ -198,10 +198,16 @@
         <div id="review" class='desc_content'>
             <button onclick="openReviewPopup()">리뷰 작성</button>
             <ul>
-                <li>리뷰 보여쥬기1</li>
-                <li>리뷰 보여쥬기2</li>
-                <li>리뷰 보여쥬기3</li>
-                <li>리뷰 보여쥬기4</li>
+                <li th:each="review : ${reviewList}">
+                    <div>
+                        <span th:text="${review.score} + '점'"></span>
+                        <div>
+                            <span th:if="${review.member != null}" th:text="${review.member.userName}"></span>
+                            <span th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd')}"></span>
+                        </div>
+                    </div>
+                    <p th:text="${review.content}"></p>
+                </li>
             </ul>
         </div>
         <!-- 후기 영역 E -->
@@ -248,13 +254,15 @@
         document.addEventListener("DOMContentLoaded", function () {
 
         });
+
         function openReviewPopup() {
-            var reviewPopup = window.open("/orderDetail/reviewDetail", "_blank", "width=600,height=400");
+            var reviewPopup = window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
         }
 
         /* 대여 기간(달력 둘 다 선택) 확정시 기간 계산하여 출력
         // 데이터에 저장 필요
         */
+
         function calculateDate() {
             // 시작일 제한
             if (new Date(document.getElementsByName('sdate')[0].value) < new Date()) {
