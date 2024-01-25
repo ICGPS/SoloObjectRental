@@ -154,8 +154,10 @@
                 <a href="#qna"th:text="#{배송_교환반품}"></a>
             </li>
         </ul>
-        <div id="review" class='desc_content'>
-            <button onclick="openReviewPopup()">리뷰 작성</button>
+        <div id="review" class='desc_content' th:object="${member}">
+            <th:block th:if="${member.isLogin()}">
+                <button onclick="openReviewPopup()">리뷰 작성</button>
+            </th:block>
             <ul>
                 <li th:each="review : ${reviewList}">
                     <div>
@@ -255,7 +257,7 @@
         });
 
         function openReviewPopup() {
-            var reviewPopup = window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
+            window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
         }
 
         function calculateDate() {

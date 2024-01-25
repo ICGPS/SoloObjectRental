@@ -1,6 +1,7 @@
 package org.choongang.cs.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.board.service.BoardInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.cs.entities.FeedbackPost;
@@ -31,6 +32,7 @@ public class CsController implements ExceptionProcessor {
     private final Utils utils;
     private final InquiryService inquiryService;
     private final FeedbackPostRepository feedbackPostRepository;
+    private final BoardInfoService boardInfoService;
 
     // 고객지원 홈
     @GetMapping("/main")
@@ -44,6 +46,7 @@ public class CsController implements ExceptionProcessor {
     @GetMapping("/inquiry")
     public String inquiry(Model model) {
         commonProcess("inquiry", model);
+        //model.addAttribute("board", boardInfoService);
 
         return utils.tpl("cs/inquiry");
     }
