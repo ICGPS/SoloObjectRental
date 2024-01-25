@@ -161,7 +161,7 @@
                     <div>
                         <span th:text="${review.score} + '점'"></span>
                         <div>
-                            <span th:text="${review.member.userName}"></span>
+                            <span th:if="${review.member != null}" th:text="${review.member.userName}"></span>
                             <span th:text="${#temporals.format(review.createdAt, 'yyyy-MM-dd')}"></span>
                         </div>
                     </div>
