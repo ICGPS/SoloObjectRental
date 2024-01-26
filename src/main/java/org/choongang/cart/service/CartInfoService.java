@@ -80,11 +80,12 @@ public class CartInfoService {
     Product product = item.getProduct();
     int salePrice = product.getSalePrice();
     int ea = item.getEa();
+    int period = item.getPeriod();
 
     DiscountType type = product.getDiscountType();
     int discount = product.getDiscount();
 
-    int totalPrice = salePrice * ea;
+    int totalPrice = salePrice * ea * period;
     int totalDiscount = 0;
     if (type == DiscountType.PERCENT) { // % 할인
       totalDiscount = (int)Math.round(totalPrice * discount / 100.0);
@@ -130,12 +131,13 @@ public class CartInfoService {
       Product product = item.getProduct();
       int salePrice = product.getSalePrice(); // 상품 판매가
       int ea = item.getEa(); // 구매 수량
-      totalPrice += salePrice * ea; // 할인
+      int period = item.getPeriod();
+      totalPrice += salePrice * ea * period; // 합계
 
       DiscountType type = product.getDiscountType();
       int discount = product.getDiscount();
       if (type == DiscountType.PERCENT) { // % 할인
-        totalDiscount += Math.round(salePrice * ea * discount / 100.0);
+        totalDiscount += Math.round(salePrice * ea * period * discount / 100.0);
       } else { // 고정금액 할인
         totalDiscount += discount;
       }

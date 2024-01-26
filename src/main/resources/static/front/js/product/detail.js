@@ -7,19 +7,45 @@ const productDetails = {
      * 구매 수량 변경
      *
      */
+     /* 하나 사용할 때
+     changeEa(e) {
+         const el = e.currentTarget;
+         const inputEl = el.parentElement.querySelector("input[type='number']");
+         let ea = parseInt(inputEl.value);
+         if (el.classList.contains("down")) { // 수량 감소
+            ea--;
+         } else { // 수량 증가
+             ea++;
+         }
+         ea = ea < 1 ? 1 : ea;
+
+         inputEl.value = ea;
+     }
+     */
     changeEa(e) {
         const el = e.currentTarget;
-        const inputEl = el.parentElement.querySelector("input[type='number']");
-        let ea = parseInt(inputEl.value);
+
+        const inputEa0 = document.querySelectorAll("input[type='number']")[0];
+        const inputEa1 = document.querySelectorAll("input[type='number']")[1];
+
+        let ea0 = parseInt(inputEa0.value);
+        let ea1 = parseInt(inputEa1.value);
+
         if (el.classList.contains("down")) { // 수량 감소
-            ea--;
+            ea0--;
+            ea1--;
         } else { // 수량 증가
-            ea++;
+            ea0++;
+            ea1++;
         }
 
-        ea = ea < 1 ? 1 : ea;
+        ea0 = ea0 < 1 ? 1 : ea0;
+        ea1 = ea1 < 1 ? 1 : ea1;
 
-        inputEl.value = ea;
+        inputEa0.value = ea0;
+        inputEa1.value = ea1;
+
+        calculateTotal();
     }
 };
 
@@ -57,6 +83,7 @@ window.addEventListener("DOMContentLoaded", function() {
                 otherEl.value = ea;
                 }
             }
+            calculateTotal();
         });
     }
     /* 상품 수량 증가, 감소 처리 E */
@@ -99,5 +126,4 @@ window.addEventListener("DOMContentLoaded", function() {
         }
     });
     /* 상단 벗어날 시 하단 바 생성 E */
-
 });
