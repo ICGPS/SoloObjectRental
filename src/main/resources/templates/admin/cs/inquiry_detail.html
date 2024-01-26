@@ -2,16 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
-<section layout:fragment="content" th:object="${recordInquiry}">
+<section layout:fragment="content" th:object="${recordInquiry}" class="inquiry_detail">
     <h1>1:1문의 답변하기</h1>
     <div>
-        <h3 th:text="*{title}"></h3>
-        <p th:text="*{createdAt}"></p>
+        <h2 th:text="*{title}"></h2>
+        <div>
+            <!--<p th:text="*{author}"></p>-->
+            <p th:text="*{createdAt}"></p>
+        </div>
+
     </div>
     <p th:text="*{content}"></p>
 
     <form>
         <textarea></textarea>
+        <button type="submit">답변하기</button>
     </form>
 </section>
 </html>

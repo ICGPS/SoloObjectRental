@@ -127,3 +127,12 @@ select { border: 1px solid #d5d5d5; height: 35px; }
      border: 1px solid #d5d5d5;
 }
 
+.inquiry_detail div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inquiry_detail p {
+    font-size: 16px;
+}
