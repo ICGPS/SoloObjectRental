@@ -49,11 +49,11 @@ public class BoardSearchController implements ExceptionProcessor {
     Board board = new Board();
     board.setSkin("default");
 
-////    ListData<BoardData> data = boardInfoService.getList(search);
-//    model.addAttribute("items", data.getItems());
-//    model.addAttribute("pagination", data.getPagination());
-//    model.addAttribute("board", board);
-//    model.addAttribute("mode", "search");
+    ListData<BoardData> data = boardInfoService.getList(search);
+    model.addAttribute("items", data.getItems());
+    model.addAttribute("pagination", data.getPagination());
+    model.addAttribute("board", board);
+    model.addAttribute("mode", "search");
 
     return utils.tpl("board/search");
   }
