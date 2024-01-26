@@ -1,13 +1,10 @@
 package org.choongang.mypage.service;
 
 import lombok.RequiredArgsConstructor;
-import org.choongang.member.Authority;
-import org.choongang.member.entities.Authorities;
-import org.choongang.member.entities.Member;
 import org.choongang.member.repositories.AuthoritiesRepository;
 import org.choongang.member.repositories.MemberRepository;
-import org.choongang.mypage.controller.MemberInfoValidator;
-import org.choongang.mypage.controller.requestUpdateMemberInfo;
+import org.choongang.mypage.controllers.MemberInfoValidator;
+import org.choongang.mypage.controllers.RequestUpdateMemberInfo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +21,7 @@ public class upDateService {
     private final PasswordEncoder upDateCoder;
 
 
-    public void process(requestUpdateMemberInfo form, Errors errors) {
+    public void process(RequestUpdateMemberInfo form, Errors errors) {
         memberInfoValidator.validate(form, errors);
         if (errors.hasErrors()) {
             return;
