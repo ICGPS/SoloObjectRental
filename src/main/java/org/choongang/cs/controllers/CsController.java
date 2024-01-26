@@ -46,7 +46,6 @@ public class CsController implements ExceptionProcessor {
     @GetMapping("/inquiry")
     public String inquiry(Model model) {
         commonProcess("inquiry", model);
-        //model.addAttribute("board", boardInfoService);
 
         return utils.tpl("cs/inquiry");
     }
