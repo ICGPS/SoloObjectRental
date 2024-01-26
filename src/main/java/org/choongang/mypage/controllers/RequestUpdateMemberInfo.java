@@ -1,0 +1,24 @@
+package org.choongang.mypage.controllers;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+
+@Data
+public class RequestUpdateMemberInfo {
+
+    @NotBlank
+    @Size(min=8)
+    private String password;
+
+    @NotBlank
+    @Size(min=8)
+    private String newPassword;
+
+    @NotBlank
+    @Size(min=8)
+    private String newConfirmPassword;
+
+
+}

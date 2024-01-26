@@ -35,6 +35,7 @@ public class CartInfo extends Base {
   private Member member;
 
   private int ea = 1; // 주문수량
+  private int period; // 대여 기간
 
   @Transient
   private int totalPrice; // 상품 합계

@@ -18,10 +18,13 @@ import org.choongang.member.entities.Authorities;
 import org.choongang.member.entities.Member;
 import org.choongang.member.entities.QMember;
 import org.choongang.member.repositories.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +37,8 @@ public class MemberInfoService implements UserDetailsService {
     private final FileInfoService fileInfoService;
     private final HttpServletRequest request;
     private final EntityManager em;
+    //private final PasswordEncoder passwordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -63,6 +68,7 @@ public class MemberInfoService implements UserDetailsService {
                 .password(member.getPassword())
                 .member(member)
                 .authorities(authorities)
+//                .enable(member.inEnable())
                 .build();
     }
 
@@ -101,4 +107,15 @@ public class MemberInfoService implements UserDetailsService {
 
         return new ListData<>(items, pagination);
     }
+
+ /*   public void updateMemberInfo(Long memberId, MemberInfoHandler updateRequest) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
+
+        // Spring Security를 사용하여 비밀번호 일치 여부 확인
+        if (!passwordEncoder.matches(updateRequest.getCurrentPassword(), member.getPassword())) {
+            throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
+        }
+
+    }*/
 }

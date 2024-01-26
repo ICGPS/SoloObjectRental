@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
 import org.choongang.file.entities.FileInfo;
-import org.choongang.member.controllers.RequestJoin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,4 +62,6 @@ public class Member extends Base {
 
     @Transient
     private FileInfo profileImage;
+
+    private boolean enable = true;
 }

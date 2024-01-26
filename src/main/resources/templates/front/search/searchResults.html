@@ -3,6 +3,25 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th, td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+
     <title>검색 결과</title>
 
     <h2>검색 결과</h2>
@@ -18,14 +37,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="result : ${searchResults}">
-            <td th:text="${result.boardName}"></td>
-            <td th:text="${result.title}"></td>
-            <td th:text="${result.content}"></td>
-            <td th:text="${#dates.format(result.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        <tr th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}">
+            <td></td>
+            <td th:text="*{subject}"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr th:unless="${items != null && !items.isEmpty()}">
+            <td colspan="4" th:text="#{조회된_게시글이_없습니다.}"></td>
         </tr>
         </tbody>
     </table>
-
+    <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </main>
 </html>
