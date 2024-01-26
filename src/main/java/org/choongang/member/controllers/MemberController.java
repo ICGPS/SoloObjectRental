@@ -101,6 +101,12 @@ public class MemberController implements ExceptionProcessor {
 
     @GetMapping("/member/find_id_done")
 
+    public String toFindIdDone() {
+
+        return "member/find_id_done";
+    }
+
+    @PostMapping("/member/find_id_done")
     public String findIdDone() {
 
         return "member/find_id_done";
