@@ -52,10 +52,12 @@ public class CartSaveService {
     for (int num : nums) {
 
       int ea = Integer.parseInt(utils.getParam("ea_" + num));
+      int period = Integer.parseInt(utils.getParam("period"));
+
 
       boolean exist = false;
       for (CartInfo item : items) {
-        if (item.getProduct().getSeq().equals(product.getSeq()) ) {
+        if (item.getProduct() != null && item.getProduct().getSeq().equals(product.getSeq()) ) {
           item.setEa(item.getEa() + ea);
           exist = true;
           break;
@@ -71,6 +73,7 @@ public class CartSaveService {
           .product(product)
           .uid(uid)
           .ea(ea)
+          .period(period)
           .member(member)
           .build();
       items.add(item);
