@@ -1,6 +1,7 @@
 package org.choongang.cs.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.board.entities.BoardData;
 import org.choongang.board.service.BoardInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
@@ -46,6 +47,9 @@ public class CsController implements ExceptionProcessor {
     @GetMapping("/inquiry")
     public String inquiry(Model model) {
         commonProcess("inquiry", model);
+        //System.out.println(boardInfoService.getLatest("qna").get(1).getSubject());
+        List<BoardData> items = boardInfoService.getLatest("qna", 5);
+        model.addAttribute("items", items);
 
         return utils.tpl("cs/inquiry");
     }

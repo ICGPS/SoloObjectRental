@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content" th:object="${recordInquiry}">
+    <h1>1:1문의 답변하기</h1>
+    <div>
+        <h3 th:text="*{title}"></h3>
+        <p th:text="*{createdAt}"></p>
+    </div>
+    <p th:text="*{content}"></p>
+
+    <form>
+        <textarea></textarea>
+    </form>
+</section>
+</html>
