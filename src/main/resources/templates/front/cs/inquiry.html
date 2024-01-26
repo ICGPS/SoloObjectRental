@@ -9,471 +9,57 @@
     <p>문의 주신 내용에 신속하고 친철하게 답변 드리겠습니다.</p>
     <div class="often_question">
       <p>문의 하시기 전에 자주 찾는 질문을 준비했어요 ~ !</p>
-      <div class="accordion accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-              자주 찾는 질문 #1
-            </button>
-          </h2>
-          <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              여긴 Seoul 특별시
-              수많은 기적을 일으켰지
-              가려진 별들 사이 떠오르는 특별
-
-              별난 것투성이 변함없지
-              번화하는 거리
-
-              거리거리마다 걸리적거리는 거
-              Clean it up clean it up, get back
-              겉만 번지르르 텅텅 빈 깡통
-              Kick it kick it kick it
-
-              Swerving, I'm speeding on Serpent Road
-              Luxurious like I'm an S-Class
-              Best of the best on First Class
-
-              I'm up above the world so high
-              I'll be there shining day and night
-              They wonder how my spotlight is so bright
-
-              Counting stars
-              특별의 별의 별의 별의 별의 별의 별의 별난 놈
-              That's me
-              별의 별의 별의 별의 별의 별의별 일이 my work
-              (Bling Bling)
-
-              Everyday
-              빛깔 뻔쩍 빛깔 뻔쩍
-              빛깔 뻔쩍해 class는 특
-              빛깔 뻔쩍 빛깔 뻔쩍
-              빛이 번져 더욱 빛나는 star
-
-              힙합 스텝 큼지막이 밟지 특출난 게 특기
-              내 집처럼 드나들지 특집
-              작업실은 안 부러워 특실
-              득실득실거려 독보적인 특징
-
-              두리번두리번 어중떠중 띄엄띄엄 보는 애들이
-              뻔쩍뻔쩍 빛나는 것들만 보면 달려
-              버릇이 no no
-              빛나는 걸 쫓기보단 빛나는 쪽이
-              되는 게 훨씬 폼 잡기 편해
-              Shine like a diamond k?
-
-              Swerving, I'm speeding on Serpent Road
-              Luxurious like I'm an S-Class
-              Best of the best on First Class
-
-              I'm up above the world so high
-              I'll be there shining day and night
-              They wonder how my spotlight is so bright
-
-              Counting stars
-              특별의 별의 별의 별의 별의 별의 별의 별난 놈
-              That's me
-              별의 별의 별의 별의 별의 별의별 일이 my work
-              (Bling Bling)
-
-              Everyday
-              빛깔 뻔쩍 빛깔 뻔쩍
-              빛깔 뻔쩍해 class는 특
-              빛깔 뻔쩍 빛깔 뻔쩍
-              빛이 번져 더욱 빛나는 star
-
-              I feel like the brightest star 빛이 쏟아지는 밤
-              하늘을 바라보면
-              내 모습 수놓아져 있어 yeah yeah
-              떨어지지 않고
-              한 자리에서 거뜬하게 STAY해 yeah
-              빛날 광에 사람 인 그게 바로 우리 소개말
-              We're special yeah
-
-              Stray Kids 내 뒤의 팀은 특수부대
-              Stage 위 그 자체로 이건 특별 무대
-              관중들은 따로 필요 없지 축제
-              절제 따위 필요 없이 고삐 풀 때
-
-              Limited Edition 특이한 건 특별해져
-              불투명함은 분명하게 바꿔 거듭 되새겨
-              눈에 띄는 텐션 몰입하는 객석
-              우리 빛이 하나가 돼 여기 모든 곳을 밝혀
-
-              Counting stars 특 (Counting stars 특)
-              Feeling extra (Bling Bling)
-
-              Everyday
-              빛깔 뻔쩍 빛깔 뻔쩍
-              빛깔 뻔쩍해 class는 특
-              빛깔 뻔쩍 빛깔 뻔쩍
-              빛이 번져 더욱 빛나는 star
+       <!-- <th:block th:if="${board.getLatest('qna').isEmpty() == false}">-->
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body"></div>
+              </div>
             </div>
+            <!--          <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" th:text="${board.get('2').subject}">
+                          </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body" th:text="${board.get('2').content}"></div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" th:text="${board.get('3').subject}">
+                          </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body" th:text="${board.get('3').content}"></div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour" th:text="${board.get('4').subject}">
+                          </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body" th:text="${board.get('4').content}"></div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive" th:text="${board.get('5').subject}">
+                          </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body" th:text="${board.get('5').content}"></div>
+                        </div>
+                      </div>-->
           </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-              자주 찾는 질문 #2
-            </button>
-          </h2>
-          <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              사건 발생 잊지 못할 사건
-              치명적인 매력에 홀라당 빠져
-              자꾸 나를 자극하는 넌
-              출처가 없는 문제야 풀어야 할 숙제야
-
-              Can I be your boyfriend?
-              너를 대하는 태도 거짓 하나 없어 no cap
-              너에게 하고 싶은 말로 가득 찼어 my case
-              완벽함 앞에 어떤 말로도 부족해
-
-              You got me losing patience
-              걷잡을 수 없는 emotion
-              떠올라 네 모습 I never feel alright
-              수많은 감정이 충돌해 왜 이래
-
-              Rolling in the deep inside my head
-              You got me bad
-              무장해제
-              신속하게 네게로 moving, on my way
-
-              Why do I keep getting attracted
-              자석 같이 끌려가
-              I cannot explain this reaction
-              이것밖에 143
-
-              Why do I keep getting attracted
-              네 모습만 떠올라
-              I cannot explain this emotion
-              143
-              I LOVE YOU
-
-              A B C D E F G I
-              Wanna send my code to you
-              8 letters is all it takes
-              And I'm gonna let you know oh
-
-              너 말곤 높이 쌓아뒀지 barricade (barricade)
-              원하는 대로 불러도 돼 code name (call me baby)
-              욕심이래도 되고 싶어 soulmate (whoo)
-              이 맘은 점점 더 upgrade 'cause
-
-              You got me losing patience
-              걷잡을 수 없는 emotion
-              떠올라 네 모습 I never feel alright
-              수많은 감정이 충돌해 왜 이래
-
-              Rolling in the deep inside my head
-              You got me bad
-              무장해제
-              신속하게 네게로 moving, on my way
-
-              Why do I keep getting attracted
-              자석 같이 끌려가
-              I cannot explain this reaction
-              이것밖에 143
-
-              Why do I keep getting attracted
-              네 모습만 떠올라
-              I cannot explain this emotion
-              143
-              I LOVE YOU
-
-              Heartbeat 나의 모든 상태 지금 위기 (위기)
-              너의 모습 ain't no “false”
-              나의 속맘 다시 repeat (repeat)
-
-              Walking next to you but I'm falling
-              더 깊게 빠져들어 끌리지
-              You're pulling me deeper and deeper
-              I try to get out but I can't stop
-
-              Can I be the one?
-              Yeah I'll be the one
-              무모하게 도전해 오그라드는 표현
-              머릿속이 띵하고 무감정은 손절
-              Moving, I'm on my way
-
-              Why do I keep getting attracted
-              네 모습만 떠올라
-              I cannot explain this emotion
-              143
-              I LOVE YOU
-
-              Why do I keep getting attracted
-              자석 같이 끌려가
-              I cannot explain this reaction
-              (이것밖에)
-
-              I'm gonna let you know (know)
-              That I'm just gonna go (go)
-              And hold you so I'm never letting go
-
-              I'm gonna let you know (know)
-              That I'm just gonna go (just go)
-              Yeah 난 너에게로 지금 출발합니다 바로 like I'm
-
-              Never letting go oh
-              I cannot explain this emotion
-              143
-              I LOVE YOU
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-              자주 찾는 질문 #3
-            </button>
-          </h2>
-          <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              Let's go
-              정상인 척 다들 힘 좀 빼
-              짓고 있는 미소들은 쎄해
-              Lock이 풀리면 다 똑같지
-              눈은 날 못 속여 Ho
-              본체는 풀렸네
-              정신을 간신히 잡지
-              눈 한번 깜빡이고 Back
-              다시 세상이 정한 정상인 코스프레 준비 Ppow
-              Mash up mind blown 정신은 Back up
-              Prototype 내 속은 언제나 Freaky monster
-              유행 같은 친절함은 철이 지나 Rotten
-              내 통수에 다 시원하게 욕해도 다 먹금
-              Poppin'
-              순진하게만 보다가 크게 다침
-              호의가 계속되면 권리인 줄 아네 Toxic
-              이러니 돌지 Warning
-              MANIAC
-              나사 빠진 것처럼 미쳐 MANIAC
-              핑핑 돌아버리겠지
-              MANIAC Frankenstein처럼 걸어
-              MANIAC MANIAC Haha
-              MANIAC (Oh)
-              나사 빠진 것처럼 웃어 MANIAC
-              (You can't stop the smoke)
-              핑핑 돌아버리겠지 (Thick as fog)
-              MANIAC 비정상투성이 집단 (We're MANIACS)
-              MANIAC MANIAC
-              다 터진 인형 실밥처럼
-              결국 본색이 드러나지
-              편하지 않은 이 Life
-              It ain't live It's holding on Yeah
-              정상인 척 다들 척 좀 빼
-              짓고 있는 미소 No fresh 해
-              Locket 풀면 다들 똑같지
-              눈은 날 못 속여 Ho
-              내가 걷는 이 거리는 다 지뢰밭
-              다 언제 터질지 모르는 Dormant volcano
-              얌전했던 바람도 언제 바뀔지 몰라
-              다들 숨긴 채 살아가 Like a sealed tornado
-              Poppin'
-              순진하게만 보다가 크게 다침
-              호의가 계속되면 권리인 줄 아네 Toxic
-              이러니 돌지 Warning
-              MANIAC
-              나사 빠진 것처럼 미쳐 MANIAC
-              핑핑 돌아버리겠지
-              MANIAC Frankenstein처럼 걸어
-              MANIAC MANIAC Haha
-              MANIAC (Oh)
-              나사 빠진 것처럼 웃어 MANIAC
-              (You can't stop the smoke)
-              핑핑 돌아버리겠지 (Thick as fog)
-              MANIAC 비정상투성이 집단 (We're MANIACS)
-              MANIAC MANIAC
-              가득해 두 눈은 Lunatic
-              모든 감각이 날 서 있지
-              예쁘게 포장한 대로 매번 가둬 놓으니
-              흘러가다 보면 결국 드러나겠지
-              숨겨진 내면의 그 모습이 Yeah
-              MANIAC
-              MANIAC (MANIAC)
-              MANIAC
-              MANIAC MANIAC
-              You cannot stop with this feeling
-              MANIAC (Oh)
-              나사 빠진 것처럼 웃어 MANIAC
-              (You can't stop the smoke)
-              핑핑 돌아버리겠지 (Thick as fog)
-              MANIAC 비정상투성이 집단 (We're MANIACS)
-              MANIAC MANIAC
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-              자주 찾는 질문 #4
-            </button>
-          </h2>
-          <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              Oh 소리를 지르는 내가 Oh
-              창빈이란다 내 자리는 내가 취한다
-              태도는 터프하게 트랙 위를 폭주하는 기관차 Ey
-              몰아치는 허리케인에 뒤집어진 우산
-              잔소리꾼의 최후 하하 꼴이 좋구나
-              나무꾼은 어서 돌아가시오 여긴 나무랄 데가 없네
-              납작해질 리 없는 콧대 목 핏대와 함께 세운 줏대
-              훨씬 더 웅장하게 내는 경적 소리 빵빵 빵빵
-              Here they come
-              악당 무리에 뜨거운 피가 돌아 온몸에 번져
-              소문난 꾼들의 모임에 쏟아지는 눈빛은
-              Freezing cold but I know we'll burn forever
-              해보라는 태도 난 여전히
-              할 말을 내뱉지 퉤 퉤 퉤
-              소리꾼
-              소리꾼 (퉤 퉤 퉤)
-              소리꾼
-              Man I'm not sorry I'm dirty
-              우르르쾅쾅쾅쾅 천둥 (빠라바밤)
-              구름 타고 두둥 (빠라바밤)
-              바람과 함께 등장한 꾼
-              BANG BANG BANG BOOM
-              Man I'm not sorry I'm dirty
-              Keep on talking we don't play by the rules
-              그래 다들 헛소리소리소리
-              이거저거 귀찮아서 도리도리
-              말이 너무 많아 자꾸 나서지 좀 말아
-              Why you mad? Why you sad? Why you 틱틱틱
-              Out of 안중
-              얼레리 꼴레리 멋있는 척들이 앙증
-              발끝조차도 따라오지 못해 여긴 내 판들
-              들어봐 (What's up?)
-              질투가 (나나 봐)
-              전부 한쪽으로 치워놓고 버려
-              Here they come
-              악당 무리에 뜨거운 피가 돌아 온몸에 번져
-              소문난 꾼들의 모임에 쏟아지는 눈빛은
-              Freezing cold but I know we'll burn forever
-              해보라는 태도 난 여전히
-              할 말을 내뱉지 퉤 퉤 퉤
-              Hahaha
-              소리꾼
-              소리꾼 (퉤 퉤 퉤)
-              소리꾼
-              Man I'm not sorry I'm dirty
-              꾼들이 왔어요 (Huh)
-              꾼들이 왔어요 (비켜라)
-              날이면 날마다 오는 날이 아닌 오늘
-              소리꾼들이 왔어요
-              원래 삐딱해 소리는 일당백
-              맘에 안 들면 들 때까지 말대답해
-              Final warning 당장 Back up
-              뱉어
-              센 척
-              Back off
-              할 말을 내뱉지 퉤 퉤 퉤
-              소리꾼
-              소리꾼
-              Man I'm not sorry I'm dirty
-              우르르쾅쾅쾅쾅 천둥 (빠라바밤)
-              구름 타고 두둥 (빠라바밤)
-              바람과 함께 등장한 꾼
-              BANG BANG BANG BOOM
-              Man I'm not sorry I'm dirty
-              Keep on talking we don't play by the rules
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-              자주 찾는 질문 #5
-            </button>
-          </h2>
-          <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              Welcome to 극락 (락) 날벼락 (락)
-              도시의 락 (락) 즐기면 그만 (락)
-              없지 고난 (락) 역경의 밤 (락)
-              지새우면 끝 고생 끝에 낙 (락)
-
-              잡생각 고민 오키도키
-              안 해 뻘짓 도피도피
-              여긴 벌집 벌투성이
-              피할 수 없음 쏘이고 보자
-
-              고막 터뜨려 bang bang 흠뻑 젖은 머리 헤드뱅잉
-              졸라맸던 허리띠 더 꽉 매고 움직여 쉴 새 없게
-              주제넘게란 말 집어치운 채
-              즐김은 위아래 없는 축제
-              행복 지수 측정 불가 Good day
-              Lock lock unlock
-
-              Just feel the rhythm of the world
-              'Cause we will make it rock
-              몸부림치며 roll 냅다 던져버려
-              맞닥뜨려 세상의 소음
-
-              Lalalala la lalalala
-              Just feel the rock We let it rock
-              (Lalalala la lalalala)
-              Just feel the luck We let it rock
-              (Lalalala la lalalala)
-              노랫가락 락락락
-              미치도록 Lalalala
-
-              Lalalala la lalalala
-
-              Inhale 빨리 산소 호흡해 바쁘게 움직여야 해 몸
-              Guitar, bass, drums 또 새까맣게 칠하지 nails도
-              We gon' rock rock,
-              움직임은 don't stop stop (go for rock)
-
-              Yeah we tick tock boom chiki ta
-              여기 mic 위에 shout 다 즐겨라 걍 음악이다
-              걸어 lock 근심에 이 노래는 삼
-              머리 풀어 장르부터 즐거울 락 (oh yeah)
-
-              이것저것 빈 무대에 섞어
-              저기 반응 약해 빨리 변신해 stunner
-              Bet you've never seen a stage like this 번쩍
-              떠 버리지 눈이
-              남은 기대들마저 털어
-
-              Just feel the rhythm of the world
-              'Cause we will make it rock
-              몸부림치며 roll 냅다 던져버려
-              맞닥뜨려 세상의 소음
-
-              가리지 않아 so sick
-              어디든 흘러나오는 대로 Move and show it
-              낮이고 밤이고 낙으로 살아가지 oh 쉿
-              피할 곳 없이 부딪혀
-              쾅쾅 쳐 대자고
-              정적과 부정적 에너지 타파
-
-              Lalalala la lalalala
-              Lalalala la lalalala
-
-              Just feel the rock We let it rock
-              (Lalalala la lalalala)
-              Just feel the luck We let it rock
-              (Lalalala la lalalala)
-              노랫가락 락락락
-              미치도록 Lalalala
-
-              Rock and roll
-              We dancing till we fall
-              No stopping here we go
-              24/7 keep it going on
-
-              Rock and roll
-              We dancing till we fall
-              No stopping here we go
-              No stopping here we go
-              Here we go
-            </div>
-          </div>
-        </div>
-      </div>
+<!--        </th:block>-->
     </div>
-    <a class="inquiry_btn" th:href="@{/cs/inquiryAdd}" th:text="#{1:1 문의하기}"></a>
+    <a class="inquiry_btn" th:href="@{/cs/inquiryAdd}">1:1 문의하기</a>
   </div>
 </main>
 </html>
