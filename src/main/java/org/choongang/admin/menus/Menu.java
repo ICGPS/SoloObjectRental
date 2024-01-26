@@ -22,6 +22,10 @@ public class Menu {
                 new MenuDetail("category", "상품분류", "/admin/product/category"),
                 new MenuDetail("display", "상품진열관리", "/admin/product/display")
         ));
+
+        menus.put("order", Arrays.asList(
+                new MenuDetail("list", "주문목록", "/admin/order")
+        ));
         
         // 주문관리
         menus.put("order", Arrays.asList(
