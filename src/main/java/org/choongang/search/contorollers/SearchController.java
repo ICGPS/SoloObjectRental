@@ -1,5 +1,11 @@
 package org.choongang.search.contorollers;
 
+import lombok.RequiredArgsConstructor;
+import org.choongang.board.controllers.BoardDataSearch;
+import org.choongang.board.entities.BoardData;
+import org.choongang.board.service.BoardInfoService;
+import org.choongang.commons.ListData;
+import org.choongang.commons.Utils;
 import org.choongang.search.entities.Search;
 import org.choongang.search.repositories.SearchRepository;
 import org.choongang.search.service.SearchService;
@@ -16,17 +22,25 @@ import java.util.List;
 
 @Controller("SearchController")
 @RequestMapping("/search")
+@RequiredArgsConstructor
 public class SearchController {
 
-    @Autowired
-    private SearchService searchService;
+    private final BoardInfoService boardInfoService;
+    private final Utils utils;
 
     @GetMapping("/searchResults")
     public String searchResults(Model model, @RequestParam(value = "skey", required = false) String keyword) {
-        List<Search> searchResults = searchService.searchResults(keyword);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("searchResults", searchResults);
-        return "front/search/searchResults";
+
+        BoardDataSearch search = new BoardDataSearch();
+        search.setSopt("ALL");
+        search.setSkey(keyword);
+        ListData<BoardData> data = boardInfoService.getList(search);
+
+
+        model.addAttribute("items", data.getItems());
+        model.addAttribute("pagination", data.getPagination());
+
+        return utils.tpl("search/searchResults");
     }
 }
 

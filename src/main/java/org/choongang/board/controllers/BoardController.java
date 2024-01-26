@@ -192,7 +192,7 @@ public class BoardController implements ExceptionProcessor {
     // 게시글 저장 처리
     BoardData boardData = boardSaveService.save(form);
 
-    String redirectURL = "redirect:board/";
+    String redirectURL = "redirect:";
     redirectURL += board.getLocationAfterWriting().equals("view") ? "view/" + boardData.getSeq() : "list/" + form.getBid();
 
     return redirectURL;
