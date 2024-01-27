@@ -1,4 +1,4 @@
-package org.choongang.mypage.controller;
+package org.choongang.mypage.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.validators.PasswordValidator;
@@ -15,7 +15,7 @@ public class MemberInfoValidator implements Validator, PasswordValidator {
     private final MemberRepository memberUpdateRepository;
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.isAssignableFrom(requestUpdateMemberInfo.class);
+        return clazz.isAssignableFrom(RequestUpdateMemberInfo.class);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class MemberInfoValidator implements Validator, PasswordValidator {
          * 2. 비밀번호 복잡성 체크 - 대소문자 1개 각각 포함, 숫자 1개 이상 포함, 특수문자도 1개 이상 포함
          * 3. 비밀번호, 비밀번호 확인 일치 여부 체크
          */
-        requestUpdateMemberInfo form = (requestUpdateMemberInfo)target;
+        RequestUpdateMemberInfo form = (RequestUpdateMemberInfo)target;
         String password = form.getPassword();
         String newPassword = form.getNewPassword();
         String newConfirmPassword = form.getNewConfirmPassword();

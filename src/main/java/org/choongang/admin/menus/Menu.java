@@ -22,10 +22,21 @@ public class Menu {
                 new MenuDetail("category", "상품분류", "/admin/product/category"),
                 new MenuDetail("display", "상품진열관리", "/admin/product/display")
         ));
+
+        menus.put("order", Arrays.asList(
+                new MenuDetail("list", "주문목록", "/admin/order")
+        ));
         
         // 주문관리
         menus.put("order", Arrays.asList(
             new MenuDetail("list", "주문목록", "/admin/order")
+        ));
+
+        // CS
+        menus.put("cs", Arrays.asList(
+                new MenuDetail("inquiry", "1:1문의 목록", "/admin/cs"),
+                new MenuDetail("product", "상품문의 목록", "/admin/cs/product"),
+                new MenuDetail("feedback", "칭찬/개선 목록", "/admin/cs/feedback")
         ));
 
         menus.put("board", Arrays.asList(
@@ -46,4 +57,3 @@ public class Menu {
         return menus.get(code);
     }
 }
-//
