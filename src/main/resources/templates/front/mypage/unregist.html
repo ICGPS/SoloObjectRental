@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+
+  <div class="col">
+
+    <form action="unregist" method="post" th:object="${passwordDto}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <div th:replace="~{misc/form_errors :: formErrorsFragment}"></div>
+      <input type="password" name="password">
+      <input type="password" name="passwordCheck">
+      <input type="submit" value="회원 탈퇴">
+      <input type="button" value="취소">
+    </form>
+  </div>
+
+</main>
+
+</html>
