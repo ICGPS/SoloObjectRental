@@ -70,6 +70,10 @@ public class InquiryService {
                 inquiry.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         );
     }
+
+    public List<Inquiry> getAllList() {
+        return inquiryRepository.findAll();
+    }
 }
 
 /**
