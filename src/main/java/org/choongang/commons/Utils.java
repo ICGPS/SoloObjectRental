@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.config.controllers.BasicConfig;
+import org.choongang.banner.entities.Banner;
+import org.choongang.banner.service.BannerInfoService;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,8 @@ public class Utils {
     private final HttpServletRequest request;
     private final HttpSession session;
     private final FileInfoService fileInfoService;
+    private final BannerInfoService bannerInfoService;
+
 
     private static final ResourceBundle commonsBundle;
     private static final ResourceBundle validationsBundle;
@@ -237,6 +241,16 @@ public class Utils {
         String sessId = session.getId();
 
         return Objects.hash(ip, ua, sessId);
+    }
+
+    /**
+     * 배너 목록
+     *
+     * @param groupCode : 배너 그룹 코드
+     * @return
+     */
+    public List<Banner> getBanners(String groupCode) {
+        return bannerInfoService.getList(groupCode);
     }
 
     public String toJson(Object item) {
