@@ -11,10 +11,7 @@ import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -70,6 +67,7 @@ public class MemberController implements ExceptionProcessor {
 
         return "admin/member/authority";
     }
+
 
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "list");

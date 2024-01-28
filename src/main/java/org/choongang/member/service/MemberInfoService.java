@@ -108,6 +108,7 @@ public class MemberInfoService implements UserDetailsService {
         return new ListData<>(items, pagination);
     }
 
+
  /*   public void updateMemberInfo(Long memberId, MemberInfoHandler updateRequest) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(MemberNotFoundException::new);

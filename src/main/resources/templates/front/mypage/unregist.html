@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
 
-  <div class="col">
+  <th:block sec:authorize="isAuthenticated()">
+    <button type="button" id="deleteBtn">회원탈퇴</button>
+  </th:block>
 
-    <form action="unregist" method="post" th:object="${passwordDto}">
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-      <div th:replace="~{misc/form_errors :: formErrorsFragment}"></div>
-      <input type="password" name="password">
-      <input type="password" name="passwordCheck">
-      <input type="submit" value="회원 탈퇴">
-      <input type="button" value="취소">
-    </form>
-  </div>
+
+  <script>
+    const deleteBtn = document.querySelector('#deleteBtn') ;
+    deleteBtn.addEventListener('click', function() {
+      var yes = confirm('탈퇴하시겠습니까?') ;
+      if (yes) { location.href='/member/delete' ; }
+      else { }
+    });
+  </script>
 
 </main>
 

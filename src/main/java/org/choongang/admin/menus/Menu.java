@@ -44,6 +44,12 @@ public class Menu {
             new MenuDetail("add_branch", "지점 등록", "/admin/reservation/add_branch"),
                 new MenuDetail("holiday", "휴무일 관리", "/admin/reservation/holiday")
         ));
+
+        menus.put("banner", Arrays.asList(
+            new MenuDetail("group", "배너관리", "/admin/banner"),
+            new MenuDetail("add", "배너등록", "/admin/banner/group")
+        ));
+
     }
 
     public static List<MenuDetail> getMenus(String code) {

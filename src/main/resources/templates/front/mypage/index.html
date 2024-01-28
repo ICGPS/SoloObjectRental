@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
@@ -73,12 +74,21 @@
       </div>
 
       <!-- 결제 완료 추가 E -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <a th:href="@{/mypage/unregist}">회원 탈퇴</a>
+      <div name="frmInfo" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${member}">
+        <button type="button" id="deleteBtn">회원탈퇴</button>
       </div>
+
 
     </section>
   </main>
+  <script>
+    const deleteBtn = document.querySelector('#deleteBtn') ;
+    deleteBtn.addEventListener('click', function() {
+      var yes = confirm('탈퇴하시겠습니까?') ;
+      if (yes) { location.href='/member/delete' ; }
+      else { }
+    });
+  </script>
   </body>
 </main>
 </html>
