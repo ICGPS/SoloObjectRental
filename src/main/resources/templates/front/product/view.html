@@ -25,6 +25,53 @@
         input[type="number"] {
             -moz-appearance: textfield;
         }
+
+        #qna ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #qna ul li {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #qna ul li div {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        #qna ul li div span {
+            font-weight: bold;
+        }
+
+        #qna ul li p {
+            margin-top: 10px;
+        }
+
+        #qna ul li div span:first-child {
+            text-align: left;
+        }
+
+        #qna ul li div span:last-child {
+            text-align: right;
+        }
+
+        #qna button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #qna button:hover {
+            background-color: #45a049;
+        }
+
     </style>
 
     <section class="product_main" id="product_main">
@@ -216,23 +263,34 @@
         <!-- 문의 영역 S -->
         <ul class="tabs">
             <li class="tab">
-                <a href="#description"th:text="#{상세}"></a>
+                <a href="#description" th:text="#{상세}"></a>
             </li>
             <li class="tab">
-                <a href="#review"th:text="#{후기}"></a>
+                <a href="#review" th:text="#{후기}"></a>
             </li>
             <li class="tab on">
-                <a href="#qna"th:text="#{문의}"></a>
+                <a href="#qna" th:text="#{문의}"></a>
             </li>
             <li class="tab">
-                <a href="#qna"th:text="#{배송_교환반품}"></a>
+                <a href="#qna" th:text="#{배송_교환반품}"></a>
             </li>
         </ul>
-        <div id="qna" class='desc_content'>
-            <button type="button" onclick="openQnaPopup()">문의 작성</button>
+        <div id="qna" class='desc_content' th:object="${member}">
+            <th:block th:if="${member.isLogin()}">
+            <button type="button" onclick="openQnAPopup()">문의 작성</button>
+            </th:block>
+            <ul>
+                <li th:each="qna : ${qnaList}">
+                    <div>
+                        <div>
+                            <span th:if="${qna.member != null}" th:text="${qna.member.userName}"></span>
+                            <span th:text="${#temporals.format(qna.createdAt, 'yyyy-MM-dd')}"></span>
+                        </div>
+                    </div>
+                    <p th:text="${qna.content}"></p>
+                </li>
+            </ul>
         </div>
-        <div id="qnaPopup" class="popup"></div>
-        <script src="/front/js/product/qna.js"></script>
         <!-- 문의 영역 E -->
         <!-- 배송/교환반품 영역 S -->
         <ul class="tabs">
@@ -258,6 +316,10 @@
         document.addEventListener("DOMContentLoaded", function () {
 
         });
+
+        function openQnAPopup() {
+            window.open("/orderDetail/qnaDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
+        }
 
         function openReviewPopup() {
             window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
