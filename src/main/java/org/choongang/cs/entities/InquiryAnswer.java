@@ -11,9 +11,7 @@ import org.choongang.commons.entities.BaseMember;
 public class InquiryAnswer extends BaseMember {
     @Id
     @GeneratedValue
-    private Long seq; // 문의사항 번호
-    private int answerNumber;
-    private int inquiryNumber;
+    private Long answerSeq;
+    private Long inquirySeq; // 문의사항 번호
     private String answerContent;
-    private String answerAuthor;
 }

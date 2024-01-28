@@ -2,20 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
-<section layout:fragment="content" th:object="${recordInquiry}" class="inquiry_detail">
+<section layout:fragment="content" class="inquiry_detail">
     <h1>1:1문의 답변하기</h1>
     <div>
-        <h2 th:text="*{title}"></h2>
+        <h2 th:text="${recordInquiry.title}"></h2>
         <div>
             <!--<p th:text="*{author}"></p>-->
-            <p th:text="*{createdAt}"></p>
+            <p th:text="${recordInquiry.createdAt}"></p>
         </div>
 
     </div>
-    <p th:text="*{content}"></p>
+    <p th:text="${recordInquiry.content}"></p>
 
-    <form>
-        <textarea></textarea>
+    <p th:text="${inquiryAnswer.createdAt}"></p>
+    <p th:text="${inquiryAnswer.answerContent}"></p>
+
+    <form name="inquiryAnswer" method="post" th:action="@{/admin/cs/adminInquiryAnswerSave}">
+        <input type="hidden" name="inquirySeq" th:value="${recordInquiry.seq}">
+        <textarea name="answerContent"></textarea>
         <button type="submit">답변하기</button>
     </form>
 </section>
