@@ -1,4 +1,6 @@
+/*
 package org.choongang.chatting.configs;
+
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +23,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     }
 
 }
-
+*/
 
 
 

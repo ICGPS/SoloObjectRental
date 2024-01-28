@@ -42,6 +42,10 @@ public class EmailSendService {
             tplData.put("subject", message.subject());
             tplData.put("message", message.message());
 
+            // 아이디 찾기와 관련된 아이디 메일링 서비스 추가 S //
+            //tplData.putAll(Map.of("id", tplData.get("id")));
+            // 아이디 찾기와 관련된 아이디 메일링 서비스 추가 E //
+
             context.setVariables(tplData);
 
             text = templateEngine.process("email/" + tpl, context);

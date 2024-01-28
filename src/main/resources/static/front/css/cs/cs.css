@@ -64,7 +64,16 @@
 }
 
 .often_question {
-    margin-top: 50px;
+    width: 70%;
+    margin: 50px auto;
+}
+
+.often_question_inner {
+    margin: 50px 0;
+}
+
+.often_question_inner button {
+    font-size: 14px;
 }
 
 .feedbackPostAdd {
@@ -148,4 +157,16 @@
 .inquiry_detail p {
     width: 100%;
     padding: 10px;
+}
+
+.accordion-body {
+    text-align: left;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.inquiry_answer {
+    width: 100%;
+    background: pink;
+    padding: 50px;
 }
