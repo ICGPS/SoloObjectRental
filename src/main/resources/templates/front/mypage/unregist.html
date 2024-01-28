@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+
+  <th:block sec:authorize="isAuthenticated()">
+    <button type="button" id="deleteBtn">회원탈퇴</button>
+  </th:block>
+
+
+  <script>
+    const deleteBtn = document.querySelector('#deleteBtn') ;
+    deleteBtn.addEventListener('click', function() {
+      var yes = confirm('탈퇴하시겠습니까?') ;
+      if (yes) { location.href='/member/delete' ; }
+      else { }
+    });
+  </script>
+
+</main>
+
+</html>
