@@ -47,7 +47,7 @@ public class CsController implements ExceptionProcessor {
     @GetMapping("/inquiry")
     public String inquiry(Model model) {
         commonProcess("inquiry", model);
-        //System.out.println(boardInfoService.getLatest("qna").get(1).getSubject());
+
         List<BoardData> items = boardInfoService.getLatest("qna", 5);
         model.addAttribute("items", items);
 
