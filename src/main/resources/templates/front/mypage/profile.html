@@ -39,5 +39,17 @@
 
     <button type="submit" th:text="#{수정하기}"></button>
   </form>
+  <form>
+    <div>
+      <!-- 배송지 관리 팝업창 버튼 -->
+      <button type="button" class="address_List" onclick="commonLib.popup.open('/mypage/delivery', 550, 600)">
+        배송지 관리
+      </button>
+      <!-- 배송지 관리 팝업창 -->
+      <div id="deliveryPopup" class="popup" style="display: none;">
+
+      </div>
+    </div>
+  </form>
 </section>
 </html>
