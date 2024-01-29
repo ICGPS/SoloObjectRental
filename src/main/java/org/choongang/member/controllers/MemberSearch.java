@@ -6,4 +6,10 @@ import lombok.Data;
 public class MemberSearch {
     private int page = 1;
     private int limit = 20;
+
+    private String userId;
+    private String name;
+
+    private String sopt;
+    private String skey;
 }

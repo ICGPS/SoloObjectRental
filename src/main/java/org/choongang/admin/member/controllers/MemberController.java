@@ -1,6 +1,7 @@
 package org.choongang.admin.member.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.member.service.AdminMemberService;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
@@ -22,6 +23,7 @@ import java.util.Objects;
 public class MemberController implements ExceptionProcessor {
 
     private final MemberInfoService infoService;
+    private final AdminMemberService adminMemberService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() {
@@ -58,14 +60,14 @@ public class MemberController implements ExceptionProcessor {
         return "admin/member/authority";
     }
 
-    @PostMapping("/authority")
-    public String authorityPs(Authority form, Model model) {
+    @PatchMapping("/authority")
+    public String authorityPs(@RequestParam("chk") List<Long> chks, Model model) {
         commonProcess("authority", model);
 
-//        ListData<Member> data = infoService.getList(search);
+        adminMemberService.saveList(chks);
 
-
-        return "admin/member/authority";
+        model.addAttribute("script", "window.history.back(); alert('수정되었습니다.');");
+        return "common/_execute_script";
     }
 
 
