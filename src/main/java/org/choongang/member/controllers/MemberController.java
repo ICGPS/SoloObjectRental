@@ -2,10 +2,13 @@ package org.choongang.member.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
+import org.choongang.member.service.FindIdService;
 import org.choongang.member.service.FindPwService;
 import org.choongang.member.service.JoinService;
+import org.choongang.member.service.MemberDeleteService;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
@@ -26,6 +30,8 @@ public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
     private final FindPwService findPwService;
+    private final MemberDeleteService memberDeleteService;
+    private final FindIdService findIdService;
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model) {
@@ -74,7 +80,6 @@ public class MemberController implements ExceptionProcessor {
     public String findId(@ModelAttribute RequestFindId form, Model model) {
         commonProcess("find_id", model);
 
-
         return utils.tpl("member/find_id");
     }
 
@@ -91,13 +96,29 @@ public class MemberController implements ExceptionProcessor {
     public String findIdPs(@Valid RequestFindId form, Errors errors, Model model) {
         commonProcess("find_id", model);
 
+        findIdService.sendUserId(form.name(), form.email());
+
         if (errors.hasErrors()) {
 
             return utils.tpl("member/find_id");
         }
-        return "redirect:/member/find_id_done";
+
+        return utils.tpl("member/find_id_done");
     }
 
+
+    @GetMapping("/find_id_done")
+
+    public String toFindIdDone() {
+
+        return utils.tpl("member/find_id_done");
+    }
+
+    @PostMapping("/member/find_id_done")
+    public String findIdDone() {
+
+        return utils.tpl("member/find_id_done");
+    }
 
     /* 아이디 찾기 E */
 
@@ -156,6 +177,23 @@ public class MemberController implements ExceptionProcessor {
 
         return utils.tpl("member/mainPage");
     }
+
+    /**
+     * 회원탈퇴
+     * @param model
+     * @return
+     */
+    @GetMapping("/delete")
+    public String deleteMember(Model model) {
+        commonProcess("deleteMember", model);
+
+        memberDeleteService.deleteMember();
+
+        return "redirect:/main/index";
+    }
+
+
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "join";

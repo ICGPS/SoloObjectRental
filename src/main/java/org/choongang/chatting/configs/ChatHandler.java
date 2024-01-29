@@ -1,3 +1,4 @@
+/*
 package org.choongang.chatting.configs;
 
 import org.springframework.stereotype.Component;
@@ -38,7 +39,7 @@ public class ChatHandler extends TextWebSocketHandler {
     }
 
 }
-
+*/
 
 
 

@@ -32,6 +32,13 @@ public class Menu {
             new MenuDetail("list", "주문목록", "/admin/order")
         ));
 
+        // CS
+        menus.put("cs", Arrays.asList(
+                new MenuDetail("inquiry", "1:1문의 목록", "/admin/cs"),
+                new MenuDetail("product", "상품문의 목록", "/admin/cs/product"),
+                new MenuDetail("feedback", "칭찬/개선 목록", "/admin/cs/feedback")
+        ));
+
         menus.put("board", Arrays.asList(
                 new MenuDetail("list", "게시판목록", "/admin/board"),
                 new MenuDetail("add", "게시판등록", "/admin/board/add"),
@@ -44,10 +51,15 @@ public class Menu {
             new MenuDetail("add_branch", "지점 등록", "/admin/reservation/add_branch"),
                 new MenuDetail("holiday", "휴무일 관리", "/admin/reservation/holiday")
         ));
+
+        menus.put("banner", Arrays.asList(
+            new MenuDetail("group", "배너관리", "/admin/banner"),
+            new MenuDetail("add", "배너등록", "/admin/banner/group")
+        ));
+
     }
 
     public static List<MenuDetail> getMenus(String code) {
         return menus.get(code);
     }
 }
-//

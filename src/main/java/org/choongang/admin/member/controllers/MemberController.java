@@ -70,6 +70,7 @@ public class MemberController implements ExceptionProcessor {
         return "common/_execute_script";
     }
 
+
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "list");
         String pageTitle = "회원 목록";

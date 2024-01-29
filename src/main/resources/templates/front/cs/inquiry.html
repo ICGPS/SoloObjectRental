@@ -2,64 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content" class="inquiry_main">
-  <div>
-    <h3>1:1 문의</h3>
-    <p>궁금하신 점이 있다면 무엇이든 물어보세요.</p>
-    <p>문의 주신 내용에 신속하고 친철하게 답변 드리겠습니다.</p>
-    <div class="often_question">
-      <p>문의 하시기 전에 자주 찾는 질문을 준비했어요 ~ !</p>
-       <!-- <th:block th:if="${board.getLatest('qna').isEmpty() == false}">-->
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                </button>
-              </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body"></div>
-              </div>
+<main layout:fragment="content" class="inquiry_main" th:object="${board}">
+    <div>
+        <h3>1:1 문의</h3>
+        <p>궁금하신 점이 있다면 무엇이든 물어보세요.</p>
+        <p>문의 주신 내용에 신속하고 친철하게 답변 드리겠습니다.</p>
+        <th:block th:if="${items != null && !items.isEmpty()}">
+        <div class="often_question">
+            <p>문의 하시기 전에 자주 찾는 질문을 준비했어요 ~ !</p>
+            <div class="accordion accordion-flush often_question_inner" id="accordionFlushExample"
+                 th:object="${@boardInfoService.getLatest('qna')}">
+                <div class="accordion-item" th:each="item, status : ${items}" th:object="${item}">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                th:data-bs-target="${'#flush-collapse_' + status.index}" aria-expanded="false"
+                                th:aria-controls="${'flush-collapse_' + status.index}"
+                                th:text="*{subject}">
+                        </button>
+                    </h2>
+                    <div th:id="${'flush-collapse_' + status.index}" class="accordion-collapse collapse"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body"
+                             th:text="*{content}"></div>
+                    </div>
+                </div>
             </div>
-            <!--          <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" th:text="${board.get('2').subject}">
-                          </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body" th:text="${board.get('2').content}"></div>
-                        </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" th:text="${board.get('3').subject}">
-                          </button>
-                        </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body" th:text="${board.get('3').content}"></div>
-                        </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour" th:text="${board.get('4').subject}">
-                          </button>
-                        </h2>
-                        <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body" th:text="${board.get('4').content}"></div>
-                        </div>
-                      </div>
-                      <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive" th:text="${board.get('5').subject}">
-                          </button>
-                        </h2>
-                        <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                          <div class="accordion-body" th:text="${board.get('5').content}"></div>
-                        </div>
-                      </div>-->
-          </div>
-<!--        </th:block>-->
+            </th:block>
+        </div>
+        <a class="inquiry_btn" th:href="@{/cs/inquiryAdd}">1:1 문의하기</a>
     </div>
-    <a class="inquiry_btn" th:href="@{/cs/inquiryAdd}">1:1 문의하기</a>
-  </div>
 </main>
 </html>
