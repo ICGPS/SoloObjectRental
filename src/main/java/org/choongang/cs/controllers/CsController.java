@@ -1,11 +1,13 @@
 package org.choongang.cs.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.cs.service.InquiryAnswerService;
 import org.choongang.board.entities.BoardData;
 import org.choongang.board.service.BoardInfoService;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.cs.entities.FeedbackPost;
+import org.choongang.cs.entities.InquiryAnswer;
 import org.choongang.cs.repositories.FeedbackPostRepository;
 import org.choongang.cs.service.InquiryService;
 import org.choongang.member.MemberUtil;
@@ -32,6 +34,7 @@ public class CsController implements ExceptionProcessor {
     private final MemberUtil memberUtil;
     private final Utils utils;
     private final InquiryService inquiryService;
+    private final InquiryAnswerService inquiryAnswerService;
     private final FeedbackPostRepository feedbackPostRepository;
     private final BoardInfoService boardInfoService;
 
@@ -92,6 +95,9 @@ public class CsController implements ExceptionProcessor {
 
         RecordInquiry recordInquiry = inquiryService.getOne(seq);
         model.addAttribute("recordInquiry", recordInquiry);
+
+        InquiryAnswer inquiryAnswer = inquiryAnswerService.getOne(seq);
+        model.addAttribute("inquiryAnswer", inquiryAnswer);
 
         return utils.tpl("cs/inquiry_detail");
     }

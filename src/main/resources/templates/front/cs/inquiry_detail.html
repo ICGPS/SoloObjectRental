@@ -2,15 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-    <main layout:fragment="content" th:object="${recordInquiry}" class="inquiry_detail">
+    <main layout:fragment="content" class="inquiry_detail">
         <div>
-            <h3 th:text="*{title}"></h3>
-            <p th:text="*{createdAt}"></p>
+            <h3 th:text="${recordInquiry.title}"></h3>
+            <p th:text="${recordInquiry.createdAt}"></p>
         </div>
-        <p th:text="*{content}"></p>
+        <p th:text="${recordInquiry.content}"></p>
 
-        <div class="inquiry_answer">
-            여기서 답변 조회
-        </div>
+        <th:block th:if="${inquiryAnswer.getAnswerSeq() != null}">
+            <div class="inquiry_answer" >
+                <p th:text="${inquiryAnswer.answerContent}"></p>
+                <p th:text="${#temporals.format(inquiryAnswer.createdAt, 'yyyy-MM-dd')}"></p>
+            </div>
+        </th:block>
+
     </main>
 </html>

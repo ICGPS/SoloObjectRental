@@ -166,7 +166,6 @@
 }
 
 .inquiry_answer {
-    width: 100%;
-    background: pink;
-    padding: 50px;
+    display: block !important;
+    background: #efefef;
 }
