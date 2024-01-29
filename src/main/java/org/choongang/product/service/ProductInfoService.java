@@ -87,7 +87,7 @@ public class ProductInfoService {
     public ListData<Product> getList(ProductSearch search, boolean isAll, String sort) {
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
-        System.out.println("///////////////" +  sort);
+
         QProduct product = QProduct.product;
         BooleanBuilder andBuilder = new BooleanBuilder();
 

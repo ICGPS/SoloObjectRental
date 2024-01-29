@@ -2,13 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <main th:fragment="content">
     <h1>결제완료</h1>
-    <table th:object="${orderInfo}">
+    <table th:object="${orderInfo}" border="1">
         <tr>
             <th colspan="2" th:text="#{주문_정보}"></th>
         </tr>
         <tr>
             <th th:text="#{주문번호}"></th>
             <td th:text="*{seq}"></td>
+            <td>
+                <a th:text="#{구매영수증}" th:href="@{/order/receipt}"></a>
+            </td>
+        </tr>
+        <tr>
+            <th th:text="#{주문시간}"></th>
+            <td th:text="*{createdAt}"></td>
+
         </tr>
         <tr>
             <th th:text="#{주문자_이름}"></th>
@@ -18,16 +26,13 @@
             <th th:text="#{상품}"></th>
             <td>
                 <div th:each="orderItem : *{orderItems}">
+<!--                    <th:block th:utext="${@utils.printThumb(orderItem.product.listImage, 50, 50, 'product_image')}"></th:block>-->
                     <th:block th:text="${orderItem.product.name}"></th:block>
                     <th:block th:text="${orderItem.ea + '개'}"></th:block>
-<!--                    <th:block th:text="${orderItem.period + '개월'}"></th:block>-->
+                    <th:block th:text="${period + '개월'}"></th:block>
                     <th:block th:text="${orderItem.salePrice + '원'}"></th:block>
                 </div>
             </td>
-        </tr>
-        <tr>
-            <th th:text="#{결제금액}"></th>
-            <td th:text="*{totalPrice + '(상품합계) + ' +  totalDeliveryPrice + '(배송비) - ' + totalDiscount + '(총 할인금액) = ' + payPrice}"></td>
         </tr>
         <tr>
             <th colspan="2" th:text="#{배송지_정보}"></th>
@@ -47,6 +52,14 @@
         <tr>
             <th th:text="#{주소_상세}"></th>
             <td th:text="*{addressSub}"></td>
+        </tr>
+        <tr>
+            <th th:text="#{배송메모}"></th>
+            <td th:text="*{deliveryMemo}"></td>
+        </tr>
+        <tr>
+            <th th:text="#{결제금액}"></th>
+            <td th:text="*{totalPrice + '(상품합계) + ' +  totalDeliveryPrice + '(배송비) - ' + totalDiscount + '(총 할인금액) = ' + payPrice}"></td>
         </tr>
     </table>
 </main>
