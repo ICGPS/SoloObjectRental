@@ -63,5 +63,8 @@ public class Member extends Base {
     @Transient
     private FileInfo profileImage;
 
-//    private boolean enable = true;
+    private boolean enable = true;
+
+    @Column(name="_lock")
+    private boolean lock;
 }
