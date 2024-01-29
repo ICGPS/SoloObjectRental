@@ -69,11 +69,11 @@ public class CsController {
     }
 
     // 상품 문의
-    @GetMapping("/product")
-    public String product(Model model) {
-        commonProcess("product", model);
+    @GetMapping("/qna")
+    public String qna(Model model) {
+        commonProcess("qna", model);
 
-        return "admin/cs/product_inquiry";
+        return "admin/cs/qna";
     }
 
     // 칭찬/개선
