@@ -44,7 +44,7 @@ public class OrderInfo extends Base {
   private String receiverName; // 받는분 이름
 
   @Column(length=15, nullable = false)
-  private String receiverCellPhone; // 받는분 휴대전화 버놓
+  private String receiverCellPhone; // 받는분 휴대전화 번호
 
   @Column(length=15, nullable = false)
   private String zonecode; // 배송주소 - 우편번호
