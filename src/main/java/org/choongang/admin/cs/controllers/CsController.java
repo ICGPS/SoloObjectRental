@@ -52,7 +52,7 @@ public class CsController {
 
         InquiryAnswer inquiryAnswer = inquiryAnswerService.getOne(seq);
         model.addAttribute("inquiryAnswer", inquiryAnswer);
-
+        
         return "admin/cs/inquiry_detail";
     }
 

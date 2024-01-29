@@ -14,13 +14,20 @@
     </div>
     <p th:text="${recordInquiry.content}"></p>
 
-    <p th:text="${inquiryAnswer.createdAt}"></p>
-    <p th:text="${inquiryAnswer.answerContent}"></p>
+    <th:block th:if="${inquiryAnswer.getAnswerSeq() != null}">
+        <div class="inquiry_answer">
+            <p th:text="${inquiryAnswer.answerContent}"></p>
+            <p th:text="${#temporals.format(inquiryAnswer.createdAt, 'yyyy-MM-dd')}"></p>
+        </div>
+    </th:block>
 
-    <form name="inquiryAnswer" method="post" th:action="@{/admin/cs/adminInquiryAnswerSave}">
-        <input type="hidden" name="inquirySeq" th:value="${recordInquiry.seq}">
-        <textarea name="answerContent"></textarea>
-        <button type="submit">답변하기</button>
-    </form>
+    <th:block th:if="${inquiryAnswer.getAnswerSeq() == null}">
+        <form name="inquiryAnswer" method="post" th:action="@{/admin/cs/adminInquiryAnswerSave}">
+            <input type="hidden" name="inquirySeq" th:value="${recordInquiry.seq}">
+            <textarea name="answerContent"></textarea>
+            <button type="submit">답변하기</button>
+        </form>
+    </th:block>
+
 </section>
 </html>

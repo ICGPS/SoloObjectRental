@@ -13,7 +13,10 @@ public class InquiryAnswerService {
     private final InquiryAnswerRepository inquiryAnswerRepository;
 
     public InquiryAnswer save(InquiryAnswer inquiryAnswer) {
-        return inquiryAnswerRepository.saveAndFlush(inquiryAnswer);
+        try {
+            InquiryAnswer data = inquiryAnswerRepository.saveAndFlush(inquiryAnswer);
+        } catch (Exception e) {}
+        return inquiryAnswer;
     }
 
     public InquiryAnswer getOne(Long inquirySeq) {
