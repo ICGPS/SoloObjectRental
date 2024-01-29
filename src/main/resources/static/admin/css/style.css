@@ -127,6 +127,10 @@ select { border: 1px solid #d5d5d5; height: 35px; }
      border: 1px solid #d5d5d5;
 }
 
+.inquiry_detail {
+    max-width: 1000px;
+}
+
 .inquiry_detail div {
     display: flex;
     justify-content: space-between;
@@ -135,4 +139,11 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 
 .inquiry_detail p {
     font-size: 16px;
+}
+
+.inquiry_answer {
+    display: block !important;
+    background: #ccc;
+    padding: 10px 30px;
+    box-sizing: border-box;
 }
