@@ -55,7 +55,7 @@ public class CsController {
 
         InquiryAnswer inquiryAnswer = inquiryAnswerService.getOne(seq);
         model.addAttribute("inquiryAnswer", inquiryAnswer);
-        
+
         return "admin/cs/inquiry_detail";
     }
 
@@ -72,11 +72,11 @@ public class CsController {
     }
 
     // 상품 문의
-    @GetMapping("/qna")
-    public String qna(Model model) {
-        commonProcess("qna", model);
+    @GetMapping("/product")
+    public String product(Model model) {
+        commonProcess("product", model);
 
-        return "admin/cs/qna";
+        return "admin/cs/product_inquiry";
     }
 
     // 칭찬/개선

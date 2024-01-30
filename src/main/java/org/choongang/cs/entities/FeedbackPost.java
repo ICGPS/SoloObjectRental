@@ -24,7 +24,7 @@ public class FeedbackPost {
 
     @Column(length = 100)
     private String filePath; // 이미지 파일 경로
-    
+
     private LocalDateTime createdAt; // 작성일
 
 
@@ -44,26 +44,3 @@ public class FeedbackPost {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
