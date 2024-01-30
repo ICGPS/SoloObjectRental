@@ -3,7 +3,183 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/popup}">
-<main layout:fragment="content">
+<head>
+    <style>
+        .card-section {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
 
+        .card-section p {
+            font-size: 0.875rem;
+            color: #718096;
+        }
+
+
+        .section-spacing.radio div {
+            font-size: 15px;
+        }
+
+        #wrap {
+            display: none;
+            border: 1px solid;
+            width: 500px;
+            height: 300px;
+            margin: 5px 0;
+            position: relative;
+        }
+
+        #btnFoldWrap {
+            cursor: pointer;
+            position: absolute;
+            right: 0px;
+            top: -1px;
+            z-index: 1;
+        }
+
+        .search-address-btn {
+            margin-top: 0.5rem;
+        }
+
+        .add-address-btn {
+            margin-top: 0.5rem;
+        }
+
+        .address div {
+            margin: 10px 0;
+        }
+
+        .address div input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="card">
+        <div class="card-section">
+            <h3>배송 주소 목록</h3>
+            <p>배송지</p>
+        </div>
+        <div class="section-spacing radio">
+            <label>배송지 선택</label>
+            <div>
+                <input type="radio" id="mainAddress" name="deliveryType" placeholder="배송지를 입력해주세요">
+                <label for="mainAddress">배송지</label>
+            </div>
+            <div>
+                <input type="radio" id="newAddress1" name="deliveryType" placeholder="배송지를 입력해주세요">
+                <label for="newAddress1">새 배송지 1</label>
+            </div>
+            <div>
+                <input type="radio" id="newAddress2" name="deliveryType" placeholder="배송지를 입력해주세요">
+                <label for="newAddress2">새 배송지 2</label>
+            </div>
+        </div>
+        <form name="" method="post" th:action="@{/}"></form>
+        <div class="section-spacing">
+            <label for="recipient">수령인</label>
+            <input type="text" id="recipient" placeholder="수령인을 입력해주세요">
+        </div>
+        <div class="section-spacing">
+            <label for="contactNumber">연락처</label>
+            <input type="tel" id="contactNumber" placeholder="연락처를 입력해주세요">
+        </div>
+        <div class="section-spacing address">
+            <label for="address">배송지</label>
+            <div>
+                <input type="text" id="postcode" placeholder="우편번호" readonly>
+                <br>
+                <input type="text" id="address" placeholder="주소" readonly>
+            </div>
+            <div id="wrap">
+                <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" onclick="foldDaumPostcode()" alt="접기 버튼">
+            </div>
+        </div>
+
+        <div class="section-spacing address" >
+            <label for="detailAddress">배송지 상세주소</label>
+            <div>
+                <input type="text" id="extraAddress" placeholder="참고항목" readonly>
+                <input type="text" id="detailAddress" placeholder="배송지 상세주소를 입력해주세요">
+            </div>
+            <button class=" search-address-btn" onclick="execDaumPostcode()">우편번호 찾기</button>
+        </div>
+        <button class="add-address-btn">배송지 추가</button>
+        <button class="add-address-btn">배송지 삭제</button>
+        <button class="add-address-btn">완료</button>
+
+    </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script>
+
+
+        var element_wrap = document.getElementById('wrap');
+
+        function foldDaumPostcode() {
+            element_wrap.style.display = 'none';
+        }
+
+        function execDaumPostcode() {
+            console.log('aaaa');
+            var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+            new daum.Postcode({
+                oncomplete: function(data) {
+
+                    var addr = '';
+                    var extraAddr = '';
+
+
+                    if (data.userSelectedType === 'R') {
+                        addr = data.roadAddress;
+                    } else {
+                        addr = data.jibunAddress;
+                    }
+
+                    if(data.userSelectedType === 'R'){
+
+                        if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                            extraAddr += data.bname;
+                        }
+
+                        if(data.buildingName !== '' && data.apartment === 'Y'){
+                            extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                        }
+
+                        if(extraAddr !== ''){
+                            extraAddr = ' (' + extraAddr + ')';
+                        }
+                        document.getElementById("extraAddress").value = extraAddr;
+
+                    } else {
+                        document.getElementById("extraAddress").value = '';
+                    }
+
+                    document.getElementById('postcode').value = data.zonecode;
+                    document.getElementById("address").value = addr;
+
+                    document.getElementById("detailAddress").focus();
+
+
+                    element_wrap.style.display = 'none';
+
+
+                    document.body.scrollTop = currentScroll;
+                },
+                onresize : function(size) {
+                    element_wrap.style.height = size.height+'px';
+                },
+                width : '100%',
+                height : '100%'
+            }).embed(element_wrap);
+
+            element_wrap.style.display = 'block';
+        }
+    </script>
 </main>
+</body>
 </html>

@@ -38,7 +38,8 @@ public class Member extends Base {
     private String bDay;
 
     @Column(length=100)
-    private String address;
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<DeliveryList> address = new ArrayList<>(); // 배송지 관리
 
     @Column(nullable = false)
     private String tel;
@@ -50,11 +51,11 @@ public class Member extends Base {
     private String nation;  // 국적
 */
 
-    @Column(length=10)
-    private String zonecode; // 우편번호
-
-    @Column(length=100)
-    private String addressSub; // 서브 주소
+//    @Column(length=10)
+//    private String zonecode; // 우편번호
+//
+//    @Column(length=100)
+//    private String addressSub; // 서브 주소
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)

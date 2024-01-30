@@ -11,8 +11,8 @@ commonLib.deliverAddressList.popup = {
 open(url, width, height) {
     if (!url) return;
 
-    width = width || 350;
-    height = height || 350;
+    width = width || 450;
+    height = height || 450;
 
 /* 이미 열려 있는 레이어팝업이 있다면 제거 */
 this.close();
