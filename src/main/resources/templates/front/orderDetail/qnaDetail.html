@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>문의 작성</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+        }
+
+        #qnaPopup {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            display: none;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            height: 100px;
+            margin-bottom: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        button {
+            background-color: gray;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+
+<body>
+<form id="qnaForm" name="qnaForm" method="post" th:action="@{/orderDetail/submitQnA}">
+
+    <input type="hidden" name="productSeq" th:value="${param.seq}">
+
+    <textarea id="reviewContent" name="content" class="form-control" placeholder="문의 사항을 작성해주세요."></textarea>
+
+    <button type="submit">작성 완료</button>
+</form>
+
+</body>
+</html>

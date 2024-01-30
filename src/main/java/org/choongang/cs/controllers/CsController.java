@@ -9,6 +9,7 @@ import org.choongang.commons.Utils;
 import org.choongang.cs.entities.FeedbackPost;
 import org.choongang.cs.entities.InquiryAnswer;
 import org.choongang.cs.repositories.FeedbackPostRepository;
+import org.choongang.cs.service.FeedbackService;
 import org.choongang.cs.service.InquiryService;
 import org.choongang.member.MemberUtil;
 import org.springframework.stereotype.Controller;
@@ -106,7 +107,6 @@ public class CsController implements ExceptionProcessor {
     // 칭찬/개선
     @GetMapping("/feedbackPost")
     public String feedbackPost(Model model) {
-
         commonProcess("feedbackPost", model);
 
         return utils.tpl("cs/feedbackPost");
@@ -121,8 +121,6 @@ public class CsController implements ExceptionProcessor {
 
         return utils.tpl("cs/feedbackPostAdd");
     }
-
-
 
     @PostMapping("/feedbackPostAdd")
     public String feedbackPostAddDone(

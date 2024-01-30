@@ -4,6 +4,24 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>칭찬/개선</h1>
+
+    <table class="inquiry_table table table-hover">
+        <tr class="table-secondary">
+            <th>NO</th>
+            <th>칭찬/개선 내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        <tr th:each="item : ${feedbackPost}" th:object="${feedbackPost}">
+            <td th:text="${item.seq}"></td>
+            <td>
+                <a th:text="${item.content}" th:href="@{/admin/cs/feedbackDetail/{seq}(seq = ${item.seq})}"></a>
+            </td>
+            <td th:text="${item.author}"></td>
+            <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}"></td>
+        </tr>
+    </table>
+
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </html>

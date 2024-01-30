@@ -3,15 +3,62 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+   <style>
+
+
+      main {
+         max-width: 600px;
+         margin: 0 auto;
+         padding: 20px;
+      }
+
+      h2 {
+         text-align: center;
+         color: #333;
+      }
+
+      form {
+         margin-top: 20px;
+      }
+
+      label {
+         display: block;
+         margin-bottom: 8px;
+         color: #555;
+      }
+
+      textarea {
+         width: 100%;
+         padding: 8px;
+         margin-bottom: 16px;
+         border: 1px solid #ddd;
+         border-radius: 4px;
+         resize: vertical;
+      }
+
+      input[type="file"] {
+         margin-bottom: 16px;
+      }
+
+      input[type="submit"] {
+         background-color: gray;
+         color: white;
+         padding: 10px 15px;
+         border: none;
+         border-radius: 4px;
+         cursor: pointer;
+         font-size: 16px;
+      }
+
+
+   </style>
+
    <h2>칭찬 / 개선</h2>
 
-   <form action="" method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}" enctype="multipart/form-data">
+   <form method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}">
 
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-
-      <label for="feedback">내용 : </label>
       <textarea id="feedback" name="feedback" rows="4" cols="50" th:field="*{content}" required></textarea>
-      <p>파일첨부: <input type="file" name="file"></p>
+      <p>파일첨부: </p>
 
       <input type="submit" value="전송">
    </form>

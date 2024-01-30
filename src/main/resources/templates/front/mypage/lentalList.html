@@ -3,8 +3,83 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
+    <style>
+        h1 {
+    margin-bottom: 20px;
+}
 
-    렌탈리스트
+form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+input {
+    margin-right: 5px;
+    flex: 0.25;
+}
+
+button {
+    margin-left: 5px;
+}
+
+table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2; /* 배경색 설정 */
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+    </style>
+    <h1>렌탈 리스트</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th style="padding-right: 120px;">주문 번호</th>
+            <th style="padding-right: 120px;">거래 일시</th>
+            <th style="padding-right: 120px;">주문자명</th>
+            <th style="padding-right: 120px;">상품명</th>
+            <th style="padding-right: 120px;">배송주소</th>
+            <th style="padding-right: 120px;">배송메모</th>
+            <th style="padding-right: 120px;">주문 상태</th>
+            <!-- 다른 주문 정보 필드들 추가 -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${memberOrders}">
+            <td style="padding-right: 120px;" th:text="${order.seq}"></td>
+            <td style="padding-right: 120px;" th:text="${order.createdAt}"></td>
+            <td style="padding-right: 120px;" th:text="${order.orderName}"></td>
+            <td style="padding-right: 120px;">
+                <ul>
+                    <li th:each="item : ${order.orderItems}" th:text="${item.productName}"></li>
+                </ul>
+            </td>
+            <td style="padding-right: 120px;" th:text="${order.zonecode != null ? order.zonecode : 'N/A'}"></td>
+            <td style="padding-right: 120px;" th:text="${order.deliveryMemo != null ? order.deliveryMemo : 'N/A'}"></td>
+            <td style="padding-right: 120px;" th:text="${order.status != null ? order.status : 'N/A'}"></td>
+            <!-- 다른 주문 정보 필드들 추가 -->
+        </tr>
+        </tbody>
+    </table>
 </main>
-
 </html>

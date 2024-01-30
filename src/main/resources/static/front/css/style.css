@@ -13,10 +13,16 @@ dd { flex-grow: 1; }
 
 .layout_width { max-width: 1300px; margin: 0 auto; }
 
+main,
+section {
+    min-height: 550px;
+    padding: 50px;
+}
+
 /* 페이징 공통 S */
-.pagination { text-align: center; margin: 30px 0; }
-.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
-.pagination .page.on { background: #596b99; color: #fff; }
+.pagination { text-align: center; margin: 30px 0; justify-content: center;}
+.pagination .page { border: 1px solid #3e90d5; color: #3e90d5; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #3e90d5; color: #fff; }
 .pagination .page + .page { margin-left: 3px; }
 /* 페이징 공통 E */
 
@@ -34,6 +40,15 @@ header .logo_search .search { display: flex; }
 header nav { background: #ffffff; }
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 1px; min-width: 120px; text-align: left; color: #000000; font-size: 20px; }
 header nav > .inner a:hover { background: #ffffff; }
+
+.search_btn {
+    width: 50px;
+    border: none;
+    background: #A7CFF1;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 /* 헤더 공통 S */
 
 /* 입력 항목 공통 S */
@@ -46,10 +61,6 @@ select { height: 40px; border: 1px solid #d5d5d5; border-radius: 3px; }
 .card-footer { max-width: 1300px; margin: 0 auto; }
 .logo_search {
     border-bottom: 1px solid #efefef;
-}
-
-main {
-    padding: 50px;
 }
 
 textarea {

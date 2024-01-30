@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,6 +54,8 @@ public class CartSaveService {
 
       int ea = Integer.parseInt(utils.getParam("ea_" + num));
       int period = Integer.parseInt(utils.getParam("period"));
+      LocalDate sdate = LocalDate.parse(utils.getParam("sdate"));
+      LocalDate edate = LocalDate.parse(utils.getParam("edate"));
 
 
       boolean exist = false;
@@ -74,6 +77,8 @@ public class CartSaveService {
           .uid(uid)
           .ea(ea)
           .period(period)
+          .sdate(sdate)
+          .edate(edate)
           .member(member)
           .build();
       items.add(item);
