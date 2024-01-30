@@ -218,6 +218,12 @@ public class MypageController implements ExceptionProcessor {
         return "redirect:/mypage/memberInfo";
     }
 
+    @GetMapping("/delivery")
+    public String delivery(Model model) {
+
+        return utils.tpl("mypage/delivery");
+    }
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
