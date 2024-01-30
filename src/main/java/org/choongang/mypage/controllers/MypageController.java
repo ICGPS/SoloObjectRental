@@ -2,13 +2,17 @@ package org.choongang.mypage.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
+import org.choongang.email.service.EmailVerifyService;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberUpdateService;
+import org.choongang.mypage.service.ResignService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -30,7 +34,12 @@ public class MypageController implements ExceptionProcessor {
     private final Utils utils;
     private final MemberUtil memberUtil;
     private final MemberUpdateService memberUpdateService;
+
+    private final EmailVerifyService emailVerifyService;
     private final ProfileValidator profileValidator;
+    private final ResignValidator resignValidator;
+    private final ResignService resignService;
+
     @GetMapping
     public String myPage(Model model) {
 
@@ -209,11 +218,6 @@ public class MypageController implements ExceptionProcessor {
         return "redirect:/mypage/memberInfo";
     }
 
-    @GetMapping("/delivery")
-    public String delivery(Model model) {
-
-        return utils.tpl("mypage/delivery");
-    }
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
@@ -227,7 +231,12 @@ public class MypageController implements ExceptionProcessor {
             pageTitle = Utils.getMessage("회원정보_수정", "commons");
             addCommonScript.add("fileManager");
             addScript.add("mypage/profile");
+
+            /* 회원 탈퇴 S */
+        } else if (mode.equals("resign")) {
+            pageTitle = utils.getMessage("회원 탈퇴", "commons");
         }
+            /* 회원 탈퇴 E */
 
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCss", addCss);

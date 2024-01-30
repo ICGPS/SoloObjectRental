@@ -5,6 +5,9 @@ import org.choongang.order.entities.OrderInfo;
 import org.choongang.order.repositories.OrderInfoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class OrderInfoService {
@@ -20,5 +23,9 @@ public class OrderInfoService {
     OrderInfo orderInfo = orderInfoRepository.findById(seq).orElseThrow(OrderNotFoundException::new);
 
     return orderInfo;
+  }
+
+  public List<OrderInfo> orderList() {
+    return orderInfoRepository.findAll();
   }
 }
