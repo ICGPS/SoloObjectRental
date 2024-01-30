@@ -24,8 +24,8 @@ header .btn_area a {
     display: inline-block;
     width: 90px;
     height: 28px;
-    border: 1px solid #A7CFF1;
-    color: #666;
+    border: 1px solid #F9CCCF;
+    color: #000;
     border-radius: 5px;
     line-height: 26px;
     text-align: center;
@@ -33,8 +33,7 @@ header .btn_area a {
 }
 
 header .btn_area a:last-of-type {
-    background: #A7CFF1;
-    color: #fff;
+    background: #F9CCCF;
 }
 
 /* 헤더 영역 E */
@@ -71,11 +70,17 @@ main > aside > a i {
 main > aside > a.on, main > aside > a:hover {
     background: #75b4e9;
     font-weight: 500;
+    color: #fff;
 }
 
-main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #3e90d5; position: absolute; }
+main > aside > a.on i,
+main > aside > a:hover i {
+    color: #fff;
+}
 
-nav.submenus { box-shadow: 1px 1px 5px #cdced5; height: 60px; background: #fff; border-radius: 5px; margin-bottom: 50px; display: flex; align-items: center; }
+main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #FFDC91; position: absolute; }
+
+nav.submenus { box-shadow: 1px 1px 5px #ccc; height: 60px; background: #fff; border-radius: 5px; margin-bottom: 50px; display: flex; align-items: center; }
 nav.submenus a { height: 60px; line-height: 60px; padding: 0 40px; font-size: 1.385rem; color: #222; }
 nav.submenus a.on { background: #75b4e9; color: #fff; font-weight: 500; }
 
@@ -117,7 +122,17 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 .search_btn { text-align: center; margin: 20px 0 30px; }
 .search_btn .btn { display: inline-block; min-width: 200px; text-align: center; font-size:1.4rem; font-weight: 500; height: 45px; line-height: 45px; background: #75b4e9; color: #fff; cursor: pointer; border-radius: 3px; border: 0; }
 
-.sbtn { border: 1px solid #222; color: #222; background: #fff; display: inline-block; padding: 7px 20px; border-radius: 3px; cursor: pointer; line-height: 1; }
+.sbtn {
+    border: 1px solid #222;
+    color: #222;
+    background: #fff;
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    line-height: 1;
+}
+
 .sbtn:hover, .sbtn.on { background: #75b4e9; color: #fff; border-color: #75b4e9; }
 .sbtn i { color: #222; font-size: 1.1rem; vertical-align: middle; line-height: 1; }
 .sbtn:hover i, .sbtn.on i { color: #fff; }
@@ -199,4 +214,20 @@ select { border: 1px solid #d5d5d5; height: 35px; }
     padding: 10px 30px;
     margin-top: 30px;
     box-sizing: border-box;
+}
+
+.inquiry_detail button  {
+    display: block;
+    min-width: 200px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    height: 45px;
+    line-height: 45px;
+    background: #75b4e9;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 0;
+    margin: 50px auto;
 }
