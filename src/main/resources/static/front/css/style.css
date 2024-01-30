@@ -34,6 +34,15 @@ header .logo_search .search { display: flex; }
 header nav { background: #ffffff; }
 header nav > .inner a { display: inline-block; height: 45px; line-height: 45px; padding: 1px; min-width: 120px; text-align: left; color: #000000; font-size: 20px; }
 header nav > .inner a:hover { background: #ffffff; }
+
+.search_btn {
+    width: 50px;
+    border: none;
+    background: #a78c7b;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 /* 헤더 공통 S */
 
 /* 입력 항목 공통 S */

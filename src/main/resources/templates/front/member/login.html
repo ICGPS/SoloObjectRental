@@ -60,6 +60,14 @@
             padding: 10px;
         }
 
+        .login_btn {
+            background: #a78c7b;
+        }
+
+         .join_btn {
+            background: #ccc;
+         }
+
         .login_btn,
         .join_btn {
             width: 100%;
@@ -117,7 +125,7 @@
                     <label for="autoLogin" th:text="#{자동 로그인}" class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ml-2 text-sm"></label>
                 </div>
                 <button type="submit" th:text="#{로그인}"
-                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full login_btn"></button>
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full login_btn"></button>
                 <button type="button" th:text="#{회원가입}"
                         class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full mt-2 bg-green-500 join_btn"
                         onclick="window.location.href='/member/join'" > <!-- 옵션을 이용한 페이지이동 -->

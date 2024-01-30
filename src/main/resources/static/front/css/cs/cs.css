@@ -36,11 +36,10 @@
     width: 300px;
     padding: 20px;
     margin: 10px;
-    background: #7a8e95;
+    background: #a78c7b;
     border-radius: 10px;
     text-align: center;
-    font-size: 20px;
-
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +47,7 @@
 
 .service_btn_box a:active,
  .service_btn_box a:hover {
-    background: #213f5d;
+    background: #735f53;
 }
 
 .service_btn_box a i {
@@ -100,14 +99,23 @@
 
 .inquiry_btn {
     display: inline-flex;
-    width: 180px;
+    width: 200px;
     height: 50px;
-    background: #596b99;
+    padding: 11px 0 9px;
+    background: #a78c7b;
     border-radius: 10px;
     color:#fff;
+    font-size: 18px;
     text-decoration: none;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
+}
+
+.inquiry_btn:active,
+ .inquiry_btn:hover {
+    background: #735f53;
+    color: #fff;
 }
 
 .inquiry_box {
