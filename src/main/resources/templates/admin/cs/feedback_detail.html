@@ -8,6 +8,8 @@
     <p th:text="${#temporals.format(feedbackPost.createdAt, 'yyyy-MM-dd')}"></p>
     <h2 th:text="${feedbackPost.content}"></h2>
 
+    <img th:if="${feedbackPost.imageUrl}" th:src="@{/images/{fileName}(fileName=${feedbackPost.imageUrl})}" alt="Uploaded Image" />
+
 
 </section>
 </html>

@@ -5,7 +5,6 @@
 <main layout:fragment="content">
    <style>
 
-
       main {
          max-width: 600px;
          margin: 0 auto;
@@ -13,7 +12,6 @@
       }
 
       h2 {
-         text-align: center;
          color: #333;
       }
 
@@ -55,10 +53,11 @@
 
    <h2>칭찬 / 개선</h2>
 
-   <form method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}">
+   <form method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}" enctype="multipart/form-data">
+
 
       <textarea id="feedback" name="feedback" rows="4" cols="50" th:field="*{content}" required></textarea>
-      <p>파일첨부: </p>
+      <p>이미지첨부:<input type="file" name="file" accept="image/*"></p>
 
       <input type="submit" value="전송">
    </form>

@@ -123,9 +123,8 @@ public class CsController implements ExceptionProcessor {
     }
 
     @PostMapping("/feedbackPostAdd")
-    public String feedbackPostAddDone(
-            @ModelAttribute FeedbackPost feedbackPost,
-            @RequestParam("file") MultipartFile file, Principal principal) {
+    public String handleFeedbackPostAdd(@ModelAttribute("feedbackPost") FeedbackPost feedbackPost,
+                                        @RequestParam("file") MultipartFile file, Principal principal) {
 
         String userName = principal.getName();
         feedbackPost.setAuthor(userName);
@@ -146,18 +145,20 @@ public class CsController implements ExceptionProcessor {
                 Path path = Paths.get(filePath);
                 Files.write(path, bytes);
 
-                feedbackPost.setFilePath(filePath);
+
+                feedbackPost.setImageUrl("/images/" + fileName);
 
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("CsController - 파일 업로드 오류 발생");
+
             }
         }
 
+        // feedbackPost 저장
         feedbackPostRepository.save(feedbackPost);
 
         return utils.tpl("cs/feedbackPostAdd_done");
-
     }
 
     private void commonProcess(String mode, Model model) {

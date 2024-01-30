@@ -31,16 +31,11 @@ public class FeedbackPost {
 
     private LocalDateTime createdAt; // 작성일
 
-
     private String feedback;
 
-    public String getFeedback() {
-        return feedback;
-    }
+    @Getter @Setter
+    private String imageUrl;
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
 
     @PrePersist
     protected void create() {
