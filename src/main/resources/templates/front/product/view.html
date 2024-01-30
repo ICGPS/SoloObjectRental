@@ -26,51 +26,49 @@
             -moz-appearance: textfield;
         }
 
-        #qna ul {
-            list-style: none;
-            padding: 0;
+        #qna {
+            margin-bottom: 20px;
+            padding: 0 0 0 25px;
+            border-bottom: 1px solid #ccc;
         }
 
         #qna ul li {
-            border: 1px solid #ccc;
-            padding: 10px;
             margin-bottom: 10px;
         }
 
-        #qna ul li div {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
+#qna ul li div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 
-        #qna ul li div span {
-            font-weight: bold;
-        }
+#qna ul li p {
+    margin-top: 10px;
+}
 
-        #qna ul li p {
-            margin-top: 10px;
-        }
+#qna ul li div span:first-child {
+    margin: 20px 0;
+    text-align: right;
+}
 
-        #qna ul li div span:first-child {
-            text-align: left;
-        }
+#qna ul li div span:last-child {
+    margin: 20px;
+    text-align: right;
+}
 
-        #qna ul li div span:last-child {
-            text-align: right;
-        }
+#qna button {
+    background-color: gray;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* 버튼 위쪽 여백 추가 */
+}
 
-        #qna button {
-            background-color: gray;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #qna button:hover {
-            background-color: gray;
-        }
+#qna button:hover {
+    background-color: gray;
+}
 
     </style>
 
