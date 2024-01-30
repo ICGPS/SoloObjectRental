@@ -10,6 +10,7 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.order.constants.OrderStatus;
 import org.choongang.order.entities.OrderInfo;
+import org.choongang.order.service.OrderInfoService;
 import org.choongang.order.service.OrderSaveService;
 import org.choongang.order.service.OrderStatusService;
 import org.choongang.order.entities.OrderInfo;
@@ -36,6 +37,7 @@ public class OrderController implements ExceptionProcessor {
   private final CartDeleteService cartDeleteService;
   private final OrderSaveService orderSaveService;
   private final OrderStatusService orderStatusService;
+  private final OrderInfoService orderInfoService;
 
   private final Utils utils;
 
@@ -82,9 +84,19 @@ public class OrderController implements ExceptionProcessor {
 
     status.setComplete(); // cartData 세션 비우기
 
-
+    model.addAttribute("orderInfo", orderInfo);
 
     return "redirect:/order/end/" + orderInfo.getSeq();
+//    return utils.tpl("order/end");
+  }
+
+  @GetMapping("/end/{seq}")
+  public String orderEnd(@PathVariable("seq") Long seq, Model model) {
+    OrderInfo orderInfo = orderInfoService.get(seq);
+
+    model.addAttribute("orderInfo", orderInfo);
+
+    return utils.tpl("order/end");
   }
 
   /* 구매 영수증 연결 추가 S */
