@@ -17,9 +17,11 @@
         </th:block>
     </head>
     <body>
-    <h1 th:text="'구매 영수증'"></h1>
+    <!-- orderInfo의 주문자명을 받아서 띄운다, 주문자의 구매영수증이기 때문에 -->
+    <h1 th:text="#{orderInfo.orderName}"></h1>
     <div class="purchaseReceipt">
         <div class="buyReceiptWrap">
+        <div class="">주문번호, 거래일시, 상품명, 합계, 회사명, 서명</div>
             <a th:href="@{/mypage/orderDetail(orderNumber=${orderNumber})}">
                 <button type="button">주문 상세 페이지</button>
             </a>
