@@ -127,6 +127,10 @@ select { border: 1px solid #d5d5d5; height: 35px; }
      border: 1px solid #d5d5d5;
 }
 
+.inquiry_table td a:hover {
+     color: #fff;
+}
+
 .inquiry_detail {
     max-width: 1000px;
 }
