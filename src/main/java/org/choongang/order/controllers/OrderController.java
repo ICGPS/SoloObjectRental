@@ -13,8 +13,6 @@ import org.choongang.order.entities.OrderInfo;
 import org.choongang.order.service.OrderInfoService;
 import org.choongang.order.service.OrderSaveService;
 import org.choongang.order.service.OrderStatusService;
-import org.choongang.order.entities.OrderInfo;
-import org.choongang.order.service.OrderInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
