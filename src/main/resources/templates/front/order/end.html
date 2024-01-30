@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<main layout:fragment="content">
+    <h1>결제완료</h1>
+<style>
+    body {
+        padding: 100px;
+    }
+    .orderInfo {
+        font-size: 1.3rem;
+        justify-content: center;
+    }
+    .orderInfoSub {
+        margin-top: 15px;
+    }
+    .orderInfoSub > div {
+        display: flex;
+        margin: 10px 0;
+        height:4rem;
+        line-height: 4rem;
+    }
+
+
+    .text_left {
+        width: 15rem;
+        text-align: left;
+<!--        background: #0003;-->
+    }
+    .text_right {
+        height:4rem;
+        text-align: center;
+<!--        background: #0004;-->
+    }
+
+
+</style>
+    <!-- 아마도 _주문상세.html 파일로 필요한 곳에 사용할 수 있게 쓸 듯  -->
+    <div class="orderInfo" th:object="${orderInfo}">
+        <div class="orderInfoSub">
+            <div>
+                <h3 th:text="#{주문_정보}"></h3>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{주문번호}"></span>
+                <span class="text_right" th:text="*{seq}"></span>
+<!--                <td>-->
+<!--                    <a th:text="#{구매영수증}" th:href="@{/order/receipt}"></a>-->
+<!--                </td>-->
+            </div>
+            <div>
+                <span class="text_left" th:text="#{주문일자}"></span>
+                <span class="text_right" th:text="*{createdAt}"></span>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{주문자_이름}"></span>
+                <span class="text_right" th:text="*{orderName}"></span>
+            </div>
+        </div>
+        <div class="orderInfoSub">
+            <div>
+                <h3 th:text="#{상품_정보}"></h3>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{상품}"></span>
+                <span class="text_right">
+                    <div th:each="orderItem : *{orderItems}">
+    <!--                    <th:block th:utext="${@utils.printThumb(orderItem.product.listImage, 50, 50, 'product_image')}"></th:block>-->
+                        <span th:text="${orderItem.product.name}"></span>
+                        <span th:text="${orderItem.ea + '개'}"></span>
+    <!--                    <th:block th:text="${period + '개월'}"></th:block>-->
+                        <span th:text="${orderItem.totalPrice + '원'}"></span>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="orderInfoSub">
+            <div>
+                <h3 th:text="#{배송지_정보}"></h3>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{받는분_이름}"></span>
+                <span class="text_right" th:text="*{receiverName}"></span>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{휴대전화번호}"></span>
+                <span class="text_right" th:text="*{receiverCellPhone}"></span>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{배송_주소}"></span>
+                <span class="text_right" th:text="*{address + addressSub}"></span>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{주소_상세}"></span>
+                <span class="text_right" th:text="*{addressSub}"></span>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{배송메모}"></span>
+                <span class="text_right" th:text="*{deliveryMemo}"></span>
+            </div>
+        </div>
+        <div class="orderInfoSub">
+            <div>
+                <h3 th:text="#{총 금액}"></h3>
+            </div>
+            <div>
+                <span class="text_left" th:text="#{결제금액}"></span>
+                <span class="text_right" th:text="*{totalPrice + '(상품합계) + ' +  totalDeliveryPrice + '(배송비) - ' + totalDiscount + '(총 할인금액) = ' + payPrice}"></span>
+            </div>
+        </div>
+    </div>
+</main>
+</html>
