@@ -5,8 +5,10 @@ import org.choongang.admin.cs.service.InquiryAnswerService;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.cs.controllers.RecordInquiry;
+import org.choongang.cs.entities.FeedbackPost;
 import org.choongang.cs.entities.Inquiry;
 import org.choongang.cs.entities.InquiryAnswer;
+import org.choongang.cs.service.FeedbackService;
 import org.choongang.cs.service.InquiryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import java.util.Objects;
 public class CsController {
     private final InquiryService inquiryService;
     private final InquiryAnswerService inquiryAnswerService;
+    private final FeedbackService feedbackService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
@@ -80,6 +83,9 @@ public class CsController {
     @GetMapping("/feedback")
     public String feedback(Model model) {
         commonProcess("feedback", model);
+
+        List<FeedbackPost> feedbackPost = feedbackService.getAllList();
+        model.addAttribute("feedbackPost", feedbackPost);
 
         return "admin/cs/feedback";
     }

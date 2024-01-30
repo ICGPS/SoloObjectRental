@@ -14,13 +14,45 @@
     /* 각 링크 사이의 간격 조절을 위한 마진 추가 */
     margin: 0 10px 0 0;
     }
+
+          h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .frmFindId {
+            width: 510px;
+            margin: 0 auto;
+        }
+
+        .frmFindId input {
+            padding: 0 20px;
+            width: 510px;
+            height: 60px;
+            line-height: 60px;
+            vertical-align: middle;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .frmFindId button {
+            width: 100%;
+            height: 50px;
+            padding: 11px 0 9px;
+            font-size: 18px;
+            line-height: 30px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 30px;
+        }
+
+
     </style>
     <div class="top_right">
         <a th:href="@{/main/index}">메인페이지</a>
         <a th:href="@{/member/find_pw}">비밀번호 찾기</a>
     </div>
     <h1 th:text="#{아이디_찾기}"></h1>
-    <form name="frmFindId" method="post" th:action="@{/member/find_id}" autocomplete="off" th:object="${requestFindId}">
+    <form name="frmFindId" method="post" th:action="@{/member/find_id}" autocomplete="off" th:object="${requestFindId}" class="frmFindId">
 
         <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
         <div class="error" th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
