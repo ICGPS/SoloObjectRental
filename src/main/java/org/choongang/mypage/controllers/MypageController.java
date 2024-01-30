@@ -218,7 +218,6 @@ public class MypageController implements ExceptionProcessor {
         return "redirect:/mypage/memberInfo";
     }
 
-
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -236,7 +235,6 @@ public class MypageController implements ExceptionProcessor {
         } else if (mode.equals("resign")) {
             pageTitle = utils.getMessage("회원 탈퇴", "commons");
         }
-            /* 회원 탈퇴 E */
 
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCss", addCss);

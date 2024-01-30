@@ -77,10 +77,22 @@
 }
 
 .feedbackPostAdd {
+
        width: 100%;
-        height: 300px;
-        background: pink;
-        text-align: center;
+       height: 300px;
+       text-align: center;
+}
+
+.feedbackPost_btn {
+       display: inline-flex;
+       width: 180px;
+       height: 50px;
+       background: #596b99;
+       border-radius: 10px;
+       color:#fff;
+       text-decoration: none;
+       align-items: center;
+       justify-content: center;
 }
 
 .inquiry_main {
