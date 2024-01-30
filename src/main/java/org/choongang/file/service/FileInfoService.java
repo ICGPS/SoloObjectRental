@@ -49,6 +49,7 @@ public class FileInfoService {
      *               UNDONE : 미완료된 파일
      * @return
      */
+
     public List<FileInfo> getList(String gid, String location, String mode) {
         QFileInfo fileInfo = QFileInfo.fileInfo;
 
