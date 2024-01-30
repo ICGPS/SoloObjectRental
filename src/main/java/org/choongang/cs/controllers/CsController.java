@@ -123,8 +123,7 @@ public class CsController implements ExceptionProcessor {
     }
 
     @PostMapping("/feedbackPostAdd")
-    public String handleFeedbackPostAdd(@ModelAttribute("feedbackPost") FeedbackPost feedbackPost,
-                                        @RequestParam("file") MultipartFile file, Principal principal) {
+    public String FeedbackPostAdd(@ModelAttribute("feedbackPost") FeedbackPost feedbackPost, @RequestParam("file") MultipartFile file, Principal principal) {
 
         String userName = principal.getName();
         feedbackPost.setAuthor(userName);
@@ -146,7 +145,7 @@ public class CsController implements ExceptionProcessor {
                 Files.write(path, bytes);
 
 
-                feedbackPost.setImageUrl("/images/" + fileName);
+                feedbackPost.setImageUrl("C:/uploads/" + fileName);
 
             } catch (IOException e) {
                 e.printStackTrace();
