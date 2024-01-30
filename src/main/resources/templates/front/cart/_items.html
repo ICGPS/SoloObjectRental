@@ -56,22 +56,23 @@
         <th:block th:text="*{ea}"></th:block>
         <th:block th:text="#{개}"></th:block>
       </td>
-      <td th:if="${mode == null || mode != 'order'}">
-        <input type="number" name="period" th:value="*{period}">
-        <button type="button" class="change_ea down">
-          <i class="xi-minus"></i>
-        </button>
-        <button type="button" class="change_ea up">
-          <i class="xi-plus"></i>
-        </button>
-      </td>
-      <td th:else="${mode == null || mode != 'order'}">
+      <td>
         <th:block th:text="*{period}"></th:block>
         <th:block th:text="#{개월}"></th:block>
+        (<th:block name="sdate" th:text="*{sdate}"></th:block>~
+        <th:block name="edate" th:text="*{edate}"></th:block>)
       </td>
-      </td>
-
-      </td>
+<!--      <td th:if="${mode == null || mode != 'order'}">-->
+<!--        <input type="number" name="period" th:value="*{period}">-->
+<!--        <button type="button" class="change_ea down">-->
+<!--          <i class="xi-minus"></i>-->
+<!--        </button>-->
+<!--        <button type="button" class="change_ea up">-->
+<!--          <i class="xi-plus"></i>-->
+<!--        </button>-->
+<!--      </td>-->
+<!--      <td th:else="${mode == null || mode != 'order'}">-->
+<!--      </td>-->
       <td>
         <span th:text="*{totalPrice >= 1000 ? #numbers.formatInteger(totalPrice, 3, 'COMMA') : totalPrice}"></span>
         <th:block th:text="#{원}"></th:block>

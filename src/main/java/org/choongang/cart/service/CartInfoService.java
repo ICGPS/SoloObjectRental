@@ -14,6 +14,7 @@ import org.choongang.product.entities.Product;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,6 +81,10 @@ public class CartInfoService {
     Product product = item.getProduct();
     int salePrice = product.getSalePrice();
     int ea = item.getEa();
+    LocalDate sdate = item.getSdate();
+//    System.out.println("sdate : " + sdate);
+    LocalDate edate = item.getEdate();
+//    System.out.println("edate : " + edate);
     int period = item.getPeriod();
 
     DiscountType type = product.getDiscountType();
