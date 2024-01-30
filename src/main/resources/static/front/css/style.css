@@ -14,9 +14,9 @@ dd { flex-grow: 1; }
 .layout_width { max-width: 1300px; margin: 0 auto; }
 
 /* 페이징 공통 S */
-.pagination { text-align: center; margin: 30px 0; }
-.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
-.pagination .page.on { background: #596b99; color: #fff; }
+.pagination { text-align: center; margin: 30px 0; justify-content: center;}
+.pagination .page { border: 1px solid #3e90d5; color: #3e90d5; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #3e90d5; color: #fff; }
 .pagination .page + .page { margin-left: 3px; }
 /* 페이징 공통 E */
 
@@ -38,7 +38,7 @@ header nav > .inner a:hover { background: #ffffff; }
 .search_btn {
     width: 50px;
     border: none;
-    background: #a78c7b;
+    background: #A7CFF1;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }

@@ -8,28 +8,76 @@ dl, dt, dd { margin: 0; padding: 0; }
 img { border: 0; }
 
 /* 헤더 영역 S */
-header { display: flex; justify-content: space-between; height: 80px; align-items: center; background: #fff; }
+header {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid #efefef;
+}
+
 header > section:first-of-type { width: 208px; text-align: center; }
 header > section:last-of-type { flex-grow: 1; padding-right: 20px; text-align: right; }
-header .btn_area a { display: inline-block; width: 90px; height: 28px; border: 1px solid #596b99; color: #596b99; border-radius: 5px; line-height: 26px; text-align: center; font-weight: 500; }
-header .btn_area a:last-of-type { background: #596b99; color: #fff; }
+
+header .btn_area a {
+    display: inline-block;
+    width: 90px;
+    height: 28px;
+    border: 1px solid #A7CFF1;
+    color: #666;
+    border-radius: 5px;
+    line-height: 26px;
+    text-align: center;
+    font-weight: 500;
+}
+
+header .btn_area a:last-of-type {
+    background: #A7CFF1;
+    color: #fff;
+}
 
 /* 헤더 영역 E */
 
 /* 내용 영역  S */
-main { background: #f1f3fa; min-height: 1000px; display: flex; }
-main > aside { width: 208px; background: #596b99; }
+main { background: #fff; min-height: 1000px; display: flex; }
+
+main > aside {
+    width: 208px;
+    background: #A7CFF1;
+}
+
 main > section { flex-grow: 1; padding: 50px; }
 
-main > aside > a { display: block; height: 71px; color: #dddee4; font-size: 1.385rem; text-align: center; line-height: 70px; position: relative; }
-main > aside > a + a { border-top: 1px solid #61729e; }
-main > aside > a i { color: #dddee4; font-size: 1.385rem; }
-main > aside > a.on, main > aside > a:hover { background: #3c4e7a; font-weight: 500; }
-main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #00d0d7; position: absolute; }
+main > aside > a {
+    display: block;
+    height: 71px;
+    color: #000;
+    font-size: 1.385rem;
+    text-align: center;
+    line-height: 70px;
+    position: relative;
+}
+
+main > aside > a + a {
+    border-top: 1px solid #75b4e9;
+}
+
+main > aside > a i {
+    color: #000;
+    font-size: 1.385rem;
+}
+
+main > aside > a.on, main > aside > a:hover {
+    background: #75b4e9;
+    font-weight: 500;
+}
+
+main > aside > a.on:after, main > aside > a:hover:after { content: ''; display: block; width: 8px; height: 100%; right: 0; top: 0; background: #3e90d5; position: absolute; }
 
 nav.submenus { box-shadow: 1px 1px 5px #cdced5; height: 60px; background: #fff; border-radius: 5px; margin-bottom: 50px; display: flex; align-items: center; }
 nav.submenus a { height: 60px; line-height: 60px; padding: 0 40px; font-size: 1.385rem; color: #222; }
-nav.submenus a.on { background: #596b99; color: #fff; font-weight: 500; }
+nav.submenus a.on { background: #75b4e9; color: #fff; font-weight: 500; }
 
 /* 내용 영역 E */
 
@@ -41,15 +89,15 @@ h2 { margin: 0 0 10px 0; font-size: 1.385rem; line-height: 1; }
 /* 테이블 공통 S */
 .table_cols { border-spacing: 0; width: 100%; border-top: 2px solid #222; background: #fff; }
 .table_cols th, .table_cols td { padding: 10px; border-bottom: 1px solid #d5d5d5; }
-.table_cols th { background: #ccc; font-weight: normal; }
+.table_cols th { background: #ddd; font-weight: normal; }
 
 .table_rows { border-spacing: 0; width: 100%; background: #fff; }
-.table_rows thead th { background: #596b99; color: #fff; font-weight: normal; padding: 7px 10px; }
+.table_rows thead th { background: #75b4e9; color: #fff; font-weight: normal; padding: 7px 10px; }
 .table_rows thead th + th { border-left: 1px solid #fff; }
 
 .table_rows tbody td { border-bottom: 1px solid #ccc; padding: 7px 10px; }
 
-.table_actions { background: #fff; padding: 7px 10px; border-bottom: 1px solid #ccc; }
+.table_actions { background: #fff; padding: 7px 10px; /*border-bottom: 1px solid #ccc;*/ }
 /* 테이블 공통 E */
 
 /* 입력 공통 S */
@@ -67,10 +115,10 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 .submit_btns .btn:last-of-type { background: #222; color: #fff; }
 
 .search_btn { text-align: center; margin: 20px 0 30px; }
-.search_btn .btn { display: inline-block; min-width: 200px; text-align: center; font-size:1.4rem; font-weight: 500; height: 45px; line-height: 45px; background: #596b99; color: #fff; cursor: pointer; border-radius: 3px; border: 0; }
+.search_btn .btn { display: inline-block; min-width: 200px; text-align: center; font-size:1.4rem; font-weight: 500; height: 45px; line-height: 45px; background: #75b4e9; color: #fff; cursor: pointer; border-radius: 3px; border: 0; }
 
 .sbtn { border: 1px solid #222; color: #222; background: #fff; display: inline-block; padding: 7px 20px; border-radius: 3px; cursor: pointer; line-height: 1; }
-.sbtn:hover, .sbtn.on { background: #596b99; color: #fff; border-color: #596b99; }
+.sbtn:hover, .sbtn.on { background: #75b4e9; color: #fff; border-color: #75b4e9; }
 .sbtn i { color: #222; font-size: 1.1rem; vertical-align: middle; line-height: 1; }
 .sbtn:hover i, .sbtn.on i { color: #fff; }
 
@@ -88,8 +136,8 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 
 /* 페이징 공통 S */
 .pagination { text-align: center; margin: 30px 0; }
-.pagination .page { border: 1px solid #596b99; color: #596b99; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
-.pagination .page.on { background: #596b99; color: #fff; }
+.pagination .page { border: 1px solid #3e90d5; color: #3e90d5; display: inline-block; padding: 5px 10px; border-radius: 3px; background: #fff; }
+.pagination .page.on { background: #3e90d5; color: #fff; }
 .pagination .page + .page { margin-left: 3px; }
 /* 페이징 공통 E */
 
@@ -113,11 +161,11 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 }
 
 .inquiry_table tr:hover {
-    background: rgba(97, 114, 158, 0.3);
+    background: rgba(117, 180, 233, 0.3);
 }
 
 .inquiry_table th {
-    background: #ccc;
+    background: #ddd;
     padding: 10px;
     border: 1px solid #d5d5d5;
 }
@@ -128,7 +176,7 @@ select { border: 1px solid #d5d5d5; height: 35px; }
 }
 
 .inquiry_table td a:hover {
-     color: #fff;
+     font-weight: bold;
 }
 
 .inquiry_detail {
