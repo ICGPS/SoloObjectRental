@@ -25,4 +25,7 @@ public class DeliveryList extends Base {
     private String zonecode;
     private String address;
     private String addressSub;
+
+    public void add(DeliveryList deliveryList) {
+    }
 }

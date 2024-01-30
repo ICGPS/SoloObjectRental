@@ -11,6 +11,7 @@ import org.choongang.order.constants.OrderStatus;
 import org.choongang.product.entities.Product;
 import org.choongang.product.entities.ProductOption;
 
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -38,6 +39,8 @@ public class OrderItem extends Base {
   private ProductOption option;
 
   private int ea = 1; // 주문수량
+  private LocalDate sdate; // 대여시작일
+  private LocalDate edate; // 대여종료일
 
   @Column(length=150, nullable = false)
   private String productName; // 주문 시점의 상품 명

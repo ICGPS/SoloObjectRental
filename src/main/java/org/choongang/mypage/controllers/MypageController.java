@@ -12,6 +12,8 @@ import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.member.service.MemberUpdateService;
 import org.choongang.mypage.service.ResignService;
+import org.choongang.order.entities.OrderInfo;
+import org.choongang.order.service.OrderInfoService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +42,7 @@ public class MypageController implements ExceptionProcessor {
     private final ProfileValidator profileValidator;
     private final ResignValidator resignValidator;
     private final ResignService resignService;
+    private final OrderInfoService orderInfoService;
 
     @GetMapping
     public String myPage(Model model) {
@@ -169,8 +173,23 @@ public class MypageController implements ExceptionProcessor {
         return "front/mypage/paymentList";
     }
 
+
+    /*
     @GetMapping("/lentalList")
     public String lentalList(Model model) {
+        return "front/mypage/lentalList";
+    }
+    */
+
+    @GetMapping("/lentalList")
+    public String lentalList(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            List<OrderInfo> memberOrders = orderInfoService.getOrderInfoByEmail(email);
+            model.addAttribute("memberOrders", memberOrders);
+        System.out.println(memberOrders);
+            System.out.println(email);
+        }
         return "front/mypage/lentalList";
     }
 
@@ -217,6 +236,15 @@ public class MypageController implements ExceptionProcessor {
         //        }
         return "redirect:/mypage/memberInfo";
     }
+
+
+    @GetMapping("/delivery")
+    public String delivery(Model model) {
+
+        return utils.tpl("mypage/delivery");
+    }
+
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";

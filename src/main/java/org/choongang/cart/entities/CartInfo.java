@@ -11,6 +11,8 @@ import org.choongang.file.entities.FileInfo;
 import org.choongang.member.entities.Member;
 import org.choongang.product.entities.Product;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @Entity
@@ -35,6 +37,9 @@ public class CartInfo extends Base {
   private Member member;
 
   private int ea = 1; // 주문수량
+
+  private LocalDate sdate;
+  private LocalDate edate;
   private int period; // 대여 기간
 
   @Transient

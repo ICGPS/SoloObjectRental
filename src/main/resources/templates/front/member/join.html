@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
+<main layout:fragment="content" class="join">
     <style>
         .top_right {
         position: absolute;
@@ -28,7 +28,7 @@
         <dl>
             <dt th:text="#{이메일}"></dt>
             <dd>
-                <div>
+                <div class="email">
                     <input type="text" name="email" th:field="*{email}" th:readonly="${session.EmailAuthVerified != null && session.EmailAuthVerified}">
                     <button th:if="${session.EmailAuthVerified == null || !session.EmailAuthVerified}" type="button" id="email_verify" th:text="#{인증코드전송}"></button>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
             </dd>
         </dl>
-
+        <dl>
         <dt th:text="#{닉네임}"></dt>
         <dd>
             <input type="text" name="userName" th:field="*{userName}">
@@ -106,7 +106,7 @@
         <dl>
             <dt th:text="#{주소}"></dt>
             <dd>
-                <div>
+                <div class="address">
                     <input type="text" name="zonecode" id="zonecode" th:field="*{zonecode}" readonly th:placeholder="#{우편번호}">
                     <button type="button" th:text="#{주소_찾기}" class="search_address" data-zonecode-id="zonecode" data-address-id="address"></button>
                 </div>
@@ -145,7 +145,7 @@
 
             <div class="error" th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
         </div>
-        <button type="submit" th:text="#{가입하기}"></button>
+        <button type="submit" th:text="#{가입하기}" class="join_btn"></button>
     </form>
 
     <script th:replace="~{common/_file_tpl::image1_tpl}"></script>
