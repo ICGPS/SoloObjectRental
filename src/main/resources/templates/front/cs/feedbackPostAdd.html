@@ -55,12 +55,10 @@
 
    <h2>칭찬 / 개선</h2>
 
-   <form action="" method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}" enctype="multipart/form-data">
-
-      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+   <form method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}">
 
       <textarea id="feedback" name="feedback" rows="4" cols="50" th:field="*{content}" required></textarea>
-      <p>파일첨부: <input type="file" name="file"></p>
+      <p>파일첨부: </p>
 
       <input type="submit" value="전송">
    </form>

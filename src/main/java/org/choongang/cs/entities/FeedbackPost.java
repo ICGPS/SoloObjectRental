@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -14,6 +15,9 @@ public class FeedbackPost {
     @Id
     @GeneratedValue
     private Long seq; // 문의사항 번호
+
+    @Column(length=65)
+    private String gid = UUID.randomUUID().toString();
 
     @Column(length = 50, nullable = false)
     private String author;
