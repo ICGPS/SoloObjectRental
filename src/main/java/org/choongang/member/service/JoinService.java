@@ -45,6 +45,7 @@ public class JoinService {
         member.setTel(form.getTel());
         member.setBDay(form.getBDay());
         member.setAddress((form.getAddress()));
+        member.setAddressSub(form.getAddressSub());
 //        member.setNation(form.getNation());
 
         process(member);

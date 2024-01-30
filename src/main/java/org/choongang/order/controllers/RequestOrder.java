@@ -1,5 +1,6 @@
 package org.choongang.order.controllers;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -42,5 +43,8 @@ public class RequestOrder {
   private String payType = PayType.LBT.name(); // 결제 수단
 
   private String depositor; // 무통장 입금일 경우 입금자명
+
+  @AssertTrue
+  private boolean agree;
 
 }

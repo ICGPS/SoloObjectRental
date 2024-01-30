@@ -8,6 +8,8 @@ import org.choongang.commons.Utils;
 import org.choongang.member.service.FindIdService;
 import org.choongang.member.service.FindPwService;
 import org.choongang.member.service.JoinService;
+import org.choongang.member.service.MemberDeleteService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -28,6 +30,7 @@ public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
     private final FindPwService findPwService;
+    private final MemberDeleteService memberDeleteService;
     private final FindIdService findIdService;
     private final FindIdValidator findIdValidator;
 
@@ -177,6 +180,23 @@ public class MemberController implements ExceptionProcessor {
 
         return utils.tpl("member/mainPage");
     }
+
+    /**
+     * 회원탈퇴
+     * @param model
+     * @return
+     */
+    @GetMapping("/delete")
+    public String deleteMember(Model model) {
+        commonProcess("deleteMember", model);
+
+        memberDeleteService.deleteMember();
+
+        return "redirect:/main/index";
+    }
+
+
+
 
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "join";
