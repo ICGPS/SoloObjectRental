@@ -90,6 +90,16 @@ public class CsController {
         return "admin/cs/feedback";
     }
 
+    @GetMapping("/feedbackDetail/{seq}")
+    public String feedbackDetail(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("feedback", model);
+
+        FeedbackPost feedbackPost = feedbackService.getOne(seq);
+        model.addAttribute("feedbackPost", feedbackPost);
+
+        return "admin/cs/feedback_detail";
+    }
+
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "cs");
         String pageTitle = "CS";

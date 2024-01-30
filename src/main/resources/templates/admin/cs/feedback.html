@@ -14,7 +14,9 @@
         </tr>
         <tr th:each="item : ${feedbackPost}" th:object="${feedbackPost}">
             <td th:text="${item.seq}"></td>
-            <td th:text="${item.content}"></td>
+            <td>
+                <a th:text="${item.content}" th:href="@{/admin/cs/feedbackDetail/{seq}(seq = ${item.seq})}"></a>
+            </td>
             <td th:text="${item.author}"></td>
             <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}"></td>
         </tr>
