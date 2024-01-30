@@ -37,7 +37,6 @@ public class OrderController implements ExceptionProcessor {
   private final CartDeleteService cartDeleteService;
   private final OrderSaveService orderSaveService;
   private final OrderStatusService orderStatusService;
-  private final OrderInfoService orderInfoService;
 
   private final Utils utils;
 
