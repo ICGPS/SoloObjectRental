@@ -6,12 +6,14 @@
     <h1>1:1 문의관리</h1>
     <table class="inquiry_table table table-hover">
         <tr class="table-secondary">
+            <th>NO</th>
             <th>문의유형</th>
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
         </tr>
         <tr th:each="item : ${inquiryList}" th:object="${inquiryList}">
+            <td th:text="${item.seq}"></td>
             <td th:text="${item.categoryType}"></td>
             <td>
                 <a th:text="${item.title}" th:href="@{cs/adminInquiryDetail/{seq}(seq = ${item.seq})}"></a>
