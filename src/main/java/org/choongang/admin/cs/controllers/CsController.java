@@ -5,8 +5,10 @@ import org.choongang.admin.cs.service.InquiryAnswerService;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.cs.controllers.RecordInquiry;
+import org.choongang.cs.entities.FeedbackPost;
 import org.choongang.cs.entities.Inquiry;
 import org.choongang.cs.entities.InquiryAnswer;
+import org.choongang.cs.service.FeedbackService;
 import org.choongang.cs.service.InquiryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,7 @@ import java.util.Objects;
 public class CsController {
     private final InquiryService inquiryService;
     private final InquiryAnswerService inquiryAnswerService;
+    private final FeedbackService feedbackService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
@@ -52,7 +55,7 @@ public class CsController {
 
         InquiryAnswer inquiryAnswer = inquiryAnswerService.getOne(seq);
         model.addAttribute("inquiryAnswer", inquiryAnswer);
-        
+
         return "admin/cs/inquiry_detail";
     }
 
@@ -81,7 +84,20 @@ public class CsController {
     public String feedback(Model model) {
         commonProcess("feedback", model);
 
+        List<FeedbackPost> feedbackPost = feedbackService.getAllList();
+        model.addAttribute("feedbackPost", feedbackPost);
+
         return "admin/cs/feedback";
+    }
+
+    @GetMapping("/feedbackDetail/{seq}")
+    public String feedbackDetail(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("feedback", model);
+
+        FeedbackPost feedbackPost = feedbackService.getOne(seq);
+        model.addAttribute("feedbackPost", feedbackPost);
+
+        return "admin/cs/feedback_detail";
     }
 
     private void commonProcess(String mode, Model model) {

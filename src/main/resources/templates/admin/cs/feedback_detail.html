@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+<section layout:fragment="content" class="inquiry_detail">
+    <h1>칭찬/개선</h1>
+
+    <p th:text="${#temporals.format(feedbackPost.createdAt, 'yyyy-MM-dd')}"></p>
+    <h2 th:text="${feedbackPost.content}"></h2>
+
+
+</section>
+</html>

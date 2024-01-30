@@ -18,6 +18,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         HttpSession session = request.getSession();
 
+        exception.printStackTrace();
 
         // 세션 로그인 실패 메세지 일괄 삭제
         MemberUtil.clearLoginData(session);

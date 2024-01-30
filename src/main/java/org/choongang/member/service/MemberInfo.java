@@ -53,5 +53,7 @@ public class MemberInfo implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() { return enable; }
+    public boolean isEnabled() {
+        return enable;
+    }
 }

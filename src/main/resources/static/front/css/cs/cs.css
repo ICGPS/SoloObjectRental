@@ -1,7 +1,3 @@
-.cs_main {
-    min-height: 1000px;
-}
-
 .visual_box {
     width: 100%;
     height: 500px;
@@ -36,11 +32,10 @@
     width: 300px;
     padding: 20px;
     margin: 10px;
-    background: #7a8e95;
+    background: #A7CFF1;
     border-radius: 10px;
     text-align: center;
-    font-size: 20px;
-
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,18 +43,18 @@
 
 .service_btn_box a:active,
  .service_btn_box a:hover {
-    background: #213f5d;
+    background: #75b4e9;
 }
 
 .service_btn_box a i {
     font-size: 24px;
-    color: #fff;
+    color: #000;
     margin-top: 2px;
 }
 
 .service_btn_box a span {
     font-size: 22px;
-    color: #fff;
+    color: #000;
     padding-left: 5px;
 }
 
@@ -78,15 +73,32 @@
 
 .feedbackPostAdd {
        width: 100%;
-        height: 300px;
-        background: pink;
-        text-align: center;
+       height: 300px;
+       text-align: center;
+}
+
+.feedbackPost_btn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    padding: 11px 0 9px;
+    background: #A7CFF1;
+    border-radius: 10px;
+    color:#000;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.feedbackPost_btn:active,
+.feedbackPost_btn:hover {
+    background: #75b4e9;
+    color: #000;
 }
 
 .inquiry_main {
-       min-height: 1000px;
-       text-align: center;
-       padding: 50px;
+    text-align: center;
 }
 
 .inquiry_main h3 {
@@ -98,16 +110,30 @@
     margin: 5px 0;
 }
 
+.inquiry_main form {
+    max-width: 600px;
+    margin: 50px auto 0 auto;
+}
+
 .inquiry_btn {
     display: inline-flex;
-    width: 180px;
+    width: 200px;
     height: 50px;
-    background: #596b99;
+    padding: 11px 0 9px;
+    background: #A7CFF1;
     border-radius: 10px;
-    color:#fff;
+    color:#000;
+    font-size: 18px;
     text-decoration: none;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
+}
+
+.inquiry_btn:active,
+ .inquiry_btn:hover {
+    background: #75b4e9;
+    color: #000;
 }
 
 .inquiry_box {
@@ -133,6 +159,17 @@
 .submit_btns .btn {
     padding: 10px 15px;
     font-size: 16px;
+}
+
+.submit_btns .btn-success {
+    background: #A7CFF1;
+    border: 1px solid #A7CFF1;
+    color: #000;
+}
+
+.submit_btns .btn-success:active,
+.submit_btns .btn-success:hover {
+    background: #3e90d5;
 }
 
 .inquiry_table {
@@ -169,3 +206,28 @@
     display: block !important;
     background: #efefef;
 }
+
+.inquiryAdd_done h1 {
+    text-align: center;
+}
+
+.inquiryAdd_done a {
+    display: block;
+    width: 200px;
+    height: 50px;
+    padding: 11px 0 9px;
+    background: #A7CFF1;
+    border-radius: 10px;
+    color: #000;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    margin: 50px auto;
+    border: none;
+}
+
+.inquiryAdd_done a:active,
+.inquiryAdd_done a:hover {
+    background: #75b4e9;
+}
+
