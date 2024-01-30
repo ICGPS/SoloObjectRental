@@ -10,8 +10,11 @@ import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.order.constants.OrderStatus;
 import org.choongang.order.entities.OrderInfo;
+import org.choongang.order.service.OrderInfoService;
 import org.choongang.order.service.OrderSaveService;
 import org.choongang.order.service.OrderStatusService;
+import org.choongang.order.entities.OrderInfo;
+import org.choongang.order.service.OrderInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -29,9 +32,12 @@ import java.util.List;
 public class OrderController implements ExceptionProcessor {
 
   private final CartInfoService cartInfoService;
+  private final OrderInfoService orderInfoService;
+
   private final CartDeleteService cartDeleteService;
   private final OrderSaveService orderSaveService;
   private final OrderStatusService orderStatusService;
+  private final OrderInfoService orderInfoService;
 
   private final Utils utils;
 
@@ -78,10 +84,30 @@ public class OrderController implements ExceptionProcessor {
 
     status.setComplete(); // cartData 세션 비우기
 
-
+    model.addAttribute("orderInfo", orderInfo);
 
     return "redirect:/order/end/" + orderInfo.getSeq();
+//    return utils.tpl("order/end");
   }
+
+  @GetMapping("/end/{seq}")
+  public String orderEnd(@PathVariable("seq") Long seq, Model model) {
+    OrderInfo orderInfo = orderInfoService.get(seq);
+
+    model.addAttribute("orderInfo", orderInfo);
+
+    return utils.tpl("order/end");
+  }
+
+  /* 구매 영수증 연결 추가 S */
+  @GetMapping("/purchaseReceipt")
+  // (GET에서 사용) orderDone에 매개변수를 넣은 것 = "/purchaseReceipt?매개변수" 엔트포인트에 쿼리스트링으로 넣는 것과 동일
+  public String orderDone(@RequestParam Long orderSeq, Model model) {
+    OrderInfo orderInfo = orderInfoService.get(orderSeq);
+    model.addAttribute("orderInfo", orderInfo);
+    return utils.tpl("mypage/purchaseReceipt");
+  }
+  /* 구매 영수증 연결 추가 E */
 
   /**
    * 주문 공통 처리

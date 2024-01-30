@@ -6,6 +6,7 @@ import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -18,6 +19,7 @@ public class ResignValidator implements Validator {
     private final EmailVerifyService emailVerifyService;
     private final MemberUtil memberUtil;
     private final PasswordEncoder encoder;
+
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -35,32 +37,31 @@ public class ResignValidator implements Validator {
         } else {
             validateStep1(form, errors);
         }
+
     }
 
     /**
      * 1. 비밀번호, 비밀번호 확인 - 필수 항목
-     * 2. 비밀번호, 비밀번호 확인 일치 여부
-     * 3. 비밀번호와 회원 정보 일치 여부
+     * 2. 비밀번호, 비밀번호 확인의 일치 여부
+     * 3. 비밀번호와 회원 정보의 일치 여부
      *
      * @param form
      * @param errors
      */
     private void validateStep1(RequestResign form, Errors errors) {
         String password = form.getPassword();
-        String confirmPassWord = form.getConfirmPassword();
+        String confirmPassword = form.getConfirmPassword();
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotBlank");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotBlank");
 
-        if (StringUtils.hasText(password) && StringUtils.hasText(confirmPassWord)&& !password.equals(confirmPassWord)) {
-
-            errors.rejectValue("confirmPassword", "Mismatch.password");
+        if (StringUtils.hasText(password) && StringUtils.hasText(confirmPassword)
+                && !password.equals(confirmPassword)) {
+                errors.rejectValue("confirmPassword", "Mismatch.password");
         }
-
         if (memberUtil.isLogin()) {
             Member member = memberUtil.getMember();
-
-            if (!encoder.matches(password , member.getPassword())) {
+            if (!encoder.matches(password, member.getPassword())) {
                 errors.rejectValue("password", "Mismatch");
             }
         }
@@ -79,7 +80,7 @@ public class ResignValidator implements Validator {
             errors.rejectValue("authCode", "NotNull");
         }
 
-        if (authCode != null && emailVerifyService.check(authCode)) {
+        if (authCode != null && !emailVerifyService.check(authCode)) {
             errors.rejectValue("authCode", "Mismatch");
         }
     }

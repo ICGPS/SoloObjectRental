@@ -32,6 +32,7 @@ public class MemberController implements ExceptionProcessor {
     private final FindPwService findPwService;
     private final MemberDeleteService memberDeleteService;
     private final FindIdService findIdService;
+    private final FindIdValidator findIdValidator;
 
     @GetMapping("/join")
     public String join(@ModelAttribute RequestJoin form, Model model) {
@@ -91,17 +92,19 @@ public class MemberController implements ExceptionProcessor {
      * @param model
      * @return
      */
-    
+
     @PostMapping("/find_id")
     public String findIdPs(@Valid RequestFindId form, Errors errors, Model model) {
         commonProcess("find_id", model);
 
-        findIdService.sendUserId(form.name(), form.email());
+        findIdValidator.validate(form, errors);
 
         if (errors.hasErrors()) {
 
             return utils.tpl("member/find_id");
         }
+
+        findIdService.sendUserId(form.name(), form.email());
 
         return utils.tpl("member/find_id_done");
     }

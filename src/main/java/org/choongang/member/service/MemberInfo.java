@@ -53,8 +53,7 @@ public class MemberInfo implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() { //회원탈퇴기능에 쓰일 수 있음
+    public boolean isEnabled() {
         return enable;
-        // return true;
     }
 }

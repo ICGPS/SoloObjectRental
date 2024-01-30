@@ -22,6 +22,7 @@ public class ResignService {
         Member member = memberUtil.getMember();
         member.setEnable(false);
         member.setName("****");
+
         String gid = member.getGid();
 
         repository.saveAndFlush(member);

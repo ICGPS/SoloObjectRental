@@ -2,6 +2,7 @@ package org.choongang.mypage.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
 import org.choongang.email.service.EmailVerifyService;
@@ -33,12 +34,11 @@ public class MypageController implements ExceptionProcessor {
     private final Utils utils;
     private final MemberUtil memberUtil;
     private final MemberUpdateService memberUpdateService;
-    private final ProfileValidator profileValidator;
-
-    private final ResignValidator resignValidator;
-    private final ResignService resignService;
 
     private final EmailVerifyService emailVerifyService;
+    private final ProfileValidator profileValidator;
+    private final ResignValidator resignValidator;
+    private final ResignService resignService;
 
     @GetMapping
     public String myPage(Model model) {
@@ -218,63 +218,6 @@ public class MypageController implements ExceptionProcessor {
         return "redirect:/mypage/memberInfo";
     }
 
-    @GetMapping("/resign")
-    public String resignStep1(@ModelAttribute RequestResign form, Model model) {
-        commonProcess("resign", model);
-
-        return utils.tpl("mypage/resign");
-    }
-
-    // 이메일로 전송된 코드 확인
-    @PostMapping("/resign")
-    public String resignStep2(RequestResign form, Errors errors, Model model) {
-        commonProcess("resign", model); // 비밀번호, 비밀번호 확인
-
-        form.setMode("step1");
-        resignValidator.validate(form, errors);
-
-        if (errors.hasErrors()) {
-            return utils.tpl("mypage/resign");
-        }
-        
-        // 메일로 인증 코드 발송
-        emailVerifyService.sendCode(memberUtil.getMember().getEmail());
-
-        return utils.tpl("mypage/resign_auth");
-    }
-
-    /**
-     * 회원탈퇴 완료
-     *          enable -> false, 로그아웃 -> 비회원도 접근 가능
-     * @param model
-     * @return
-     */
-    @PostMapping("/resign_done")
-
-    public String resignProcess(RequestResign form, Errors errors, Model model) {
-        commonProcess("resign", model); // 인증번호 여부
-
-        form.setMode("step2");
-        resignValidator.validate(form, errors);
-
-        if (errors.hasErrors()) { // 인증 코드 실패시
-            return utils.tpl("mypage/resign_auth");
-        }
-
-        // 회원 탈퇴 처리
-        resignService.resign();
-
-        return "redirect:/mypage/resign_done";
-    }
-
-    @GetMapping("/resign_done")
-    @PreAuthorize("permitAll()")
-    public String resignDone(Model model) {
-        commonProcess("resign", model);
-
-        return utils.tpl("mypage/resign_auth");
-    }
-
     private void commonProcess(String mode, Model model) {
         mode = StringUtils.hasText(mode) ? mode : "main";
         String pageTitle = Utils.getMessage("마이페이지", "commons");
@@ -288,8 +231,9 @@ public class MypageController implements ExceptionProcessor {
             addCommonScript.add("fileManager");
             addScript.add("mypage/profile");
 
+            /* 회원 탈퇴 S */
         } else if (mode.equals("resign")) {
-            pageTitle = Utils.getMessage("회원_탈퇴", "commons");
+            pageTitle = utils.getMessage("회원 탈퇴", "commons");
         }
 
         model.addAttribute("pageTitle", pageTitle);

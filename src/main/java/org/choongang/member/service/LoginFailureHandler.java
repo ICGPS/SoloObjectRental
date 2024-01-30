@@ -41,8 +41,9 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             session.setAttribute("Global_error", Utils.getMessage("Fail.login", "errors"));
         }
 
-        // 탈퇴한 회원
-        if (exception instanceof DisabledException) {
+
+        // 탈퇴환 회원
+        if(exception instanceof DisabledException) {
             session.setAttribute("Global_error", Utils.getMessage("Resign.member", "errors"));
         }
 
