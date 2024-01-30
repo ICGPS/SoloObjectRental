@@ -1,7 +1,3 @@
-.cs_main {
-    min-height: 1000px;
-}
-
 .visual_box {
     width: 100%;
     height: 500px;
@@ -102,9 +98,7 @@
 }
 
 .inquiry_main {
-    min-height: 1000px;
     text-align: center;
-    padding: 50px;
 }
 
 .inquiry_main h3 {
