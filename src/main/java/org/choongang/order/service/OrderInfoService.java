@@ -28,4 +28,15 @@ public class OrderInfoService {
   public List<OrderInfo> orderList() {
     return orderInfoRepository.findAll();
   }
+
+
+  /**
+   * 회원명에 해당하는 주문 정보 조회
+   *
+   * @param email 회원명
+   * @return 주문 정보 리스트
+   */
+  public List<OrderInfo> getOrderInfoByEmail(String email) {
+    return orderInfoRepository.findByorderEmail(email);
+  }
 }
