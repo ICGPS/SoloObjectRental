@@ -66,10 +66,23 @@
         </div>
         <div class="section-spacing radio">
             <label>배송지 선택</label>
+<!--            <th:block th:each="DeliveryList : ${deliveryList}" th:object="${deliveryList}">-->
+<!--                주소내용 출력-->
+<!--            </th:block>-->
+<th:block th:text="${deliveryList}"></th:block>
+            <ul>
+                <li th:each="delivery : ${deliveryList}">
+                    <span th:text="${delivery.zonecode}"></span>
+                    <span th:text="${delivery.address}"></span>
+                    <span th:text="${delivery.addressSub}"></span>
+                </li>
+            </ul>
+
             <div>
                 <input type="radio" id="mainAddress" name="deliveryType" placeholder="배송지를 입력해주세요">
                 <label for="mainAddress">배송지</label>
             </div>
+
             <div>
                 <input type="radio" id="newAddress1" name="deliveryType" placeholder="배송지를 입력해주세요">
                 <label for="newAddress1">새 배송지 1</label>

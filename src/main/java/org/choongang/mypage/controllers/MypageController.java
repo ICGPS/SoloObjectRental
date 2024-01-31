@@ -9,7 +9,9 @@ import org.choongang.email.service.EmailVerifyService;
 import org.choongang.file.entities.FileInfo;
 import org.choongang.file.service.FileInfoService;
 import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.DeliveryList;
 import org.choongang.member.entities.Member;
+import org.choongang.member.repositories.DeliveryListRepository;
 import org.choongang.member.service.MemberUpdateService;
 import org.choongang.mypage.service.ResignService;
 import org.choongang.order.entities.OrderInfo;
@@ -43,6 +45,7 @@ public class MypageController implements ExceptionProcessor {
     private final ResignValidator resignValidator;
     private final ResignService resignService;
     private final OrderInfoService orderInfoService;
+    private final DeliveryListRepository deliveryListRepository;
 
     @GetMapping
     public String myPage(Model model) {
@@ -239,8 +242,20 @@ public class MypageController implements ExceptionProcessor {
 
 
     @GetMapping("/delivery")
-    public String delivery(Model model) {
+    public String delivery(@ModelAttribute DeliveryList form, Model model) {
+        commonProcess("delivery",model);
 
+        Member member = memberUtil.getMember();
+        if (member != null) {
+            // Member 객체에서 DeliveryList 목록 가져오기
+            List<DeliveryList> deliveryList = member.getAddress();
+//            List<DeliveryList> deliveryList = deliveryListRepository.findDeliveryListByMember(member);
+            System.out.println("///////////////////" + deliveryList);
+
+            // 모델에 배송지 목록 추가
+            model.addAttribute("deliveryList", deliveryList);
+
+        }
         return utils.tpl("mypage/delivery");
     }
 
