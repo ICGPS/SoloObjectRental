@@ -3,14 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content" class="inquiry_detail">
-    <h1>칭찬/개선</h1>
+    <h1>1:1문의 답변하기</h1>
 
     <p th:text="${#temporals.format(feedbackPost.createdAt, 'yyyy-MM-dd')}"></p>
     <h2 th:text="${feedbackPost.content}"></h2>
 
-    <div th:if="${feedbackPost.image != null}">
-        <img th:src="${feedbackPost.image.fileUrl}" style="max-width: 400px;">
-    </div>
 
 </section>
 </html>

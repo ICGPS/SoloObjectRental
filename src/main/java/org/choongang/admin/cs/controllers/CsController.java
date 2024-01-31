@@ -10,6 +10,10 @@ import org.choongang.cs.entities.Inquiry;
 import org.choongang.cs.entities.InquiryAnswer;
 import org.choongang.cs.service.FeedbackService;
 import org.choongang.cs.service.InquiryService;
+import org.choongang.orderDetails.entities.QnA;
+import org.choongang.orderDetails.service.QnAService;
+import org.choongang.product.entities.Product;
+import org.choongang.product.service.ProductInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,8 @@ public class CsController {
     private final InquiryService inquiryService;
     private final InquiryAnswerService inquiryAnswerService;
     private final FeedbackService feedbackService;
+    private final QnAService qnAService;
+    private final ProductInfoService productInfoService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
@@ -75,6 +81,12 @@ public class CsController {
     @GetMapping("/product")
     public String product(Model model) {
         commonProcess("product", model);
+
+        List<QnA> qnaList = qnAService.getAllList();
+        model.addAttribute("qnaList", qnaList);
+
+        List<Product> productList = productInfoService.getAllProducts();
+        model.addAttribute("productList", productList);
 
         return "admin/cs/product_inquiry";
     }

@@ -1,6 +1,7 @@
 package org.choongang.orderDetails.service;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.cs.entities.Inquiry;
 import org.choongang.member.MemberUtil;
 import org.choongang.member.entities.Member;
 import org.choongang.orderDetails.entities.QnA;
@@ -28,5 +29,9 @@ public class QnAService {
     public List<QnA> getQnAList(Long productSeq) {
 
         return qnARepository.findByProductSeqOrderByCreatedAtDesc(productSeq);
+    }
+
+    public List<QnA> getAllList() {
+        return qnARepository.findAll();
     }
 }

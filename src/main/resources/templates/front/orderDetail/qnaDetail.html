@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>문의 작성</title>
-
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -45,6 +43,8 @@
         }
     </style>
 
+    <title>문의 작성</title>
+
 </head>
 
 <body>
@@ -52,7 +52,7 @@
 
     <input type="hidden" name="productSeq" th:value="${param.seq}">
 
-    <textarea id="reviewContent" name="content" class="form-control" placeholder="문의 사항을 작성해주세요."></textarea>
+    <textarea id="qnaContent" name="content" class="form-control" placeholder="문의 사항을 작성해주세요."></textarea>
 
     <button type="submit">작성 완료</button>
 </form>

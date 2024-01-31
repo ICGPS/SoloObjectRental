@@ -174,4 +174,8 @@ public class ProductInfoService {
         product.setMainImages(mainImages);
         product.setListImages(listImages);
     }
+
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }
