@@ -138,7 +138,8 @@
         <!--        </dl>-->
 
         <div th:text="#{회원가입_약관}"></div>
-        <textarea class="terms" th:utext="${@utils.nl2br(siteConfig.joinTerms)}" readonly></textarea>
+<!--        <textarea class="terms" th:utext="${@utils.nl2br(siteConfig.joinTerms)}" readonly></textarea>-->
+        <textarea class="terms" th:utext="${siteConfig.joinTerms}" readonly></textarea>
         <div class="terms_agree">
             <input type="checkbox" name="agree" value="true" id="agree" th:field="*{agree}">
             <label for="agree" th:text="#{회원가입_약관에_동의합니다.}"></label>
