@@ -10,12 +10,16 @@
         #bottomBar {
             width: 100%;
             height: 100px;
-            background: #CFD8DC;
+            background: #A7CFF1;
             color: #fff;
             visibility: hidden;
             position: fixed;
             left: 0;
             bottom: 0;
+            border: none;
+            border-top: 5px solid #FFDC91;
+            align-items: center;
+            justify-content: center;
         }
 
         input[type="number"]::-webkit-inner-spin-button,
@@ -28,48 +32,9 @@
             -moz-appearance: textfield;
         }
 
-        #qna {
-            margin-bottom: 20px;
-            padding: 0 0 0 25px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        #qna ul li {
-            margin-bottom: 10px;
-        }
-
-        #qna ul li div {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        #qna ul li p {
-            margin-top: 10px;
-        }
-
-        #qna ul li div span:first-child {
-            margin: 20px 0;
-            text-align: right;
-        }
-
-        #qna ul li div span:last-child {
-            margin: 20px;
-            text-align: right;
-        }
-
-        #qna button {
-            background-color: gray;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px; /* 버튼 위쪽 여백 추가 */
-        }
-
-        #qna button:hover {
-            background-color: gray;
+        #bottomBar div,
+        #bottomBar dl {
+           margin: 0 10px;
         }
     </style>
 
@@ -88,7 +53,7 @@
                 <input type="hidden" name="mode" value="CART">
                 <input type="hidden" name="seq" th:value="*{seq}">
                 <input type="hidden" name="salePrice" th:value="*{salePrice}">
-                <div th:text="*{name}"></div>
+                <h2 th:text="*{name}"></h2>
                 <dl th:if="*{consumerPrice > 0}">
                     <dt th:text="#{소비자가}"></dt>
                     <dd>
@@ -164,11 +129,11 @@
                 <div class="btns">
                     <button type="button" th:text="#{찜하기}" class="product_action" data-mode="WISH"></button>
                     <button type="button" th:text="#{장바구니}" class="product_action" data-mode="CART"></button>
-                    <button type="button" th:text="#{구매하기}" class="product_action"  data-mode="DIRECT"></button>
                 </div>
+                <button type="button" th:text="#{구매하기}" class="product_action"  data-mode="DIRECT"></button>
 
                 <div id="bottomBar" style="display: flex;" class="selected_products">
-                    <div th:text="*{name}"></div>
+                    <h4 th:text="*{name}" style="margin: 0; font-weight: normal"></h4>
                     <dl>
                         <dt th:text="#{판매가}"></dt>
                         <dd>
@@ -281,10 +246,8 @@
             <ul>
                 <li th:each="qna : ${qnaList}">
                     <div>
-                        <div>
-                            <span th:if="${qna.member != null}" th:text="${qna.member.userName}"></span>
-                            <span th:text="${#temporals.format(qna.createdAt, 'yyyy-MM-dd')}"></span>
-                        </div>
+                        <span th:if="${qna.member != null}" th:text="${qna.member.userName}"></span>
+                        <span th:text="${#temporals.format(qna.createdAt, 'yyyy-MM-dd')}"></span>
                     </div>
                     <p th:text="${qna.content}"></p>
                 </li>
