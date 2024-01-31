@@ -25,7 +25,7 @@ public class OrderInfoService {
     return orderInfo;
   }
 
-  public List<OrderInfo> orderList() {
+  public List<OrderInfo> getList() {
     return orderInfoRepository.findAll();
   }
 

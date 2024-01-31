@@ -262,6 +262,9 @@ public class MypageController implements ExceptionProcessor {
             /* 회원 탈퇴 S */
         } else if (mode.equals("resign")) {
             pageTitle = utils.getMessage("회원 탈퇴", "commons");
+
+        } else if (mode.equals("main")) { // 마이페이지 메인
+            addScript.add("board/view_posts");
         }
 
         addCss.add("mypage/style");
