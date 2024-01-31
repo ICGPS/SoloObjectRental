@@ -1,6 +1,7 @@
 package org.choongang.cs.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.choongang.admin.cs.service.InquiryAnswerService;
 import org.choongang.board.entities.BoardData;
 import org.choongang.board.service.BoardInfoService;
@@ -11,7 +12,9 @@ import org.choongang.cs.entities.InquiryAnswer;
 import org.choongang.cs.repositories.FeedbackPostRepository;
 import org.choongang.cs.service.FeedbackService;
 import org.choongang.cs.service.InquiryService;
+import org.choongang.file.service.FileUploadService;
 import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -38,6 +41,7 @@ public class CsController implements ExceptionProcessor {
     private final InquiryAnswerService inquiryAnswerService;
     private final FeedbackPostRepository feedbackPostRepository;
     private final BoardInfoService boardInfoService;
+    private final FileUploadService fileUploadService;
 
     // 고객지원 홈
     @GetMapping("/main")
@@ -123,8 +127,10 @@ public class CsController implements ExceptionProcessor {
     }
 
     @PostMapping("/feedbackPostAdd")
-    public String FeedbackPostAdd(@ModelAttribute("feedbackPost") FeedbackPost feedbackPost, @RequestParam("file") MultipartFile file, Principal principal) {
+    public String FeedbackPostAdd(@ModelAttribute("feedbackPost") FeedbackPost feedbackPost, Model model/* @RequestParam("file") MultipartFile file, Principal principal */) {
+        commonProcess("feedbackPost", model);
 
+        /*
         String userName = principal.getName();
         feedbackPost.setAuthor(userName);
 
@@ -153,9 +159,14 @@ public class CsController implements ExceptionProcessor {
 
             }
         }
+        */
+
+        Member member = memberUtil.getMember();
+        feedbackPost.setAuthor(member.getName());
 
         // feedbackPost 저장
         feedbackPostRepository.save(feedbackPost);
+        fileUploadService.processDone(feedbackPost.getGid());
 
         return utils.tpl("cs/feedbackPostAdd_done");
     }
@@ -165,18 +176,22 @@ public class CsController implements ExceptionProcessor {
         String pageTitle = "고객지원";
 
         List<String> addCss = new ArrayList<>();
+        List<String> addCommonScript = new ArrayList<>();
 
         if (mode.equals("inquiry") || mode.equals("inquiryAdd")) {
             pageTitle = mode.equals("inquiry") ? "1:1 문의" : "1:1 문의하기";
 
         } else if (mode.equals("feedbackPost") || mode.equals("feedbackPostAdd")) {
             pageTitle = mode.equals("feedbackPost") ? "칭찬/개선" : "의견보내기";
+
         }
 
         addCss.add("cs/cs");
+        addCommonScript.add("fileManager");
 
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCss", addCss);
+        model.addAttribute("addCommonScript", addCommonScript);
 
     }
 }

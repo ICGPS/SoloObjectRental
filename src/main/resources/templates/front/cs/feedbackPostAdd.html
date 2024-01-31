@@ -54,13 +54,27 @@
    <h2>칭찬 / 개선</h2>
 
    <form method="post" th:action="@{/cs/feedbackPostAdd}" th:object="${feedbackPost}" enctype="multipart/form-data">
-
+      <input type="hidden" name="gid" th:field="*{gid}">
 
       <textarea id="feedback" name="feedback" rows="4" cols="50" th:field="*{content}" required></textarea>
-      <p>이미지첨부:<input type="file" name="file"></p>
+      <p>
+         <button type="button" class="upload_files" data-image-only="true" data-single-file="true">이미지 첨부</button>
+         <div id="uploaded_image"></div>
+      </p>
 
       <input type="submit" value="전송">
    </form>
 
+   <script>
+      function callbackFileUpload(files) {
+         if (!files || files.length == 0) {
+            return;
+         }
+
+         const file = files[0];
+         const uploadedImageEl = document.getElementById("uploaded_image");
+         uploadedImageEl.innerHTML = `<img src='${file.fileUrl}' style='max-width: 400px;'>`;
+      }
+   </script>
 </main>
 </html>
