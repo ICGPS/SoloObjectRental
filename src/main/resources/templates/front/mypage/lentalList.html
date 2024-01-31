@@ -66,7 +66,10 @@ ul {
         </thead>
         <tbody>
         <tr th:each="order : ${memberOrders}">
-            <td style="padding-right: 120px;" th:text="${order.seq}"></td>
+            <td style="padding-right: 120px;">
+                <a th:href="@{~/order/end}" th:text="${order.seq}"></a>
+            </td>
+
             <td style="padding-right: 120px;" th:text="${order.createdAt}"></td>
             <td style="padding-right: 120px;" th:text="${order.orderName}"></td>
             <td style="padding-right: 120px;">
