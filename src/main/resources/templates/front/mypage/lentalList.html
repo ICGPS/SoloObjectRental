@@ -74,7 +74,9 @@ ul {
             <td style="padding-right: 120px;" th:text="${order.orderName}"></td>
             <td style="padding-right: 120px;">
                 <ul>
-                    <li th:each="item : ${order.orderItems}" th:text="${item.productName}"></li>
+                    <li th:each="item : ${order.orderItems}">
+                        <a th:href="@{/product/detail/{productId}(productId=${item.product.seq})}" th:text="${item.productName}"></a>
+                    </li>
                 </ul>
             </td>
             <td style="padding-right: 120px;" th:text="${order.zonecode != null ? order.zonecode : 'N/A'}"></td>
