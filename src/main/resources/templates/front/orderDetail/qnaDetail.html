@@ -48,9 +48,12 @@
 </head>
 
 <body>
-<form id="qnaForm" name="qnaForm" method="post" th:action="@{/orderDetail/submitQnA}">
+
+<form id="qnaForm" name="qnaForm" method="post" th:action="@{/orderDetail/submitQnA}"  th:object="${product}">
 
     <input type="hidden" name="productSeq" th:value="${param.seq}">
+
+    <input type="text" name="productName" th:value="${product.name}" readonly>
 
     <textarea id="qnaContent" name="content" class="form-control" placeholder="문의 사항을 작성해주세요."></textarea>
 

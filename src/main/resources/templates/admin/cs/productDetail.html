@@ -3,10 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content" class="inquiry_detail">
-    <h1>1:1문의 답변하기</h1>
+    <h1>상품문의</h1>
 
-    <p th:text="${#temporals.format(feedbackPost.createdAt, 'yyyy-MM-dd')}"></p>
-    <h2 th:text="${feedbackPost.content}"></h2>
+    <div>
+        <p th:text="'내용: ' + ${qna.content}"></p>
+        <p th:text="'작성자: ' + ${qna.member.userName}"></p>
+        <p th:text="'작성일: ' + ${#temporals.format(qna.createdAt, 'yyyy-MM-dd HH:mm')}"></p>
+    </div>
 
 
 </section>

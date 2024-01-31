@@ -21,9 +21,7 @@ public class QnA extends Base {
     @GeneratedValue
     private Long seq;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="name")
-    private Product productName;
+    private String productName;
 
     private Long productSeq;
 

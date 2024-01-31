@@ -11,6 +11,8 @@ import org.choongang.orderDetails.entities.QnA;
 import org.choongang.orderDetails.entities.Review;
 import org.choongang.orderDetails.service.QnAService;
 import org.choongang.orderDetails.service.ReviewService;
+import org.choongang.product.entities.Product;
+import org.choongang.product.repositories.ProductRepository;
 import org.choongang.product.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,6 +32,7 @@ public class OrderDetailsController implements ExceptionProcessor {
   private final ReviewService reviewService;
   private final ProductInfoService productInfoService;
   private final QnAService qnAService;
+  private final ProductRepository productRepository;
 
   @GetMapping("/main")
   public String orderDetail() {
@@ -73,7 +76,8 @@ public class OrderDetailsController implements ExceptionProcessor {
 
 
   @PostMapping("/submitQnA")
-  public String submitQnA(@ModelAttribute QnA qna, Model model) {
+  public String submitQnA(@ModelAttribute QnA qna,Model model) {
+
     qnAService.save(qna);
 
     model.addAttribute("script", "self.close();");

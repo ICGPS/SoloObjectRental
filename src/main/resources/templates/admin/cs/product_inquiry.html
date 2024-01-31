@@ -14,7 +14,10 @@
         </tr>
         <tr th:each="item : ${qnaList}" th:object="${qnaList}">
             <td th:text="${item.seq}"></td>
-            <td th:each="product : ${productList}" th:if="${product.name}" th:text="${product.name}" th:href="@{/admin/cs/productDetail/{seq}(seq = ${item.seq})}"></td>
+            <td>
+                <span th:text="${item.productName}"></span>
+            </td>
+<!--            <td th:each="product : ${productList}" th:if="${product.name}" th:text="${product.name}" th:href="@{/admin/cs/productDetail/{seq}(seq = ${item.seq})}"></td>-->
             <td>
                 <a th:text="${item.content}" th:href="@{/admin/cs/productDetail/{seq}(seq = ${item.seq})}"></a>
             </td>

@@ -85,10 +85,18 @@ public class CsController {
         List<QnA> qnaList = qnAService.getAllList();
         model.addAttribute("qnaList", qnaList);
 
-        List<Product> productList = productInfoService.getAllProducts();
-        model.addAttribute("productList", productList);
-
         return "admin/cs/product_inquiry";
+    }
+
+    @GetMapping("/adminProductDetail/{seq}")
+    public String productDetail(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("qnA", model);
+
+        QnA qnA = qnAService.getOne(seq);
+        model.addAttribute("qnA", qnA);
+
+
+        return "admin/cs/productDetail";
     }
 
     // 칭찬/개선

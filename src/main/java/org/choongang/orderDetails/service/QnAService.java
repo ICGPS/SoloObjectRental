@@ -1,5 +1,6 @@
 package org.choongang.orderDetails.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.choongang.cs.entities.Inquiry;
 import org.choongang.member.MemberUtil;
@@ -33,5 +34,10 @@ public class QnAService {
 
     public List<QnA> getAllList() {
         return qnARepository.findAll();
+    }
+
+    public QnA getOne(Long seq) {
+        return qnARepository.findById(seq)
+                .orElseThrow(() -> new EntityNotFoundException("QnA with seq " + seq + " not found"));
     }
 }
