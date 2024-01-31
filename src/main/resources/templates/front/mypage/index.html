@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
+<main layout:fragment="content" class="mypage_box">
   <head>
 
     <meta charset="UTF-8">
@@ -12,33 +12,37 @@
     <title>Acme Shopping</title>
   </head>
   <body class="min-h-screen bg-gray-100 dark-bg-gray-800">
-  <main class="p-6">
-    <section class="grid grid-cols-1 md-grid-cols-2 gap-6">
       <!-- 프로필 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md changing_info" data-v0-t="card">
+        <span th:text="${session.member.name} + ' 님'"></span>
         <!-- 프로필 카드 내용 -->
         <a th:href="@{/mypage/profile}">회원정보수정</a>
       </div>
-      <!-- 렌탈 목록 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 렌탈목록 내용 -->
-        <a th:href="@{/mypage/lentalList}">렌탈목록</a>
-      </div>
-      <!-- 장바구니 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 장바구니 카드 내용 -->
-        <a th:href="@{/cart}">장바구니목록</a>
-      </div>
-      <!-- 문의 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 문의 카드 내용 -->
-        <a th:href="@{/cs/inquiryList}">1:1문의</a>
+
+      <div class="quick_icon">
+          <!-- 렌탈 목록 -->
+          <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+              <!-- 렌탈목록 내용 -->
+              <a th:href="@{/mypage/lentalList}">렌탈목록</a>
+          </div>
+
+          <!-- 장바구니 카드 -->
+          <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+              <!-- 장바구니 카드 내용 -->
+              <a th:href="@{/cart}">장바구니목록</a>
+          </div>
+
+          <!-- 문의 카드 -->
+          <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+              <!-- 문의 카드 내용 -->
+              <a th:href="@{/cs/inquiryList}">1:1문의</a>
+          </div>
       </div>
 
       <!-- 장바구니에서 주문하기 추가 S -->
 
       <!-- 장바구니에서 주문하기 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
         <!-- 장바구니에서 주문하기 카드 내용 -->
         <a th:href="@{/mypage/orderInCart}">장바구니에서 주문하기</a>
       </div>
@@ -48,7 +52,7 @@
       <!-- 주문 상세 추가 S -->
 
       <!-- 주문 상세 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
         <!-- 주문 상세 카드 내용 -->
         <a th:href="@{/mypage/orderDetail}">주문 상세</a>
       </div>
@@ -58,7 +62,7 @@
       <!-- 구매 영수증 추가 S -->
 
       <!-- 구매 영수증 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
         <!-- 구매 영수증 카드 내용 -->
         <a th:href="@{/mypage/purchaseReceipt}">구매 영수증</a>
       </div>
@@ -68,7 +72,7 @@
       <!-- 결제 완료 카드 추가 S -->
 
       <!-- 결제 완료 카드 -->
-      <div class="border text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
+      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
         <!-- 결제완료 카드 내용 -->
         <a th:href="@{/mypage/paymentFinish}">결제 완료</a>
       </div>
@@ -78,9 +82,6 @@
         <button type="button" id="deleteBtn">회원탈퇴</button>
       </div>
 
-
-    </section>
-  </main>
   <script>
     const deleteBtn = document.querySelector('#deleteBtn') ;
     deleteBtn.addEventListener('click', function() {
@@ -89,6 +90,7 @@
       else { }
     });
   </script>
+
   </body>
 </main>
 </html>
