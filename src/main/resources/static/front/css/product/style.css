@@ -89,7 +89,14 @@
 .product_detail .tabs .tab.on { border-color: #222; background: #222 }
 .product_detail .tabs .tab.on a { color: #fff; }
 
-.product_detail .desc_content { margin: 25px 0 100px; }
+.product_detail .desc_content {
+    margin: 25px 0 100px;
+}
+
+.product_detail .desc_content img {
+    width: 100%;
+    height: auto;
+}
 
 .product_detail .selected_products {
     display: flex;
