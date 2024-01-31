@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="items">
-  <table class="cart_items">
+  <table class="cart_items"
+         border-top="solid 1.5px black"
+         border-collapse="collapse"
+         width="100%"
+         font-size="14px">
     <thead>
     <tr>
       <th th:if="${mode == null || mode != 'order' }">
