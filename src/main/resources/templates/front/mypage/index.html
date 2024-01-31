@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/mypage/css/style.css"> <!--  -->
+<!--    <link rel="stylesheet" href="static/mypage/css/style.css"> &lt;!&ndash;  &ndash;&gt;-->
     <title>Acme Shopping</title>
   </head>
   <body class="min-h-screen bg-gray-100 dark-bg-gray-800">
@@ -72,6 +72,11 @@
         <!-- 결제완료 카드 내용 -->
         <a th:href="@{/mypage/paymentFinish}">결제 완료</a>
       </div>
+
+      <ul class="view_posts">
+        <th:block>최근본게시글</th:block>
+      </ul>
+      <script th:replace="~{front/common/_posts_tpl::tpl}"></script>
 
       <!-- 결제 완료 추가 E -->
       <div name="frmInfo" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${member}">
