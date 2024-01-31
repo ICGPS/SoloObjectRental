@@ -287,21 +287,18 @@
             window.open("/orderDetail/reviewDetail?seq=[[*{seq}]]", "_blank", "width=600,height=400");
         }
 
-        /* 대여 기간(달력 둘 다 선택) 확정시 기간 계산하여 출력
-        // 데이터에 저장 필요
-        */
-
+        /* 대여 기간(달력 둘 다 선택) 확정시 기간 계산하여 출력 */
         function calculateDate() {
             // 시작일 제한
             if (new Date(document.getElementsByName('sdate')[0].value) < new Date()) {
                 alert('대여 시작일을 확인해주세요.');
-                document.getElementsByName('sdate')[0].value='';
+                document.getElementsByName('sdate')[0].value = '';
             }
             // 종료일 - 시작일 < 0이라면 알림
             if ( (new Date(document.getElementsByName('sdate')[0].value) >= new Date(document.getElementsByName('edate')[0].value))
                 || (new Date(document.getElementsByName('edate')[0].value) < new Date()) ) {
                 alert('대여 종료일을 확인해주세요.');
-                document.getElementsByName('edate')[0].value='';
+                document.getElementsByName('edate')[0].value = '';
             }
 
             var sdateString = document.getElementsByName('sdate')[0].value;

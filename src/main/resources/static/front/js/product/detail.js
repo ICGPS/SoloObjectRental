@@ -96,8 +96,13 @@ window.addEventListener("DOMContentLoaded", function() {
             if (mode == 'WISH') { // 찜하기
 
             } else { // 장바구니, 바로구매
-                frmSave.mode.value = mode;
-                frmSave.submit();
+                if (document.getElementsByName('sdate')[0].value == ''
+                    || document.getElementsByName('edate')[0].value == '') {
+                    alert('대여기간을 설정해 주세요.');
+                } else{
+                    frmSave.mode.value = mode;
+                    frmSave.submit();
+                }
             }
         });
     }
