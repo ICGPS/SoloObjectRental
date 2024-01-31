@@ -14,7 +14,7 @@
 }
 
 .product_info dl dt {
-    width: 150px;
+    width: 120px;
 }
 
 .product_info dl dd {
@@ -33,10 +33,6 @@
     background: #ddd;
     border-radius: 5px;
     margin: 0;
-}
-
-.product_info .btns button:first-child {
-    background: #F9CCCF;
 }
 
 .product_info .btns + button {
