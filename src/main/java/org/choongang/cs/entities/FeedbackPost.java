@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.choongang.file.entities.FileInfo;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -31,16 +32,13 @@ public class FeedbackPost {
 
     private LocalDateTime createdAt; // 작성일
 
-
     private String feedback;
 
-    public String getFeedback() {
-        return feedback;
-    }
+    @Getter @Setter
+    private String imageUrl;
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
-    }
+    @Transient
+    private FileInfo image;
 
     @PrePersist
     protected void create() {
