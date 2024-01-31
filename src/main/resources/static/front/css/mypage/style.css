@@ -1,0 +1,45 @@
+.mypage_box {
+    width: 510px;
+    margin: 50px auto;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.changing_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quick_icon {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+
+.quick_icon > div {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    background: #A7CFF1 !important;
+    border: 5px solid #A7CFF1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick_icon > div:active,
+.quick_icon > div:hover {
+    border: 5px solid #FFDC91;
+}
+
+.quick_icon > div:active a,
+.quick_icon > div:hover a {
+    color: #fff;
+}
+
+.quick_icon > div a {
+    color: #000;
+}

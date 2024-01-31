@@ -264,6 +264,8 @@ public class MypageController implements ExceptionProcessor {
             pageTitle = utils.getMessage("회원 탈퇴", "commons");
         }
 
+        addCss.add("mypage/style");
+
         model.addAttribute("pageTitle", pageTitle);
         model.addAttribute("addCss", addCss);
         model.addAttribute("addScript", addScript);
