@@ -6,12 +6,12 @@
             .dropdown{
                 position : relative;
                 display : inline-block;
-                font-size: 23px;
-                margin-right: 80px;
+                font-size: 28px;
+                margin-right: 100px;
             }
 
              .dropdown > a {
-                font-size: 23px !important;
+                font-size: 28px !important;
                 text-align: center !important;
             }
 
@@ -34,7 +34,7 @@
         </style>
 
         <div class="dropdown">
-            <span class="dropbtn" th:text="#{상품}"></span>
+            <span class="dropbtn" th:text="#{렌탈상품}"></span>
             <div class="dropdown-content">
                 <a th:each="item : ${categories}" th:object="${item}" th:href="@{/product/{cateCd}(cateCd=*{cateCd})}" th:text="*{cateNm}"></a>
             </div>
@@ -60,9 +60,9 @@
             <a th:href="@{/notices/useGuide}">
                 <span class="dropbtn" th:text="#{이용안내}"></span>
             </a>
-            <div class="dropdown-content">
-                <a th:href="@{/notices/useGuide}">이용안내</a>
-            </div>
+<!--            <div class="dropdown-content">-->
+<!--                <a th:href="@{/notices/useGuide}">이용안내</a>-->
+<!--            </div>-->
         </div>
     </div>
 </nav>
