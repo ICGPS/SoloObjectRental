@@ -25,8 +25,8 @@ public class Menu {
 
         // 주문관리
         menus.put("order", Arrays.asList(
-            new MenuDetail("list", "주문목록", "/admin/order"),
-            new MenuDetail("list", "주문상품", "/admin/order")
+            new MenuDetail("list", "주문목록", "/admin/order")
+            //new MenuDetail("list", "주문상품", "/admin/order")
         ));
 
         // CS
