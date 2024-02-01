@@ -10,6 +10,10 @@ import org.choongang.cs.entities.Inquiry;
 import org.choongang.cs.entities.InquiryAnswer;
 import org.choongang.cs.service.FeedbackService;
 import org.choongang.cs.service.InquiryService;
+import org.choongang.orderDetails.entities.QnA;
+import org.choongang.orderDetails.service.QnAService;
+import org.choongang.product.entities.Product;
+import org.choongang.product.service.ProductInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,8 @@ public class CsController {
     private final InquiryService inquiryService;
     private final InquiryAnswerService inquiryAnswerService;
     private final FeedbackService feedbackService;
+    private final QnAService qnAService;
+    private final ProductInfoService productInfoService;
 
     @ModelAttribute("menuCode")
     public String getMenuCode() { // 주 메뉴 코드
@@ -76,7 +82,21 @@ public class CsController {
     public String product(Model model) {
         commonProcess("product", model);
 
+        List<QnA> qnaList = qnAService.getAllList();
+        model.addAttribute("qnaList", qnaList);
+
         return "admin/cs/product_inquiry";
+    }
+
+    @GetMapping("/adminProductDetail/{seq}")
+    public String productDetail(@PathVariable("seq") Long seq, Model model) {
+        commonProcess("qnA", model);
+
+        QnA qnA = qnAService.getOne(seq);
+        model.addAttribute("qnA", qnA);
+
+
+        return "admin/cs/productDetail";
     }
 
     // 칭찬/개선
@@ -98,6 +118,12 @@ public class CsController {
         model.addAttribute("feedbackPost", feedbackPost);
 
         return "admin/cs/feedback_detail";
+    }
+
+    @GetMapping("/productDetail/{seq}")
+    public String productDetail(@PathVariable("seq") Long seq) {
+
+        return "admin/cs/productDetail";
     }
 
     private void commonProcess(String mode, Model model) {
