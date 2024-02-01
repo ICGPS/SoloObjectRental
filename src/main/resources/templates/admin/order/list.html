@@ -41,7 +41,8 @@
                         <label th:for="${'chk_' + status.index}"></label>
                     </td>
                     <td><a th:href="@{/order/end/{seq}(seq=*{seq})}" th:text="*{seq}"></a></td>
-                    <td th:text="*{member.name}"></td>
+                    <td th:if="*{member == null || member.isEmpty()}"></td>
+                    <td th:unless="*{member == null || member.isEmpty()}" th:text="*{member.name}"></td>
                     <td th:text="*{orderName}"></td>
                     <td th:text="*{orderCellPhone}"></td>
                     <td th:text="*{receiverName}"></td>
