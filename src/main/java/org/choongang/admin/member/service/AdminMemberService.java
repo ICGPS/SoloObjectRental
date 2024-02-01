@@ -38,15 +38,11 @@ public class AdminMemberService {
                     .findFirst()
                     .orElse(new Authorities());
 
-            System.out.println("before: " + authorities);
-
             String authorityValue = utils.getParam("authority_" + seq);
 
             authorities.setAuthority(Authority.valueOf(authorityValue));
 
             authoritiesRepository.saveAndFlush(authorities);
-//            member.getAuthorities().add(authorities);
-            System.out.println("after: " + authorities);
         }
     }
 }

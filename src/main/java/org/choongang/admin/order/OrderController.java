@@ -8,9 +8,7 @@ import org.choongang.order.entities.OrderInfo;
 import org.choongang.order.service.OrderInfoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +38,14 @@ public class OrderController implements ExceptionProcessor {
 
 
         return "admin/order/list";
+    }
+
+    @PatchMapping("orderList")
+    public String listPs(@RequestParam("chk") List<Long> chks, Model model) {
+//        List<OrderInfo> data = orderInfoService.getList();
+        orderInfoService.saveList(chks);
+
+        model.addAttribute("script", "window.history.back(); alert('수정되었습니다.');");
+        return "common/_execute_script";
     }
 }
