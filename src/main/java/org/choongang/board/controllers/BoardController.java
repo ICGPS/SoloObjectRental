@@ -24,6 +24,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -192,8 +194,10 @@ public class BoardController implements ExceptionProcessor {
     // 게시글 저장 처리
     BoardData boardData = boardSaveService.save(form);
 
-    String redirectURL = "redirect:";
-    redirectURL += board.getLocationAfterWriting().equals("view") ? "view/" + boardData.getSeq() : "list/" + form.getBid();
+    String redirectURL = "redirect:/board/";
+    try {
+      redirectURL += board.getLocationAfterWriting().equals("view") ? "view/" + boardData.getSeq() : "list/" + URLEncoder.encode(form.getBid(), "UTF-8");
+    } catch (UnsupportedEncodingException e) {}
 
     return redirectURL;
 
@@ -204,8 +208,12 @@ public class BoardController implements ExceptionProcessor {
     commonProcess(seq, "delete", model);
 
     boardDeleteService.delete(seq);
-
-    return "redirect:/board/list/" + board.getBid();
+    System.out.println(board.getBid());
+    String returnUrl = "redirect:/";
+    try {
+      returnUrl = "redirect:/board/list/" + URLEncoder.encode(board.getBid(), "UTF-8");
+    } catch (UnsupportedEncodingException e) {}
+    return returnUrl;
   }
 
   /**

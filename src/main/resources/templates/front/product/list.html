@@ -52,17 +52,19 @@
         </a>
     </div>
 
-    <h1>
-        <a th:href="@{/product/{cateCd}(cateCd=${category.cateCd})}" th:text="${category.cateNm}"></a>
-    </h1>
-    <div>
-        <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=salePriceASC)}" th:text="#{낮은가격순}"></a>
-        <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=salePriceDESC)}" th:text="#{높은가격순}"></a>
-        <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=score)}" th:text="#{별점순}"></a>
-    </div>
 
-    <ul class="products">
-        <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item">
+        <h1 style="margin: 0 48%; margin-top: 50px;">
+            <a th:href="@{/product/{cateCd}(cateCd=${category.cateCd})}" th:text="${category.cateNm}"></a>
+        </h1>
+<!--        <div>-->
+<!--            <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=salePriceASC)}" th:text="#{낮은가격순}"></a>-->
+<!--            <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=salePriceDESC)}" th:text="#{높은가격순}"></a>-->
+<!--            <a name="sort_btn" th:href="@{/product/{cateCd}(cateCd=${category.cateCd},sort=score)}" th:text="#{별점순}"></a>-->
+<!--        </div>-->
+
+
+    <ul class="products justify-content-center align-items-center" style="width: 100%;">
+        <li th:if="${items != null && !items.isEmpty()}" th:each="item : ${items}" th:object="${item}" class="item" style="width:23%;">
             <a class="image" th:href="@{/product/detail/{seq}(seq=*{seq})}">
                 <th:block th:if="*{listImages != null && !listImages.isEmpty()}" th:utext="*{@utils.printThumb(listImages[0].seq, 400, 400, 'goodsImage')}">
                 </th:block>
@@ -84,7 +86,9 @@
         </li>
         <li th:unless="${items != null && !items.isEmpty()}" th:text="#{조회된_상품이_없습니다.}"></li>
     </ul>
+
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
+
 </main>
 </html>
 
