@@ -44,7 +44,7 @@
         <th:block th:text="#{원}"></th:block>
       </td>
       <td th:if="${mode == null || mode != 'order'}">
-        <input type="text" th:name="${'ea_' + status.index}" th:value="*{ea}">
+        <th:block type="text" th:name="${'ea_' + status.index}" th:text="*{ea}"></th:block>
       </td>
       <td th:unless="${mode == null || mode != 'order'}">
         <th:block th:text="*{ea}"></th:block>
