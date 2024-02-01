@@ -3,32 +3,40 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/main}">
 <main layout:fragment="content">
-    <h1>결제완료</h1>
+<!--    <h1>결제완료</h1>-->
 <style>
     body {
-        padding: 100px;
+        padding: 0 100px;
     }
     .orderInfo {
         font-size: 1.3rem;
         justify-content: center;
+
+
     }
     .orderInfoSub {
-        margin-top: 15px;
+        width: 100vw;
+        margin-top: 20px;
+        position: relative;
+
     }
     .orderInfoSub > div {
         display: flex;
+
         margin: 10px 0;
-        height:4rem;
+        height: 4rem;
         line-height: 4rem;
     }
 
 
     .text_left {
+        clear: both;
         width: 15rem;
         text-align: left;
 <!--        background: #0003;-->
     }
     .text_right {
+        clear: both;
         height:4rem;
         text-align: center;
 <!--        background: #0004;-->
@@ -57,25 +65,28 @@
                 <span class="text_left" th:text="#{주문자_이름}"></span>
                 <span class="text_right" th:text="*{orderName}"></span>
             </div>
+            <div>
+                <span class="text_left" th:text="#{주문_상태}"></span>
+                <span class="text_right" th:if="*{status == T(org.choongang.order.constants.OrderStatus).ORDER}" th:text="#{OrderStatus.ORDER}"></span>
+                <span class="text_right" th:if="*{status == T(org.choongang.order.constants.OrderStatus).PREPARE}" th:text="#{OrderStatus.PREPARE}"></span>
+                <span class="text_right" th:if="*{status == T(org.choongang.order.constants.OrderStatus).DELIVERY}" th:text="#{OrderStatus.DELIVERY}"></span>
+                <span class="text_right" th:if="*{status == T(org.choongang.order.constants.OrderStatus).ARRIVAL}" th:text="#{OrderStatus.ARRIVAL}"></span>
+            </div>
         </div>
         <a href="#" onclick="openReceiptPopup()">구매 영수증 보기</a>
         <div class="orderInfoSub">
             <div>
                 <h3 th:text="#{상품_정보}"></h3>
             </div>
-            <div>
-                <span class="text_left" th:text="#{상품}"></span>
-                <span class="text_right">
-                    <div th:each="orderItem : *{orderItems}">
-    <!--                    <th:block th:utext="${@utils.printThumb(orderItem.product.listImage, 50, 50, 'product_image')}"></th:block>-->
-                        <span th:text="${orderItem.product.name}"></span>
-                        <span th:text="${orderItem.ea + '개'}"></span>
-    <!--                    <th:block th:text="${period + '개월'}"></th:block>-->
-                        <span th:text="${orderItem.totalPrice + '원'}"></span>
-                    </div>
-                </span>
+            <div th:each="orderItem : *{orderItems}">
+<!--                    <th:block th:utext="${@utils.printThumb(orderItem.product.listImage, 50, 50, 'product_image')}"></th:block>-->
+                <span th:text="${orderItem.product.name}"></span>
+                <span th:text="${orderItem.ea + '개'}"></span>
+<!--                    <th:block th:text="${period + '개월'}"></th:block>-->
+                <span th:text="${orderItem.totalPrice + '원'}"></span>
             </div>
         </div>
+
         <div class="orderInfoSub">
             <div>
                 <h3 th:text="#{배송지_정보}"></h3>
