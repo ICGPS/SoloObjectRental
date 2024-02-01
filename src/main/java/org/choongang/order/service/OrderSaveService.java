@@ -75,6 +75,8 @@ public class OrderSaveService {
           .optionName(product.getOptionName())
           .productName(product.getName())
           .ea(cartItem.getEa())
+          .edate(cartItem.getEdate())
+          .sdate(cartItem.getSdate())
           .salePrice(product.getSalePrice())
           .totalDiscount(cartItem.getTotalDiscount())
           .totalPrice(cartItem.getTotalPrice())

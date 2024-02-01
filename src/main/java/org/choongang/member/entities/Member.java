@@ -37,7 +37,7 @@ public class Member extends Base {
     @Column(length=7, nullable = false)
     private String bDay;
 
-    @Column(length=100)
+//    @Column(length=100)
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<DeliveryList> address = new ArrayList<>(); // 배송지 관리
 
@@ -55,7 +55,8 @@ public class Member extends Base {
 //    private String zonecode; // 우편번호
 //
 //    @Column(length=100)
-//    private String addressSub; // 서브 주소
+//    private St
+//    ring addressSub; // 서브 주소
 
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
@@ -68,4 +69,6 @@ public class Member extends Base {
 
     @Column(name="_lock")
     private boolean lock;
+
+
 }

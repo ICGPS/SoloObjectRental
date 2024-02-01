@@ -93,7 +93,9 @@
     <div class="rounded-lg bg-card text-card-foreground mx-auto max-w-sm login_box">
         <div class="flex-col p-6 space-y-1">
             <h3 class="whitespace-nowrap tracking-tight text-2xl font-bold" th:text="#{로그인}"></h3>
-            <p class="text-sm text-muted-foreground" th:text="#{아래에_아이디를_입력하여_계정에_로그인하세요}"></p>
+
+            <p class="text-sm text-muted-foreground" th:text="#{아래에_아이디를_입력하여_계정에_로그인하세요.}"></p>
+
         </div>
         <div class="p-6 text-lg">
             <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off">
