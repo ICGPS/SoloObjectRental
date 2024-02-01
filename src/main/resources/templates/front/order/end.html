@@ -28,6 +28,9 @@
         line-height: 4rem;
     }
 
+    .product > span {
+        margin: 0 10px;
+    }
 
     .text_left {
         clear: both;
@@ -78,13 +81,16 @@
             <div>
                 <h3 th:text="#{상품_정보}"></h3>
             </div>
-            <div th:each="orderItem : *{orderItems}">
+            <div th:each="orderItem : *{orderItems}" class="product">
+
 <!--                    <th:block th:utext="${@utils.printThumb(orderItem.product.listImage, 50, 50, 'product_image')}"></th:block>-->
                 <span th:text="${orderItem.product.name}"></span>
+                <span th:text="${orderItem.salePrice + '원'}"></span>
                 <span th:text="${orderItem.ea + '개'}"></span>
-<!--                    <th:block th:text="${period + '개월'}"></th:block>-->
-                <span th:text="${orderItem.totalPrice + '원'}"></span>
+                <span th:text="${orderItem.sdate}"></span>~<span th:text="${orderItem.edate}"></span>
+                <span th:text="${'합계 ' + orderItem.totalPrice + '원'}"></span>
             </div>
+
         </div>
 
         <div class="orderInfoSub">
