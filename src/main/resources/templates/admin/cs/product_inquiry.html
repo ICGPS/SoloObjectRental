@@ -12,17 +12,17 @@
             <th>작성자</th>
             <th>작성일</th>
         </tr>
-        <tr th:each="item : ${qnaList}" th:object="${qnaList}">
-            <td th:text="${item.seq}"></td>
+        <tr th:each="item : ${qnaList}" th:object="${item}">
+            <td th:text="*{seq}"></td>
             <td>
-                <span th:text="${item.productName}"></span>
+                <span th:text="*{product.name}"></span>
             </td>
 <!--            <td th:each="product : ${productList}" th:if="${product.name}" th:text="${product.name}" th:href="@{/admin/cs/productDetail/{seq}(seq = ${item.seq})}"></td>-->
             <td>
-                <a th:text="${item.content}" th:href="@{/admin/cs/productDetail/{seq}(seq = ${item.seq})}"></a>
+                <a th:text="*{@utils.nl2br(content)}" th:href="@{/admin/cs/productDetail/{seq}(seq = *{seq})}"></a>
             </td>
-            <td th:text="${item.member.userName}"></td>
-            <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}"></td>
+            <td th:text="*{member.userName}"></td>
+            <td th:text="*{#temporals.format(createdAt, 'yyyy-MM-dd')}"></td>
         </tr>
     </table>
 

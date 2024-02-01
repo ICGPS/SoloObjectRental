@@ -69,14 +69,17 @@ public class OrderDetailsController implements ExceptionProcessor {
   }
 
   @GetMapping("/qnaDetail")
-  public String QnADetail(Model model) {
+  public String QnADetail(@RequestParam(name="seq", required = false) Long seq, Model model) {
+    Product product = productInfoService.get(seq);
+
+    model.addAttribute("product", product);
 
     return utils.tpl("orderDetail/qnaDetail");
   }
 
 
   @PostMapping("/submitQnA")
-  public String submitQnA(@ModelAttribute QnA qna,Model model) {
+  public String submitQnA(@ModelAttribute RequestQna qna,Model model) {
 
     qnAService.save(qna);
 

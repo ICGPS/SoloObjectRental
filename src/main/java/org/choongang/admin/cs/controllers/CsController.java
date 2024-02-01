@@ -120,6 +120,12 @@ public class CsController {
         return "admin/cs/feedback_detail";
     }
 
+    @GetMapping("/productDetail/{seq}")
+    public String productDetail(@PathVariable("seq") Long seq) {
+
+        return "admin/cs/productDetail";
+    }
+
     private void commonProcess(String mode, Model model) {
         mode = Objects.requireNonNullElse(mode, "cs");
         String pageTitle = "CS";

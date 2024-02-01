@@ -21,9 +21,8 @@ public class QnA extends Base {
     @GeneratedValue
     private Long seq;
 
-    private String productName;
-
-    private Long productSeq;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Product product;
 
     @Lob
     private String content;
