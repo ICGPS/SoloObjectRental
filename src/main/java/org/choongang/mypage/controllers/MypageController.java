@@ -280,6 +280,7 @@ public class MypageController implements ExceptionProcessor {
 
         } else if (mode.equals("main")) { // 마이페이지 메인
             addScript.add("board/view_posts");
+            addScript.add("product/view_products");
         }
 
         addCss.add("mypage/style");
