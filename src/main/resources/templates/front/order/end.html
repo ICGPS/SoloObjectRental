@@ -5,27 +5,30 @@
 <main layout:fragment="content">
 <!--    <h1>결제완료</h1>-->
 <style>
-    body {
-        padding: 0 100px;
-    }
-    .orderInfo {
-        font-size: 1.3rem;
-        justify-content: center;
 
+    .orderInfo {
+        display: grid;
+        place-items: center;
+        height: 150vh; /* 화면의 높이에 맞춤 */
+        font-size: 1.3rem;
 
     }
     .orderInfoSub {
-        width: 100vw;
-        margin-top: 20px;
+        width: 50vw;
+        margin-top: 10px;
+        padding: 0 10px;
         position: relative;
+        border: 1px solid;
 
     }
     .orderInfoSub > div {
         display: flex;
-
         margin: 10px 0;
         height: 4rem;
         line-height: 4rem;
+    }
+    .info {
+        border-bottom: 1px solid;
     }
 
     .product > span {
@@ -36,7 +39,7 @@
         clear: both;
         width: 15rem;
         text-align: left;
-<!--        background: #0003;-->
+        background: #0001;
     }
     .text_right {
         clear: both;
@@ -50,7 +53,7 @@
     <!-- 아마도 _주문상세.html 파일로 필요한 곳에 사용할 수 있게 쓸 듯  -->
     <div class="orderInfo" th:object="${orderInfo}">
         <div class="orderInfoSub">
-            <div>
+            <div class="info">
                 <h3 th:text="#{주문_정보}"></h3>
             </div>
             <div>
@@ -78,7 +81,7 @@
         </div>
         <a href="#" onclick="openReceiptPopup()">구매 영수증 보기</a>
         <div class="orderInfoSub">
-            <div>
+            <div class="info">
                 <h3 th:text="#{상품_정보}"></h3>
             </div>
             <div th:each="orderItem : *{orderItems}" class="product">
@@ -94,7 +97,7 @@
         </div>
 
         <div class="orderInfoSub">
-            <div>
+            <div class="info">
                 <h3 th:text="#{배송지_정보}"></h3>
             </div>
             <div>
