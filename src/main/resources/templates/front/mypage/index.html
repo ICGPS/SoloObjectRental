@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/mypage/css/style.css"> <!--  -->
+<!--    <link rel="stylesheet" href="static/mypage/css/style.css"> &lt;!&ndash;  &ndash;&gt;-->
     <title>Acme Shopping</title>
   </head>
   <body class="min-h-screen bg-gray-100 dark-bg-gray-800">
@@ -42,40 +42,45 @@
       <!-- 장바구니에서 주문하기 추가 S -->
 
       <!-- 장바구니에서 주문하기 카드 -->
-      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 장바구니에서 주문하기 카드 내용 -->
-        <a th:href="@{/mypage/orderInCart}">장바구니에서 주문하기</a>
-      </div>
+<!--      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">-->
+<!--        &lt;!&ndash; 장바구니에서 주문하기 카드 내용 &ndash;&gt;-->
+<!--        <a th:href="@{/mypage/orderInCart}">장바구니에서 주문하기</a>-->
+<!--      </div>-->
 
       <!-- 장바구니에서 주문하기 추가 E -->
 
       <!-- 주문 상세 추가 S -->
 
       <!-- 주문 상세 카드 -->
-      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 주문 상세 카드 내용 -->
-        <a th:href="@{/mypage/orderDetail}">주문 상세</a>
-      </div>
+<!--      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">-->
+<!--        &lt;!&ndash; 주문 상세 카드 내용 &ndash;&gt;-->
+<!--        <a th:href="@{/mypage/orderDetail}">주문 상세</a>-->
+<!--      </div>-->
 
       <!-- 주문 상세 추가 E -->
 
       <!-- 구매 영수증 추가 S -->
 
       <!-- 구매 영수증 카드 -->
-      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 구매 영수증 카드 내용 -->
-        <a th:href="@{/mypage/purchaseReceipt}">구매 영수증</a>
-      </div>
+<!--      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">-->
+<!--        &lt;!&ndash; 구매 영수증 카드 내용 &ndash;&gt;-->
+<!--        <a th:href="@{/mypage/purchaseReceipt}">구매 영수증</a>-->
+<!--      </div>-->
 
       <!-- 구매 영수증 추가 E -->
 
       <!-- 결제 완료 카드 추가 S -->
 
       <!-- 결제 완료 카드 -->
-      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">
-        <!-- 결제완료 카드 내용 -->
-        <a th:href="@{/mypage/paymentFinish}">결제 완료</a>
-      </div>
+<!--      <div class="text-card-foreground bg-white dark-bg-gray-700 p-6 rounded-lg shadow-md" data-v0-t="card">-->
+<!--        &lt;!&ndash; 결제완료 카드 내용 &ndash;&gt;-->
+<!--        <a th:href="@{/mypage/paymentFinish}">결제 완료</a>-->
+<!--      </div>-->
+
+      <ul class="view_posts">
+        <th:block>최근본게시글</th:block>
+      </ul>
+      <script th:replace="~{front/common/_posts_tpl::tpl}"></script>
 
       <!-- 결제 완료 추가 E -->
       <div name="frmInfo" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${member}">
