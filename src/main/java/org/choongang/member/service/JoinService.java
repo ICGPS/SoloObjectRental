@@ -54,12 +54,12 @@ public class JoinService {
 //        address.set(form.getZonecode(), form.getAddress(), form.getAddressSub());
 
         DeliveryList deliveryList = new DeliveryList();
-
+        deliveryList.setMember(member);
         deliveryList.setZonecode(form.getZonecode());
         deliveryList.setAddress(form.getAddress());
         deliveryList.setAddressSub(form.getAddressSub());
         deliveryList.add(deliveryList);
-        member.setAddress(address);
+
 
 //        member.setAddress((address));
 //        member.setAddressSub(form.getAddressSub());
@@ -77,6 +77,9 @@ public class JoinService {
         uploadService.processDone(form.getGid());
 
         deliveryListRepository.saveAndFlush(deliveryList);
+
+
+
     }
 
     public void process(Member member) {
