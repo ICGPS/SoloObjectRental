@@ -41,7 +41,7 @@
     </div>
 
     <div class="board_latest my-5 justify-content-end">
-        <div class="card border-primary col-md-6 fs-3">
+        <div class="card col-md-6 fs-3">
             <div class="card-body text-primary">
                 <ul th:each="b : ${boardMenus}">
                     <ul class="items" th:if="${b.bName == '공지사항'}">
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="card border-primary col-md-6 fs-3">
+        <div class="card col-md-6 fs-3">
             <div class="card-body text-primary">
                 <ul th:each="b : ${boardMenus}">
                     <ul class="items" th:if="${b.bName == '자유게시판'}">
@@ -86,39 +86,39 @@
         <div class="btn_top" style="position: fixed; bottom: 2vw; right: 2vw; border-radius: 50%; background: #0001; width: 3rem; height: 3rem; align-items: center; display: flex; padding: 0 8px;">Top</div>
     </a>
 
-    <div class="row">
-        <div class="card border-primary col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706668191686')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
+<!--    <div class="row">-->
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706668191686')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="card border-primary col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706682605441')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706682605441')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="card border-primary col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706668191686')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706773055292')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="card border-primary col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706682605441')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706773065791')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </main>
 
 
