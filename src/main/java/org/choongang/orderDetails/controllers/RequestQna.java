@@ -8,6 +8,7 @@ import org.choongang.product.entities.Product;
 
 @Data
 public class RequestQna {
+
     private Long seq;
 
     private Long productSeq;

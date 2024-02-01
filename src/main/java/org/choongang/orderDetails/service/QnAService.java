@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class QnAService {
+
     private final ProductInfoService productInfoService;
     private final QnARepository qnARepository;
     private final MemberUtil memberUtil;

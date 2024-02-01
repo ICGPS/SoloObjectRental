@@ -32,19 +32,3 @@ public class QnA extends Base {
     private Member member;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

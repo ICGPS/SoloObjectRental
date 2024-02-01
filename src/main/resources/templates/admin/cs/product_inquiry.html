@@ -17,7 +17,6 @@
             <td>
                 <span th:text="*{product.name}"></span>
             </td>
-<!--            <td th:each="product : ${productList}" th:if="${product.name}" th:text="${product.name}" th:href="@{/admin/cs/productDetail/{seq}(seq = ${item.seq})}"></td>-->
             <td>
                 <a th:text="*{@utils.nl2br(content)}" th:href="@{/admin/cs/productDetail/{seq}(seq = *{seq})}"></a>
             </td>
