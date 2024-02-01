@@ -40,14 +40,6 @@
             </div>
         </div>
         <div class="dropdown">
-            <a th:href="@{/board/list/notice}">
-                <span class="dropbtn" th:text="#{공지사항}"></span>
-            </a>
-            <div class="dropdown-content">
-                <a th:href="@{/board/list/notice}">공지사항</a>
-            </div>
-        </div>
-        <div class="dropdown">
             <a th:href="@{/cs/main}">
                 <span class="dropbtn" th:text="#{고객센터}"></span>
             </a>
@@ -60,9 +52,11 @@
             <a th:href="@{/notices/useGuide}">
                 <span class="dropbtn" th:text="#{이용안내}"></span>
             </a>
-<!--            <div class="dropdown-content">-->
-<!--                <a th:href="@{/notices/useGuide}">이용안내</a>-->
-<!--            </div>-->
+            <div class="dropdown-content">
+                <a th:each="b : ${boardMenus}" class="items" th:if="${b.bName == '공지사항'}"
+                    <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
+                <a th:href="@{/notices/useGuide}">이용안내</a>
+            </div>
         </div>
     </div>
 </nav>
