@@ -120,3 +120,23 @@ if (location.pathname.indexOf("/board/view/") != -1) {
     localStorage.setItem(key, JSON.stringify(viewPosts));
 }
 /* 최근 본 게시글 기록 저장 E */
+
+/* 최근 본 게시물(상품) 기록 저장 S */
+if (location.pathname.indexOf("/product/detail/") != -1) {
+    const v = /\/product\/detail\/(\d*)/.exec(location.pathname);
+    const seq = Number(v[1]);
+    const key = "viewProducts";
+    let viewProducts = localStorage.getItem(key);
+    viewProducts = JSON.parse(viewProducts) || [];
+
+    // 이미 열람 기록이 있으면 기존 기록 삭제
+    const index = viewProducts.findIndex(p => p.seq == seq);
+    if (index != -1) viewProducts.splice(index, 1);
+
+    viewProducts.push({seq, timestamp: Date.now()});
+
+    viewProducts.sort((a, b) => b.timestamp - a.timestamp); // 내림차순 정렬
+
+    localStorage.setItem(key, JSON.stringify(viewProducts));
+}
+/* 최근 본 게시물(상품) 기록 저장 E */
