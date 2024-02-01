@@ -4,6 +4,27 @@
       layout:decorate="~{admin/layouts/main}">
 <section layout:fragment="content">
     <h1>상품문의</h1>
+    <table class="inquiry_table table table-hover">
+        <tr class="table-secondary">
+            <th>NO</th>
+            <th>상품</th>
+            <th>상품 문의 내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        <tr th:each="item : ${qnaList}" th:object="${item}">
+            <td th:text="*{seq}"></td>
+            <td>
+                <span th:text="*{product.name}"></span>
+            </td>
+            <td>
+                <a th:text="*{@utils.nl2br(content)}" th:href="@{/admin/cs/productDetail/{seq}(seq = *{seq})}"></a>
+            </td>
+            <td th:text="*{member.userName}"></td>
+            <td th:text="*{#temporals.format(createdAt, 'yyyy-MM-dd')}"></td>
+        </tr>
+    </table>
+
     <th:block th:replace="~{common/_pagination::pagination}"></th:block>
 </section>
 </html>

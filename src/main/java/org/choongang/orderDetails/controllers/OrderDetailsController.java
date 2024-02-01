@@ -11,6 +11,8 @@ import org.choongang.orderDetails.entities.QnA;
 import org.choongang.orderDetails.entities.Review;
 import org.choongang.orderDetails.service.QnAService;
 import org.choongang.orderDetails.service.ReviewService;
+import org.choongang.product.entities.Product;
+import org.choongang.product.repositories.ProductRepository;
 import org.choongang.product.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,6 +32,7 @@ public class OrderDetailsController implements ExceptionProcessor {
   private final ReviewService reviewService;
   private final ProductInfoService productInfoService;
   private final QnAService qnAService;
+  private final ProductRepository productRepository;
 
   @GetMapping("/main")
   public String orderDetail() {
@@ -66,14 +69,18 @@ public class OrderDetailsController implements ExceptionProcessor {
   }
 
   @GetMapping("/qnaDetail")
-  public String QnADetail(Model model) {
+  public String QnADetail(@RequestParam(name="seq", required = false) Long seq, Model model) {
+    Product product = productInfoService.get(seq);
+
+    model.addAttribute("product", product);
 
     return utils.tpl("orderDetail/qnaDetail");
   }
 
 
   @PostMapping("/submitQnA")
-  public String submitQnA(@ModelAttribute QnA qna, Model model) {
+  public String submitQnA(@ModelAttribute RequestQna qna,Model model) {
+
     qnAService.save(qna);
 
     model.addAttribute("script", "self.close();");
@@ -81,3 +88,4 @@ public class OrderDetailsController implements ExceptionProcessor {
     return "common/_execute_script";
   }
 }
+
