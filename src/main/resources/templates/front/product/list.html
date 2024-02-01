@@ -45,6 +45,13 @@
     </style>
 </head>
 <main layout:fragment="content">
+
+    <div class="banners d-flex justify-content-center align-items-center" th:each="banner : ${@utils.getBanners('banner1')}" th:object="${banner}">
+        <a th:if="*{bannerImage != null}" th:href="*{bLink}" th:target="*{target}" >
+            <img th:src="*{bannerImage.fileUrl}" class="img-fluid">
+        </a>
+    </div>
+
     <h1>
         <a th:href="@{/product/{cateCd}(cateCd=${category.cateCd})}" th:text="${category.cateNm}"></a>
     </h1>
