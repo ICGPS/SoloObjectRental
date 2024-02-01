@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.choongang.commons.entities.Base;
 import org.choongang.member.entities.Member;
+import org.choongang.product.entities.Product;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,8 @@ public class QnA extends Base {
     @GeneratedValue
     private Long seq;
 
-    private Long productSeq;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Product product;
 
     @Lob
     private String content;
@@ -30,19 +32,3 @@ public class QnA extends Base {
     private Member member;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
