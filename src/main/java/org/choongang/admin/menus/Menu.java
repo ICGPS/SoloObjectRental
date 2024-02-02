@@ -26,7 +26,7 @@ public class Menu {
         // 주문관리
         menus.put("order", Arrays.asList(
             new MenuDetail("list", "주문목록", "/admin/order")
-            //new MenuDetail("list", "주문상품", "/admin/order")
+//            ,new MenuDetail("list", "주문상품", "/admin/order")
         ));
 
         // CS
@@ -38,8 +38,8 @@ public class Menu {
 
         menus.put("board", Arrays.asList(
                 new MenuDetail("list", "게시판목록", "/admin/board"),
-                new MenuDetail("add", "게시판등록", "/admin/board/add"),
-                new MenuDetail("posts", "게시글관리", "/admin/board/posts")
+                new MenuDetail("add", "게시판등록", "/admin/board/add")
+//                ,new MenuDetail("posts", "게시글관리", "/admin/board/posts")
         ));
 
 //        menus.put("reservation", Arrays.asList(
