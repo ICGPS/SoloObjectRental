@@ -1,10 +1,7 @@
 package org.choongang.member.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.choongang.commons.entities.Base;
 
 @Data
@@ -18,6 +15,7 @@ public class DeliveryList extends Base {
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="memberSeq")
+    @ToString.Exclude
     private Member member;
 
     private boolean defaultAddress;
