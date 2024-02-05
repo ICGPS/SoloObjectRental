@@ -47,6 +47,7 @@ public class MypageController implements ExceptionProcessor {
     private final OrderInfoService orderInfoService;
     private final DeliveryListRepository deliveryListRepository;
 
+
     @GetMapping
     public String myPage(Model model) {
 
@@ -227,6 +228,8 @@ public class MypageController implements ExceptionProcessor {
         //        return "redirect:/mypage/memberInfo";
     }
 
+
+
     @PostMapping("/updateMemberInfo")
     public String updateMemberInfoPs(@ModelAttribute MemberInfoForm memberInfoForm, Model model) {
         // 회원 정보 수정 로직 추가
@@ -270,25 +273,23 @@ public class MypageController implements ExceptionProcessor {
     @GetMapping("/resign")
     public String resignStep1(@ModelAttribute RequestResign form, Model model) {
         commonProcess("resign", model);
-
-
         return utils.tpl("mypage/resign");
     }
-
     // 이메일로 전송된 코드 확인
     @PostMapping("/resign")
     public String resignStep2(RequestResign form, Errors errors, Model model) {
-        commonProcess("resign", model);// 비밀번호, 비밀번호 확인 -
+        commonProcess("resign", model);  // 비밀번호, 비밀번호 확인 -
 
         form.setMode("step1");
+        resignValidator.validate(form, errors);
 
         if (errors.hasErrors()) {
             return utils.tpl("mypage/resign");
         }
-
+        // 메일로 인증 코드 발송
+        emailVerifyService.sendCode(memberUtil.getMember().getEmail());
         return utils.tpl("mypage/resign_auth");
     }
-
     /**
      * 회원탈퇴 완료
      *          enable -> false, 로그아웃 -> 비회원도 접근 가능
@@ -298,7 +299,7 @@ public class MypageController implements ExceptionProcessor {
     @PostMapping("/resign_done")
     @PreAuthorize("permitAll()")
     public String resignProcess(RequestResign form, Errors errors, Model model) {
-        commonProcess("resign", model);// 인증번호 여부
+        commonProcess("resign", model); // 인증번호 여부
 
         form.setMode("step2");
         resignValidator.validate(form, errors);
@@ -306,6 +307,7 @@ public class MypageController implements ExceptionProcessor {
         if (errors.hasErrors()) { // 인증 코드 실패시
             return utils.tpl("mypage/resign_auth");
         }
+
         // 회원 탈퇴 처리
         resignService.resign();
 
@@ -321,36 +323,34 @@ public class MypageController implements ExceptionProcessor {
         return utils.tpl("mypage/resign_done");
     }
 
-
-
     private void commonProcess(String mode, Model model) {
-        mode = StringUtils.hasText(mode) ? mode : "main";
-        String pageTitle = Utils.getMessage("마이페이지", "commons");
+    mode = StringUtils.hasText(mode) ? mode : "main";
+    String pageTitle = Utils.getMessage("마이페이지", "commons");
 
-        List<String> addCss = new ArrayList<>();
-        List<String> addScript = new ArrayList<>();
-        List<String> addCommonScript = new ArrayList<>();
+    List<String> addCss = new ArrayList<>();
+    List<String> addScript = new ArrayList<>();
+    List<String> addCommonScript = new ArrayList<>();
 
-        if (mode.equals("profile")) {
-            pageTitle = Utils.getMessage("회원정보_수정", "commons");
-            addCommonScript.add("fileManager");
-            addScript.add("mypage/profile");
+    if (mode.equals("profile")) {
+        pageTitle = Utils.getMessage("회원정보_수정", "commons");
+        addCommonScript.add("fileManager");
+        addScript.add("mypage/profile");
 
-            /* 회원 탈퇴 S */
-        } else if (mode.equals("resign")) {
-            pageTitle = utils.getMessage("회원 탈퇴", "commons");
+        /* 회원 탈퇴 S */
+    } else if (mode.equals("resign")) {
+        pageTitle = Utils.getMessage("회원탈퇴", "commons");
 
-        } else if (mode.equals("main")) { // 마이페이지 메인
-            addScript.add("board/view_posts");
-            addScript.add("product/view_products");
-        }
+    } else if (mode.equals("main")) { // 마이페이지 메인
+        addScript.add("board/view_posts");
+        addScript.add("product/view_products");
+    }
 
-        addCss.add("mypage/style");
+    addCss.add("mypage/style");
 
-        model.addAttribute("pageTitle", pageTitle);
-        model.addAttribute("addCss", addCss);
-        model.addAttribute("addScript", addScript);
-        model.addAttribute("addCommonScript", addCommonScript);
+    model.addAttribute("pageTitle", pageTitle);
+    model.addAttribute("addCss", addCss);
+    model.addAttribute("addScript", addScript);
+    model.addAttribute("addCommonScript", addCommonScript);
 
     }
 }
