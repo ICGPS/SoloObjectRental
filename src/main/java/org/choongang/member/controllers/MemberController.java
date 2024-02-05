@@ -191,7 +191,7 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("deleteMember", model);
 
         memberDeleteService.deleteMember();
-        return "redirect:/member/logout";
+        return "redirect:/mypage/resign";
     }
 
 

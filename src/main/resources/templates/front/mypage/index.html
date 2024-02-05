@@ -88,18 +88,12 @@
       <script th:replace="~{front/common/_products_tpl::tpl}"></script>
 
       <!-- 결제 완료 추가 E -->
-      <div name="frmInfo" method="post" th:action="@{/member/join}" autocomplete="off" th:object="${member}">
-        <button type="button" id="deleteBtn">회원탈퇴</button>
-      </div>
 
-  <script>
-    const deleteBtn = document.querySelector('#deleteBtn') ;
-    deleteBtn.addEventListener('click', function() {
-      var yes = confirm('탈퇴하시겠습니까?') ;
-      if (yes) { location.href='/member/delete' ; }
-      else { }
-    });
-  </script>
+      <li>
+        <a th:href="@{/mypage/resign}" th:text="#{회원탈퇴}"></a>
+      </li>
+
+
 
   </body>
 </main>
