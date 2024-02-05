@@ -71,7 +71,7 @@ public class MemberController implements ExceptionProcessor {
 
     /**
      * 아이디 찾기 양식
-     * 
+     *
      * @param form
      * @param model
      * @return
@@ -191,8 +191,7 @@ public class MemberController implements ExceptionProcessor {
         commonProcess("deleteMember", model);
 
         memberDeleteService.deleteMember();
-
-        return "redirect:/main/index";
+        return "redirect:/member/logout";
     }
 
 

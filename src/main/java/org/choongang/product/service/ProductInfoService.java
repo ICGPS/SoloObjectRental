@@ -135,14 +135,14 @@ public class ProductInfoService {
         /* 검색 조건 처리 E */
 
         // default - 등록순
-        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), desc("createdAt")));
+        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Order.desc("listOrder"), Sort.Order.desc("createdAt")));
         // 정렬순서
         if (sort.equals("score")) { // 별점순
-            pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), desc("score")));
+            pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Order.desc("listOrder"), Sort.Order.desc("score")));
         } else if (sort.equals("salePriceDESC")) { // 높은 가격순
-            pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), desc("salePrice")));
+            pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Order.desc("listOrder"), Sort.Order.desc("salePrice")));
         } else if (sort.equals("salePriceASC")) { // 낮은 가격순
-            pageable = PageRequest.of(page - 1, limit, Sort.by(desc("listOrder"), asc("salePrice")));
+            pageable = PageRequest.of(page - 1, limit, Sort.by(Sort.Order.desc("listOrder"), Sort.Order.asc("salePrice")));
         }
 
         Page<Product> data = productRepository.findAll(andBuilder, pageable);
