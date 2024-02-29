@@ -56,7 +56,7 @@ public class CsController implements ExceptionProcessor {
     public String inquiry(Model model) {
         commonProcess("inquiry", model);
 
-        List<BoardData> items = boardInfoService.getLatest("qna", 5);
+        List<BoardData> items = boardInfoService.getLatest("qna");
         model.addAttribute("items", items);
 
         return utils.tpl("cs/inquiry");
