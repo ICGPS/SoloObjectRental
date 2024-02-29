@@ -48,14 +48,14 @@
                         <h2 class="fs-1">
                             <a th:href="@{/board/list/{bid}(bid=${b.bid})}" th:text="${b.bName}"></a>
                         </h2>
-                        <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
-                            <a th:href="@{/board/view/{seq}(seq=*{seq})}">
-                                <th:block th:if="*{notice}">
-                                    [<th:block th:text="#{공지}"></th:block>]
-                                </th:block>
-                                <th:block th:text="*{subject}"></th:block>
-                            </a>
-                        </li>
+                                    <li th:each="item : ${@boardInfoService.getLatest(b.bid)}" th:object="${item}" class="item">
+                                        <a th:href="@{/board/view/{seq}(seq=*{seq})}">
+                                            <th:block th:if="*{notice}">
+                                                [<th:block th:text="#{공지}"></th:block>]
+                                            </th:block>
+                                            <th:block th:text="*{subject}"></th:block>
+                                        </a>
+                                    </li>
                     </ul>
                 </ul>
             </div>
@@ -87,40 +87,40 @@
     </a>
 
 
-    <div class="row">
-        <div class="card col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706668191686')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
+<!--    <div class="row">-->
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706668191686')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="card col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706682605441')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706682605441')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="card col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706773055292')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706773055292')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="card col-md-3">
-            <div class="card-body text-primary">
-                <div th:object="${@productDisplayService.getDisplayData('1706773065791')}">
-                    <div th:replace="~{front/product/_display_items::item}"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
+<!--        <div class="card col-md-3">-->
+<!--            <div class="card-body text-primary">-->
+<!--                <div th:object="${@productDisplayService.getDisplayData('1706773065791')}">-->
+<!--                    <div th:replace="~{front/product/_display_items::item}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
