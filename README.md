@@ -36,6 +36,8 @@
   
 ## :hammer: ERD
 
+![ERD](https://github.com/ICGPS/SoloObjectRental/blob/GohWonil-patch-1/SoloObjectRental.png)
+
 <br>
 
 ## :wrench:DB : ![dbeaver](https://img.shields.io/badge/dbeaver-F80000?style=for-the-badge&logo=dbeaver&logoColor=white)   , ![Oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)   
@@ -157,7 +159,9 @@
 - 손미희 : 전체 일정관리 & CS
 - 박호범 : 일일 일정관리 & 마이페이지
 - 임나라 : 서기 & CS
-
+  
+## :pushpin: 프로젝트 PPT
+https://drive.google.com/file/d/18YW5UriFWEG2vuZ-_eexwWY6kMJQvEs7/view?usp=drive_link
 
 ## :pushpin: 시연 영상 
-https://youtu.be/SciQOLxlJeA
+https://drive.google.com/drive/folders/1p8nXvgf0RWhUllbiGpnxNhLl4L6hlHdQ?usp=drive_link
